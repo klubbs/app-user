@@ -1,6 +1,6 @@
 import React, { ReactElement, useState } from 'react';
 import { Image, FlatList } from 'react-native';
-import { ICouponsItems } from './params';
+import { ICouponsItems } from './interfaces';
 
 import { Container, PercentOff, Box, Valid, ColumWrapperStyle, FlatStyle } from './styles';
 

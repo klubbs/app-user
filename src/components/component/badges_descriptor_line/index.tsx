@@ -3,7 +3,7 @@ import React from 'react';
 import { Feather } from '@expo/vector-icons';
 
 import { ContainerBadge, Description, DescriptionPrincipal, ContainerDescription } from './styles';
-import { IBadgesDescriptorLine } from './params';
+import { IBadgesDescriptorLine } from './interfaces';
 
 const BadgesDescriptorLine: React.FC<IBadgesDescriptorLine> = (props) => {
   return (

@@ -3,7 +3,7 @@ import { FlatList } from 'react-native';
 import Stablishment from "../../component/stablishment_card"
 import { useNavigation } from '@react-navigation/native';
 import { Header, containerStyle, wrapperStyle, EmptyCard } from './styles';
-import { IRestaurants } from './params';
+import { IRestaurants } from './interfaces';
 
 
 const NUM_COLUMS = 2;

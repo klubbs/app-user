@@ -4,7 +4,7 @@ import { Feather } from '@expo/vector-icons';
 
 import { WrapperTop, ContainerImage, ContainerPoints, MenuLogoutContainer, MenuTextLogout, ImageBorder, MenuText, MenuTextDescription, UserImage, Point, PointValues, MenuItemArrow, MenuItemContainer, MenuItemIcon, MenuTextContainer } from './styles';
 import COLORS from '../../../../assets/constants/colors';
-import { IMenu } from './params';
+import { IMenu } from './interfaces';
 
 
 const Profile: React.FC = () => {

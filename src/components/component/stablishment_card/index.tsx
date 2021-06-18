@@ -4,7 +4,7 @@ import COLORS from '../../../../assets/constants/colors'
 import { Wrapper, Container, StablishmentName, Image, ContainerBadges, ContainerDescriptions, OpenCloseBadge } from './styles';
 import IconText from '../icon_text'
 import BadgesLine from "../badges_line"
-import { IStablishmentCard } from './params';
+import { IStablishmentCard } from './interfaces';
 
 
 const StablishmentCard: React.FC<IStablishmentCard> = (props) => {
