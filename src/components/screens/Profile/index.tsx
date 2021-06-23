@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { View, SafeAreaView, FlatList, SectionList } from 'react-native';
 import { Feather } from '@expo/vector-icons';
-
-import { WrapperTop, ContainerImage, ContainerPoints, MenuLogoutContainer, MenuTextLogout, ImageBorder, MenuText, MenuTextDescription, UserImage, Point, PointValues, MenuItemArrow, MenuItemContainer, MenuItemIcon, MenuTextContainer } from './styles';
+import { useNavigation } from '@react-navigation/native';
+import React, { useState } from 'react';
+import { FlatList, SafeAreaView, TouchableOpacity, View } from 'react-native';
 import COLORS from '../../../../assets/constants/colors';
 import { IMenu } from './interfaces';
+import { ContainerImage, ContainerPoints, ImageBorder, MenuItemArrow, MenuItemContainer, MenuItemIcon, MenuLogoutContainer, MenuText, MenuTextContainer, MenuTextDescription, MenuTextLogout, Point, PointValues, UserImage, WrapperTop } from './styles';
+
 
 
 const Profile: React.FC = () => {
@@ -17,6 +18,11 @@ const Profile: React.FC = () => {
       { id: "2", text: "Preferências", description: "Controle suas preferências", icon: "settings", color: "#F0C929" }
     ]
   )
+
+  const navigation = useNavigation();
+
+
+  const [user, setUser] = useState(null)
 
   const MenuItem = (params: IMenu) => {
     return (
@@ -44,6 +50,21 @@ const Profile: React.FC = () => {
     )
   }
 
+  const RenderPoints: React.FC = () => {
+
+    return (
+      user
+        ? <>
+          <Point>Pontos</Point>
+          <PointValues>1500</PointValues>
+        </>
+        :
+        <TouchableOpacity onPress={() => navigation.navigate("WelcomeLogin")}>
+          <Point>Entrar ou Cadastrar-se</Point>
+        </TouchableOpacity>
+    )
+  }
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.COLOR_WHITE }} >
       <WrapperTop >
@@ -53,8 +74,7 @@ const Profile: React.FC = () => {
           </ImageBorder>
         </ContainerImage>
         <ContainerPoints >
-          <Point>Pontos</Point>
-          <PointValues>1500</PointValues>
+          <RenderPoints />
         </ContainerPoints>
       </WrapperTop>
       <View style={{ flex: 2 }}>

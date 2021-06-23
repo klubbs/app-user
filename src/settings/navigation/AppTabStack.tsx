@@ -1,13 +1,13 @@
 import { Feather } from "@expo/vector-icons";
-import { createBottomTabNavigator, BottomTabBar } from "@react-navigation/bottom-tabs";
+import { BottomTabBar, createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
-import { View, TouchableOpacity } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import Svg, { Path } from 'react-native-svg';
+import COLORS from '../../../assets/constants/colors';
+import Coupons from '../../components/screens/coupons';
+import Home from '../../components/screens/home';
+import Profile from '../../components/screens/profile';
 import { TabsParamList } from "./ParamList/TabsParamList";
-import COLORS from '../../../assets/constants/colors'
-import Coupons from '../../components/screens/Coupons'
-import Home from '../../components/screens/Home'
-import Profile from '../../components/screens/Profile'
 
 interface AppStackProps { }
 

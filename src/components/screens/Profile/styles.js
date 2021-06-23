@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 import COLORS from '../../../../assets/constants/colors';
 
 
@@ -59,9 +59,9 @@ export const Point = styled.Text`
 
 
 export const MenuItemArrow = styled.View`
-  width: 40;
-  height: 40;
-  border-radius: 10;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
   justify-content: center;
   align-items: center;
   background-color: ${COLORS.COLOR_BLACK10};
@@ -70,9 +70,9 @@ export const MenuItemArrow = styled.View`
 
 export const MenuItemIcon = styled.View`
   background-color: ${`${COLORS.COLOR_YELLOW}40`};
-  width: 55;
-  height: 55;
-  border-radius: 27.5;
+  width: 55px;
+  height: 55px;
+  border-radius: 27.5px;
   justify-content: center;
   align-items: center;
 `;
