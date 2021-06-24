@@ -59,7 +59,7 @@ const Profile: React.FC = () => {
           <PointValues>1500</PointValues>
         </>
         :
-        <TouchableOpacity onPress={() => navigation.navigate("WelcomeLogin")}>
+        <TouchableOpacity onPress={() => navigation.navigate("LoginWelcome")}>
           <Point>Entrar ou Cadastrar-se</Point>
         </TouchableOpacity>
     )

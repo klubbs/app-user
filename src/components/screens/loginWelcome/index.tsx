@@ -7,14 +7,17 @@ import Button from '../../component/button';
 import Input from '../../component/input_line';
 import { ContainerBottom, ContainerTop, Description, ExplainText, Styles, Title, Wrapper } from './styles';
 
-const WelcomeLogin: React.FC = () => {
+const LoginWelcome: React.FC = () => {
 
   const navigation = useNavigation();
 
   const [email, setEmail] = useState("")
 
   const handleConfirm = () => {
+    //Se encontrar e-mail ir para senha
+    // navigation.navigate('LoginPassword');
 
+    //Não encontrar e-mail ir para tela de registro
     navigation.navigate('Register');
 
   }
@@ -52,4 +55,4 @@ const WelcomeLogin: React.FC = () => {
   );
 }
 
-export default WelcomeLogin;
+export default LoginWelcome;

@@ -1,9 +1,10 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import COLORS from "../../../assets/constants/colors";
+import LoginPassword from "../../components/screens/loginPassword";
+import WelcomeLoginScreen from "../../components/screens/loginWelcome";
 import Register from "../../components/screens/register";
 import Restaurant from "../../components/screens/restaurant";
-import WelcomeLoginScreen from "../../components/screens/welcomeLogin";
 import Tabs from "./AppTabStack";
 import { AppStackParamList } from "./ParamList/AppStackParamList";
 
@@ -23,7 +24,8 @@ const App: React.FC<AppStackProps> = () => {
       headerTitleStyle: { color: "transparent" }
     })} >
       <AppStack.Screen name="Tabs" component={Tabs} />
-      <AppStack.Screen name="WelcomeLogin" component={WelcomeLoginScreen} />
+      <AppStack.Screen name="LoginWelcome" component={WelcomeLoginScreen} />
+      <AppStack.Screen name="LoginPassword" component={LoginPassword} />
       <AppStack.Screen name="Register" component={Register} options={{ headerShown: true }} />
       <AppStack.Screen name="Restaurant" component={Restaurant} />
     </AppStack.Navigator >
