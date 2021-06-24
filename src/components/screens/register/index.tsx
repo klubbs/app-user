@@ -6,6 +6,8 @@ import COLORS from '../../../../assets/constants/colors';
 import { BEHAVIOR_KEYBOARD } from '../../../utils/behavior_utils';
 import { maskPhone } from '../../../utils/masks_utils';
 import Input from '../../component/input_line';
+import { ModalCode } from '../../component_heavy/modal_code';
+import { IModalRef } from '../../component_heavy/modal_code/types';
 import { Confirm, containerBackButton, ContainerBottom, ContainerMiddle, ContainerScrool, ContainerTop, Description, Title, Wrapper } from './styles';
 
 const Register: React.FC = () => {
@@ -13,20 +15,14 @@ const Register: React.FC = () => {
   const [name, setName] = useState("")
   const [phone, setPhone] = useState("")
   const [password, setPassword] = useState("")
-  const [code, setCode] = useState("")
 
   const [currentScroll, setCurrentScroll] = useState(0)
 
-  const navigation = useNavigation()
   const scroolRef = useRef<ScrollView>(null)
+  const modalCodeRef = useRef<IModalRef>(null)
+
+  const navigation = useNavigation()
   const WIDTH = useWindowDimensions().width
-
-  const welcomeInformations = useCallback(() => {
-    return currentScroll === 0
-      ? { title: "Opa, tudo boom ?", description: "Conta um pouquinho mais sobre você ?" }
-      : { title: "Para finalizar", description: "Estamos quase acabando !" }
-
-  }, [currentScroll])
 
   useEffect(() => {
     navigation.addListener('beforeRemove', (e) => {
@@ -49,9 +45,21 @@ const Register: React.FC = () => {
     })
   }, [])
 
+  const welcomeInformations = useCallback(() => {
+    return currentScroll === 0
+      ? { title: "Opa, tudo boom ?", description: "Conta um pouquinho mais sobre você ?" }
+      : { title: "Para finalizar", description: "Estamos quase acabando !" }
+
+  }, [currentScroll])
+
 
   const onAnimatedScroll = (isNext: boolean) => {
     Keyboard.dismiss()
+
+
+    if (isNext && currentScroll === 1) {
+      modalCodeRef.current?.openModal()
+    }
 
     setCurrentScroll(isNext ? 1 : 0)
 
@@ -142,6 +150,8 @@ const Register: React.FC = () => {
         </ContainerMiddle>
         <RenderButtons />
       </KeyboardAvoidingView>
+
+      <ModalCode ref={modalCodeRef} action={'REGISTER'} registerParams={{ email: "EMAILDOIDO@GMAIL.COM", phone, password }} />
 
     </Wrapper>
   );

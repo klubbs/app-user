@@ -23,7 +23,7 @@ export const ContainerBadges = styled.View`
 
 export const ContainerUsual = styled.View`
   flex-direction: row;
-  margin-top: 30;
+  margin-top: 30px;
   justify-content: center;
 `
 

@@ -13,10 +13,10 @@ export const ContainerPoints = styled.View`
 `;
 
 export const UserImage = styled.Image`
-  width: 100;
-  height: 100;
-  border-radius: 50;
-  z-index: 10;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  z-index: 10px;
 `;
 
 export const ContainerImage = styled.View`
@@ -26,10 +26,10 @@ export const ContainerImage = styled.View`
 `;
 
 export const ImageBorder = styled.View`
-  width: 115;
-  height: 115;
-  border-radius: 57.5;
-  border-width: 5;
+  width: 115px;
+  height: 115px;
+  border-radius: 57.5px;
+  border-width: 5px;
   border-right-color: ${COLORS.COLOR_YELLOW};
   border-bottom-color: ${COLORS.COLOR_YELLOW};
   border-color: transparent;
@@ -84,7 +84,7 @@ export const MenuItemContainer = styled.TouchableOpacity.attrs(props => ({
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-top: 30;
+  margin-top: 30px;
 `;
 
 export const MenuText = styled.Text`
