@@ -1,10 +1,10 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { useFonts } from 'expo-font';
+import FlashComponent from 'flash-notify';
 import React, { useState } from "react";
-import { ActivityIndicator, View, StatusBar } from "react-native";
+import { ActivityIndicator, StatusBar, View } from "react-native";
 import AppStack from "./src/settings/navigation/AppStack";
 import AuthStack from "./src/settings/navigation/AuthStack";
-
 export default function App() {
 
   const [logged, setLogged] = useState(true)
@@ -34,6 +34,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
+      <FlashComponent />
       <StatusBar animated={true} barStyle={'dark-content'} />
       {logged ? <AppStack /> : <AuthStack />}
     </NavigationContainer>
