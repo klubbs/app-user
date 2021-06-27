@@ -1,6 +1,6 @@
 export type IModalCodeProps = {
   action: 'REGISTER' | 'RECOVER'
-  registerParams?: { email: string, password: string, phone: string }
+  registerParams?: { mail: string, password: string, phone: string, name: string }
   recoverParams?: { email: string, password: string }
 }
 

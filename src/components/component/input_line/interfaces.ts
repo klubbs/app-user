@@ -9,6 +9,7 @@ export type IInputLine = {
   contentType?: contentType
   isPassword?: boolean
   onChangeText: (text: string) => void;
+  onTouchEnd?: () => void
   style?: any
 }
 

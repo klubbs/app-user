@@ -13,10 +13,12 @@ const InputLine: React.FC<IInputLine> = (props) => {
       returnKeyType={props.returnkeyType}
       maxLength={props.maxLength}
       onChangeText={(e) => props.onChangeText(e)}
+      onTouchEnd={props.onTouchEnd}
       textContentType={props.contentType}
       secureTextEntry={props?.isPassword}
       value={props.value}
-      {...props.style}
+      style={props.style}
+      // {...props.style}
     />
   );
 }

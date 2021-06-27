@@ -1,19 +1,16 @@
-import React from 'react';
-import * as Linking from 'expo-linking';
-
-import { Wrapper, ContainerImage, ContainerInformations, ContainerGetCoupon, ContainerUsual, GetCouponText, RestaurantName, ContainerBadges, RestaurantCategory, ContainerDescription, WrapperTop, ContainerIcons } from './styles';
-import { AppStackParamList } from "../../../settings/navigation/ParamList/AppStackParamList"
-import { StackScreenProps } from "@react-navigation/stack";
 import { Feather } from '@expo/vector-icons';
+import * as Linking from 'expo-linking';
+import React from 'react';
 import COLORS from '../../../../assets/constants/colors';
-import BadgesDescriptorLine from "../../component/badges_descriptor_line"
-import UberButton from "../../component/button_uber"
+import { RestaurantScreenProps } from "../../../settings/navigation/interfaces/IAppStackParams";
+import BadgesDescriptorLine from "../../component/badges_descriptor_line";
+import UberButton from "../../component/button_uber";
 import TabRestaurants from '../../component_heavy/restaurants_menu';
+import { ContainerBadges, ContainerDescription, ContainerGetCoupon, ContainerIcons, ContainerImage, ContainerInformations, ContainerUsual, GetCouponText, RestaurantCategory, RestaurantName, Wrapper, WrapperTop } from './styles';
 
 
-type OrderDetailsProps = StackScreenProps<AppStackParamList, 'Restaurant'>
 
-const Restaurant: React.FC<OrderDetailsProps> = ({ route }) => {
+const Restaurant: React.FC<RestaurantScreenProps> = ({ route }) => {
 
   const handleUberCall = () => {
     Linking.openURL(`uber://?client_id=e1P-SgdvK_PmQCLAq_815j4fjk5OxJ50&action=setPickup&pickup=my_location&dropoff[latitude]=${null}&dropoff[longitude]=${null}&dropoff[nickname]=${null}`)

@@ -3,7 +3,7 @@ import * as Haptic from 'expo-haptics';
 import React, { useEffect, useState } from 'react';
 import { ImageBackground, Keyboard, KeyboardAvoidingView } from 'react-native';
 import { CollOffsLogoSvg } from '../../../../assets/images/colloffs-logo';
-import { LoginUserExecutor } from '../../../executors/users/login-user';
+import { LoginUserExecutor } from '../../../executors/users/login_user_executor';
 import { BEHAVIOR_KEYBOARD } from '../../../utils/behavior_utils';
 import { NotificationsFlash } from '../../../utils/notificationsFlash_utils';
 import Button from '../../component/button';
@@ -13,7 +13,7 @@ import { ContainerBottom, ContainerTop, Description, ExplainText, Styles, Title,
 
 const LoginWelcome: React.FC = () => {
 
-  const [email, setEmail] = useState("")
+  const [mail, setEmail] = useState("")
   const [loading, setLoading] = useState(false)
 
   const [keyboardOpen, setkeyboardOpen] = useState(false)
@@ -31,16 +31,16 @@ const LoginWelcome: React.FC = () => {
   }, [])
 
   const handleConfirm = async () => {
-
     try {
       setLoading(true)
 
-      const response = await LoginUserExecutor._loginEmailAsync(email);
+      const response = await LoginUserExecutor._checkEmailAsync(mail);
 
       if (response)
-        navigation.navigate('LoginPassword', { email });
-      else
-        navigation.navigate('Register', { email });
+        navigation.navigate('LoginPassword', { mail: mail });
+      else {
+        navigation.navigate('Register', { mail: mail });
+      }
 
     } catch (error: any) {
 
@@ -70,7 +70,7 @@ const LoginWelcome: React.FC = () => {
             <CollOffsLogoSvg />
           </ImageBackground>
           <Input
-            value={email}
+            value={mail}
             placeHolder={"e-mail de login"}
             onChangeText={(t) => setEmail(t)}
             style={{ marginBottom: '5%' }}

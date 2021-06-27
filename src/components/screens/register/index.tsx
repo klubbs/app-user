@@ -1,21 +1,29 @@
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import * as Haptic from 'expo-haptics';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Alert, Keyboard, KeyboardAvoidingView, ScrollView, useWindowDimensions } from 'react-native';
-import COLORS from '../../../../assets/constants/colors';
+import { default as COLORS } from '../../../../assets/constants/colors';
+import { UserDomain } from '../../../executors/users/user_domain';
+import { RegisterScreenProps } from '../../../settings/navigation/interfaces/IAppStackParams';
 import { BEHAVIOR_KEYBOARD } from '../../../utils/behavior_utils';
 import { maskPhone } from '../../../utils/masks_utils';
+import { NotificationsFlash } from '../../../utils/notificationsFlash_utils';
 import Input from '../../component/input_line';
 import { ModalCode } from '../../component_heavy/modal_code';
 import { IModalRef } from '../../component_heavy/modal_code/types';
 import { Confirm, containerBackButton, ContainerBottom, ContainerMiddle, ContainerScrool, ContainerTop, Description, Title, Wrapper } from './styles';
 
-const Register: React.FC = () => {
+
+const SCROOL_INDEX = { FIRST: 0, LAST: 1 };
+
+const Register: React.FC<RegisterScreenProps> = ({ route }) => {
 
   const [name, setName] = useState("")
   const [phone, setPhone] = useState("")
   const [password, setPassword] = useState("")
 
+  const [errorInput, setErrorInput] = useState({ password: false, name: false, phone: false })
   const [currentScroll, setCurrentScroll] = useState(0)
 
   const scroolRef = useRef<ScrollView>(null)
@@ -46,7 +54,7 @@ const Register: React.FC = () => {
   }, [])
 
   const welcomeInformations = useCallback(() => {
-    return currentScroll === 0
+    return currentScroll === SCROOL_INDEX.FIRST
       ? { title: "Opa, tudo boom ?", description: "Conta um pouquinho mais sobre você ?" }
       : { title: "Para finalizar", description: "Estamos quase acabando !" }
 
@@ -57,17 +65,57 @@ const Register: React.FC = () => {
     Keyboard.dismiss()
 
 
-    if (isNext && currentScroll === 1) {
+    if (isNext && currentScroll === SCROOL_INDEX.LAST) {
       modalCodeRef.current?.openModal()
     }
 
-    setCurrentScroll(isNext ? 1 : 0)
+    setCurrentScroll(isNext ? SCROOL_INDEX.LAST : SCROOL_INDEX.FIRST)
 
     const distance = isNext
       ? WIDTH
       : 0
 
     scroolRef.current?.scrollTo({ x: distance, y: 0, animated: true })
+  }
+
+  const handleConfirm = async () => {
+
+    if (currentScroll === SCROOL_INDEX.LAST) {
+      try {
+
+        UserDomain._validateUserCreateAsync(route.params.mail, password, name, phone)
+
+        modalCodeRef.current?.openModal()
+
+      } catch (error: any) {
+
+        Haptic.notificationAsync(Haptic.NotificationFeedbackType.Error)
+
+        let errorInputTmp = errorInput
+
+        error.error.forEach((element: any) => {
+          if (element.field === 'name')
+            errorInputTmp.name = true
+
+          if (element.field === 'phone')
+            errorInputTmp.phone = true
+
+          if (element.field === 'password')
+            errorInputTmp.password = true
+        });
+
+        if (errorInputTmp.name || errorInputTmp.phone)
+          NotificationsFlash.IncompleteRegisterInputs()
+
+
+        if (errorInputTmp.password)
+          NotificationsFlash.InvalidPassword()
+
+        setErrorInput({ ...errorInput })
+      }
+    } else {
+      onAnimatedScroll(true)
+    }
   }
 
   const RenderScrolls = () => {
@@ -81,7 +129,8 @@ const Register: React.FC = () => {
             keyboardType={"default"}
             contentType={"name"}
             onChangeText={setName}
-            style={{ marginBottom: '10%' }}
+            onTouchEnd={() => errorInput.name ? setErrorInput({ ...errorInput, name: false }) : null}
+            style={{ marginBottom: '10%', borderColor: errorInput.name ? COLORS.COLOR_RED : COLORS.COLOR_WHITE_40 }}
           />
           <Input
             value={maskPhone(phone)}
@@ -91,6 +140,8 @@ const Register: React.FC = () => {
             returnkeyType={"done"}
             maxLength={17}
             onChangeText={(txt) => setPhone(maskPhone(txt))}
+            onTouchEnd={() => errorInput.phone ? setErrorInput({ ...errorInput, phone: false }) : null}
+            style={{ borderColor: errorInput.phone ? COLORS.COLOR_RED : COLORS.COLOR_WHITE_40 }}
           />
         </ContainerScrool>
 
@@ -102,6 +153,8 @@ const Register: React.FC = () => {
             contentType={"password"}
             isPassword={true}
             onChangeText={setPassword}
+            onTouchEnd={() => errorInput.password ? setErrorInput({ ...errorInput, password: false }) : null}
+            style={{ borderColor: errorInput.password ? COLORS.COLOR_RED : COLORS.COLOR_WHITE_40 }}
           />
         </ContainerScrool>
       </>
@@ -113,16 +166,16 @@ const Register: React.FC = () => {
     return (
       <ContainerBottom>
 
-        {currentScroll === 1 ? <Feather
+        {currentScroll === SCROOL_INDEX.LAST ? <Feather
           name={"chevron-left"}
           size={15}
           style={containerBackButton as any}
-          color={COLORS.COLOR_SECUNDARY_WHITE}
+          color={errorInput.name || errorInput.phone ? COLORS.COLOR_RED : COLORS.COLOR_SECUNDARY_WHITE}
           onPress={() => onAnimatedScroll(false)}
         /> : null}
 
 
-        <Confirm onPress={() => onAnimatedScroll(true)}>
+        <Confirm onPress={handleConfirm}>
           <Feather name={"chevron-right"} size={15} color={COLORS.COLOR_WHITE} />
         </Confirm>
       </ContainerBottom>
@@ -151,7 +204,7 @@ const Register: React.FC = () => {
         <RenderButtons />
       </KeyboardAvoidingView>
 
-      <ModalCode ref={modalCodeRef} action={'REGISTER'} registerParams={{ email: "EMAILDOIDO@GMAIL.COM", phone, password }} />
+      <ModalCode ref={modalCodeRef} action={'REGISTER'} registerParams={{ mail: route.params.mail, phone, password, name }} />
 
     </Wrapper>
   );

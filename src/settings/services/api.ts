@@ -23,6 +23,9 @@ api.interceptors.response.use((response) => {
   return response;
 }, (error): Promise<{ message: string, error: any, statusCode: number }> => {
 
+  console.log("##############")
+  console.log(error)
+
   const statusCode = error.response.data?.statusCode
 
   const validationError = error.response.data?.error
@@ -34,8 +37,8 @@ api.interceptors.response.use((response) => {
 
 
 export type IResponseMessage<T> = {
-  Message: T
-  StatusCode: number
+  message: T
+  statusCode: number
 }
 
 export type IError = { message: string, error: any, statusCode: number }

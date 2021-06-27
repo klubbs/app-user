@@ -2,8 +2,14 @@ import styled from 'styled-components';
 import COLORS from '../../../../assets/constants/colors';
 
 
+export const SafeArea = styled.SafeAreaView`
+  flex:1;
+  background-color: ${COLORS.COLOR_WHITE};
+
+`
+
 export const ContainerPoints = styled.View`
-  border-left-width: 0.8;
+  border-left-width: 0.8px;
   border-left-color: ${COLORS.COLOR_BLACK20};
   flex: 1;
   height: 20%;

@@ -1,14 +1,17 @@
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import React, { useState } from 'react';
-import { FlatList, SafeAreaView, TouchableOpacity, View } from 'react-native';
+import LottieView from 'lottie-react-native';
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import { Alert, FlatList, TouchableOpacity, View } from 'react-native';
+import CongratulationsCoupons from '../../../../assets/animations/congratulations_coupons.json';
 import COLORS from '../../../../assets/constants/colors';
+import { AuthContext } from '../../../contexts/AuthContext';
+import { OptionsScreenProps } from '../../../settings/navigation/interfaces/ITabParams';
 import { IMenu } from './interfaces';
-import { ContainerImage, ContainerPoints, ImageBorder, MenuItemArrow, MenuItemContainer, MenuItemIcon, MenuLogoutContainer, MenuText, MenuTextContainer, MenuTextDescription, MenuTextLogout, Point, PointValues, UserImage, WrapperTop } from './styles';
+import { ContainerImage, ContainerPoints, ImageBorder, MenuItemArrow, MenuItemContainer, MenuItemIcon, MenuLogoutContainer, MenuText, MenuTextContainer, MenuTextDescription, MenuTextLogout, Point, PointValues, SafeArea, UserImage, WrapperTop } from './styles';
 
 
-
-const Profile: React.FC = () => {
+const Profile: React.FC<OptionsScreenProps> = ({ route }) => {
 
   const [menuData, setMenuData] = useState<IMenu[]>(
     [
@@ -19,10 +22,34 @@ const Profile: React.FC = () => {
     ]
   )
 
+  const { user, isRegister, _signOut } = useContext(AuthContext)
+
+  const animRef = useRef<LottieView>(null)
   const navigation = useNavigation();
 
+  useEffect(() => {
+    if (isRegister)
+      animRef.current?.play()
 
-  const [user, setUser] = useState(null)
+  }, [isRegister])
+
+
+  const handleSignOut = async () => {
+
+    Alert.alert('Vai nos deixar ?', 'Quer realmente sair do melhor app de todos ! 🤣', [
+      {
+        text: 'Não',
+        style: 'cancel',
+        onPress: () => { }
+      },
+      {
+        text: 'Sim, quero sair',
+        style: 'destructive',
+        onPress: () => { _signOut() }
+      }
+    ])
+
+  }
 
   const MenuItem = (params: IMenu) => {
     return (
@@ -43,8 +70,8 @@ const Profile: React.FC = () => {
 
   const MenuFooterItem = () => {
     return (
-      <MenuLogoutContainer>
-        <Feather name={'log-out'} size={16} color={COLORS.COLOR_BLACK40} />
+      user && <MenuLogoutContainer>
+        <Feather name={'log-out'} size={16} color={COLORS.COLOR_BLACK40} onPress={handleSignOut} />
         <MenuTextLogout>Sair</MenuTextLogout>
       </MenuLogoutContainer>
     )
@@ -66,11 +93,12 @@ const Profile: React.FC = () => {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.COLOR_WHITE }} >
+    <SafeArea>
+      {isRegister && <LottieView source={CongratulationsCoupons} loop={false} ref={animRef} />}
       <WrapperTop >
         <ContainerImage >
           <ImageBorder>
-            <UserImage source={{ uri: "https://yt3.ggpht.com/ytc/AAUvwniRYZJAnDuZv0bHVkRWorCYYacm49zD_84SnCR1Pg=s900-c-k-c0x00ffffff-no-rj" }} />
+            <UserImage source={{ uri: `${user?.image ?? 'ss'}` }} />
           </ImageBorder>
         </ContainerImage>
         <ContainerPoints >
@@ -88,7 +116,7 @@ const Profile: React.FC = () => {
         />
 
       </View>
-    </SafeAreaView >
+    </SafeArea >
   );
 }
 

@@ -7,7 +7,7 @@ import COLORS from '../../../assets/constants/colors';
 import Coupons from '../../components/screens/coupons';
 import Home from '../../components/screens/home';
 import Profile from '../../components/screens/profile';
-import { TabsParamList } from "./ParamList/TabsParamList";
+import { ITabsParamList } from "./interfaces/ITabParams";
 
 interface AppStackProps { }
 
@@ -74,7 +74,7 @@ const CustomTabBar = ({ props }: any) => {
   </View>)
 }
 
-const Tab = createBottomTabNavigator<TabsParamList>();
+const Tab = createBottomTabNavigator<ITabsParamList>();
 
 
 const Tabs: React.FC<AppStackProps> = () => {

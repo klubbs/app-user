@@ -6,11 +6,11 @@ import WelcomeLoginScreen from "../../components/screens/loginWelcome";
 import Register from "../../components/screens/register";
 import Restaurant from "../../components/screens/restaurant";
 import Tabs from "./AppTabStack";
-import { AppStackParamList } from "./ParamList/AppStackParamList";
+import { IAppStackParams } from "./interfaces/IAppStackParams";
 
 
 
-const AppStack = createStackNavigator<AppStackParamList>();
+const AppStack = createStackNavigator<IAppStackParams>();
 
 interface AppStackProps { }
 

@@ -2,9 +2,14 @@ import { NavigationContainer } from "@react-navigation/native";
 import { useFonts } from 'expo-font';
 import FlashComponent from 'flash-notify';
 import React, { useState } from "react";
-import { ActivityIndicator, StatusBar, View } from "react-native";
+import { ActivityIndicator, LogBox, StatusBar, View } from "react-native";
+import { AuthProvider } from './src/contexts/AuthContext';
 import AppStack from "./src/settings/navigation/AppStack";
 import AuthStack from "./src/settings/navigation/AuthStack";
+import "./src/utils/base64_initialization";
+
+LogBox.ignoreLogs(['Expected style']); // Ignore log notification by message
+
 export default function App() {
 
   const [logged, setLogged] = useState(true)
@@ -33,10 +38,12 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <FlashComponent />
-      <StatusBar animated={true} barStyle={'dark-content'} />
-      {logged ? <AppStack /> : <AuthStack />}
-    </NavigationContainer>
+    <AuthProvider>
+      <NavigationContainer>
+        <FlashComponent />
+        <StatusBar animated={true} barStyle={'dark-content'} />
+        {logged ? <AppStack /> : <AuthStack />}
+      </NavigationContainer >
+    </AuthProvider>
   );
 };
