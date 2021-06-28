@@ -20,7 +20,7 @@ export const ContainerBadge = styled.View`
   align-items: center;
   margin-right: 5px;
   border-radius: 8px;
-  border-color: ${`${COLORS.COLOR_YELLOW}40`};
+  border-color: ${`${COLORS.COLOR_YELLOW}50`};
   border-width: 1px;
   padding-top:  8px;
   padding-bottom: 8px;

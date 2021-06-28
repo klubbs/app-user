@@ -3,7 +3,7 @@ import { StackScreenProps } from "@react-navigation/stack";
 export type ITabsParamList = {
   Home: undefined;
   Search: undefined;
-  Percent: undefined;
+  Coupon: undefined;
   Options: { isSign: boolean };
 };
 

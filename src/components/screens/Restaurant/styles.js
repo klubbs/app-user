@@ -13,6 +13,7 @@ export const ContainerImage = styled.Image`
 
 export const ContainerInformations = styled.View`
   flex: 1;
+  background-color: ${COLORS.COLOR_WHITE};
 `
 
 export const ContainerBadges = styled.View`

@@ -4,6 +4,7 @@ import * as Haptic from 'expo-haptics';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Alert, Keyboard, KeyboardAvoidingView, ScrollView, useWindowDimensions } from 'react-native';
 import { default as COLORS } from '../../../../assets/constants/colors';
+import { RegisterUserExecutor } from '../../../executors/users/register_user_executor';
 import { UserDomain } from '../../../executors/users/user_domain';
 import { RegisterScreenProps } from '../../../settings/navigation/interfaces/IAppStackParams';
 import { BEHAVIOR_KEYBOARD } from '../../../utils/behavior_utils';
@@ -81,9 +82,15 @@ const Register: React.FC<RegisterScreenProps> = ({ route }) => {
   const handleConfirm = async () => {
 
     if (currentScroll === SCROOL_INDEX.LAST) {
+
+
+      //Verificar antes o número de telefone do usuário
+
       try {
 
         UserDomain._validateUserCreateAsync(route.params.mail, password, name, phone)
+
+        RegisterUserExecutor._sendRegisterCode(route.params.mail)
 
         modalCodeRef.current?.openModal()
 

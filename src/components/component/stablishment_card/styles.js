@@ -11,11 +11,11 @@ export const Wrapper = styled.TouchableOpacity.attrs(props => ({
 `
 
 export const Image = styled.ImageBackground.attrs(props => ({
-  imageStyle: { borderRadius: 75 }
+  imageStyle: { borderRadius: 10 }
 }
 ))`
-  height: 150px;
-  width: 150px;
+  height: 100px;
+  width: 180px;
   z-index: 10;
 `
 
@@ -23,26 +23,20 @@ export const OpenCloseBadge = styled.View`
   width: 15px;
   height: 15px;
   border-radius: 7.5px;
-  left:90%;
-  top:20%;
+  left:95%;
+  top:-5%;
   border-width: 1px;
   border-color: ${COLORS.COLOR_WHITE};
   background-color: #EA382D;
 `
 
 export const Container = styled.View`
-    background-color: ${COLORS.COLOR_SECUNDARY_WHITE};
-    position: absolute;
-    justify-content: center;
-    align-items: center;
-    top: 25%;
-    padding-top: 45%;
-    height: 200px;
-    border-radius: 20px;
-    shadow-color:${COLORS.COLOR_BLACK};
-    shadow-opacity: 0.05;
-    shadow-offset: 0 2px;
-    shadow-radius: 1px;
+    /* background-color: ${COLORS.COLOR_YELLOW}; */
+    /* justify-content: center; */
+    align-items: flex-start;
+    /* padding-top: 5%; */
+    height: 120px;
+    width: 180px;
 `
 
 export const ContainerDescription = styled.View`
@@ -51,8 +45,7 @@ export const ContainerDescription = styled.View`
   align-items: center;
 `
 export const ContainerDescriptions = styled.View`
-  width: 100%;
-  margin-top: 5%;
+  flex:4;
   flex-direction: row;
   align-items: flex-start;
   justify-content: space-evenly;
@@ -71,4 +64,54 @@ export const StablishmentName = styled.Text`
   font-size:16px;
   font-family:'Nunito_Bold';
   margin-bottom: 2%;
+`;
+
+export const StablishmentCategory = styled.Text`
+  color:${COLORS.COLOR_BLACK50};
+  font-size:12px;
+  font-family:'Nunito_Light';
+`;
+
+export const ContainerToolbar = styled.View`
+  flex:2;
+  width: 180px;
+  background-color: ${COLORS.COLOR_BLACK};
+  border-radius: 10px;
+  justify-content: flex-start;
+  padding-horizontal:5px;
+  align-items: center;
+  flex-direction: row;
+`
+
+const ToolbarBadgeDefault = styled.View`
+  width: 30%;
+  height: 80%;
+  margin-right: 8px;
+`
+
+export const ContainerOff = styled(ToolbarBadgeDefault)`
+  background-color: ${COLORS.COLOR_SECUNDARY_BLACK};
+  border-radius: 10px;
+  justify-content: space-evenly;
+  flex-direction: row;
+  align-items: center;
+`
+
+export const ContainerDistance = styled(ToolbarBadgeDefault)`
+  justify-content: space-between;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: row;
+`
+
+export const OffCoupon = styled.Text`
+  color:${COLORS.COLOR_YELLOW};
+  font-size:11px;
+  font-family:'Nunito_Bold';
+`;
+
+export const DistanceLocation = styled.Text`
+  color:${COLORS.COLOR_WHITE_80};
+  font-size:10px;
+  font-family:'Nunito_Regular';
 `;

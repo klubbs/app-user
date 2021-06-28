@@ -38,6 +38,7 @@ export const ImageBorder = styled.View`
   border-width: 5px;
   border-right-color: ${COLORS.COLOR_YELLOW};
   border-bottom-color: ${COLORS.COLOR_YELLOW};
+  background-color: ${props => props.hasUser ? 'transparent' : COLORS.COLOR_BLACK10};
   border-color: transparent;
   justify-content: center;
   align-items: center;

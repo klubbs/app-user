@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react';
-import { Dimensions, View, StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet, View } from 'react-native';
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import COLORS from '../../../../assets/constants/colors';
-
 import { ContainerImage, Image } from './styles';
+
 
 
 const WIDTH_DIMENSION = Dimensions.get('window').width
@@ -11,6 +11,17 @@ const WIDTH_DIMENSION = Dimensions.get('window').width
 const AdvertisementsBanner: React.FC = () => {
 
   const [items, setItems] = useState([{ index: 1 }, { index: 2 }])
+
+  const animatedStyle = (index: number, animatedValue: any, carouselProps: any) => {
+    return {
+      opacity: animatedValue.interpolate({
+        inputRange: [-1, 0, 1],
+        outputRange: [0.5, 0.5, 1],
+        extrapolate: 'extend'
+      })
+    }
+  }
+
   const refSlider = useRef(null)
 
   return (
@@ -18,6 +29,7 @@ const AdvertisementsBanner: React.FC = () => {
       <Carousel
         ref={refSlider}
         data={items}
+        slideInterpolatedStyle={animatedStyle}
         renderItem={(item, index) => {
           return (
             <ContainerImage >
@@ -27,7 +39,6 @@ const AdvertisementsBanner: React.FC = () => {
         }}
         autoplay={false}
         alwaysBounceHorizontal={true}
-        slideStyle={{ marginBottom: 100 }}
         sliderWidth={WIDTH_DIMENSION}
         itemWidth={WIDTH_DIMENSION / 1.2}
       />
@@ -35,8 +46,8 @@ const AdvertisementsBanner: React.FC = () => {
         dotsLength={2}
         activeDotIndex={1}
         dotStyle={styles.dotsStyle}
-        inactiveDotStyle={{ backgroundColor: COLORS.COLOR_SECUNDARY_WHITE }}
-        inactiveDotOpacity={0.4}
+        inactiveDotStyle={{ backgroundColor: COLORS.COLOR_SECUNDARY_BLACK }}
+        inactiveDotOpacity={0.2}
         inactiveDotScale={0.6}
       />
     </View>

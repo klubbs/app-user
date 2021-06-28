@@ -1,10 +1,12 @@
 import React from 'react';
-import COLORS from '../../../../assets/constants/colors'
-
-import { Wrapper, Container, StablishmentName, Image, ContainerBadges, ContainerDescriptions, OpenCloseBadge } from './styles';
-import IconText from '../icon_text'
-import BadgesLine from "../badges_line"
+import { View } from 'react-native';
+import colors from '../../../../assets/constants/colors';
+import { CouponIcon } from '../../../../assets/icons/coupon_icon';
+import { MarkerTimeIcon } from '../../../../assets/icons/marker-time_icon';
+import { Ratings } from '../ratings';
 import { IStablishmentCard } from './interfaces';
+import { Container, ContainerDescriptions, ContainerDistance, ContainerOff, ContainerToolbar, DistanceLocation, Image, OffCoupon, OpenCloseBadge, StablishmentCategory, StablishmentName, Wrapper } from './styles';
+
 
 
 const StablishmentCard: React.FC<IStablishmentCard> = (props) => {
@@ -15,14 +17,32 @@ const StablishmentCard: React.FC<IStablishmentCard> = (props) => {
         <OpenCloseBadge />
       </Image>
       <Container>
-        <StablishmentName>{props.title}</StablishmentName>
         <ContainerDescriptions>
-          <IconText icon={'star'} color={COLORS.COLOR_YELLOW} description={'4.5 / 5'} />
-          <IconText icon={'tag'} color={COLORS.COLOR_YELLOW} description={'10 Cupons'} />
+          <View>
+            <StablishmentName>{props.title}</StablishmentName>
+            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: 180 }}>
+
+              <StablishmentCategory>Churrascaria</StablishmentCategory>
+
+              <Ratings rating={3} />
+
+            </View>
+
+          </View>
+
         </ContainerDescriptions>
-        <ContainerBadges>
-          <BadgesLine text={"Churrascaria"} color={COLORS.COLOR_YELLOW} />
-        </ContainerBadges>
+        <ContainerToolbar>
+          <ContainerOff>
+            <CouponIcon fill={colors.COLOR_WHITE_80} width={15} height={13} />
+            <OffCoupon>12%</OffCoupon>
+          </ContainerOff>
+
+          <ContainerDistance>
+            <MarkerTimeIcon fill={colors.COLOR_WHITE_80} width={15} height={14} />
+            <DistanceLocation>1.2km</DistanceLocation>
+          </ContainerDistance>
+
+        </ContainerToolbar>
       </Container>
     </Wrapper >
   );

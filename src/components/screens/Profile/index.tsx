@@ -4,7 +4,7 @@ import LottieView from 'lottie-react-native';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Alert, FlatList, TouchableOpacity, View } from 'react-native';
 import CongratulationsCoupons from '../../../../assets/animations/congratulations_coupons.json';
-import COLORS from '../../../../assets/constants/colors';
+import { default as colors, default as COLORS } from '../../../../assets/constants/colors';
 import { AuthContext } from '../../../contexts/AuthContext';
 import { OptionsScreenProps } from '../../../settings/navigation/interfaces/ITabParams';
 import { IMenu } from './interfaces';
@@ -43,7 +43,7 @@ const Profile: React.FC<OptionsScreenProps> = ({ route }) => {
         onPress: () => { }
       },
       {
-        text: 'Sim, quero sair',
+        text: 'Sair',
         style: 'destructive',
         onPress: () => { _signOut() }
       }
@@ -97,8 +97,11 @@ const Profile: React.FC<OptionsScreenProps> = ({ route }) => {
       {isRegister && <LottieView source={CongratulationsCoupons} loop={false} ref={animRef} />}
       <WrapperTop >
         <ContainerImage >
-          <ImageBorder>
-            <UserImage source={{ uri: `${user?.image ?? 'ss'}` }} />
+          <ImageBorder hasUser={user?.image}>
+            {user?.image
+              ? <UserImage source={{ uri: `${user?.image}` }} />
+              :   <Feather name={'user'} color={colors.COLOR_BLACK40} size={35} />
+            }
           </ImageBorder>
         </ContainerImage>
         <ContainerPoints >

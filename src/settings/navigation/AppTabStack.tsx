@@ -4,6 +4,8 @@ import React from "react";
 import { TouchableOpacity, View } from "react-native";
 import Svg, { Path } from 'react-native-svg';
 import COLORS from '../../../assets/constants/colors';
+import { CouponIcon } from "../../../assets/icons/coupon_icon";
+import { ShopIcon } from "../../../assets/icons/shop_icon";
 import Coupons from '../../components/screens/coupons';
 import Home from '../../components/screens/home';
 import Profile from '../../components/screens/profile';
@@ -96,16 +98,16 @@ const Tabs: React.FC<AppStackProps> = () => {
         name="Home"
         component={Home}
         options={{
-          tabBarIcon: ({ focused }) => <IconTab focused={focused} icon="home" />,
+          tabBarIcon: ({ focused }) => <ShopIcon fill={focused ? COLORS.COLOR_YELLOW : COLORS.COLOR_SECUNDARY_WHITE} width={18} height={18} />,
           tabBarButton: (props) => (<TabBarCustomButton {...props} />)
         }}
       />
 
       <Tab.Screen
-        name="Percent"
+        name="Coupon"
         component={Coupons}
         options={{
-          tabBarIcon: ({ focused }) => <IconTab focused={focused} icon="percent" />,
+          tabBarIcon: ({ focused }) => <CouponIcon fill={focused ? COLORS.COLOR_YELLOW : COLORS.COLOR_SECUNDARY_WHITE} width={18} height={18} />,
           tabBarButton: (props) => (<TabBarCustomButton {...props} />)
         }}
       />

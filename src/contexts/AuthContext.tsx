@@ -59,7 +59,18 @@ const AuthProvider: React.FC = ({ children }) => {
     await RegisterUserExecutor._createUserAsync(mail, password, name, phone, code)
 
     setIsRegister(true)
+
   }
+
+  useEffect(() => {
+
+    if (isRegister) {
+      setTimeout(() => {
+        setIsRegister(false)
+      }, 4000)
+    }
+
+  }, [isRegister])
 
 
   return (

@@ -13,8 +13,6 @@ class LoginUserExecutor {
 
     const { data } = await api.get<IResponseMessage<boolean>>(`validations/users/infos/emails/${email}`)
 
-    console.log(data)
-
     return data.message
   }
 

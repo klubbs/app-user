@@ -49,8 +49,6 @@ export const ModalCode = React.forwardRef<IModalRef, IModalCodeProps>((propsComp
     const user = propsComp.registerParams
 
     if (user) {
-      RegisterUserExecutor._sendRegisterCode(user?.mail)
-
       setVisible(true)
     }
   }

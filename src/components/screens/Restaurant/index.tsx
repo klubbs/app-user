@@ -39,9 +39,9 @@ const Restaurant: React.FC<RestaurantScreenProps> = ({ route }) => {
         </WrapperTop>
 
         <ContainerBadges >
-          <BadgesDescriptorLine text={"Estabelecimento"} secundaryText={"Premium"} color={COLORS.COLOR_YELLOW} />
-          <BadgesDescriptorLine text={"Horário"} secundaryText={"17:00 - 23:00"} color={COLORS.COLOR_SECUNDARY_BLACK} />
-          <BadgesDescriptorLine text={"Classificação"} secundaryText={"4.5"} color={COLORS.COLOR_SECUNDARY_BLACK} icon={"star"} />
+          <BadgesDescriptorLine text={"Recebe"} secundaryText={"1000 pontos"} color={COLORS.COLOR_YELLOW} />
+          <BadgesDescriptorLine text={"Horário"} secundaryText={"17:00 - 23:00"} color={COLORS.COLOR_BLACK80} />
+          <BadgesDescriptorLine text={"Classificação"} secundaryText={"4.5"} color={COLORS.COLOR_BLACK80} icon={"star"} />
         </ContainerBadges>
 
         <ContainerUsual>
