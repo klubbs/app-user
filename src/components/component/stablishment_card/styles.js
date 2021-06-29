@@ -1,12 +1,13 @@
 import styled from 'styled-components'
 import COLORS from '../../../../assets/constants/colors'
+import { isIphoneX } from '../../../utils/iphone_helper'
 
 export const Wrapper = styled.TouchableOpacity.attrs(props => ({
-  activeOpacity: 0.9
+  activeOpacity: 0.95
 }
 ))`
     height: 280px;
-    width: 45%;
+    width: ${isIphoneX() ? '190px' : '175px'};
     align-items: center;
 `
 
@@ -15,7 +16,7 @@ export const Image = styled.ImageBackground.attrs(props => ({
 }
 ))`
   height: 100px;
-  width: 180px;
+  width: 100%;
   z-index: 10;
 `
 
@@ -23,7 +24,7 @@ export const OpenCloseBadge = styled.View`
   width: 15px;
   height: 15px;
   border-radius: 7.5px;
-  left:95%;
+  left:93%;
   top:-5%;
   border-width: 1px;
   border-color: ${COLORS.COLOR_WHITE};
@@ -31,12 +32,9 @@ export const OpenCloseBadge = styled.View`
 `
 
 export const Container = styled.View`
-    /* background-color: ${COLORS.COLOR_YELLOW}; */
-    /* justify-content: center; */
     align-items: flex-start;
-    /* padding-top: 5%; */
     height: 120px;
-    width: 180px;
+    width: 100%;
 `
 
 export const ContainerDescription = styled.View`
@@ -46,9 +44,9 @@ export const ContainerDescription = styled.View`
 `
 export const ContainerDescriptions = styled.View`
   flex:4;
-  flex-direction: row;
+  padding-top: 2%;
   align-items: flex-start;
-  justify-content: space-evenly;
+  justify-content: flex-start;
 `
 
 export const ContainerBadges = styled.View`
@@ -63,7 +61,7 @@ export const StablishmentName = styled.Text`
   color:${COLORS.COLOR_SECUNDARY_BLACK};
   font-size:16px;
   font-family:'Nunito_Bold';
-  margin-bottom: 2%;
+  margin-bottom: 1%;
 `;
 
 export const StablishmentCategory = styled.Text`
@@ -74,7 +72,7 @@ export const StablishmentCategory = styled.Text`
 
 export const ContainerToolbar = styled.View`
   flex:2;
-  width: 180px;
+  width: 100%;
   background-color: ${COLORS.COLOR_BLACK};
   border-radius: 10px;
   justify-content: flex-start;

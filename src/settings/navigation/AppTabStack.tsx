@@ -9,6 +9,7 @@ import { ShopIcon } from "../../../assets/icons/shop_icon";
 import Coupons from '../../components/screens/coupons';
 import Home from '../../components/screens/home';
 import Profile from '../../components/screens/profile';
+import { isIphoneX } from "../../utils/iphone_helper";
 import { ITabsParamList } from "./interfaces/ITabParams";
 
 interface AppStackProps { }
@@ -46,7 +47,7 @@ const TabBarCustomButton = ({ accessibilityState, children, onPress }: any) => {
       <TouchableOpacity
         style={{
           flex: 1,
-          height: 60,
+          height: 50,
           backgroundColor: COLORS.COLOR_SECUNDARY_BLACK
         }}
         activeOpacity={1}
@@ -66,7 +67,7 @@ const CustomTabBar = ({ props }: any) => {
         bottom: 0,
         left: 0,
         right: 0,
-        height: 30,
+        height: isIphoneX() ? 40 : 10,
         backgroundColor: COLORS.COLOR_SECUNDARY_BLACK
       }}
     ></View>

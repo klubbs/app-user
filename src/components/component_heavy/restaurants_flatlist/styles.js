@@ -4,11 +4,11 @@ import COLORS from '../../../../assets/constants/colors'
 
 export const containerStyle = { paddingBottom: 50 }
 
-export const wrapperStyle = { padding: 10, justifyContent: 'space-evenly' }
+export const wrapperStyle = { justifyContent: 'space-around' }
 
 export const EmptyCard = styled.View`
   height: 280px;
-  width: 45%;
+  width: 40%;
   align-items: center;
   background-color: transparent;
 `

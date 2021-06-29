@@ -18,16 +18,10 @@ const StablishmentCard: React.FC<IStablishmentCard> = (props) => {
       </Image>
       <Container>
         <ContainerDescriptions>
-          <View>
-            <StablishmentName>{props.title}</StablishmentName>
-            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: 180 }}>
-
-              <StablishmentCategory>Churrascaria</StablishmentCategory>
-
-              <Ratings rating={3} />
-
-            </View>
-
+          <StablishmentName>{props.title}</StablishmentName>
+          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+            <StablishmentCategory>Churrascaria</StablishmentCategory>
+            <Ratings rating={3} />
           </View>
 
         </ContainerDescriptions>
