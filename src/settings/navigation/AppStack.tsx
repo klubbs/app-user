@@ -4,7 +4,7 @@ import COLORS from "../../../assets/constants/colors";
 import LoginPassword from "../../components/screens/loginPassword";
 import WelcomeLoginScreen from "../../components/screens/loginWelcome";
 import Register from "../../components/screens/register";
-import Restaurant from "../../components/screens/restaurant";
+import Restaurant from "../../components/screens/Restaurant";
 import Tabs from "./AppTabStack";
 import { IAppStackParams } from "./interfaces/IAppStackParams";
 

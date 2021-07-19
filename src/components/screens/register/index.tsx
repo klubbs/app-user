@@ -83,12 +83,9 @@ const Register: React.FC<RegisterScreenProps> = ({ route }) => {
 
     if (currentScroll === SCROOL_INDEX.LAST) {
 
-
-      //Verificar antes o número de telefone do usuário
-
       try {
 
-        UserDomain._validateUserCreateAsync(route.params.mail, password, name, phone)
+        UserDomain._validateUserCreateUser(route.params.mail, password, name, phone)
 
         RegisterUserExecutor._sendRegisterCode(route.params.mail)
 
@@ -101,13 +98,13 @@ const Register: React.FC<RegisterScreenProps> = ({ route }) => {
         let errorInputTmp = errorInput
 
         error.error.forEach((element: any) => {
-          if (element.field === 'name')
+          if (element.field === 'Name')
             errorInputTmp.name = true
 
-          if (element.field === 'phone')
+          if (element.field === 'Phone')
             errorInputTmp.phone = true
 
-          if (element.field === 'password')
+          if (element.field === 'Password')
             errorInputTmp.password = true
         });
 

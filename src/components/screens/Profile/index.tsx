@@ -36,7 +36,7 @@ const Profile: React.FC<OptionsScreenProps> = ({ route }) => {
 
   const handleSignOut = async () => {
 
-    Alert.alert('Vai nos deixar ?', 'Quer realmente sair do melhor app de todos ! 🤣', [
+    Alert.alert('Não se vá', 'Quer realmente nos deixar ?', [
       {
         text: 'Não',
         style: 'cancel',
@@ -80,15 +80,19 @@ const Profile: React.FC<OptionsScreenProps> = ({ route }) => {
   const RenderPoints: React.FC = () => {
 
     return (
-      user
-        ? <>
-          <Point>Pontos</Point>
-          <PointValues>1500</PointValues>
-        </>
-        :
-        <TouchableOpacity onPress={() => navigation.navigate("LoginWelcome")}>
-          <Point>Entrar ou Cadastrar-se</Point>
-        </TouchableOpacity>
+      <ContainerPoints >
+        {
+          user
+            ? <>
+              <Point>Pontos</Point>
+              <PointValues>1500</PointValues>
+            </>
+            :
+            <TouchableOpacity onPress={() => navigation.navigate("LoginWelcome")}>
+              <Point>Entrar ou Cadastrar-se</Point>
+            </TouchableOpacity>
+        }
+      </ContainerPoints>
     )
   }
 
@@ -100,13 +104,11 @@ const Profile: React.FC<OptionsScreenProps> = ({ route }) => {
           <ImageBorder hasUser={user?.image}>
             {user?.image
               ? <UserImage source={{ uri: `${user?.image}` }} />
-              :   <Feather name={'user'} color={colors.COLOR_BLACK40} size={35} />
+              : <Feather name={'user'} color={colors.COLOR_BLACK40} size={35} />
             }
           </ImageBorder>
         </ContainerImage>
-        <ContainerPoints >
-          <RenderPoints />
-        </ContainerPoints>
+        <RenderPoints />
       </WrapperTop>
       <View style={{ flex: 2 }}>
         <FlatList

@@ -22,6 +22,43 @@ export const Description = styled.Text`
   margin-bottom: 15px;
 `
 
+export const UnregisterUser = styled.Text`
+  color:${COLORS.COLOR_YELLOW};
+  font-size:18px;
+  font-family:'Nunito_SemiBold';
+  text-align: center;
+`
+
+export const UnregisterUserDesc = styled.Text`
+  color:${COLORS.COLOR_BLACK50};
+  font-size:15px;
+  font-family:'Nunito_Light';
+  text-align: center;
+`
+
+export const UnregisterBoxText = styled.View`
+  background-color: ${COLORS.COLOR_BLACK5};
+  align-items: center;
+  justify-content: center;
+  margin-top: 20%;
+  width: 90%;
+  height: 10%;
+  border-radius: 10;
+`
+
+export const WrapperLottie = styled.View`
+  height: 55%;
+  width: 100%;
+  bottom: 50;
+  margin-bottom: 10%;
+`
+
+export const UnregisterSafeArea = styled.SafeAreaView`
+  flex:1;
+  background-color: ${COLORS.COLOR_WHITE};
+  align-items: center;
+`
+
 export const tabStyle = {
   activeTintColor: COLORS.COLOR_YELLOW,
   inactiveTintColor: COLORS.COLOR_BLACK50,

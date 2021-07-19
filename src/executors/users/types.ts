@@ -2,7 +2,7 @@ export type ICreateUserResponse = { id: string, name: string, mail: string, phon
 
 export type ILoginResponse= {
   id: string
-  email: string
+  mail: string
   phone: string
   name: string
   image: string

@@ -23,8 +23,7 @@ api.interceptors.response.use((response) => {
   return response;
 }, (error): Promise<{ message: string, error: any, statusCode: number }> => {
 
-  console.log("##############")
-  console.log(error)
+  console.log("########################################################")
 
   const statusCode = error.response.data?.statusCode
 

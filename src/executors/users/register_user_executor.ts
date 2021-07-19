@@ -9,7 +9,7 @@ class RegisterUserExecutor {
 
     const domain = UserDomain._createUser(mail, password, userName, phone, code);
 
-    const { data } = await axios.post<IResponseMessage<ICreateUserResponse>>('users', { email: domain.mail, phone: domain.phone, password: domain.password, name: domain.name, code: domain.code })
+    const { data } = await axios.post<IResponseMessage<ICreateUserResponse>>('users', { mail: domain.mail, phone: domain.phone, password: domain.password, name: domain.name, code: domain.code })
 
     return data.message
   }
@@ -18,7 +18,7 @@ class RegisterUserExecutor {
 
     UserDomain._onlyValidMail(mail)
 
-    await axios.post(`validations/users/code/register/email/${mail}`)
+    await axios.post(`users/code/register/mail`, {}, { params: { mail: mail } })
   }
 
 }

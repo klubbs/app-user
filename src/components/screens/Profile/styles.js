@@ -58,6 +58,7 @@ export const PointValues = styled.Text`
   font-family:'Nunito_Bold';
 `
 
+
 export const Point = styled.Text`
   color:${COLORS.COLOR_BLACK80};
   font-size:14px;

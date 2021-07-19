@@ -6,7 +6,7 @@ export class UserDomain {
 
   static _createUser(mail: string, password: string, name: string, phone: string, code: string): { mail: string, password: string, name: string, phone: string, code: string } {
 
-    this._validateUserCreateAsync(mail, password, name, phone)
+    this._validateUserCreateUser(mail, password, name, phone)
 
     if (code.length < 5) {
       throw ErrorException.Throw(412, "code")
@@ -17,24 +17,24 @@ export class UserDomain {
     return { mail, password, code, phone, name }
   }
 
-  static _validateUserCreateAsync(mail: string, password: string, name: string, phone: string): void {
+  static _validateUserCreateUser(mail: string, password: string, name: string, phone: string): void {
 
     const errors = []
 
     if (!_validMail(mail)) {
-      errors.push({ field: 'mail' })
+      errors.push({ field: 'Mail' })
     }
 
     if (name.length <= 0) {
-      errors.push({ field: 'name' })
+      errors.push({ field: 'Name' })
     }
 
     if (!_validPhone(phone)) {
-      errors.push({ field: 'phone' })
+      errors.push({ field: 'Phone' })
     }
 
     if (password.length < 5) {
-      errors.push({ field: 'password' })
+      errors.push({ field: 'Password' })
     }
 
     if (errors.length) {

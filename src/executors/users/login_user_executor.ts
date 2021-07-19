@@ -11,14 +11,14 @@ class LoginUserExecutor {
       throw ErrorException.Throw(422)
 
 
-    const { data } = await api.get<IResponseMessage<boolean>>(`validations/users/infos/emails/${email}`)
+    const { data } = await api.get<IResponseMessage<boolean>>(`users/infos/mail`, { params: { mail: email } })
 
     return data.message
   }
 
   static async _login(mail: string, password: string): Promise<ILoginResponse> {
 
-    const { data } = await api.get<IResponseMessage<ILoginResponse>>('validations/users/login', {
+    const { data } = await api.get<IResponseMessage<ILoginResponse>>('users/login', {
       auth: {
         username: mail,
         password: password
@@ -31,3 +31,4 @@ class LoginUserExecutor {
 
 
 export { LoginUserExecutor }
+

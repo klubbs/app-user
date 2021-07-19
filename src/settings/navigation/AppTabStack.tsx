@@ -6,9 +6,9 @@ import Svg, { Path } from 'react-native-svg';
 import COLORS from '../../../assets/constants/colors';
 import { CouponIcon } from "../../../assets/icons/coupon_icon";
 import { ShopIcon } from "../../../assets/icons/shop_icon";
-import Coupons from '../../components/screens/coupons';
-import Home from '../../components/screens/home';
-import Profile from '../../components/screens/profile';
+import Coupons from '../../components/screens/Coupons';
+import Home from '../../components/screens/Home';
+import Profile from '../../components/screens/Profile';
 import { isIphoneX } from "../../utils/iphone_helper";
 import { ITabsParamList } from "./interfaces/ITabParams";
 

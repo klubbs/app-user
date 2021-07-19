@@ -96,6 +96,8 @@ export const ModalCode = React.forwardRef<IModalRef, IModalCodeProps>((propsComp
         NotificationsFlash.InvalidCode()
       }
 
+      console.log(error)
+
       if (error?.statusCode === 422) {
         NotificationsFlash.SpillCoffee()
       }
