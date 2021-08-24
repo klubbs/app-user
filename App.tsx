@@ -3,10 +3,11 @@ import { useFonts } from 'expo-font';
 import FlashComponent from 'flash-notify';
 import React, { useState } from "react";
 import { ActivityIndicator, LogBox, StatusBar, View } from "react-native";
-import { AuthProvider } from './src/contexts/AuthContext';
-import AppStack from "./src/settings/navigation/AppStack";
-import AuthStack from "./src/settings/navigation/AuthStack";
+import { AuthProvider } from './src/contexts/auth_context';
+import AppStack from "./src/settings/navigation/app_stack";
+import AuthStack from "./src/settings/navigation/auth_stack";
 import "./src/utils/base64_initialization";
+import './src/utils/extensions/date_extensions';
 
 LogBox.ignoreLogs(['Expected style']); // Ignore log notification by message
 

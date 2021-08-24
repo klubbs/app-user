@@ -3,5 +3,4 @@ export interface IRestaurants {
   image: string;
   name: string;
   empty: boolean;
-
 }

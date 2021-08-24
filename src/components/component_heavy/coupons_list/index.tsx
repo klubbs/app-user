@@ -1,8 +1,7 @@
 import React, { ReactElement, useState } from 'react';
-import { Image, FlatList } from 'react-native';
 import { ICouponsItems } from './interfaces';
+import { Box, CouponImage, FlatComponent, PercentOff, Valid } from './styles';
 
-import { Container, PercentOff, Box, Valid, ColumWrapperStyle, FlatStyle } from './styles';
 
 
 const NUM_COLUMNS = 2
@@ -33,7 +32,7 @@ const CouponsList: React.FC = () => {
     } else {
       return (
         <Box>
-          <Image style={{ width: 100, height: 100, borderRadius: 35, marginBottom: 10 }} source={{ uri: "https://pbs.twimg.com/profile_images/1402367254067568641/LTLk2lAL.jpg" }} />
+          <CouponImage source={{ uri: "https://pbs.twimg.com/profile_images/1402367254067568641/LTLk2lAL.jpg" }} />
           <PercentOff>20% Off</PercentOff>
           <Valid>Válido até 15/06</Valid>
         </Box>
@@ -42,14 +41,10 @@ const CouponsList: React.FC = () => {
   }
 
   return (
-    <FlatList
+    <FlatComponent
       data={formatColumnsData(items)}
       numColumns={NUM_COLUMNS}
       keyExtractor={(item) => item.id}
-      showsVerticalScrollIndicator={false}
-      style={FlatStyle as any}
-      contentContainerStyle={Container as any}
-      columnWrapperStyle={ColumWrapperStyle as any}
       renderItem={({ item }) => HowitemRender(item)}
     />
   );

@@ -2,17 +2,15 @@ import { useNavigation } from '@react-navigation/native';
 import * as Haptic from 'expo-haptics';
 import React, { useContext, useImperativeHandle, useState } from 'react';
 import { Alert, Keyboard } from 'react-native';
-import { CodeField, Cursor, RenderCellOptions, useClearByFocusCell } from 'react-native-confirmation-code-field';
-import { AuthContext } from '../../../contexts/AuthContext';
-import { RegisterUserExecutor } from '../../../executors/users/register_user_executor';
+import { Cursor, RenderCellOptions, useClearByFocusCell } from 'react-native-confirmation-code-field';
+import { AuthContext } from '../../../contexts/auth_context';
+import { RegisterUserExecutor } from '../../../services/users/register_user_executor';
 import { NotificationsFlash } from '../../../utils/notificationsFlash_utils';
-import Button from '../../component/button';
 import ModalComponent from '../../component/modal';
 import { Spinner } from '../../component/spinner';
-import { Container, Input, Title, TitleDescription, TouchableReset } from './styles';
+import { ButtonConfirm, CodeBoxes, Container, Input, Title, TitleDescription, TouchableReset } from './styles';
 import { IModalCodeProps, IModalRef } from './types';
 
-const CELL_COUNT = 5;
 
 export const ModalCode = React.forwardRef<IModalRef, IModalCodeProps>((propsComp, ref) => {
 
@@ -20,7 +18,7 @@ export const ModalCode = React.forwardRef<IModalRef, IModalCodeProps>((propsComp
   const [visible, setVisible] = useState(false)
   const [loading, setLoading] = useState(false)
 
-  const { _register, _signIn } = useContext(AuthContext)
+  const { register, signIn } = useContext(AuthContext)
 
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({ value: code, setValue: setCode });
 
@@ -82,9 +80,9 @@ export const ModalCode = React.forwardRef<IModalRef, IModalCodeProps>((propsComp
       const user = propsComp.registerParams
 
       if (user) {
-        await _register(user?.mail, user?.password, user?.name, user?.phone, code)
+        await register(user?.mail, user?.password, user?.name, user?.phone, code)
 
-        await _signIn(user.mail, user.password);
+        await signIn(user.mail, user.password);
       }
 
       navigation.removeListener('beforeRemove', () => { })
@@ -95,8 +93,6 @@ export const ModalCode = React.forwardRef<IModalRef, IModalCodeProps>((propsComp
       if (error?.statusCode === 412) {
         NotificationsFlash.InvalidCode()
       }
-
-      console.log(error)
 
       if (error?.statusCode === 422) {
         NotificationsFlash.SpillCoffee()
@@ -151,19 +147,15 @@ export const ModalCode = React.forwardRef<IModalRef, IModalCodeProps>((propsComp
           <TitleDescription>Digite o código que enviamos para: {propsComp.registerParams?.mail ?? propsComp.recoverParams?.email}</TitleDescription>
         </Container>
         <Container>
-          <CodeField
+          <CodeBoxes
             value={code}
             onChangeText={(e) => setCode(e)}
-            cellCount={CELL_COUNT}
-            returnKeyType={'none'}
-            keyboardType="default"
-            textContentType="oneTimeCode"
             renderCell={renderInput}
             {...props}
           />
         </Container>
         <Container>
-          <Button text={'Pronto'} onPress={handleConfirm} styleContainer={{ width: '60%' }} />
+          <ButtonConfirm onPress={handleConfirm} />
           <TouchableReset onPress={handleResetCode} >
             <TitleDescription>Reenviar código</TitleDescription>
           </TouchableReset>

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 import COLORS from '../../../../assets/constants/colors';
 
 export const SpinnerLoading = styled.ActivityIndicator.attrs({

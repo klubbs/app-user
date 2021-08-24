@@ -2,16 +2,36 @@ import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { Alert, FlatList, TouchableOpacity, View } from 'react-native';
+import { Alert, FlatList, TouchableOpacity } from 'react-native';
 import CongratulationsCoupons from '../../../../assets/animations/congratulations_coupons.json';
-import { default as colors, default as COLORS } from '../../../../assets/constants/colors';
-import { AuthContext } from '../../../contexts/AuthContext';
+import { default as COLORS } from '../../../../assets/constants/colors';
+import { AuthContext } from '../../../contexts/auth_context';
 import { OptionsScreenProps } from '../../../settings/navigation/interfaces/ITabParams';
 import { IMenu } from './interfaces';
-import { ContainerImage, ContainerPoints, ImageBorder, MenuItemArrow, MenuItemContainer, MenuItemIcon, MenuLogoutContainer, MenuText, MenuTextContainer, MenuTextDescription, MenuTextLogout, Point, PointValues, SafeArea, UserImage, WrapperTop } from './styles';
+import {
+  ContainerFlat, ContainerImage,
+  ContainerPoints, IconArrowRight, IconLogout, IconUser, ImageBorder,
+  MenuItemArrow,
+  MenuItemContainer,
+  MenuItemIcon,
+  MenuLogoutContainer,
+  MenuText,
+  MenuTextContainer,
+  MenuTextDescription,
+  MenuTextLogout,
+  Point,
+  PointValues,
+  SafeArea,
+  UserImage,
+  WrapperTop
+} from './styles';
 
 
 const Profile: React.FC<OptionsScreenProps> = ({ route }) => {
+
+  const { user, isRegister, logout } = useContext(AuthContext)
+  const animRef = useRef<LottieView>(null)
+  const navigation = useNavigation();
 
   const [menuData, setMenuData] = useState<IMenu[]>(
     [
@@ -22,11 +42,6 @@ const Profile: React.FC<OptionsScreenProps> = ({ route }) => {
     ]
   )
 
-  const { user, isRegister, _signOut } = useContext(AuthContext)
-
-  const animRef = useRef<LottieView>(null)
-  const navigation = useNavigation();
-
   useEffect(() => {
     if (isRegister)
       animRef.current?.play()
@@ -34,7 +49,7 @@ const Profile: React.FC<OptionsScreenProps> = ({ route }) => {
   }, [isRegister])
 
 
-  const handleSignOut = async () => {
+  const handlelogout = async () => {
 
     Alert.alert('Não se vá', 'Quer realmente nos deixar ?', [
       {
@@ -45,7 +60,7 @@ const Profile: React.FC<OptionsScreenProps> = ({ route }) => {
       {
         text: 'Sair',
         style: 'destructive',
-        onPress: () => { _signOut() }
+        onPress: () => logout()
       }
     ])
 
@@ -62,7 +77,7 @@ const Profile: React.FC<OptionsScreenProps> = ({ route }) => {
           <MenuTextDescription>{params.description}</MenuTextDescription>
         </MenuTextContainer>
         <MenuItemArrow >
-          <Feather name={"chevron-right"} color={COLORS.COLOR_SECUNDARY_BLACK} size={18} />
+          <IconArrowRight />
         </MenuItemArrow>
       </MenuItemContainer>
     )
@@ -71,7 +86,7 @@ const Profile: React.FC<OptionsScreenProps> = ({ route }) => {
   const MenuFooterItem = () => {
     return (
       user && <MenuLogoutContainer>
-        <Feather name={'log-out'} size={16} color={COLORS.COLOR_BLACK40} onPress={handleSignOut} />
+        <IconLogout onPress={handlelogout} />
         <MenuTextLogout>Sair</MenuTextLogout>
       </MenuLogoutContainer>
     )
@@ -101,16 +116,17 @@ const Profile: React.FC<OptionsScreenProps> = ({ route }) => {
       {isRegister && <LottieView source={CongratulationsCoupons} loop={false} ref={animRef} />}
       <WrapperTop >
         <ContainerImage >
-          <ImageBorder hasUser={user?.image}>
+          <ImageBorder selected={user?.image}>
             {user?.image
               ? <UserImage source={{ uri: `${user?.image}` }} />
-              : <Feather name={'user'} color={colors.COLOR_BLACK40} size={35} />
+              : <IconUser />
             }
           </ImageBorder>
         </ContainerImage>
         <RenderPoints />
       </WrapperTop>
-      <View style={{ flex: 2 }}>
+
+      <ContainerFlat>
         <FlatList
           data={menuData}
           showsVerticalScrollIndicator={false}
@@ -120,7 +136,8 @@ const Profile: React.FC<OptionsScreenProps> = ({ route }) => {
           renderItem={({ item }) => MenuItem(item)}
         />
 
-      </View>
+      </ContainerFlat>
+
     </SafeArea >
   );
 }

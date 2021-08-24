@@ -1,11 +1,9 @@
-import React, { useRef } from 'react';
-import { View, SafeAreaView, Image, StyleSheet, Text } from 'react-native';
-import COLORS from '../../../../assets/constants/colors';
+import React from 'react';
+import AdvertisementsSlider from "../../component_heavy/advertisements_banner";
+import BarHome from "../../component_heavy/bar_top_home";
 import MainCategories from '../../component_heavy/restaurants_categories';
 import Restaurants from '../../component_heavy/restaurants_flatlist';
-import AdvertisementsSlider from "../../component_heavy/advertisements_banner"
-import BarHome from "../../component_heavy/bar_top_home"
-import PartnersList from '../../component_heavy/partners_flatlist';
+import { Container, ContainerBottom, Wrapper } from './styles';
 
 const example = [
   { text: "Todos", id: "1", icon: "" },
@@ -16,30 +14,21 @@ const example = [
   { text: "Mexicana", id: "6", icon: "" },
   { text: "Alemã", id: "7", icon: "" }]
 
-const Home: React.FC = () => {
-
+export const Home: React.FC = () => {
 
   return (
-    <SafeAreaView style={styles.safe}>
+    <Wrapper>
       <BarHome />
 
-      <View style={{ flex: 0.2 }}>
+      <Container>
         <AdvertisementsSlider />
-      </View>
+      </Container>
 
-      <View style={styles.scrol}>
+      <ContainerBottom>
         <MainCategories categories={example} />
         <Restaurants />
-      </View>
+      </ContainerBottom>
 
-    </SafeAreaView>
+    </Wrapper>
   );
 }
-
-const styles = StyleSheet.create({
-  safe: { flex: 1, backgroundColor: COLORS.COLOR_WHITE },
-  main_categ: { flex: 0.1 },
-  scrol: { flex: 0.8, justifyContent: 'center' },
-});
-
-export default Home;

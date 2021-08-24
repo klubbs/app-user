@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
-import Stablishment from "../../component/stablishment_card";
+import Stablishment from "../../component/establishment_card";
 import { IRestaurants } from './interfaces';
 import { containerStyle, EmptyCard, Header, wrapperStyle } from './styles';
 

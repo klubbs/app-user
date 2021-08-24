@@ -1,45 +1,28 @@
 import React, { useState } from 'react';
-import { FlatList } from 'react-native';
+import { MainCategoriesProps } from './interfaces';
+import { Description, Dot, FlatComponent, WrapplerTouchable } from './styles';
 
-import { Description, WrapplerTouchable, Dot } from './styles';
-
-interface MainCategoriesProps {
-  categories: MainCategorieItens[]
-}
-interface MainCategorieItens {
-  id: string
-  icon: string
-  text: string;
-}
-
-const RestaurantsCategories: React.FC<MainCategoriesProps> = ({ categories }: MainCategoriesProps) => {
+export const RestaurantsCategories: React.FC<MainCategoriesProps> = ({ categories }: MainCategoriesProps) => {
 
   const [selected, setSelected] = useState<string>("")
 
-  const handlePress = (item: string) => {
-    setSelected(item);
-  }
 
   return (
-
-    <FlatList
+    <FlatComponent
       data={categories}
-      horizontal
-      showsHorizontalScrollIndicator={false}
-      keyExtractor={item => `${item.id}`}
+      keyExtractor={(item) => `${item.id}`}
       renderItem={({ item }) => {
-        const isSelected = selected === item.id
+
+        const isSelected = selected === item.id as any
+
         return (
-          <WrapplerTouchable selected={isSelected} onPress={() => handlePress(item.id)}>
+          <WrapplerTouchable onPress={() => setSelected(item.id)}>
             <Dot selected={isSelected} />
             <Description selected={isSelected} >{item.text}</Description>
           </WrapplerTouchable>
         )
       }}
-      contentContainerStyle={{ paddingVertical: 20, marginBottom: 10, marginTop: 20 }}
-
     />
-
   );
 }
 

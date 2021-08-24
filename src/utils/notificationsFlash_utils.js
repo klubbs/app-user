@@ -12,13 +12,13 @@ class NotificationsFlash {
     showFlash({ type: 'NEUTRAL', title: 'Um fio desconectou', desc: 'Tente novamente mais tarde.' })
 
   static IncorrectPassword = () =>
-    showFlash({ type: "WARNING", title: 'Senha incorreta', desc: 'Será que temos um Sherlock Holmes aqui ? 🧐' })
+    showFlash({ type: "NEUTRAL", title: 'Senha incorreta', desc: 'Será que temos um Sherlock Holmes aqui ? 🧐' })
 
   static ClearMemory = () =>
     showFlash({ type: 'NEUTRAL', title: 'Feito.', desc: 'Memória liberada com sucesso.' })
 
   static InvalidMail = () =>
-    showFlash({ type: "WARNING", title: 'E-mail inválido.', desc: 'Verifique se o e-mail está correto.' })
+    showFlash({ type: "NEUTRAL", title: 'E-mail inválido', desc: 'Verifique se o e-mail está correto.' })
 
   static InvalidCode = () =>
     showFlash({ type: "WARNING", title: 'Código inválido.', desc: 'Código de verificação incorreto.' })
@@ -44,3 +44,4 @@ class NotificationsFlash {
 }
 
 export { NotificationsFlash }
+

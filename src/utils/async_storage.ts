@@ -1,24 +1,30 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { ILoginResponse } from '../executors/users/types';
+import { ILoginResponse } from '../services/users/types';
 
 
 
 class AsyncStorageUtils {
 
 
-  static _clearAllStorage = async () => {
+  static clearAllStorage = async () => {
     await AsyncStorage.clear()
   }
 
 
-  static _createUserInStorage = async (user: ILoginResponse): Promise<void> => {
+  static createUserInStorage = async (user: ILoginResponse): Promise<void> => {
     await AsyncStorage.multiSet([
-      ["@TOKEN:Key", user.token],
-      ["@USER:Key", JSON.stringify(user)]
+      ['@TOKEN:Key', user.token],
+      ['@USER:Key', JSON.stringify(user)]
     ])
   }
 
-  static _getUserInAsyncStorage = async (): Promise<ILoginResponse | null> => {
+  static getTokenInStorage = async (): Promise<string | null> => {
+    const token = await AsyncStorage.getItem('@TOKEN:Key')
+
+    return token;
+  }
+
+  static getUserInAsyncStorage = async (): Promise<ILoginResponse | null> => {
     const result = await AsyncStorage.getItem('@USER:Key')
 
     if (result !== null) {
@@ -33,3 +39,4 @@ class AsyncStorageUtils {
 
 
 export { AsyncStorageUtils };
+

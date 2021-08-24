@@ -6,7 +6,7 @@ export default {
     name: "gaba-club-app",
     slug: "gaba-club-app",
     orientation: "portrait",
-    icon: "",
+    icon: "./assets/icon.png",
     splash: {
       image: "",
       resizeMode: "contain",
