@@ -34,5 +34,6 @@ export const ContainerBlur = Animated.createAnimatedComponent(
     align-items:center;
     width:100%;
     height:100%;
+    background-color: ${COLORS.COLOR_BLACK20};
   `
 )

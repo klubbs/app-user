@@ -6,7 +6,7 @@ import { Box, CouponImage, FlatComponent, PercentOff, Valid } from './styles';
 
 const NUM_COLUMNS = 2
 
-export const CouponsStorage: React.FC = () => {
+export const CouponsStorageTab: React.FC = () => {
 
   const [items, setItems] = useState<ICouponsItems[]>([])
 

@@ -11,16 +11,6 @@ export const Title = styled.Text`
   color:${COLORS.COLOR_SECUNDARY_BLACK};
   font-size:25px;
   font-family:'Nunito_SemiBold';
-  margin-left: 5%;
-  margin-bottom: 5px;
-`
-
-export const Description = styled.Text`
-  color:${COLORS.COLOR_BLACK80};
-  font-size:12px;
-  font-family:'Nunito_Regular';
-  margin-left: 5%;
-  margin-bottom: 15px;
 `
 
 export const tabStyle = {
@@ -35,6 +25,7 @@ export const tabStyle = {
 export const HeaderContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
+  padding-horizontal:10px;
 `
 
 

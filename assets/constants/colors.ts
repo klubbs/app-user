@@ -32,5 +32,6 @@ export default {
 
 
   COLOR_YELLOW: "#EF9E31",
-  COLOR_YELLOW_RATING: "#eeaf5c"
+  COLOR_YELLOW_RATING: "#eeaf5c",
+  COLOR_YELLOW_BUTTON_TEXT: "#AA680E"
 }

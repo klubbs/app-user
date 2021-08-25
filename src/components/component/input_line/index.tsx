@@ -18,7 +18,6 @@ const InputLine: React.FC<IInputLine> = (props) => {
       secureTextEntry={props?.isPassword}
       value={props.value}
       style={props.style}
-      // {...props.style}
     />
   );
 }

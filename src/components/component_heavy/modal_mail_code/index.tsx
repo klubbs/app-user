@@ -6,13 +6,13 @@ import { Cursor, RenderCellOptions, useClearByFocusCell } from 'react-native-con
 import { AuthContext } from '../../../contexts/auth_context';
 import { RegisterUserExecutor } from '../../../services/users/register_user_executor';
 import { NotificationsFlash } from '../../../utils/notificationsFlash_utils';
-import ModalComponent from '../../component/modal';
+import { ModalComponent } from '../../component/modal';
 import { Spinner } from '../../component/spinner';
 import { ButtonConfirm, CodeBoxes, Container, Input, Title, TitleDescription, TouchableReset } from './styles';
 import { IModalCodeProps, IModalRef } from './types';
 
 
-export const ModalCode = React.forwardRef<IModalRef, IModalCodeProps>((propsComp, ref) => {
+export const ModalMailCode = React.forwardRef<IModalRef, IModalCodeProps>((propsComp, ref) => {
 
   const [code, setCode] = useState("")
   const [visible, setVisible] = useState(false)

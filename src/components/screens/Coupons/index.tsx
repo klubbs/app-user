@@ -1,19 +1,21 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import React, { useContext, useLayoutEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../../contexts/auth_context';
-import { CouponsCheckout } from '../../component_heavy/coupons_checkout';
+import { CouponsCheckout } from '../../component_heavy/coupons_checkout_tab';
 import { CouponsEmpty } from '../../component_heavy/coupons_empty';
-import { CouponsStorage } from '../../component_heavy/coupons_storage';
-import { Description, SafeArea, tabStyle, Title, HeaderContainer } from './styles';
-import { useNavigation } from '@react-navigation/native';
-import { Feather } from '@expo/vector-icons';
+import { CouponsStorageTab } from '../../component_heavy/coupons_storage_tab';
+import { SafeArea, tabStyle, Title, HeaderContainer } from './styles';
 import colors from '../../../../assets/constants/colors';
+import { ButtonCreateCoupon } from '../../component/button_cupon';
+import { ModalComponent } from '../../component/modal';
+import { ModalSaveCoupon } from '../../component_heavy/modal_save_coupon';
 
 const Tab = createMaterialTopTabNavigator();
 
 export const Coupons: React.FC = () => {
 
   const { user } = useContext(AuthContext)
+  const [visibleModal, setVisibleModal] = useState(false);
 
 
   // if (!user)
@@ -22,14 +24,14 @@ export const Coupons: React.FC = () => {
 
   return (
     <SafeArea>
+      <ModalSaveCoupon visible={visibleModal} onClose={() => setVisibleModal(false)} />
       <HeaderContainer>
         <Title>Cupons</Title>
-        <Feather size={20} name={'plus-circle'} accessibilityLabel="Criar Evento" style={{ borderRadius: 50, marginRight: 10, padding: 10 }} onPress={() => navigation.navigate('CreateEvent')} color={colors.COLOR_YELLOW} />
+        <ButtonCreateCoupon onPress={() => setVisibleModal(true)} />
       </HeaderContainer>
-      {/* <Description>Você já acumulou 1200 pontos</Description> */}
 
       <Tab.Navigator tabBarOptions={tabStyle} >
-        <Tab.Screen name="Armazenados" children={() => <CouponsStorage />} />
+        <Tab.Screen name="Armazenados" children={() => <CouponsStorageTab />} />
         <Tab.Screen name="Utilizados" children={() => <CouponsCheckout />} />
       </Tab.Navigator>
     </SafeArea>
