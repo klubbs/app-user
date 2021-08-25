@@ -8,7 +8,7 @@ export const SafeArea = styled.SafeAreaView`
 `
 
 export const Title = styled.Text`
-  color:${COLORS.COLOR_BLACK};
+  color:${COLORS.COLOR_SECUNDARY_BLACK};
   font-size:25px;
   font-family:'Nunito_SemiBold';
   margin-left: 5%;
@@ -30,5 +30,11 @@ export const tabStyle = {
   style: { backgroundColor: COLORS.COLOR_SECUNDARY_WHITE },
   labelStyle: { fontFamily: 'Nunito_SemiBold' }
 }
+
+
+export const HeaderContainer = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+`
 
 

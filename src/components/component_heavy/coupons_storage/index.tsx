@@ -6,9 +6,9 @@ import { Box, CouponImage, FlatComponent, PercentOff, Valid } from './styles';
 
 const NUM_COLUMNS = 2
 
-const CouponsList: React.FC = () => {
+export const CouponsStorage: React.FC = () => {
 
-  const [items, setItems] = useState<ICouponsItems[]>([{ id: '1', empty: false }, { id: '2', empty: false }, { id: '3', empty: false }, { id: '4', empty: false }, { id: '5', empty: false }, { id: '6', empty: true }])
+  const [items, setItems] = useState<ICouponsItems[]>([])
 
   const formatColumnsData = (data: ICouponsItems[]): ICouponsItems[] => {
 
@@ -49,5 +49,3 @@ const CouponsList: React.FC = () => {
     />
   );
 }
-
-export default CouponsList
