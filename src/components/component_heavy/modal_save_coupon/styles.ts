@@ -30,8 +30,10 @@ export const Input = styled.TextInput.attrs(props => ({
     background-color: ${colors.COLOR_BLACK10};
 `
 
-export const Wrapper = styled.View`
+export const Container = styled.View`
   flex-direction: row;
-  justify-content:space-evenly;
+  justify-content:space-between;
+`
+export const Wrapper = styled.View`
   padding:10px;
 `

@@ -11,4 +11,10 @@ export class CouponService {
     return data.message
   }
 
+  static async saveCouponInWallet(code: string): Promise<void> {
+
+    const { data } = await api.post('users/wallet/coupons', null, { params: { code: code } });
+
+  }
+
 }
