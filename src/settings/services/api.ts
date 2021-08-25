@@ -34,6 +34,10 @@ api.interceptors.response.use((response) => {
   const validationError = error.response.data?.error
   const message = error.response.data?.message
 
+  if (statusCode === 401) {
+    AsyncStorageUtils.clearAllStorage()
+  }
+
   if (statusCode === 500) {
     NotificationsFlash.SomeoneBullshit()
   }

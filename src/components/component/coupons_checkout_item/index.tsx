@@ -1,36 +1,45 @@
 import React from 'react';
+import { Fade, Placeholder } from 'rn-placeholder';
 import { ICouponCheckoutItem } from './interface';
 import {
   Box,
   ContainerLeft,
-  ContainerText,
-  CouponImage,
-  Dot,
+  ContainerText, Dot,
   Line,
   Name,
-  Percent,
-  Points,
+  Percent, PlaceHolderRound, Points,
   RightContainer,
   Wrapper
 } from './styles';
 
 
-export const CouponsCheckoutItems: React.FC<ICouponCheckoutItem> = (props) => {
+
+
+export const CouponsCheckoutItems: React.FC<{ data: ICouponCheckoutItem }> = (props) => {
+
+
   return (
     <Wrapper >
       <ContainerLeft >
-        <Percent>{props.off} %</Percent>
+        <Percent>{props.data.off} %</Percent>
         <Dot />
         <Line />
       </ContainerLeft>
       <RightContainer >
         <Box>
-          <CouponImage source={{ uri: props.image }} />
+
+          <Placeholder Animation={Fade}>
+            {/* <PlaceholderMedia /> */}
+            <PlaceHolderRound />
+          </Placeholder>
+
+          {/* <CouponImage source={{ uri: props.data.image }} /> */}
         </Box>
         <ContainerText>
-          <Name>{props.establishment_name}</Name>
+          <Name>{props.data.establishment_name}</Name>
           {/* TODO */}
           <Points>{props
+            .data
             .created_at?.ToDateFormat()
             .toLocaleTimeString("pt-br",
               {

@@ -1,3 +1,4 @@
+import { PlaceholderMedia } from "rn-placeholder";
 import styled from "styled-components/native";
 import COLORS from "../../../../assets/constants/colors";
 
@@ -74,4 +75,12 @@ export const CouponImage = styled.Image`
   width: 80px;
   height: 80px;
   border-radius: 40px;
+`
+
+export const PlaceHolderRound = styled(PlaceholderMedia).attrs(props => ({
+  isRound: true,
+  size: 90
+}))`
+  /* width: 90;
+  height: 90; */
 `

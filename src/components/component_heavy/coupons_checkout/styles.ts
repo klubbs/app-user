@@ -1,5 +1,6 @@
+import { Placeholder, PlaceholderLine } from 'rn-placeholder';
 import styled from "styled-components/native";
-import COLORS from "../../../../assets/constants/colors";
+import { default as colors, default as COLORS } from '../../../../assets/constants/colors';
 
 
 export const Wrapper = styled.View`
@@ -74,4 +75,27 @@ export const CouponImage = styled.Image`
   width: 80px;
   height: 80px;
   border-radius: 40px;
+`
+
+export const PlaceHolderWrapper = styled(Placeholder)`
+  padding-top:20px;
+	padding-horizontal:20px;
+`
+
+export const PlaceHolderContent = styled(PlaceholderLine).attrs(props => ({
+  width: 50
+}))`
+`
+
+export const NothingTransactionSubtitle = styled.Text`
+  color:${colors.COLOR_BLACK50};
+  font-size:14px;
+  margin-top:20px;
+  align-self: center;
+  font-family:'Nunito_Light';
+`
+export const CheckoutsFlatList = styled.FlatList.attrs(props => ({
+  showsVerticalScrollIndicator: false
+}))`
+  background-color: ${colors.COLOR_WHITE};
 `
