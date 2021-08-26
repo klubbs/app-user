@@ -8,6 +8,7 @@ import AppStack from "./src/settings/navigation/app_stack";
 import AuthStack from "./src/settings/navigation/auth_stack";
 import "./src/utils/base64_initialization";
 import './src/utils/extensions/date_extensions';
+import './src/utils/extensions/object_extensions';
 
 LogBox.ignoreLogs(['Expected style']); // Ignore log notification by message
 

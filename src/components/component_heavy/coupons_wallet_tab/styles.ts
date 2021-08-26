@@ -1,7 +1,9 @@
 import styled from 'styled-components/native';
 import COLORS from '../../../../assets/constants/colors';
 
-export const Box = styled.View`
+export const Container = styled.TouchableOpacity.attrs(props => ({
+  activeOpacity: 0.8
+}))<{ empty: boolean }>`
   background-color: ${props => props.empty ? 'transparent' : COLORS.COLOR_SECUNDARY_WHITE};
   justify-content: center;
   align-items: center;
@@ -14,7 +16,7 @@ export const Box = styled.View`
   shadow-radius: 1px;
 `
 
-export const PercentOff = styled.Text`
+export const Off = styled.Text`
   color:${COLORS.COLOR_SECUNDARY_BLACK};
   font-size:16px;
   font-family:'Nunito_Bold';

@@ -28,6 +28,7 @@ export const Input = styled.TextInput.attrs(props => ({
     color: ${colors.COLOR_SECUNDARY_BLACK};
     border-radius: 10px;
     background-color: ${colors.COLOR_BLACK10};
+    margin-horizontal:10px;
 `
 
 export const Container = styled.View`
@@ -36,4 +37,7 @@ export const Container = styled.View`
 `
 export const Wrapper = styled.View`
   padding:10px;
+  align-items:center;
+  justify-content: space-between;
+  /* justify-content: space-between; */
 `

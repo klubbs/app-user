@@ -41,8 +41,8 @@ class NotificationsFlash {
   static SuccessfullySentCode = () =>
     showFlash({ type: "NEUTRAL", title: 'Verifique seu e-mail', desc: 'Código enviado com sucesso.' })
 
-  static CustomMessage = (title: string, message: string) =>
-    showFlash({ type: "NEUTRAL", title: title, desc: message })
+  static CustomMessage = (title: string, message: string, type?: 'WARNING' | 'NEUTRAL' | 'DANGER' | 'SUCCESS') =>
+    showFlash({ type: type ?? "NEUTRAL", title: title, desc: message })
 
 }
 

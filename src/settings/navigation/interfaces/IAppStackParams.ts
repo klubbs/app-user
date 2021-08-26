@@ -6,6 +6,7 @@ export type IAppStackParams = {
   LoginPassword: { mail: string };
   Register: { mail: string };
   Restaurant: { id: string, image: string, name: string; };
+  CouponQr: { recommendation_code: string, establishment_name: string, coupon_off: number };
 };
 
 
@@ -14,4 +15,6 @@ export type RestaurantScreenProps = StackScreenProps<IAppStackParams, 'Restauran
 export type LoginPasswordScreenProps = StackScreenProps<IAppStackParams, 'LoginPassword'>
 
 export type RegisterScreenProps = StackScreenProps<IAppStackParams, 'Register'>
+
+export type CouponQrScreenProps = StackScreenProps<IAppStackParams, 'CouponQr'>
 

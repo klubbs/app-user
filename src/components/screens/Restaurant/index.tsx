@@ -5,7 +5,7 @@ import COLORS from '../../../../assets/constants/colors';
 import { RestaurantScreenProps } from "../../../settings/navigation/interfaces/IAppStackParams";
 import BadgesDescriptorLine from "../../component/badges_descriptor_line";
 import UberButton from "../../component/button_uber";
-import TabRestaurants from '../../component_heavy/restaurants_menu';
+import TabRestaurants from '../../component_heavy/restaurants_menu_tab';
 import { ContainerBadges, ContainerDescription, ContainerGetCoupon, ContainerIcons, ContainerImage, ContainerInformations, ContainerUsual, GetCouponText, RestaurantCategory, RestaurantName, Wrapper, WrapperTop } from './styles';
 
 
