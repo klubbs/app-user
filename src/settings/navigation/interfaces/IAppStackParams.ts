@@ -1,4 +1,5 @@
 import { StackScreenProps } from "@react-navigation/stack";
+import { IWalletCouponsReponse } from "../../../services/interfaces/icoupon";
 
 export type IAppStackParams = {
   Tabs: undefined;
@@ -6,7 +7,7 @@ export type IAppStackParams = {
   LoginPassword: { mail: string };
   Register: { mail: string };
   Restaurant: { id: string, image: string, name: string; };
-  CouponQr: { recommendation_code: string, establishment_name: string, coupon_off: number };
+  CouponQr: Omit<IWalletCouponsReponse, 'wallet_id'>;
 };
 
 

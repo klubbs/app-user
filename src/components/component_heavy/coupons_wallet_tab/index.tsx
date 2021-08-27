@@ -66,7 +66,14 @@ export const CouponsStorageTab: React.FC = () => {
         {item.empty && <Container empty={item.empty} />}
 
         {!item.empty &&
-          <Container empty={item.empty} onPress={() => navigation.navigate('CouponQr', { recommendation_code: item.recommendation_coupon_code, establishment_name: item.establishment_name, coupon_off: item.coupon_off_percentual })}>
+          <Container empty={item.empty} onPress={() => navigation.navigate('CouponQr', {
+            recommendation_coupon_code: item.recommendation_coupon_code,
+            coupon_off_percentual: item.coupon_off_percentual,
+            coupon_description: item.coupon_description,
+            coupon_valid_at: item.coupon_valid_at,
+            establishment_name: item.establishment_name,
+            establishment_image: item.establishment_image
+          })}>
             <CouponImage source={{ uri: item.establishment_image }} />
             <Off>{item.coupon_off_percentual}% OFF</Off>
             <Valid>Válido até {

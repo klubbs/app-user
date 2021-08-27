@@ -1,9 +1,6 @@
 
 export default {
 
-
-
-
   COLOR_BLACK: "#1E1E1E",
   COLOR_SECUNDARY_BLACK: "#2D2F35",
 

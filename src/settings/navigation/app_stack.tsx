@@ -1,5 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
+import colors from "../../../assets/constants/colors";
 import COLORS from "../../../assets/constants/colors";
 import { CouponQrScreen } from "../../components/screens/coupon_qr";
 import { LoginPasswordScreen } from "../../components/screens/login_password";
@@ -28,7 +29,7 @@ const App: React.FC<{}> = () => {
       <AppStack.Screen name="LoginPassword" component={LoginPasswordScreen} />
       <AppStack.Screen name="Register" component={Register} options={{ headerShown: true }} />
       <AppStack.Screen name="Restaurant" component={Restaurant} />
-      <AppStack.Screen name="CouponQr" component={CouponQrScreen} />
+      <AppStack.Screen name="CouponQr" component={CouponQrScreen} options={{ headerTintColor: COLORS.COLOR_WHITE }} />
     </AppStack.Navigator >
   );
 };
