@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../../contexts/auth_context';
 import { CouponsCheckout } from '../../component_heavy/coupons_checkout_tab';
 import { CouponsEmpty } from '../../component_heavy/coupons_logout';
-import { CouponsStorageTab } from '../../component_heavy/coupons_wallet_tab';
+import { CouponsWalletTab } from '../../component_heavy/coupons_wallet_tab';
 import { SafeArea, tabStyle, Title, HeaderContainer } from './styles';
 import colors from '../../../../assets/constants/colors';
 import { ButtonCreateCoupon } from '../../component/button_cupon';
@@ -31,7 +31,7 @@ export const Coupons: React.FC = () => {
       </HeaderContainer>
 
       <Tab.Navigator tabBarOptions={tabStyle} >
-        <Tab.Screen name="Armazenados" children={() => <CouponsStorageTab />} />
+        <Tab.Screen name="Armazenados" children={() => <CouponsWalletTab />} />
         <Tab.Screen name="Utilizados" children={() => <CouponsCheckout />} />
       </Tab.Navigator>
     </SafeArea>

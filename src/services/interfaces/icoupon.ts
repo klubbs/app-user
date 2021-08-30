@@ -9,10 +9,13 @@ export interface ICouponCheckoutResponse {
 
 export interface IWalletCouponsReponse {
   wallet_id: string
-  recommendation_coupon_code: string
-  coupon_off_percentual: number
-  coupon_description: string
-  coupon_valid_at: number
-  establishment_name: string
-  establishment_image: string
+  coupon_code: string
+  coupon_id: string
+  master_coupons: {
+    master_coupon_off_percentual: number,
+    master_coupon_description: string,
+    master_coupon_valid_at: number,
+    establishment_name: string,
+    establishment_image: string
+  }[]
 }

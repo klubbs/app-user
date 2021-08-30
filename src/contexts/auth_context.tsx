@@ -6,7 +6,7 @@ import { AsyncStorageUtils } from '../utils/async_storage';
 
 
 export const AuthContext = createContext(
-  {} as {
+  { } as {
     user: ILoginResponse | null
     register: (mail: string, password: string, name: string, phone: string, code: string) => Promise<void>
     signIn: (mail: string, password: string) => Promise<void>
@@ -22,6 +22,9 @@ const AuthProvider: React.FC = ({ children }) => {
   const [isRegister, setIsRegister] = useState(false)
 
   useEffect(() => {
+
+
+    EventEmitter.listen('LOGOUT_USER', () => logout())
 
     reloadUser();
 
@@ -74,6 +77,24 @@ const AuthProvider: React.FC = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
+}
+
+
+export const EventEmitter = {
+  events: new Map(),
+  listen: (topic: any, cb: any) => {
+    const oldEvents = EventEmitter.events.get(topic)
+    if (EventEmitter.events.has(topic)) {
+      return EventEmitter.events.set(topic, [...oldEvents, cb])
+    }
+    return EventEmitter.events.set(topic, [cb])
+  },
+  emit: (topic: any, data: any) => {
+    const myListeners = EventEmitter.events.get(topic)
+    if (Array.isArray(myListeners) && myListeners.length) {
+      myListeners.forEach(event => event(data))
+    }
+  }
 }
 
 export { AuthProvider };

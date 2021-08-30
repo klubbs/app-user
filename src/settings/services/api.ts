@@ -1,5 +1,6 @@
 import axios from 'axios';
 import Constants from 'expo-constants';
+import { EventEmitter } from '../../contexts/auth_context';
 import { AsyncStorageUtils } from '../../utils/async_storage';
 import { NotificationsFlash } from '../../utils/notificationsFlash_utils';
 const { showFlash } = require('flash-notify');
@@ -35,7 +36,7 @@ api.interceptors.response.use((response) => {
   const message = error.response.data?.message
 
   if (statusCode === 401) {
-    AsyncStorageUtils.clearAllStorage()
+    EventEmitter.emit('LOGOUT_USER', { })
   }
 
   if (statusCode === 500) {
