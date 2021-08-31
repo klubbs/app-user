@@ -9,14 +9,14 @@ import { MotiView } from 'moti'
 
 import { BottomContainer, TopContainer, Wrapper, Off, Establishment, Influencer, ValidAt, FlatListComponent, AnimatedWrapper, BackgroundCoupon, InfluencerIcon, InfluencerContainer, SubtitleHelp, ImageEstablishment } from './styles';
 import { ModalCouponEstablishmentInfos } from '../../component_heavy/modalCouponEstablishmentInfos';
-import { ICouponDetails } from './interfaces';
+import { IMasterCouponDetails } from './interfaces';
 
 export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
 
 
-  const [activeMasterCoupon, setActiveMasterCoupon] = useState<ICouponDetails | null>(null)
+  const [activeMasterCoupon, setActiveMasterCoupon] = useState<IMasterCouponDetails | null>(null)
 
-  function handlePressableCoupon(item: ICouponDetails) {
+  function handlePressableCoupon(item: IMasterCouponDetails) {
     setActiveMasterCoupon(item)
   }
 
@@ -36,7 +36,7 @@ export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
       <BottomContainer>
 
         <FlatListComponent
-          data={route.params.master_coupons as ICouponDetails[]}
+          data={route.params.master_coupons as IMasterCouponDetails[]}
           keyExtractor={item => item.key}
           renderItem={({ item }) => {
             return (
@@ -52,7 +52,9 @@ export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
         />
         <SubtitleHelp>Atente o estabelecimento de validar seu cupom</SubtitleHelp>
       </BottomContainer>
-      <ModalCouponEstablishmentInfos data={activeMasterCoupon} onClose={() => setActiveMasterCoupon(null)} />
+      {
+        activeMasterCoupon && <ModalCouponEstablishmentInfos data={activeMasterCoupon} onClose={() => setActiveMasterCoupon(null)} />
+      }
     </Wrapper>
   );
 }
