@@ -29,32 +29,6 @@ export const BottomContainer = styled.View`
   width: 90%;
 `
 
-export const Off = styled.Text`
-  color:${colors.COLOR_BLACK80};
-  font-size:40px;
-  font-family:'Nunito_ExtraBold';
-`
-
-export const Establishment = styled.Text`
-  color:${colors.COLOR_SECUNDARY_BLACK};
-  font-size:30px;
-  margin-top: 5%;
-  font-family:'Nunito_Bold';
-`
-
-export const Influencer = styled.Text`
-  color:${colors.COLOR_BLACK50};
-  font-size:20px;
-  font-family:'Nunito_Regular';
-`
-
-export const ValidAt = styled.Text`
-  color:${colors.COLOR_BLACK80};
-  top: 12%;
-  font-size:12px;
-  font-family:'Nunito_Light';
-`
-
 export const BackgroundCoupon = styled(QrCouponBackground).attrs(props => ({
   height: height,
   width: width - 40
@@ -65,20 +39,6 @@ export const BackgroundCoupon = styled(QrCouponBackground).attrs(props => ({
   bottom: 0;
   align-self: center;
   left: 5%;
-`
-
-export const InfluencerIcon = styled(LikeUpIcon).attrs(props => ({
-  width: 15,
-  height: 15,
-  fill: colors.COLOR_BLACK50
-}))`
-margin-right: 5px;
-`
-
-export const InfluencerContainer = styled.View`
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
 `
 
 export const SubtitleHelp = styled.Text`

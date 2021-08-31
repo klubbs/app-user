@@ -7,12 +7,6 @@ export const SafeArea = styled.SafeAreaView`
   background-color: ${COLORS.COLOR_SECUNDARY_WHITE};
 `
 
-export const Title = styled.Text`
-  color:${COLORS.COLOR_SECUNDARY_BLACK};
-  font-size:25px;
-  font-family:'Nunito_SemiBold';
-`
-
 export const tabStyle = {
   activeTintColor: COLORS.COLOR_YELLOW,
   inactiveTintColor: COLORS.COLOR_BLACK50,
@@ -24,7 +18,7 @@ export const tabStyle = {
 
 export const HeaderContainer = styled.View`
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding-horizontal:10px;
 `
 

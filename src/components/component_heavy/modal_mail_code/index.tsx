@@ -155,7 +155,7 @@ export const ModalMailCode = React.forwardRef<IModalRef, IModalCodeProps>((props
           />
         </Container>
         <Container>
-          <ButtonConfirm onPress={handleConfirm} />
+          <ButtonConfirm title={"Enviar"} onPress={handleConfirm} />
           <TouchableReset onPress={handleResetCode} >
             <TitleDescription>Reenviar código</TitleDescription>
           </TouchableReset>

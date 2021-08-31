@@ -2,7 +2,7 @@ import React from 'react';
 import AdvertisementsSlider from "../../component_heavy/advertisements_banner";
 import BarHome from "../../component_heavy/bar_top_home";
 import MainCategories from '../../component_heavy/restaurants_categories';
-import Restaurants from '../../component_heavy/restaurants_flatlist';
+import { RestaurantsFlatlist } from '../../component_heavy/restaurants_flatlist';
 import { Container, ContainerBottom, Wrapper } from './styles';
 
 const example = [
@@ -26,7 +26,7 @@ export const Home: React.FC = () => {
 
       <ContainerBottom>
         <MainCategories categories={example} />
-        <Restaurants />
+        <RestaurantsFlatlist />
       </ContainerBottom>
 
     </Wrapper>

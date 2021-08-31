@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View } from 'react-native'
-import { FlatList } from 'react-native-gesture-handler';
+
 import QRCode from 'react-native-qrcode-svg';
 import colors from '../../../../assets/constants/colors';
 import { CouponQrScreenProps } from '../../../settings/navigation/interfaces/IAppStackParams';
 import { EstablishmentCardQr } from '../../component/establishmentCardQr';
-import { MotiView } from 'moti'
-
-import { BottomContainer, TopContainer, Wrapper, Off, Establishment, Influencer, ValidAt, FlatListComponent, AnimatedWrapper, BackgroundCoupon, InfluencerIcon, InfluencerContainer, SubtitleHelp, ImageEstablishment } from './styles';
-import { ModalCouponEstablishmentInfos } from '../../component_heavy/modalCouponEstablishmentInfos';
+import { BottomContainer, TopContainer, Wrapper, FlatListComponent, AnimatedWrapper, BackgroundCoupon, SubtitleHelp, ImageEstablishment } from './styles';
+import { MasterCouponDetailModal } from '../../component_heavy/masterCouponDetailModal';
 import { IMasterCouponDetails } from './interfaces';
+import { AuthContext } from '../../../contexts/auth_context';
+
 
 export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
 
+  const { user } = useContext(AuthContext)
 
   const [activeMasterCoupon, setActiveMasterCoupon] = useState<IMasterCouponDetails | null>(null)
 
@@ -26,7 +27,7 @@ export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
       <BackgroundCoupon />
       <TopContainer>
         <QRCode
-          value={route?.params?.coupon_code}
+          value={`${route?.params?.coupon_id}|${user?.id}`}
           logo={require('../../../../assets/logo_circle.png')}
           size={190}
           color={colors.COLOR_SECUNDARY_BLACK}
@@ -53,7 +54,7 @@ export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
         <SubtitleHelp>Atente o estabelecimento de validar seu cupom</SubtitleHelp>
       </BottomContainer>
       {
-        activeMasterCoupon && <ModalCouponEstablishmentInfos data={activeMasterCoupon} onClose={() => setActiveMasterCoupon(null)} />
+        activeMasterCoupon && <MasterCouponDetailModal data={activeMasterCoupon} onClose={() => setActiveMasterCoupon(null)} />
       }
     </Wrapper>
   );

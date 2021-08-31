@@ -3,9 +3,9 @@ import { View } from 'react-native';
 import { Modalize } from 'react-native-modalize'
 import { IMasterCouponDetails } from '../../screens/coupon_qr/interfaces';
 
-import { Wrapper, Name, Description } from './styles';
+import { Wrapper, Name, Description, Divider } from './styles';
 
-export const ModalCouponEstablishmentInfos: React.FC<{ data: IMasterCouponDetails | null, onClose: any }> = (props) => {
+export const MasterCouponDetailModal: React.FC<{ data: IMasterCouponDetails | null, onClose: any }> = (props) => {
 
   const modalizeRef = useRef<Modalize>()
 
@@ -27,6 +27,7 @@ export const ModalCouponEstablishmentInfos: React.FC<{ data: IMasterCouponDetail
     >
       <Wrapper>
         <Name>{props?.data?.establishment_name}</Name>
+        <Divider />
         <Description>{props?.data?.master_coupon_description}</Description>
       </Wrapper>
 

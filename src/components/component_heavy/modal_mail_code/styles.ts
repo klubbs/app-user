@@ -2,6 +2,7 @@ import { TouchableOpacity } from 'react-native';
 import { CodeField } from 'react-native-confirmation-code-field';
 import styled from 'styled-components/native';
 import COLORS from '../../../../assets/constants/colors';
+import Button from '../../component/button'
 
 export const Input = styled.Text`
     width: 60px;
@@ -59,7 +60,7 @@ export const CodeBoxes = styled(CodeField).attrs(props => ({
   textContentType: 'oneTimeCode'
 }))``
 
-export const ButtonConfirm = styled.Button.attrs(props => ({
+export const ButtonConfirm = styled(Button).attrs(props => ({
   text: 'Pronto',
   styleContainer: { width: '60%' }
 }))``

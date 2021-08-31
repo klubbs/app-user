@@ -1,42 +1,49 @@
 import React, { ReactElement, useState, useEffect, useRef } from 'react';
 import { CouponService } from '../../../services/coupon_service';
 import { ICouponsItem } from './interfaces';
-import { Container, CouponImage, FlatComponent, Off, Valid } from './styles';
+import { Container, FlatComponent } from './styles';
 import { useNavigation } from '@react-navigation/native';
 import { CouponWallet } from '../../component/coupon_wallet'
 
 const NUM_COLUMNS = 2
+
 export const CouponsWalletTab: React.FC = () => {
 
   const navigation = useNavigation()
 
+  const [refresh, setRefresh] = useState(false)
   const [walletCoupom, setWalletCoupon] = useState<ICouponsItem[]>([])
 
   useEffect(() => {
 
-    (async function getAllWalletCoupons() {
-      try {
-        const response = await CouponService.getWalletCoupons();
-
-        const mapped: ICouponsItem[] = []
-
-        response.forEach(item => {
-          mapped.push({
-            ...item,
-            influencer_image: '',//TODO
-            empty: false
-          })
-        });
-
-        setWalletCoupon(mapped)
-
-      } catch (error) { }
-    })()
+    getAllWalletCoupons()
 
   }, [])
 
+  async function getAllWalletCoupons() {
+    setRefresh(true)
 
-  const format4TwoColumns = (data: ICouponsItem[]): ICouponsItem[] => {
+    try {
+      const response = await CouponService.getWalletCoupons();
+
+      const mapped: ICouponsItem[] = []
+
+      response.forEach(item => {
+        mapped.push({
+          ...item,
+          influencer_image: '',//TODO
+          empty: false
+        })
+      });
+
+      setWalletCoupon(mapped)
+
+    } catch (error) { }
+
+    setRefresh(false)
+  }
+
+  function format4TwoColumns(data: ICouponsItem[]): ICouponsItem[] {
 
     const rowsNumber = Math.floor(data.length / NUM_COLUMNS)
 
@@ -51,7 +58,7 @@ export const CouponsWalletTab: React.FC = () => {
     return data;
   }
 
-  const RenderCoupon = (item: ICouponsItem): ReactElement => {
+  function RenderCoupon(item: ICouponsItem): ReactElement {
 
     return (
       <>
@@ -72,11 +79,13 @@ export const CouponsWalletTab: React.FC = () => {
   }
 
   return (
-      <FlatComponent
-        data={format4TwoColumns(walletCoupom)}
-        numColumns={NUM_COLUMNS}
-        keyExtractor={(item: ICouponsItem) => item.wallet_id}
-        renderItem={({ item }) => RenderCoupon(item as ICouponsItem)}
-      />
+    <FlatComponent
+      onRefresh={() => getAllWalletCoupons()}
+      refreshing={refresh}
+      data={format4TwoColumns(walletCoupom)}
+      numColumns={NUM_COLUMNS}
+      keyExtractor={(item: ICouponsItem) => item.wallet_id}
+      renderItem={({ item }) => RenderCoupon(item as ICouponsItem)}
+    />
   );
 }

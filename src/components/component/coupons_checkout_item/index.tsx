@@ -7,7 +7,7 @@ import {
   ContainerText, Dot,
   Line,
   Name,
-  Percent, PlaceHolderRound, Points,
+  Percent, Time,
   RightContainer,
   Wrapper,
   ImageEmpty
@@ -28,17 +28,11 @@ export const CouponsCheckoutItems: React.FC<{ data: ICouponCheckoutItem }> = (pr
       </ContainerLeft>
       <RightContainer >
         <Box>
-
           <ImageEmpty />
-          {/* <Placeholder Animation={Fade}>
-          <PlaceHolderRound />
-          </Placeholder> */}
-
         </Box>
         <ContainerText>
           <Name>{props.data.establishment_name}</Name>
-          {/* TODO */}
-          <Points>{props
+          <Time>{props
             .data
             .created_at?.ToDateFormat()
             .toLocaleTimeString("pt-br",
@@ -49,9 +43,7 @@ export const CouponsCheckoutItems: React.FC<{ data: ICouponCheckoutItem }> = (pr
                 hour: '2-digit',
                 minute: '2-digit'
               })}
-          </Points>
-
-          {/* <Points>100 pontos</Points> */}
+          </Time>
         </ContainerText>
       </RightContainer>
     </Wrapper>

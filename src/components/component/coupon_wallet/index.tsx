@@ -4,7 +4,7 @@ import colors from '../../../../assets/constants/colors';
 import { CouponIcon } from '../../../../assets/icons/coupon_icon';
 import { ICouponsItem } from '../../component_heavy/coupons_wallet_tab/interfaces';
 
-import { Wrapper, BackgroundCoupon, CouponCode, CountCoupons, Container, OffCoupons, CouponContainer, Influencer, InfluencerEmpty } from './styles';
+import { MotifiedWrapper, BackgroundCoupon, CouponCode, CountCoupons, Container, OffCoupons, CouponContainer, Influencer, InfluencerEmpty } from './styles';
 
 
 export const CouponWallet: React.FC<{ data: ICouponsItem } & PressableProps> = ({ onPress, onPressOut, onLongPress, onPressIn, data }) => {
@@ -25,7 +25,10 @@ export const CouponWallet: React.FC<{ data: ICouponsItem } & PressableProps> = (
   }, [data])
 
   return (
-    <Wrapper
+    <MotifiedWrapper
+      from={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ type: 'timing', duration: 400 }}
       onLongPress={onLongPress}
       onPress={onPress}
       onPressOut={onPressOut}
@@ -47,6 +50,6 @@ export const CouponWallet: React.FC<{ data: ICouponsItem } & PressableProps> = (
           </InfluencerEmpty>
       }
       <CouponCode active={couponsActive}>{data.coupon_code}</CouponCode>
-    </Wrapper >
+    </MotifiedWrapper >
   );
 }

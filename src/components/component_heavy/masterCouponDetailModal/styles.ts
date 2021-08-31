@@ -9,13 +9,20 @@ export const Wrapper = styled.View`
 
 
 export const Name = styled.Text`
-  color:${colors.COLOR_BLACK80};
-  font-size:25px;
+  color:${colors.COLOR_SECUNDARY_BLACK};
+  font-size:18px;
   font-family:'Nunito_Light';
 `
 
 export const Description = styled.Text`
-  color:${colors.COLOR_BLACK80};
-  font-size:30px;
-  font-family:'Nunito_Regular';
+  color:${colors.COLOR_SECUNDARY_BLACK};
+  font-size:16px;
+  font-family:'Nunito_Light';
+`
+
+export const Divider = styled.View`
+  height: 1px;
+  margin-top:10px;
+  margin-bottom: 20px;
+  background-color: ${colors.COLOR_BLACK10};
 `

@@ -16,26 +16,6 @@ export const Container = styled.TouchableOpacity.attrs(props => ({
   shadow-radius: 1px;
 `
 
-export const Off = styled.Text`
-  color:${COLORS.COLOR_SECUNDARY_BLACK};
-  font-size:16px;
-  font-family:'Nunito_Bold';
-`;
-
-export const Valid = styled.Text`
-  color:${COLORS.COLOR_BLACK50};
-  font-size:12px;
-  font-family:'Nunito_Regular';
-`;
-
-
-export const CouponImage = styled.Image`
-  width: 100px;
-  height: 100px;
-  border-radius: 35px;
-  margin-bottom: 10px;
-`
-
 export const FlatComponent = styled.FlatList.attrs(props => ({
   showsVerticalScrollIndicator: false,
   contentContainerStyle: {

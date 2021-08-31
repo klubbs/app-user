@@ -4,7 +4,7 @@ import { AuthContext } from '../../../contexts/auth_context';
 import { CouponsCheckout } from '../../component_heavy/coupons_checkout_tab';
 import { CouponsEmpty } from '../../component_heavy/coupons_logout';
 import { CouponsWalletTab } from '../../component_heavy/coupons_wallet_tab';
-import { SafeArea, tabStyle, Title, HeaderContainer } from './styles';
+import { SafeArea, tabStyle, HeaderContainer } from './styles';
 import colors from '../../../../assets/constants/colors';
 import { ButtonCreateCoupon } from '../../component/button_cupon';
 import { ModalComponent } from '../../component/modal';
@@ -26,12 +26,11 @@ export const Coupons: React.FC = () => {
     <SafeArea>
       <ModalSaveCoupon visible={visibleModal} onClose={() => setVisibleModal(false)} />
       <HeaderContainer>
-        <Title>Cupons</Title>
         <ButtonCreateCoupon onPress={() => setVisibleModal(true)} />
       </HeaderContainer>
 
       <Tab.Navigator tabBarOptions={tabStyle} >
-        <Tab.Screen name="Armazenados" children={() => <CouponsWalletTab />} />
+        <Tab.Screen name="Carteira" children={() => <CouponsWalletTab />} />
         <Tab.Screen name="Utilizados" children={() => <CouponsCheckout />} />
       </Tab.Navigator>
     </SafeArea>

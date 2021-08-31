@@ -57,7 +57,7 @@ export const Name = styled.Text`
   font-family:'Nunito_Bold';
 `
 
-export const Points = styled.Text`
+export const Time = styled.Text`
   color:${COLORS.COLOR_BLACK80};
   font-size:12px;
   font-family:'Nunito_Light';
@@ -66,7 +66,7 @@ export const Points = styled.Text`
 export const Percent = styled.Text`
   color:${COLORS.COLOR_SECUNDARY_BLACK};
   font-size:12px;
-  font-family:'Nunito_Light';
+  font-family:'Nunito_Bold';
   transform: rotate(-90deg);
   margin-bottom: 35%;
 `

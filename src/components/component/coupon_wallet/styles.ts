@@ -1,18 +1,22 @@
 import { Skeleton } from '@motify/skeleton';
-import { MotiImage, MotiView } from 'moti'
+import { motify, MotiImage, MotiView } from 'moti'
 import styled from "styled-components/native";
 import colors from '../../../../assets/constants/colors';
 import COLORS from "../../../../assets/constants/colors";
 import { CouponIcon } from "../../../../assets/icons/coupon_icon";
 import { CouponWalletBackground } from "../../../../assets/images/coupon_wallet_background";
 
-export const Wrapper = styled.Pressable`
+
+const Wrapper = styled.Pressable`
   height:200;
   width:48%;
   align-items: center;
   justify-content: flex-end;
   padding-bottom:4.5%;
 `
+
+export const MotifiedWrapper = motify(Wrapper)()
+
 
 export const BackgroundCoupon = styled(CouponWalletBackground).attrs(props => ({
   height: 200,
