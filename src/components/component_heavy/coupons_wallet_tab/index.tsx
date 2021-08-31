@@ -1,11 +1,11 @@
-import React, { ReactElement, useState, useEffect } from 'react';
+import React, { ReactElement, useState, useEffect, useRef } from 'react';
 import { CouponService } from '../../../services/coupon_service';
 import { ICouponsItem } from './interfaces';
 import { Container, CouponImage, FlatComponent, Off, Valid } from './styles';
 import { useNavigation } from '@react-navigation/native';
 import { CouponWallet } from '../../component/coupon_wallet'
-const NUM_COLUMNS = 2
 
+const NUM_COLUMNS = 2
 export const CouponsWalletTab: React.FC = () => {
 
   const navigation = useNavigation()
@@ -14,8 +14,7 @@ export const CouponsWalletTab: React.FC = () => {
 
   useEffect(() => {
 
-    const getAllWalletCoupons = async () => {
-
+    (async function getAllWalletCoupons() {
       try {
         const response = await CouponService.getWalletCoupons();
 
@@ -24,6 +23,7 @@ export const CouponsWalletTab: React.FC = () => {
         response.forEach(item => {
           mapped.push({
             ...item,
+            influencer_image: '',//TODO
             empty: false
           })
         });
@@ -31,21 +31,19 @@ export const CouponsWalletTab: React.FC = () => {
         setWalletCoupon(mapped)
 
       } catch (error) { }
-    }
-
-    getAllWalletCoupons()
+    })()
 
   }, [])
 
 
-  const formatColumnsData = (data: ICouponsItem[]): ICouponsItem[] => {
+  const format4TwoColumns = (data: ICouponsItem[]): ICouponsItem[] => {
 
     const rowsNumber = Math.floor(data.length / NUM_COLUMNS)
 
     let numItemsLastRow = data.length - (rowsNumber * NUM_COLUMNS)
 
     while (numItemsLastRow !== NUM_COLUMNS && numItemsLastRow !== 0) {
-      data.push({ wallet_id: `blank-${numItemsLastRow}`, empty: true, coupon_code: '', coupon_id: '', master_coupons: [] })
+      data.push({ wallet_id: `blank-${numItemsLastRow}`, empty: true, coupon_code: '', coupon_id: '', influencer_image: '', master_coupons: [] })
 
       numItemsLastRow++;
     }
@@ -53,47 +51,32 @@ export const CouponsWalletTab: React.FC = () => {
     return data;
   }
 
-  const RenderItem = (item: ICouponsItem): ReactElement => {
+  const RenderCoupon = (item: ICouponsItem): ReactElement => {
 
     return (
       <>
         {item.empty && <Container empty={item.empty} />}
 
         {!item.empty &&
-          <CouponWallet data={item} />
-          // <Container empty={item.empty} onPress={() => navigation.navigate('CouponQr', {
-          //   recommendation_coupon_code: item.recommendation_coupon_code,
-          //   coupon_off_percentual: item.coupon_off_percentual,
-          //   coupon_description: item.coupon_description,
-          //   coupon_valid_at: item.coupon_valid_at,
-          //   establishment_name: item.establishment_name,
-          //   establishment_image: item.establishment_image
-          // })}>
-          //   <CouponImage source={{ uri: item.establishment_image }} />
-          //   <Off>{item.coupon_off_percentual}% OFF</Off>
-          //   <Valid>Válido até {
-          //     item.coupon_valid_at?.ToDateFormat()
-          //       .toLocaleTimeString("pt-br",
-          //         {
-          //           formatMatcher: "best fit",
-          //           day: 'numeric',
-          //           month: 'numeric',
-          //           hour: '2-digit',
-          //           minute: '2-digit'
-          //         })}
-          //   </Valid>
-          // </Container>
+          <CouponWallet data={item}
+            onPress={() => navigation.navigate('CouponQr', {
+              wallet_id: item.wallet_id,
+              coupon_code: item.coupon_code,
+              coupon_id: item.coupon_id,
+              master_coupons: item.master_coupons
+            })}
+          />
         }
       </>
     )
   }
 
   return (
-    <FlatComponent
-      data={formatColumnsData(walletCoupom)}
-      numColumns={NUM_COLUMNS}
-      keyExtractor={(item: ICouponsItem) => item.wallet_id}
-      renderItem={({ item }) => RenderItem(item as ICouponsItem)}
-    />
+      <FlatComponent
+        data={format4TwoColumns(walletCoupom)}
+        numColumns={NUM_COLUMNS}
+        keyExtractor={(item: ICouponsItem) => item.wallet_id}
+        renderItem={({ item }) => RenderCoupon(item as ICouponsItem)}
+      />
   );
 }

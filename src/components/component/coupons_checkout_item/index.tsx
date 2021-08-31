@@ -1,5 +1,5 @@
+import { Skeleton } from '@motify/skeleton';
 import React from 'react';
-import { Fade, Placeholder } from 'rn-placeholder';
 import { ICouponCheckoutItem } from './interface';
 import {
   Box,
@@ -9,7 +9,8 @@ import {
   Name,
   Percent, PlaceHolderRound, Points,
   RightContainer,
-  Wrapper
+  Wrapper,
+  ImageEmpty
 } from './styles';
 
 
@@ -28,12 +29,11 @@ export const CouponsCheckoutItems: React.FC<{ data: ICouponCheckoutItem }> = (pr
       <RightContainer >
         <Box>
 
-          <Placeholder Animation={Fade}>
-            {/* <PlaceholderMedia /> */}
-            <PlaceHolderRound />
-          </Placeholder>
+          <ImageEmpty />
+          {/* <Placeholder Animation={Fade}>
+          <PlaceHolderRound />
+          </Placeholder> */}
 
-          {/* <CouponImage source={{ uri: props.data.image }} /> */}
         </Box>
         <ContainerText>
           <Name>{props.data.establishment_name}</Name>

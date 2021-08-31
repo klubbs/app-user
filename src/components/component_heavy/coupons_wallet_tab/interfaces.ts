@@ -2,6 +2,7 @@ export interface ICouponsItem {
   wallet_id: string
   coupon_code: string
   coupon_id: string
+  influencer_image: string
   master_coupons: {
     master_coupon_off_percentual: number,
     master_coupon_description: string,

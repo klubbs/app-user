@@ -22,9 +22,7 @@ const AuthProvider: React.FC = ({ children }) => {
   const [isRegister, setIsRegister] = useState(false)
 
   useEffect(() => {
-
-
-    EventEmitter.listen('LOGOUT_USER', () => logout())
+    EventEmitter.listen('LOGOUT_USER', function () { logout() })
 
     reloadUser();
 

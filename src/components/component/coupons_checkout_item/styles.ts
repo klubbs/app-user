@@ -1,6 +1,8 @@
 import { PlaceholderMedia } from "rn-placeholder";
 import styled from "styled-components/native";
 import COLORS from "../../../../assets/constants/colors";
+import { Skeleton } from '@motify/skeleton';
+import { MotiView } from 'moti'
 
 
 export const Wrapper = styled.View`
@@ -38,9 +40,7 @@ export const ContainerLeft = styled.View`
   align-items: center;
 `;
 
-export const Box = styled.View`
-  width: 30%;
-  height: 80%;
+export const Box = styled(MotiView)`
   border-radius: 10px;
   justify-content: center;
   align-items: center;
@@ -77,10 +77,9 @@ export const CouponImage = styled.Image`
   border-radius: 40px;
 `
 
-export const PlaceHolderRound = styled(PlaceholderMedia).attrs(props => ({
-  isRound: true,
-  size: 90
-}))`
-  /* width: 90;
-  height: 90; */
-`
+export const ImageEmpty = styled(Skeleton).attrs(props => ({
+  width: 80,
+  height: 80,
+  radius: 'round',
+  colors: [COLORS.COLOR_SECUNDARY_WHITE, COLORS.COLOR_WHITE_20]
+}))``

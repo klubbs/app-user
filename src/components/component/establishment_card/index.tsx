@@ -9,10 +9,10 @@ import { Container, ContainerDescriptions, ContainerDistance, ContainerOff, Cont
 
 
 
-const StablishmentCard: React.FC<IStablishmentCard> = (props) => {
+const EstablishmentCard: React.FC<IStablishmentCard> = (props) => {
   return (
 
-    <Wrapper onPress={props.onPress}>
+    <Wrapper disabled={!props.onPress} onPress={props.onPress}>
       <Image source={{ uri: props.uri }}>
         <OpenCloseBadge />
       </Image>
@@ -42,4 +42,4 @@ const StablishmentCard: React.FC<IStablishmentCard> = (props) => {
   );
 }
 
-export default StablishmentCard;
+export default EstablishmentCard;

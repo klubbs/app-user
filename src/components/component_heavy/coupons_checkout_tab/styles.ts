@@ -1,4 +1,5 @@
-import { Placeholder, PlaceholderLine } from 'rn-placeholder';
+import { MotiView } from '@motify/components';
+import { Skeleton } from '@motify/skeleton';
 import styled from "styled-components/native";
 import { default as colors, default as COLORS } from '../../../../assets/constants/colors';
 
@@ -76,17 +77,6 @@ export const CouponImage = styled.Image`
   height: 80px;
   border-radius: 40px;
 `
-
-export const PlaceHolderWrapper = styled(Placeholder)`
-  padding-top:20px;
-	padding-horizontal:20px;
-`
-
-export const PlaceHolderContent = styled(PlaceholderLine).attrs(props => ({
-  width: 50
-}))`
-`
-
 export const NothingTransactionSubtitle = styled.Text`
   color:${colors.COLOR_BLACK50};
   font-size:14px;
@@ -98,4 +88,33 @@ export const CheckoutsFlatList = styled.FlatList.attrs(props => ({
   showsVerticalScrollIndicator: false
 }))`
   background-color: ${colors.COLOR_WHITE};
+`
+
+export const SquareSkeleton = styled(Skeleton).attrs(props => ({
+  width: 40,
+  height: 40,
+  colors: [COLORS.COLOR_WHITE_40, COLORS.COLOR_BLACK20]
+}))``
+
+export const LineSkeleton = styled(Skeleton).attrs(props => ({
+  width: props.top ? '90%' : '40%',
+  height: 15,
+  radius: 4,
+  colors: [COLORS.COLOR_WHITE_40, COLORS.COLOR_BLACK20]
+})) <{ top?: boolean }>``
+
+export const SpaceSkeleton = styled.View`
+  height:5px;
+  width:5px;
+`
+
+
+export const WrapperSkeleton = styled(MotiView)`
+  top:5%;
+  padding-left: 5%;
+  /* left:2%; */
+  height: 40px;
+  width:100%;
+  flex-direction: row;
+  align-items: center;
 `

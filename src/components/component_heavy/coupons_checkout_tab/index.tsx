@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Fade, PlaceholderLine, PlaceholderMedia } from 'rn-placeholder';
+import { View } from 'react-native'
 import { CouponService } from '../../../services/coupon_service';
 import { CouponsCheckoutItems } from '../../component/coupons_checkout_item';
 import { ICouponCheckoutItem } from '../../component/coupons_checkout_item/interface';
-import { CheckoutsFlatList, NothingTransactionSubtitle, PlaceHolderContent, PlaceHolderWrapper } from './styles';
+import { CheckoutsFlatList, NothingTransactionSubtitle, SpaceSkeleton, LineSkeleton, SquareSkeleton, WrapperSkeleton } from './styles';
 
 export const CouponsCheckout: React.FC = () => {
 
@@ -26,7 +26,7 @@ export const CouponsCheckout: React.FC = () => {
 
   }, [])
 
-  const onRefreshCheckouts = async () => {
+  async function onRefreshCheckouts() {
     setRefresh(true)
 
     try {
@@ -38,19 +38,19 @@ export const CouponsCheckout: React.FC = () => {
     } catch (error) { }
 
     setRefresh(false)
-
   }
-
 
   if (checkouts === null) {
     return (
-      <PlaceHolderWrapper
-        Animation={Fade}
-        Left={PlaceholderMedia}
-      >
-        <PlaceHolderContent />
-        <PlaceholderLine />
-      </PlaceHolderWrapper>
+      <WrapperSkeleton>
+        <SquareSkeleton />
+        <SpaceSkeleton />
+        <View>
+          <LineSkeleton top={true} />
+          <SpaceSkeleton />
+          <LineSkeleton />
+        </View>
+      </WrapperSkeleton>
     )
   }
 

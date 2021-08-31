@@ -36,6 +36,8 @@ api.interceptors.response.use((response) => {
   const message = error.response.data?.message
 
   if (statusCode === 401) {
+    console.log(error)
+    console.log('ta chamando')
     EventEmitter.emit('LOGOUT_USER', { })
   }
 

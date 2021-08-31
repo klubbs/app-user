@@ -6,7 +6,7 @@ export const Wrapper = styled.TouchableOpacity.attrs(props => ({
   activeOpacity: 0.95
 }
 ))`
-    height: 280px;
+    height: 250px;
     width: ${isIphoneX() ? '190px' : '175px'};
     align-items: center;
 `
@@ -37,24 +37,11 @@ export const Container = styled.View`
     width: 100%;
 `
 
-export const ContainerDescription = styled.View`
-  flex: 1;
-  justify-content:flex-end;
-  align-items: center;
-`
 export const ContainerDescriptions = styled.View`
   flex:4;
   padding-top: 2%;
   align-items: flex-start;
   justify-content: flex-start;
-`
-
-export const ContainerBadges = styled.View`
-  width: 100%;
-  margin-top: 10%;
-  flex-direction: row;
-  justify-content:space-evenly;
-  align-items: flex-start;
 `
 
 export const StablishmentName = styled.Text`

@@ -3,6 +3,7 @@ import { Dimensions, StyleSheet } from 'react-native'
 import colors from '../../../../assets/constants/colors';
 import { QrCouponBackground } from '../../../../assets/images/qr_coupon_background';
 import { LikeUpIcon } from '../../../../assets/icons/like_up_icon';
+import { MotiView } from 'moti'
 
 const { width, height } = Dimensions.get('window');
 
@@ -25,7 +26,7 @@ export const TopContainer = styled.View`
 export const BottomContainer = styled.View`
   flex: 1;
   align-items: center;
-  width: 100%;
+  width: 90%;
 `
 
 export const Off = styled.Text`
@@ -96,3 +97,20 @@ export const ImageEstablishment = styled.Image`
   width: 60px;
   border-radius:30px;
 `
+
+export const FlatListComponent = styled.FlatList.attrs(props => ({
+  horizontal: true,
+  contenContainerStyle: {
+    alignItems: 'center',
+    justifyContent: 'center', paddingLeft: 30
+  },
+  showsHorizontalScrollIndicator: false
+
+}))``
+
+export const AnimatedWrapper = styled(MotiView).attrs(props => ({
+  from: { left: 800 },
+  animate: { left: 0 },
+  transition: { type: 'spring', duration: 1000 }
+
+}))``
