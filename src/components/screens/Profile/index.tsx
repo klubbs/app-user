@@ -5,9 +5,9 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Alert, FlatList, TouchableOpacity } from 'react-native';
 import CongratulationsCoupons from '../../../../assets/animations/congratulations_coupons.json';
 import { default as COLORS } from '../../../../assets/constants/colors';
-import { AuthContext } from '../../../contexts/auth_context';
-import { OptionsScreenProps } from '../../../settings/navigation/interfaces/ITabParams';
-import { IMenu } from './interfaces';
+import { AuthContext } from '../../../contexts/authContext';
+import { OptionsScreenProps } from '../../../settings/navigations/interfaces/ITabParams';
+import { IMenu } from './types';
 import {
   ContainerFlat, ContainerImage,
   ContainerPoints, IconArrowRight, IconLogout, IconUser, ImageBorder,

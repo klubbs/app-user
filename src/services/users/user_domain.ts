@@ -1,5 +1,5 @@
-import { ErrorException } from "../../utils/error_exception"
-import { validMail, validPhone } from "../../utils/validation_fields"
+import { ErrorException } from "../../utils/errorException"
+import { validMail, validPhone } from "../../utils/validationFields"
 
 export class UserDomain {
 

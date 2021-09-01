@@ -1,0 +1,24 @@
+{
+  "Create Application Function Template": {
+    "prefix": "rnfccontext",
+    "body": [
+      "import React from 'react';\r",
+      "import { createContext } from 'react';\r",
+      "",
+      "export const  ${1:FunctionName} = createContext(\r",
+      "  { } as { } );",
+      "",
+      "",
+      "const HomeProvider: React.FC = ({ children }) => {\r",
+      "",
+      "",
+      "  return (",
+      "    < ${1:FunctionName}.Provider value={{ }}>",
+      "      {children}",
+      "    </ ${1:FunctionName}.Provider>",
+      "  );",
+      " }"
+    ],
+    "description": "Will create a default context component "
+  }
+}

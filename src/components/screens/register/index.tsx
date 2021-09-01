@@ -6,11 +6,11 @@ import { Alert, Keyboard, ScrollView, useWindowDimensions } from 'react-native';
 import { default as COLORS } from '../../../../assets/constants/colors';
 import { RegisterUserExecutor } from '../../../services/users/register_user_executor';
 import { UserDomain } from '../../../services/users/user_domain';
-import { RegisterScreenProps } from '../../../settings/navigation/interfaces/IAppStackParams';
-import { maskPhone } from '../../../utils/masks_utils';
-import { NotificationsFlash } from '../../../utils/notificationsFlash_utils';
-import { ModalMailCode } from '../../component_heavy/modal_mail_code';
-import { IModalRef } from '../../component_heavy/modal_mail_code/types';
+import { RegisterScreenProps } from '../../../settings/@types/IAppStackParams';
+import { maskPhone } from '../../../utils/masksUtils';
+import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
+import { ModalMailCode } from '../../componentHeavy/modalMailCode';
+import { IModalRef } from '../../componentHeavy/modalMailCode/types';
 import { Confirm, containerBackButton, ContainerBottom, ContainerMiddle, ContainerScrool, ContainerTop, Description, Name, Password, Phone, Title, Wrapper, WrapperKeyboard } from './styles';
 
 

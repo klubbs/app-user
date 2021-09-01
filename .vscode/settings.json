@@ -1,5 +1,16 @@
 {
-  "editor.codeActionsOnSave": {
-    // "source.organizeImports": true,
-  }
+  "editor.formatOnSave": true,
+  "editor.rulers": [
+    120
+  ],
+  "editor.wordWrapColumn": 100,
+  "editor.renderIndentGuides": true,
+  // "editor.wordWrap": "bounded",
+  "editor.codeLens": true,
+  "[typescript]": {
+    "editor.codeLens": true
+  },
+  "[javascript]": {
+    "editor.codeLens": true
+  },
 }

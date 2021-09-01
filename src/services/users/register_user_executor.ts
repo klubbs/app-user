@@ -1,5 +1,5 @@
 import axios, { IResponseMessage } from "../../settings/services/api";
-import { ICreateUserResponse } from "./types";
+import { ICreateUserResponse } from "../@types/IUser";
 import { UserDomain } from "./user_domain";
 
 

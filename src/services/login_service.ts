@@ -1,8 +1,9 @@
-import api, { IError, IResponseMessage } from '../settings/services/api'
-import { ErrorException } from '../utils/error_exception'
-import { NotificationsFlash } from '../utils/notificationsFlash_utils'
-import { validMail } from '../utils/validation_fields'
-import { ILoginResponse } from './users/types'
+import { IError, IResponseMessage } from '../settings/@types/IResponses'
+import api from '../settings/services/api'
+import { ErrorException } from '../utils/errorException'
+import { NotificationsFlash } from '../utils/notificationsFlashUtils'
+import { validMail } from '../utils/validationFields'
+import { ILoginResponse } from './@types/IUser'
 
 class LoginService {
 

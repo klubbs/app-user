@@ -1,8 +1,8 @@
-import api, { IError } from "../settings/services/api";
-import { NotificationsFlash } from "../utils/notificationsFlash_utils";
-import { IResponseMessage } from './../settings/services/api';
-import { ICouponCheckoutResponse, IWalletCouponsReponse } from './interfaces/icoupon';
+import api from "../settings/services/api";
+import { NotificationsFlash } from "../utils/notificationsFlashUtils";
+import { ICouponCheckoutResponse, IWalletCouponsReponse } from './@types/ICoupon';
 import * as Haptic from 'expo-haptics';
+import { IResponseMessage, IError } from "../settings/@types/IResponses";
 
 export class CouponService {
 

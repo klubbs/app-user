@@ -1,14 +1,14 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import React, { useContext, useState } from 'react';
-import { AuthContext } from '../../../contexts/auth_context';
-import { CouponsCheckout } from '../../component_heavy/coupons_checkout_tab';
-import { CouponsEmpty } from '../../component_heavy/coupons_logout';
-import { CouponsWalletTab } from '../../component_heavy/coupons_wallet_tab';
+import { AuthContext } from '../../../contexts/authContext';
+import { CouponsCheckout } from '../../componentHeavy/walletCouponsCheckoutTab';
+import { CouponsEmpty } from '../../componentHeavy/logoutCoupons';
+import { CouponsWalletTab } from '../../componentHeavy/walletCouponsTab';
 import { SafeArea, tabStyle, HeaderContainer } from './styles';
 import colors from '../../../../assets/constants/colors';
-import { ButtonCreateCoupon } from '../../component/button_cupon';
+import { ButtonCreateCoupon } from '../../component/buttonCoupon';
 import { ModalComponent } from '../../component/modal';
-import { ModalSaveCoupon } from '../../component_heavy/modal_save_coupon';
+import { ModalSaveCoupon } from '../../componentHeavy/modalAddCoupon';
 
 const Tab = createMaterialTopTabNavigator();
 

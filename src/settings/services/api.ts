@@ -1,8 +1,8 @@
 import axios from 'axios';
 import Constants from 'expo-constants';
-import { EventEmitter } from '../../contexts/auth_context';
-import { AsyncStorageUtils } from '../../utils/async_storage';
-import { NotificationsFlash } from '../../utils/notificationsFlash_utils';
+import { EventEmitter } from '../../contexts/authContext';
+import { AsyncStorageUtils } from '../../utils/asyncStorageUtils';
+import { NotificationsFlash } from '../../utils/notificationsFlashUtils';
 const { showFlash } = require('flash-notify');
 
 
@@ -48,12 +48,5 @@ api.interceptors.response.use((response) => {
   return Promise.reject({ message, error: validationError, statusCode: Number(statusCode) });
 });
 
-
-export type IResponseMessage<T> = {
-  message: T
-  statusCode: number
-}
-
-export type IError = { message: string, error: { field: string; validation: string }[], statusCode: number }
 
 export default api;
