@@ -56,7 +56,6 @@ export const RestaurantsFlatlist: React.FC = () => {
   }, [])
 
 
-
   const HowItemRender = (item: IRestaurants) => {
 
     if (item.empty) {

@@ -1,5 +1,5 @@
-import React, { useContext, useMemo, useEffect, useState } from 'react';
-import { View } from 'react-native';
+import React, { useContext, useRef, useEffect, useState } from 'react';
+import { View, Animated } from 'react-native';
 import colors from '../../../../assets/constants/colors';
 import { CouponIcon } from '../../../../assets/icons/coupon_icon';
 import { MarkerTimeIcon } from '../../../../assets/icons/marker-time_icon';
@@ -12,9 +12,9 @@ import {
   ContainerOff,
   ContainerToolbar,
   DistanceLocation,
-  MotifyImage,
-  OffCoupon,
   OpenIndicator,
+  OffCoupon,
+  Image,
   StablishmentCategory,
   EstablishmentName,
   Wrapper,
@@ -30,11 +30,17 @@ export const CardEstablishment: React.FC<ICardEstablishmentProps> = ({ data, onP
   const { categories } = useContext(HomeContext)
 
   const categoryDesc = categories.find(item => item.id === data.business_category_id)?.description
-
   //TODO: Recuperar somente a hora
   const isOpen = data.closedAt < new Date().ToUnixEpoch() && data.openedAt < new Date().ToUnixEpoch()
 
 
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+
+  Animated.timing(fadeAnim, {
+    toValue: 1,
+    duration: 350,
+    useNativeDriver: true
+  }).start();
 
   return (
 
@@ -42,14 +48,15 @@ export const CardEstablishment: React.FC<ICardEstablishmentProps> = ({ data, onP
 
 
       <AnimatePresence>
-        <OpenIndicator open={isOpen} />
+        <OpenIndicator open={isOpen} style={{ opacity: fadeAnim }} />
 
         {
           data.image &&
-          <MotifyImage
+          <Image
             key={'content'}
-            from={{ opacity: 0 }}
-            animate={{ opacity: isOpen ? 1 : 0.2 }}
+            styles={{ opacity: fadeAnim }}
+            // from={{ opacity: 0 }}
+            // animate={{ opacity: isOpen ? 1 : 0.2 }}
             source={{ uri: data.image }}
           />
         }

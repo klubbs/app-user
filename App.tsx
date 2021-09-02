@@ -10,7 +10,7 @@ import "./src/utils/base64Initialization";
 import './src/utils/extensions/dateExtensions';
 import './src/utils/extensions/objectExtensions';
 
-LogBox.ignoreLogs(['Expected style']); // Ignore log notification by message
+LogBox.ignoreLogs(['Expected style', 'Require cycles are allowed']); // Ignore log notification by message
 
 export default function App() {
 

@@ -1,5 +1,6 @@
 import { MotiView, motify } from 'moti'
 import styled from 'styled-components/native'
+import { Animated } from 'react-native'
 import colors from '../../../../assets/constants/colors'
 import COLORS from '../../../../assets/constants/colors'
 import { isIphoneX } from '../../../utils/iphoneHelper'
@@ -15,15 +16,49 @@ export const Wrapper = styled.TouchableOpacity.attrs(props => ({
     align-items: center;
 `
 
-const Image = styled(CachedImage).attrs(props => ({
-  imageStyle: { borderRadius: 10 }
+export const Image = Animated.createAnimatedComponent(styled(CachedImage).attrs(props => ({
 }))
   `
   height: 100px;
   width: 190px;
   border-radius: 10;
   `
-export const MotifyImage = motify(Image as any)()
+)
+
+// export const MotifyImage = motify(Image as any)()
+
+/* export const OpenIndicator = styled(MotiView).attrs(props => ({
+  from: { opacity: 0 },
+  animate: { opacity: 1 },
+  transition: { type: 'timing' }
+})) <{ open: boolean }>`
+  width: 15px;
+  height: 15px;
+  border-radius: 7.5px;
+  z-index:10;
+  top:5%;
+  right:-48%;
+  border-width: 1px;
+  border-color: ${COLORS.COLOR_WHITE};
+  background-color: ${props => props.open ? colors.COLOR_GREEN : colors.COLOR_RED};
+` */
+
+export const OpenIndicator = Animated.createAnimatedComponent(styled.View.attrs(props => ({
+  /* from: { opacity: 0 },
+  animate: { opacity: 1 },
+  transition: { type: 'timing' } */
+})) <{ open: boolean }>`
+  width: 15px;
+  height: 15px;
+  border-radius: 7.5px;
+  z-index:10;
+  top:5%;
+  right:-48%;
+  border-width: 1px;
+  border-color: ${COLORS.COLOR_WHITE};
+  background-color: ${props => props.open ? colors.COLOR_GREEN : colors.COLOR_RED};
+`
+)
 
 export const EmptyImage = styled.View`
   height: 100px;
@@ -38,21 +73,7 @@ export const EmptyShopIcon = styled(ShopIcon).attrs(props => ({
   height: 20,
   fill: colors.COLOR_BLACK40
 }))``
-export const OpenIndicator = styled(MotiView).attrs(props => ({
-  from: { opacity: 0 },
-  animate: { opacity: 1 },
-  transition: { type: 'timing' }
-})) <{ open: boolean }>`
-  width: 15px;
-  height: 15px;
-  border-radius: 7.5px;
-  z-index:10;
-  top:5%;
-  right:-48%;
-  border-width: 1px;
-  border-color: ${COLORS.COLOR_WHITE};
-  background-color: ${props => props.open ? colors.COLOR_GREEN : colors.COLOR_RED};
-`
+
 
 export const Container = styled.View`
     align-items: flex-start;

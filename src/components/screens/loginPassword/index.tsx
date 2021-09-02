@@ -35,6 +35,8 @@ export const LoginPasswordScreen: React.FC<LoginPasswordScreenProps> = ({ route 
       navigation.navigate('Tabs', { signUser: true })
 
     } catch (error: any) {
+      console.log(error)
+
       LoginService.catchLogin(error)
     } finally {
       setLoading(false)
