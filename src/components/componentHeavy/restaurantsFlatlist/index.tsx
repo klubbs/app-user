@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext, useMemo } from 'react';
 import { FlatList, Text, View } from 'react-native';
 import { StoreService } from '../../../services/store_services';
 import { format4TwoColumns } from '../../../utils/formatersUtils';
@@ -11,7 +11,6 @@ import { Spinner } from '../../component/spinner';
 import { LocationAccuracy, LocationObject } from 'expo-location';
 import { HomeContext } from '../../../contexts/homeContext';
 
-let allRestaurants: IRestaurants[] = []
 
 export const RestaurantsFlatlist: React.FC = () => {
 
@@ -46,8 +45,6 @@ export const RestaurantsFlatlist: React.FC = () => {
 
         mappedData.push({ empty: true } as IRestaurants)
 
-
-        allRestaurants = mappedData
         setRestaurants(mappedData)
 
       } catch (error) {
@@ -58,13 +55,6 @@ export const RestaurantsFlatlist: React.FC = () => {
     })()
   }, [])
 
-  useEffect(() => {
-
-    const tmp = allRestaurants.filter(item => selectedCategory === item.business_category_id || selectedCategory === '94d9ccaf-9a03-4b1d-9dc7-bec0931b1381')
-
-    setRestaurants(tmp)
-
-  }, [selectedCategory])
 
 
   const HowItemRender = (item: IRestaurants) => {
@@ -85,6 +75,14 @@ export const RestaurantsFlatlist: React.FC = () => {
 
   }
 
+  const memoizedRestaurants = useMemo(
+    () => {
+
+      const tmp = restaurants.filter(item => selectedCategory === item.business_category_id || selectedCategory === '94d9ccaf-9a03-4b1d-9dc7-bec0931b1381')
+
+      return format4TwoColumns(tmp, 2, { empty: true, name: '', image: '' })
+    }, [selectedCategory, restaurants]);
+
 
   if (locationDenied) {
     return (<Text>Porra nenhuma</Text>)
@@ -94,7 +92,7 @@ export const RestaurantsFlatlist: React.FC = () => {
     <>
       <Spinner loading={loading} />
       <FlatList
-        data={format4TwoColumns(restaurants, 2, { empty: true, name: '', image: '' })}
+        data={memoizedRestaurants}
         showsVerticalScrollIndicator={false}
         numColumns={2}
         columnWrapperStyle={wrapperStyle as any}
