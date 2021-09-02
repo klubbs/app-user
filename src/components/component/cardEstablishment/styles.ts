@@ -1,6 +1,10 @@
+import { MotiView, motify } from 'moti'
 import styled from 'styled-components/native'
+import colors from '../../../../assets/constants/colors'
 import COLORS from '../../../../assets/constants/colors'
 import { isIphoneX } from '../../../utils/iphoneHelper'
+import CachedImage from 'react-native-expo-cached-image';
+import { ShopIcon } from '../../../../assets/icons/shop_icon'
 
 export const Wrapper = styled.TouchableOpacity.attrs(props => ({
   activeOpacity: 0.95
@@ -11,24 +15,43 @@ export const Wrapper = styled.TouchableOpacity.attrs(props => ({
     align-items: center;
 `
 
-export const Image = styled.ImageBackground.attrs(props => ({
+const Image = styled(CachedImage).attrs(props => ({
   imageStyle: { borderRadius: 10 }
-}
-))`
+}))
+  `
   height: 100px;
-  width: 100%;
-  z-index: 10;
-`
+  width: 190px;
+  border-radius: 10;
+  `
+export const MotifyImage = motify(Image as any)()
 
-export const OpenCloseBadge = styled.View`
+export const EmptyImage = styled.View`
+  height: 100px;
+  width: 190px;
+  justify-content:center;
+  align-items:center;
+  border-radius: 10px;
+  background-color:${colors.COLOR_BLACK10}
+`
+export const EmptyShopIcon = styled(ShopIcon).attrs(props => ({
+  width: 20,
+  height: 20,
+  fill: colors.COLOR_BLACK40
+}))``
+export const OpenIndicator = styled(MotiView).attrs(props => ({
+  from: { opacity: 0 },
+  animate: { opacity: 1 },
+  transition: { type: 'timing' }
+})) <{ open: boolean }>`
   width: 15px;
   height: 15px;
   border-radius: 7.5px;
-  left:93%;
-  top:-5%;
+  z-index:10;
+  top:5%;
+  right:-48%;
   border-width: 1px;
   border-color: ${COLORS.COLOR_WHITE};
-  background-color: #EA382D;
+  background-color: ${props => props.open ? colors.COLOR_GREEN : colors.COLOR_RED};
 `
 
 export const Container = styled.View`

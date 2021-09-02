@@ -24,7 +24,7 @@ export default {
   COLOR_SECUNDARY_WHITE_60: '#F3F3F360',
 
   COLOR_RED: '#cf6666',
-
+  COLOR_GREEN: '#CCE9B5',
 
 
 

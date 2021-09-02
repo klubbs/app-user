@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { View } from 'react-native';
 import colors from '../../../../assets/constants/colors';
 import { CouponIcon } from '../../../../assets/icons/coupon_icon';
@@ -12,38 +12,56 @@ import {
   ContainerOff,
   ContainerToolbar,
   DistanceLocation,
-  Image,
+  MotifyImage,
   OffCoupon,
-  OpenCloseBadge,
+  OpenIndicator,
   StablishmentCategory,
   EstablishmentName,
-  Wrapper
+  Wrapper,
+  EmptyImage,
+  EmptyShopIcon
 } from './styles';
-import { ICardEstablishmentProps } from './@types.ts';
+import { Skeleton } from '@motify/skeleton'
+import { ICardEstablishmentProps } from './@types';
 import { HomeContext } from '../../../contexts/homeContext';
-
 
 export const CardEstablishment: React.FC<ICardEstablishmentProps> = ({ data, onPress, userLocation }) => {
 
-  // const { selectedCategory } = useContext(HomeContext)
 
-  // if (selectedCategory !== data.business_category_id && selectedCategory !== '94d9ccaf-9a03-4b1d-9dc7-bec0931b1381') {
-  //   return null;
-  // }
+  const { selectedCategory, categories } = useContext(HomeContext)
+
+  const categoryDesc = categories.find(item => item.id === data.business_category_id)?.description
+
+  const isOpen = data.closedAt < new Date().ToUnixEpoch() && data.openedAt < new Date().ToUnixEpoch()
+
 
   return (
 
     <Wrapper disabled={!onPress} onPress={onPress}>
 
-      <Image source={{ uri: data.image }}>
-        <OpenCloseBadge />
-      </Image>
+      <OpenIndicator open={isOpen} />
+
+      {
+        data.image ?
+          <MotifyImage
+            from={{ opacity: 0 }}
+            animate={{ opacity: isOpen ? 1 : 0.2 }}
+            source={{ uri: 'https://cache.dominos.com/wam/prod/market/BR/_pt/images/promo/f9a98c74-3f0c-428f-a9b4-af3d6ff9b5b3.png' }}
+          >
+          </MotifyImage>
+          :
+          <EmptyImage >
+            <EmptyShopIcon />
+          </EmptyImage>
+
+      }
+
 
       <Container>
         <ContainerDescriptions>
           <EstablishmentName>{data?.name}</EstablishmentName>
           <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-            <StablishmentCategory>Churrascaria</StablishmentCategory>
+            <StablishmentCategory>{categoryDesc}</StablishmentCategory>
             <Ratings rating={3} />
           </View>
 
