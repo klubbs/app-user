@@ -16,7 +16,7 @@ export const Wrapper = styled.TouchableOpacity.attrs(props => ({
     align-items: center;
 `
 
-export const Image = Animated.createAnimatedComponent(styled(FastImage).attrs(props => ({
+export const Image = Animated.createAnimatedComponent(styled.Image.attrs(props => ({
 }))
   `
   height: 100px;

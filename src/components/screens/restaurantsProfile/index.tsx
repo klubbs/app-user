@@ -1,12 +1,13 @@
 import { Feather } from '@expo/vector-icons';
 import * as Linking from 'expo-linking';
 import React from 'react';
+import colors from '../../../../assets/constants/colors';
 import COLORS from '../../../../assets/constants/colors';
+import { CouponIcon } from '../../../../assets/icons/coupon_icon';
 import { RestaurantScreenProps } from "../../../settings/@types/IAppStackParams";
-import BadgesDescriptorLine from "../../component/badgesDescriptorLine";
 import UberButton from "../../component/buttonUber";
 import TabRestaurants from '../../componentHeavy/restaurantsProfileTab';
-import { ContainerBadges, ContainerDescription, ContainerGetCoupon, ContainerIcons, ContainerImage, ContainerInformations, ContainerUsual, GetCouponText, RestaurantCategory, RestaurantName, Wrapper, WrapperTop } from './styles';
+import { BlocksWrapper, Description, BlocksValue, ContainerGetCoupon, ContainerImage, Container, ContainerUsual, GetCouponText, RestaurantCategory, RestaurantName, Wrapper, WrapperTop } from './styles';
 
 
 
@@ -24,36 +25,31 @@ const Restaurant: React.FC<RestaurantScreenProps> = ({ route }) => {
   return (
     <Wrapper>
       <ContainerImage source={{ uri: route?.params?.image }} />
-      <ContainerInformations>
+
+      <Container>
 
         <WrapperTop >
-          <ContainerDescription >
-            <RestaurantName>{route?.params?.name}</RestaurantName>
-            <RestaurantCategory>{route?.params?.name}</RestaurantCategory>
-          </ContainerDescription>
-          <ContainerIcons >
-            <Feather name={"phone"} size={20} color={COLORS.COLOR_BLACK80} onPress={() => console.log('BRASIL')} />
-            <Feather name={"share"} size={20} color={COLORS.COLOR_BLACK80} onPress={() => console.log('BRASIL')} />
-            <Feather name={"heart"} size={20} color={COLORS.COLOR_BLACK80} onPress={() => console.log('BRASIL')} />
-          </ContainerIcons>
+          <RestaurantName>{route?.params?.name}</RestaurantName>
+          <RestaurantCategory>Pizzaria</RestaurantCategory>
         </WrapperTop>
 
-        <ContainerBadges >
-          <BadgesDescriptorLine text={"Recebe"} secundaryText={"1000 pontos"} color={COLORS.COLOR_YELLOW} />
-          <BadgesDescriptorLine text={"Horário"} secundaryText={"17:00 - 23:00"} color={COLORS.COLOR_BLACK80} />
-          <BadgesDescriptorLine text={"Classificação"} secundaryText={"4.5"} color={COLORS.COLOR_BLACK80} icon={"star"} />
-        </ContainerBadges>
-
         <ContainerUsual>
-          <UberButton onPress={handleUberCall} />
+          <BlocksWrapper>
+            {/*Icon Timer*/}
+            <BlocksValue>10h - 22h</BlocksValue>
+          </BlocksWrapper>
+          <BlocksWrapper>
+            <CouponIcon width={12} height={12} fill={colors.COLOR_SECUNDARY_BLACK} />
+            <BlocksValue>10%</BlocksValue>
+          </BlocksWrapper>
+          {/* <UberButton onPress={handleUberCall} /> */}
+
+          {/* <TabRestaurants /> */}
         </ContainerUsual>
 
-        <ContainerUsual>
-          <TabRestaurants />
-        </ContainerUsual>
 
+      </Container>
 
-      </ContainerInformations>
       <ContainerGetCoupon onPress={handleCouponCall}>
         <GetCouponText>PEGAR CUPOM</GetCouponText>
       </ContainerGetCoupon>

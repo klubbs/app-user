@@ -1,5 +1,4 @@
 import { NavigationContainer } from "@react-navigation/native";
-import 'expo-dev-client';
 import { useFonts } from 'expo-font';
 import React from "react";
 import { ActivityIndicator, LogBox, StatusBar, View } from "react-native";
