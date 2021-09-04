@@ -3,6 +3,7 @@ import React, { useContext, useState } from 'react';
 import { Keyboard } from 'react-native';
 import { AuthContext } from '../../../contexts/authContext';
 import { LoginService } from '../../../services/login_service';
+import { StoreService } from '../../../services/store_services';
 import { LoginPasswordScreenProps } from '../../../settings/@types/IAppStackParams';
 import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
 import { Spinner } from '../../component/spinner';
@@ -50,8 +51,8 @@ export const LoginPasswordScreen: React.FC<LoginPasswordScreenProps> = ({ route 
       <WrapperKeyboard>
 
         <ContainerTop>
-          <Title>Oi, Marcelle</Title>
-          <Description>É bom ver você de volta! 🤗</Description>
+          <Title>Oi, {route.params.mail}</Title>
+          <Description>É bom ter você de volta! 🤗</Description>
         </ContainerTop>
 
         <ContainerBottom>

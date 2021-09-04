@@ -4,37 +4,37 @@ import { ICategoryResponse } from '../../../services/@types/IStore';
 import { StoreService } from '../../../services/store_services';
 import { Description, Dot, FlatComponent, WrapplerTouchable } from './styles';
 
-export const RestaurantsCategories: React.FC = () => {
+export const RestaurantsCategories: React.FC = (props) => {
 
   const { categories, setCategories, selectedCategory, setSelectedCategory } = useContext(HomeContext)
 
   useEffect(() => {
-
-    (async function getCategories() {
-      try {
-        const data = await StoreService.getCategories();
-
-        //Move Todos to init
-        const index = data.findIndex(item => item.id === '94d9ccaf-9a03-4b1d-9dc7-bec0931b1381');
-        const element = data[index];
-        data.splice(index, 1);
-        data.splice(0, 0, element);
-        //Move Todos to init
-
-        setSelectedCategory(element.id)
-
-        setCategories(data)
-      } catch (error) {
-        //TODO
-      }
-    })()
-
+    getCategories()
   }, [])
+
+  async function getCategories() {
+    try {
+
+      const data = await StoreService.getCategories();
+
+      //Move Todos to init
+      const index = data.findIndex(item => item.id === '94d9ccaf-9a03-4b1d-9dc7-bec0931b1381');
+      const element = data[index];
+      data.splice(index, 1);
+      data.splice(0, 0, element);
+      //Move Todos to init
+
+      setSelectedCategory(element.id)
+
+      setCategories(data)
+    } catch (error) {
+    }
+  }
 
   return (
     <FlatComponent
       data={categories}
-      keyExtractor={(item: ICategoryResponse) => item.id}
+      keyExtractor={(item: ICategoryResponse, index: number) => `${item.id}`}
       renderItem={({ item }) => {
 
         const isSelected = selectedCategory === item.id as string

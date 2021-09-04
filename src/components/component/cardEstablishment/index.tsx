@@ -24,6 +24,7 @@ import {
 import { useAnimationState, AnimatePresence } from 'moti'
 import { ICardEstablishmentProps } from './@types';
 import { HomeContext } from '../../../contexts/homeContext';
+import { Skeleton } from '@motify/skeleton';
 
 export const CardEstablishment: React.FC<ICardEstablishmentProps> = ({ data, onPress, userLocation }) => {
 
@@ -33,6 +34,7 @@ export const CardEstablishment: React.FC<ICardEstablishmentProps> = ({ data, onP
   //TODO: Recuperar somente a hora
   const isOpen = data.closedAt < new Date().ToUnixEpoch() && data.openedAt < new Date().ToUnixEpoch()
 
+  const [loading, setLoading] = useState(true)
 
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
@@ -42,35 +44,41 @@ export const CardEstablishment: React.FC<ICardEstablishmentProps> = ({ data, onP
     useNativeDriver: true
   }).start();
 
+
+  const fadeAnim2 = useRef(new Animated.Value(0)).current;
+
+
+  Animated.timing(fadeAnim2, {
+    toValue: 1,
+    duration: 2000,
+    useNativeDriver: true
+  }).start();
+
   return (
 
     <Wrapper disabled={!onPress} onPress={onPress}>
 
 
-      <AnimatePresence>
-        <OpenIndicator open={isOpen} style={{ opacity: fadeAnim }} />
+      <OpenIndicator open={isOpen} style={{ opacity: fadeAnim }} />
 
-        {
-          data.image &&
-          <Image
-            key={'content'}
-            styles={{ opacity: fadeAnim }}
-            // from={{ opacity: 0 }}
-            // animate={{ opacity: isOpen ? 1 : 0.2 }}
-            source={{ uri: data.image }}
-          />
-        }
+      {
+        data.image &&
+        <Image
+          key={'content'}
+          style={{ opacity: fadeAnim }}
+          source={{ uri: data.image }}
+        />
+      }
 
-        {
-          !data.image &&
-          <EmptyImage
-            key={'empty'}
-          >
-            <EmptyShopIcon />
-          </EmptyImage>
+      {
+        !data.image &&
+        <EmptyImage
+          key={'empty'}
+        >
+          <EmptyShopIcon />
+        </EmptyImage>
 
-        }
-      </AnimatePresence>
+      }
 
       <Container>
         <ContainerDescriptions>

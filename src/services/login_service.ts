@@ -20,7 +20,7 @@ class LoginService {
   }
 
   static async validateMail(email: string): Promise<boolean> {
-
+    console.log('dentro da validacao de email')
     if (!validMail(email))
       throw ErrorException.Throw(422)
 

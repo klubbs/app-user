@@ -4,8 +4,8 @@ import { Animated } from 'react-native'
 import colors from '../../../../assets/constants/colors'
 import COLORS from '../../../../assets/constants/colors'
 import { isIphoneX } from '../../../utils/iphoneHelper'
-import CachedImage from 'react-native-expo-cached-image';
 import { ShopIcon } from '../../../../assets/icons/shop_icon'
+import FastImage from 'react-native-fast-image'
 
 export const Wrapper = styled.TouchableOpacity.attrs(props => ({
   activeOpacity: 0.95
@@ -16,7 +16,7 @@ export const Wrapper = styled.TouchableOpacity.attrs(props => ({
     align-items: center;
 `
 
-export const Image = Animated.createAnimatedComponent(styled(CachedImage).attrs(props => ({
+export const Image = Animated.createAnimatedComponent(styled(FastImage).attrs(props => ({
 }))
   `
   height: 100px;
@@ -24,25 +24,6 @@ export const Image = Animated.createAnimatedComponent(styled(CachedImage).attrs(
   border-radius: 10;
   `
 )
-
-// export const MotifyImage = motify(Image as any)()
-
-/* export const OpenIndicator = styled(MotiView).attrs(props => ({
-  from: { opacity: 0 },
-  animate: { opacity: 1 },
-  transition: { type: 'timing' }
-})) <{ open: boolean }>`
-  width: 15px;
-  height: 15px;
-  border-radius: 7.5px;
-  z-index:10;
-  top:5%;
-  right:-48%;
-  border-width: 1px;
-  border-color: ${COLORS.COLOR_WHITE};
-  background-color: ${props => props.open ? colors.COLOR_GREEN : colors.COLOR_RED};
-` */
-
 export const OpenIndicator = Animated.createAnimatedComponent(styled.View.attrs(props => ({
   /* from: { opacity: 0 },
   animate: { opacity: 1 },

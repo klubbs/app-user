@@ -26,7 +26,8 @@ export default {
     },
     version: "1.0.0",
     ios: {
-      supportsTablet: true
+      supportsTablet: true,
+      bundleIdentifier: 'klubbs.user.app'
     },
     extra: {
       ENVIRONMENT_API_EARTH: process.env.ENVIRONMENT_API_EARTH,

@@ -1,24 +1,25 @@
 import React from 'react';
-import HomeProvider from '../../../contexts/homeContext';
+import { HomeProvider } from '../../../contexts/homeContext';
 import AdvertisementsSlider from "../../componentHeavy/bannerAdvertisements";
 import MainCategories from '../../componentHeavy/restaurantsCategories';
-import { RestaurantsFlatlist } from '../../componentHeavy/restaurantsFlatlist';
+import { RestaurantsList } from '../../componentHeavy/restaurantsList';
 import { Container, ContainerBottom, Wrapper } from './styles';
 
 export const Home: React.FC = () => {
 
-  return (
-    <Wrapper>
 
-      <Container>
-        <AdvertisementsSlider />
-      </Container>
-      <HomeProvider>
+  return (
+    <HomeProvider>
+      <Wrapper>
+
+        <Container>
+          <AdvertisementsSlider />
+        </Container>
         <ContainerBottom>
           <MainCategories />
-          <RestaurantsFlatlist />
+          <RestaurantsList />
         </ContainerBottom>
-      </HomeProvider>
-    </Wrapper>
+      </Wrapper>
+    </HomeProvider>
   );
 }

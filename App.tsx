@@ -1,20 +1,19 @@
 import { NavigationContainer } from "@react-navigation/native";
+import 'expo-dev-client';
 import { useFonts } from 'expo-font';
-import FlashComponent from 'flash-notify';
-import React, { useState } from "react";
+import React from "react";
 import { ActivityIndicator, LogBox, StatusBar, View } from "react-native";
 import { AuthProvider } from './src/contexts/authContext';
 import AppStack from "./src/settings/navigations/appStack";
-import AuthStack from "./src/settings/navigations/authStack";
 import "./src/utils/base64Initialization";
 import './src/utils/extensions/dateExtensions';
 import './src/utils/extensions/objectExtensions';
+import FlashComponent from 'flash-notify'
 
-LogBox.ignoreLogs(['Expected style', 'Require cycles are allowed']); // Ignore log notification by message
+// LogBox.ignoreLogs(['Expected style']); // Ignore log notification by message
 
 export default function App() {
 
-  const [logged, setLogged] = useState(true)
 
   let [fontsLoaded] = useFonts({
     Nunito_ExtraLight: require('./assets/fonts/Nunito_200ExtraLight.ttf'),
@@ -44,7 +43,7 @@ export default function App() {
       <NavigationContainer>
         <FlashComponent />
         <StatusBar animated={true} barStyle={'dark-content'} />
-        {logged ? <AppStack /> : <AuthStack />}
+        <AppStack />
       </NavigationContainer >
     </AuthProvider>
   );
