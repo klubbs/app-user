@@ -1,23 +1,18 @@
-import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Alert, FlatList, TouchableOpacity } from 'react-native';
 import CongratulationsCoupons from '../../../../assets/animations/congratulations_coupons.json';
-import { default as COLORS } from '../../../../assets/constants/colors';
 import { AuthContext } from '../../../contexts/authContext';
-import { OptionsScreenProps } from '../../../settings/navigations/interfaces/ITabParams';
 import { IMenu } from './types';
+import { MenuItem } from '../../component/menuItem';
 import {
-  ContainerFlat, ContainerImage,
-  ContainerPoints, IconArrowRight, IconLogout, IconUser, ImageBorder,
-  MenuItemArrow,
-  MenuItemContainer,
-  MenuItemIcon,
+  ContainerImage,
+  ContainerPoints,
+  IconLogout,
+  IconUser,
+  ImageBorder,
   MenuLogoutContainer,
-  MenuText,
-  MenuTextContainer,
-  MenuTextDescription,
   MenuTextLogout,
   Point,
   PointValues,
@@ -27,20 +22,19 @@ import {
 } from './styles';
 
 
-const Profile: React.FC<OptionsScreenProps> = ({ route }) => {
+const Profile: React.FC = () => {
+
+  const MENU_DATA: IMenu[] = [
+    // { key: "1", text: "Meus Dados", description: "Edite seus dados", icon: "user", logged: true, cb: () => { } },
+    { key: "2", text: "Configurações", description: "Controle suas configurações", icon: "settings", logged: false, cb: () => { } },
+    { key: '3', text: "Influenciador", description: 'Gerencie sua influência', icon: "thumbs-up", logged: true, cb: () => navigation.navigate('Influencer') }
+  ]
 
   const { user, isRegister, logout } = useContext(AuthContext)
-  const animRef = useRef<LottieView>(null)
-  const navigation = useNavigation();
 
-  const [menuData, setMenuData] = useState<IMenu[]>(
-    [
-      // #F48B29
-      //#AC0D0D
-      { id: "1", text: "Meus Dados", description: "Edite seus dados", icon: "user", color: "#FBE6C2" },
-      { id: "2", text: "Preferências", description: "Controle suas preferências", icon: "settings", color: "#F0C929" }
-    ]
-  )
+  const animRef = useRef<LottieView>(null)
+
+  const navigation = useNavigation();
 
   useEffect(() => {
     if (isRegister)
@@ -66,41 +60,27 @@ const Profile: React.FC<OptionsScreenProps> = ({ route }) => {
 
   }
 
-  const MenuItem = (params: IMenu) => {
-    return (
-      <MenuItemContainer >
-        <MenuItemIcon >
-          <Feather name={params.icon} color={COLORS.COLOR_YELLOW} size={16} />
-        </MenuItemIcon>
-        <MenuTextContainer>
-          <MenuText>{params.text}</MenuText>
-          <MenuTextDescription>{params.description}</MenuTextDescription>
-        </MenuTextContainer>
-        <MenuItemArrow >
-          <IconArrowRight />
-        </MenuItemArrow>
-      </MenuItemContainer>
-    )
-  }
+  function MenuFooterItem() {
 
-  const MenuFooterItem = () => {
     return (
       user && <MenuLogoutContainer>
         <IconLogout onPress={handlelogout} />
         <MenuTextLogout>Sair</MenuTextLogout>
       </MenuLogoutContainer>
     )
+
   }
 
-  const RenderPoints: React.FC = () => {
+  function RenderPoints(): JSX.Element {
 
     return (
       <ContainerPoints >
         {
           user
-            ? <>
+            ?
+            <>
               <Point>Pontos</Point>
-              <PointValues>1500</PointValues>
+              <PointValues>Em breve</PointValues>
             </>
             :
             <TouchableOpacity onPress={() => navigation.navigate("LoginWelcome")}>
@@ -126,17 +106,16 @@ const Profile: React.FC<OptionsScreenProps> = ({ route }) => {
         <RenderPoints />
       </WrapperTop>
 
-      <ContainerFlat>
-        <FlatList
-          data={menuData}
-          showsVerticalScrollIndicator={false}
-          style={{ paddingHorizontal: 20 }}
-          keyExtractor={item => `${item.id}`}
-          ListFooterComponent={() => MenuFooterItem()}
-          renderItem={({ item }) => MenuItem(item)}
-        />
+      <FlatList
+        data={MENU_DATA}
+        showsVerticalScrollIndicator={false}
+        style={{ paddingHorizontal: 20 }}
+        contentContainerStyle={{ height: '30%' }}
+        keyExtractor={item => item.key}
+        ListFooterComponent={() => MenuFooterItem()}
+        renderItem={({ item }) => <MenuItem key={item.key} icon={item.icon} description={item.description} text={item.text} cb={item.cb} logged={item.logged} />}
+      />
 
-      </ContainerFlat>
 
     </SafeArea >
   );

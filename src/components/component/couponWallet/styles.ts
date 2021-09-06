@@ -8,7 +8,7 @@ import { CouponWalletBackground } from "../../../../assets/images/coupon_wallet_
 
 
 const Wrapper = styled.Pressable`
-  height:200;
+  height:200px;
   width:48%;
   align-items: center;
   justify-content: flex-end;

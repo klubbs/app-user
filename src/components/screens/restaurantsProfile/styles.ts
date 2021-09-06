@@ -15,11 +15,12 @@ export const ContainerImage = styled.Image`
 
 export const Container = styled.View`
   flex: 1;
+  padding:20px;
   background-color: ${COLORS.COLOR_WHITE};
 `
 
 
-export const ContainerUsual = styled.View`
+export const IconsContainer = styled.View`
   flex-direction: row;
   margin-top: 30px;
   justify-content: center;
@@ -55,32 +56,38 @@ export const RestaurantCategory = styled.Text`
   font-family:'Nunito_Light';
 `;
 
-
-
-export const WrapperTop = styled.View`
-  top: 10px;
-  left: 20px;
+export const AboutSubtitle = styled.Text`
+  color:${COLORS.COLOR_BLACK80};
+  font-size:16px;
+  margin-top:10%;
+  font-family:'Nunito_Bold';
 `;
+
+export const About = styled.Text`
+  color:${COLORS.COLOR_BLACK50};
+  font-size:14px;
+  margin-top:5%;
+  letter-spacing: 0.5px;
+  font-family:'Nunito_Regular';
+`;
+
+
+
+export const NameContainer = styled.View`
+  top: 10px;
+  `;
 
 
 export const BlocksWrapper = styled.View`
   align-items:center;
+  flex-direction: row;
   justify-content: center;
   flex:1;
   height:80px;
 `
 export const BlocksValue = styled.Text`
-  color:${COLORS.COLOR_BLACK80};
+  color:${COLORS.COLOR_YELLOW};
+  margin-left: 5px;
   font-size:14px;
-  margin-top:5px;
   font-family:'Nunito_Bold';
-`
-
-
-
-export const Description = styled.Text`
-  color:${COLORS.COLOR_BLACK80};
-  font-size:13px;
-  font-family:'Nunito_Regular';
-  letter-spacing: 0.5px;
 `

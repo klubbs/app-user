@@ -12,8 +12,8 @@ export const Container = styled.View`
   width: 100%;
   border-radius:5px;
   bottom:0;
-  z-index: 10px;
-  elevation: 10px;
+  z-index: 10;
+  elevation: 10;
   background-color:${COLORS.COLOR_WHITE};
 `;
 

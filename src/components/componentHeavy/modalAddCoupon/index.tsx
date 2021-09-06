@@ -9,12 +9,12 @@ import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
 import { SubtitleSaveCouponImage } from '../../../../assets/images/subtitle_save_coupon';
 import { IError } from '../../../settings/@types/IResponses';
 
-export const ModalSaveCoupon: React.FC<{ visible: boolean, onClose: any }> = (props) => {
+export const ModalSaveCoupon: React.FC<{ visible: boolean, onClose: any, isInfluencer: boolean }> = (props) => {
 
   const [value, setValue] = useState("")
   const [loading, setLoading] = useState(false)
 
-  const onSaveCoupon = async () => {
+  async function onSaveCoupon() {
     try {
       setLoading(true)
 
@@ -38,7 +38,33 @@ export const ModalSaveCoupon: React.FC<{ visible: boolean, onClose: any }> = (pr
     }
   }
 
-  const onCloseHandler = () => {
+  async function onCreateNewCoupon() {
+
+    try {
+
+      if (value.length <= 0) {
+        return;
+      }
+
+      setLoading(true)
+
+      Keyboard.dismiss();
+
+      await CouponService.createNewCouponCode(value)
+
+      NotificationsFlash.CustomMessage('Cupom criado', 'Só colar seu código para seus seguidores', 'SUCCESS')
+
+      onCloseHandler();
+    } catch (error) {
+
+      CouponService.catchCreateNewCoupon(error as IError)
+
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  function onCloseHandler() {
     setValue('')
     props.onClose();
   }
@@ -49,8 +75,8 @@ export const ModalSaveCoupon: React.FC<{ visible: boolean, onClose: any }> = (pr
       <Spinner loading={loading} />
       <Wrapper>
         <Container>
-          <Input value={value} onChangeText={(e) => setValue(e.toUpperCase())} />
-          <ButtonStorage onPress={() => onSaveCoupon()} size={25} />
+          <Input value={value} onChangeText={(e) => setValue(e.toUpperCase().trim())} />
+          <ButtonStorage onPress={() => props.isInfluencer ? onCreateNewCoupon() : onSaveCoupon()} size={25} />
         </Container>
 
         <SubtitleSaveCouponImage />

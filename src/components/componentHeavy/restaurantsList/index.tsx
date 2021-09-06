@@ -1,26 +1,26 @@
 import * as Location from 'expo-location';
-import React, { useEffect, useState, useContext, useMemo, useCallback } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StoreService } from '../../../services/store_services';
-import { format4TwoColumns } from '../../../utils/formatersUtils';
 import { CardEstablishment } from "../../component/cardEstablishment";
-import { containerStyle, EmptyCard, Header, wrapperStyle } from './styles';
+import { containerStyle, EmptyCard, Header, WrapperNotFound, wrapperStyle, NotFoundTitle, NotFoundSubtitle, WrapperDenied } from './styles';
 import { IRestaurants } from './interfaces';
 import { LocationAccuracy, LocationObject } from 'expo-location';
 import { HomeContext } from '../../../contexts/homeContext';
+import { NotFoundRestaurants } from '../../../../assets/images/notFoundRestaurants';
+import { LocationDeniedImage } from '../../../../assets/images/locationDeniedImage';
 
-let adonis = []
+let userLocation: LocationObject | undefined = undefined;
+
 export const RestaurantsList: React.FC = (props) => {
-
-  let userLocation: LocationObject | undefined = undefined;
 
   const navigation = useNavigation();
 
-  const { selectedCategory, restaurants, setRestaurants } = useContext(HomeContext)
-
+  const { categorizedRestaurants, getCategoriesDescription, setRestaurants } = useContext(HomeContext)
 
   const [loading, setLoading] = useState(false)
+
   const [locationDenied, setLocationDenied] = useState<boolean>(false)
 
   useEffect(() => {
@@ -57,34 +57,47 @@ export const RestaurantsList: React.FC = (props) => {
     }
   }
 
-  const HowItemRender = useCallback(({ item }: { item: IRestaurants }) => {
+  const HowItemRender = ({ item }: { item: IRestaurants }) => {
 
     if (!item.empty) {
       return (
         <CardEstablishment
           data={item}
           userLocation={userLocation}
-          onPress={() => navigation.navigate("Restaurant", { name: item.name, id: item.id, image: item.image })} />
+          onPress={() => navigation.navigate("Restaurant", {
+            ...item,
+            business_category_id: getCategoriesDescription(item.business_category_id)
+          })}
+        />
       )
     }
 
     return <EmptyCard />
-  }, [])
+  }
 
-  const memoizedRestaurants = useMemo(
-    () => {
-      const tmp = restaurants.filter(item => selectedCategory === item.business_category_id || selectedCategory === '94d9ccaf-9a03-4b1d-9dc7-bec0931b1381')
+  function NotFound(): JSX.Element {
+    return (
+      <WrapperNotFound>
+        <NotFoundRestaurants height={160} />
+        <NotFoundTitle>Nos desculpe</NotFoundTitle>
+        <NotFoundSubtitle>Infelizmente não temos nada por aqui ainda</NotFoundSubtitle>
+      </WrapperNotFound>
+    )
+  }
 
-      return format4TwoColumns(tmp, 2, { empty: true, name: '', image: '' })
-
-    }, [selectedCategory, restaurants]);
-
-  //TODO: LOCATION DENIED SHOW WHAT?
+  if (locationDenied) {
+    return (
+      <WrapperDenied>
+        <LocationDeniedImage height={160} />
+        <NotFoundTitle>Habilite sua localização</NotFoundTitle>
+        <NotFoundSubtitle>Para indicarmos estabelecimentos próximos</NotFoundSubtitle>
+      </WrapperDenied>
+    )
+  }
 
   return (
     <FlatList
-      data={memoizedRestaurants}
-      extraData={memoizedRestaurants}
+      data={categorizedRestaurants}
       refreshing={loading}
       onRefresh={getAllEstablishments}
       showsVerticalScrollIndicator={false}
@@ -93,7 +106,7 @@ export const RestaurantsList: React.FC = (props) => {
       contentContainerStyle={containerStyle}
       keyExtractor={(item: IRestaurants, index: number) => `${item.id}`}
       ListHeaderComponent={() => <Header>Restaurantes</Header>}
-      // ListEmptyComponent
+      ListEmptyComponent={() => <NotFound />}
       stickyHeaderIndices={[0]}
       renderItem={HowItemRender}
     />

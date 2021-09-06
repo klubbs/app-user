@@ -1,50 +1,41 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { HomeContext } from '../../../contexts/homeContext';
 import { ICategoryResponse } from '../../../services/@types/IStore';
-import { StoreService } from '../../../services/store_services';
-import { Description, Dot, FlatComponent, WrapplerTouchable } from './styles';
+import { Description, Dot, FlatComponent, WrapplerTouchable, SkeletonStyled, WrapperSkeleton } from './styles';
 
 export const RestaurantsCategories: React.FC = (props) => {
 
-  const { categories, setCategories, selectedCategory, setSelectedCategory } = useContext(HomeContext)
+  const { getCategories, selectedCategory, setSelectedCategory, categories } = useContext(HomeContext)
 
   useEffect(() => {
-    getCategories()
+    (getCategories)()
   }, [])
 
-  async function getCategories() {
-    try {
+  function ItemRender({ item }: { item: ICategoryResponse }): JSX.Element {
 
-      const data = await StoreService.getCategories();
+    const isSelected = selectedCategory === item.id
 
-      //Move Todos to init
-      const index = data.findIndex(item => item.id === '94d9ccaf-9a03-4b1d-9dc7-bec0931b1381');
-      const element = data[index];
-      data.splice(index, 1);
-      data.splice(0, 0, element);
-      //Move Todos to init
+    return (
+      <WrapplerTouchable onPress={() => setSelectedCategory(item.id)}>
+        <Dot active={isSelected} />
+        <Description active={isSelected} >{item.description}</Description>
+      </WrapplerTouchable>
+    )
+  }
 
-      setSelectedCategory(element.id)
-
-      setCategories(data)
-    } catch (error) {
-    }
+  if (categories.length <= 0) {
+    return (
+      <WrapperSkeleton>
+        <SkeletonStyled />
+      </WrapperSkeleton>
+    )
   }
 
   return (
     <FlatComponent
       data={categories}
       keyExtractor={(item: ICategoryResponse, index: number) => `${item.id}`}
-      renderItem={({ item }) => {
-
-        const isSelected = selectedCategory === item.id as string
-        return (
-          <WrapplerTouchable onPress={() => setSelectedCategory(item.id)}>
-            <Dot active={isSelected} />
-            <Description active={isSelected} >{item.description}</Description>
-          </WrapplerTouchable>
-        )
-      }}
+      renderItem={ItemRender as any}
     />
   );
 }

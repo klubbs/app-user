@@ -24,7 +24,8 @@ export const ContainerBottom = styled.View`
 export const Title = styled.Text`
   color:${COLORS.COLOR_WHITE};
   font-size:20px;
-  font-family:'Nunito_Bold';`
+  font-family:'Nunito_Bold';
+`
 
 export const Description = styled.Text`
   color:${COLORS.COLOR_WHITE_80};

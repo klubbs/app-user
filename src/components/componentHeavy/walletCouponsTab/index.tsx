@@ -65,7 +65,8 @@ export const CouponsWalletTab: React.FC = () => {
         {item.empty && <Container empty={item.empty} />}
 
         {!item.empty &&
-          <CouponWallet data={item}
+          <CouponWallet
+            data={item}
             onPress={() => navigation.navigate('CouponQr', {
               wallet_id: item.wallet_id,
               coupon_code: item.coupon_code,

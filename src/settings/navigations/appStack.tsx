@@ -9,6 +9,7 @@ import Register from "../../components/screens/register";
 import Restaurant from "../../components/screens/restaurantsProfile";
 import Tabs from "./appTabStack";
 import { IAppStackParams } from "../@types/IAppStackParams";
+import { Influencer } from "../../components/screens/influencer";
 
 
 
@@ -30,6 +31,7 @@ const App: React.FC<{}> = () => {
       <AppStack.Screen name="Register" component={Register} options={{ headerShown: true }} />
       <AppStack.Screen name="Restaurant" component={Restaurant} />
       <AppStack.Screen name="CouponQr" component={CouponQrScreen} options={{ headerTintColor: COLORS.COLOR_WHITE }} />
+      <AppStack.Screen name="Influencer" component={Influencer} />
     </AppStack.Navigator >
   );
 };

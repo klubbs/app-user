@@ -9,6 +9,7 @@ export type IAppStackParams = {
   Register: { mail: string };
   Restaurant: IRestaurants;
   CouponQr: Omit<IWalletCouponsReponse, 'wallet_id'>;
+  Influencer: undefined;
 };
 
 

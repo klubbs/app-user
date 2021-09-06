@@ -1,22 +1,19 @@
 import { Feather } from '@expo/vector-icons';
-import * as Linking from 'expo-linking';
 import React from 'react';
 import colors from '../../../../assets/constants/colors';
 import COLORS from '../../../../assets/constants/colors';
+import { ClockIcon } from '../../../../assets/icons/clockIcon';
 import { CouponIcon } from '../../../../assets/icons/coupon_icon';
 import { RestaurantScreenProps } from "../../../settings/@types/IAppStackParams";
 import UberButton from "../../component/buttonUber";
-import TabRestaurants from '../../componentHeavy/restaurantsProfileTab';
-import { BlocksWrapper, Description, BlocksValue, ContainerGetCoupon, ContainerImage, Container, ContainerUsual, GetCouponText, RestaurantCategory, RestaurantName, Wrapper, WrapperTop } from './styles';
+import { RestaurantInteractions } from '../../componentHeavy/restaurantInteractions';
+import { BlocksWrapper, About, AboutSubtitle, BlocksValue, ContainerGetCoupon, ContainerImage, Container, IconsContainer, GetCouponText, RestaurantCategory, RestaurantName, Wrapper, NameContainer } from './styles';
 
 
 
 const Restaurant: React.FC<RestaurantScreenProps> = ({ route }) => {
 
-  const handleUberCall = () => {
-    Linking.openURL(`uber://?client_id=e1P-SgdvK_PmQCLAq_815j4fjk5OxJ50&action=setPickup&pickup=my_location&dropoff[latitude]=${null}&dropoff[longitude]=${null}&dropoff[nickname]=${null}`)
 
-  }
 
   const handleCouponCall = () => {
 
@@ -28,25 +25,57 @@ const Restaurant: React.FC<RestaurantScreenProps> = ({ route }) => {
 
       <Container>
 
-        <WrapperTop >
+        <NameContainer >
           <RestaurantName>{route?.params?.name}</RestaurantName>
-          <RestaurantCategory>Pizzaria</RestaurantCategory>
-        </WrapperTop>
+          <RestaurantCategory>{route?.params?.business_category_id}</RestaurantCategory>
+        </NameContainer>
 
-        <ContainerUsual>
+        <AboutSubtitle>Sobre</AboutSubtitle>
+        <About>{route?.params?.description}</About>
+
+        <IconsContainer>
           <BlocksWrapper>
-            {/*Icon Timer*/}
-            <BlocksValue>10h - 22h</BlocksValue>
+            <ClockIcon width={14} height={14} fill={colors.COLOR_YELLOW_RATING} />
+            <BlocksValue>
+              {
+                route.params
+                  .openedAt.ToDateFormat()
+                  .toLocaleTimeString("pt-br",
+                    {
+                      formatMatcher: "best fit",
+                      hour: '2-digit',
+                      minute: '2-digit'
+                    })
+              }
+              { } &#xB7; { }
+              {
+                route.params
+                  .closedAt.ToDateFormat()
+                  .toLocaleTimeString("pt-br",
+                    {
+                      formatMatcher: "best fit",
+                      hour: '2-digit',
+                      minute: '2-digit'
+                    })
+              }
+            </BlocksValue>
           </BlocksWrapper>
           <BlocksWrapper>
-            <CouponIcon width={12} height={12} fill={colors.COLOR_SECUNDARY_BLACK} />
+            <CouponIcon width={14} height={14} fill={colors.COLOR_YELLOW_RATING} />
             <BlocksValue>10%</BlocksValue>
           </BlocksWrapper>
           {/* <UberButton onPress={handleUberCall} /> */}
+        </IconsContainer>
 
-          {/* <TabRestaurants /> */}
-        </ContainerUsual>
-
+        <RestaurantInteractions
+          data={
+            {
+              lat: route.params.latitude,
+              long: route.params.longitude,
+              restaurantName: route.params.name
+            }
+          }
+        />
 
       </Container>
 

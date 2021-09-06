@@ -24,7 +24,7 @@ export const Coupons: React.FC = () => {
 
   return (
     <SafeArea>
-      <ModalSaveCoupon visible={visibleModal} onClose={() => setVisibleModal(false)} />
+      <ModalSaveCoupon visible={visibleModal} onClose={() => setVisibleModal(false)} isInfluencer={false} />
       <HeaderContainer>
         <ButtonCreateCoupon onPress={() => setVisibleModal(true)} />
       </HeaderContainer>

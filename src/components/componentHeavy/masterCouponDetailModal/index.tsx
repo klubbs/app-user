@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { View } from 'react-native';
+import React, { useEffect, useRef } from 'react';
 import { Modalize } from 'react-native-modalize'
 import { IMasterCouponDetails } from '../../screens/couponQr/types';
 

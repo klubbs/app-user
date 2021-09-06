@@ -3,11 +3,11 @@ export interface IMenuSections {
   data: IMenu
 }
 
-export interface IMenu {
-  id: string,
+export type IMenu = {
+  key: string,
   icon: any,
   text: string,
   description: string,
-
-  color: string
+  logged?: boolean,
+  cb: () => void
 }

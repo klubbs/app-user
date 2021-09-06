@@ -1,4 +1,3 @@
-import { Skeleton } from '@motify/skeleton';
 import React from 'react';
 import { ICouponCheckoutItem } from './interface';
 import {

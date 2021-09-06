@@ -1,6 +1,4 @@
 import React, { useState, useContext } from 'react';
-import { View } from 'react-native'
-
 import QRCode from 'react-native-qrcode-svg';
 import colors from '../../../../assets/constants/colors';
 import { CouponQrScreenProps } from '../../../settings/@types/IAppStackParams';
@@ -59,15 +57,3 @@ export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
     </Wrapper>
   );
 }
-
-
-{/* <ValidAt>Válido até {route?.params?.coupon_valid_at?.ToDateFormat()
-          .toLocaleTimeString("pt-br",
-            {
-              formatMatcher: "best fit",
-              day: 'numeric',
-              month: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit',
-              year: '2-digit'
-            })}</ValidAt> */}

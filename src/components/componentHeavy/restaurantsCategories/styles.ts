@@ -1,6 +1,8 @@
+import { Skeleton } from '@motify/skeleton';
 import styled from 'styled-components/native';
+import colors from '../../../../assets/constants/colors';
 import COLORS from '../../../../assets/constants/colors';
-
+import { MotiView } from 'moti'
 
 export const Description = styled.Text<{ active: boolean }>`
   color:${({ active }) => active ? COLORS.COLOR_SECUNDARY_BLACK : COLORS.COLOR_BLACK80};
@@ -34,3 +36,20 @@ export const FlatComponent = styled.FlatList.attrs(props => ({
   showsHorizontalScrollIndicator: false,
   contentContainerStyle: { paddingVertical: 20, marginBottom: 10, marginTop: 20 }
 }))``
+
+
+export const SkeletonStyled = styled(Skeleton).attrs(props => ({
+  width: '100%',
+  height: 20,
+  colorMode: 'light',
+  colors: [colors.COLOR_SECUNDARY_WHITE, colors.COLOR_WHITE],
+  transition: {
+    duration: 800
+  }
+}))`
+`
+
+export const WrapperSkeleton = styled(MotiView)`
+  margin-top:20px;
+  margin-bottom:20px;
+`

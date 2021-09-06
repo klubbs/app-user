@@ -6,7 +6,7 @@ import { AsyncStorageUtils } from '../utils/asyncStorageUtils';
 
 
 export const AuthContext = createContext(
-  { } as {
+  {} as {
     user: ILoginResponse | null
     register: (mail: string, password: string, name: string, phone: string, code: string) => Promise<void>
     signIn: (mail: string, password: string) => Promise<void>
@@ -68,6 +68,7 @@ const AuthProvider: React.FC = ({ children }) => {
     }
 
   }, [isRegister])
+
 
 
   return (

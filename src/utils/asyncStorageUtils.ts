@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { ICategoryResponse } from '../services/@types/IStore';
 import { ILoginResponse } from '../services/@types/IUser';
 
 
@@ -27,11 +28,21 @@ class AsyncStorageUtils {
   static getUserInAsyncStorage = async (): Promise<ILoginResponse | null> => {
     const result = await AsyncStorage.getItem('@USER:Key')
 
-    if (result !== null) {
-      return JSON.parse(result) as ILoginResponse;
-    } else {
-      return null;
-    }
+    return result != null ? JSON.parse(result) : null;
+  }
+
+  static async saveCategoriesInStorage(categories: ICategoryResponse[]) {
+
+    const jsonValue = JSON.stringify(categories)
+
+    await AsyncStorage.setItem('@CATEGORIES_ESTABLISHMENTS:Key', jsonValue)
+
+  }
+
+  static async getCategoriesInStorage(): Promise<ICategoryResponse[] | null> {
+    const results = await AsyncStorage.getItem('@CATEGORIES_ESTABLISHMENTS:Key')
+
+    return results != null ? JSON.parse(results) : null;
   }
 
 
