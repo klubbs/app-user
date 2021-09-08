@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
 import colors from '../../../../assets/constants/colors';
 import { ShopIcon } from '../../../../assets/icons/shop_icon';
 import { ICardMasterCoupons } from './@types';
+import * as Haptic from 'expo-haptics';
 
 import { WrapperCard, TopContainer, BottomContainer, Name, Selection, Rules, WrapperOff, Off, SeeMore, SubBottomContainer, ValidAt } from './styles';
 
@@ -12,9 +12,13 @@ export const CardMasterCoupons: React.FC<{ data: ICardMasterCoupons }> = ({ data
 
 
   function handlePress() {
+
+    Haptic.impactAsync(Haptic.ImpactFeedbackStyle.Light)
+
     const isSelected = !selected;
 
     setSelected(isSelected);
+
     data.onPress(isSelected, data.masterCouponId)
 
   }

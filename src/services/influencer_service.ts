@@ -17,7 +17,7 @@ export class InfluencerService {
 
     if (error.statusCode === 422) {
 
-      Haptic.notificationAsync(Haptic.NotificationFeedbackType.Warning)
+      Haptic.impactAsync(Haptic.ImpactFeedbackStyle.Light)
 
       if (actual === "CODE") {
         NotificationsFlash.CustomMessage('Código inválido', "Espaços são proibidos e necessário 10 caracteres.", 'NEUTRAL')

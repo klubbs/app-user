@@ -29,21 +29,14 @@ const LoginWelcome: React.FC = () => {
 
   async function handleConfirm() {
     try {
-      console.log('nem aparece esse')
 
       setLoading(true)
 
-      console.log('cheguei aqui')
-
       const response = await LoginService.validateMail(mail);
-
-      console.log('passwi da chamada')
 
       navigation.navigate(response ? 'LoginPassword' : 'Register', { mail: mail });
 
     } catch (error: any) {
-
-      console.log('---------- erro tela de login email', error)
 
       Haptic.notificationAsync(Haptic.NotificationFeedbackType.Warning)
 

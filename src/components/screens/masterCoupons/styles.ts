@@ -19,11 +19,30 @@ export const Header = styled.Text`
   font-family:'Nunito_Bold';
 `
 
-export const HeaderContainer = styled.View`
+export const ItemsSubtitle = styled.Text`
+  color:${colors.COLOR_WHITE};
+  font-size: 12px;
+  font-family:'Nunito_Regular';
+`
+
+export const Items = styled.Text`
+  color:${colors.COLOR_WHITE};
+  font-size: 12px;
+  font-family:'Nunito_Bold';
+`
+
+export const ContainerItems = styled.View`
   flex-direction:row;
-  padding-horizontal:6%;
-  justify-content: space-between;
-  align-items:center;
+  justify-content: center;
+  padding-top:5%;
+  align-items: center;
+`
+
+export const CouponWrapper = styled.View`
+  flex-direction:row;
+  position:absolute;
+  right:10%;
+  top:100%;
 `
 
 export const FlatComponent = styled.FlatList.attrs(props => ({

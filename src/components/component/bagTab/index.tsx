@@ -1,27 +1,23 @@
-import React, { useState, ComponentProps } from 'react';
-import { View } from 'react-native';
+import React from 'react';
+import { TouchableOpacity } from 'react-native'
+import { useLayout } from '../../../utils/layoutHooks'
 
 import { Container, Wrapper } from './styles';
 
-function useLayout() {
-  const [layout, setLayout] = useState({ height: 0 })
-
-  const onLayout: ComponentProps<typeof View>['onLayout'] = ({ nativeEvent }) => {
-    setLayout(nativeEvent.layout)
-  }
-
-  return [layout, onLayout] as const
-}
-
-export const BagTab: React.FC = () => {
+export const BagTab: React.FC<{ show: boolean, onPress: () => void }> = (props) => {
 
   const [{ height }, onLayout] = useLayout()
 
   return (
-    <Wrapper animate={{ height }}>
-      <Container onLayout={onLayout} style={{ height: true ? 0 : '15%' }}>
+    <Wrapper
+      animate={{ height }}
+    >
+      <TouchableOpacity onPress={props.onPress} activeOpacity={0.8}>
+        <Container onLayout={onLayout} style={{ height: props.show ? 100 : 0 }}>
+          {props.children}
+        </Container>
+      </TouchableOpacity>
 
-      </Container>
-    </Wrapper>
+    </Wrapper >
   );
 }

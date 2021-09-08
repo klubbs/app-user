@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { FlatList } from 'react-native';
+import colors from '../../../../assets/constants/colors';
+import { CouponIcon } from '../../../../assets/icons/coupon_icon';
 import { InfluencerService } from '../../../services/influencer_service';
-import { StoreService } from '../../../services/store_services';
 import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
 import { BagTab } from '../../component/bagTab';
 import { CardMasterCoupons } from '../../componentHeavy/cardMasterCoupons';
 import { ICardMasterCoupons } from '../../componentHeavy/cardMasterCoupons/@types';
+import { ModalInfluencerLinkCoupons } from '../../componentHeavy/modalInfluencerLinkCoupons';
 
-import { Wrapper, FlatComponent, Header, HeaderContainer } from './styles';
+import { Wrapper, FlatComponent, Header, ContainerItems, Items, CouponWrapper, ItemsSubtitle } from './styles';
 
 export const MasterCoupons: React.FC = () => {
 
   const [masterCoupons, setMasterCoupons] = useState<ICardMasterCoupons[]>([])
-
   const [selectedMasters, setSelectedMaster] = useState<string[]>([])
+  const [showLinkModal, setShowLinkModal] = useState(false)
 
   useEffect(() => {
 
@@ -44,15 +46,24 @@ export const MasterCoupons: React.FC = () => {
   }
 
   function handleCouponSelect(isSelected: boolean, masteCouponId: string) {
-    console.log(masteCouponId)
-    if (isSelected) {
-      setSelectedMaster([...selectedMasters, masteCouponId])
-      return
-    }
+    isSelected
+      ? setSelectedMaster([...selectedMasters, masteCouponId])
+      : setSelectedMaster(selectedMasters.filter(item => item !== masteCouponId));
+  }
 
-    let tmp = selectedMasters.filter(item => item !== masteCouponId);
+  function BagTabCoupons(): JSX.Element {
 
-    setSelectedMaster(tmp);
+    return (
+      <BagTab show={selectedMasters.length > 0} onPress={() => setShowLinkModal(true)}>
+        <ContainerItems>
+          <ItemsSubtitle>Definir meu cupom</ItemsSubtitle>
+          <CouponWrapper>
+            <CouponIcon width={15} height={15} fill={colors.COLOR_WHITE} style={{ marginRight: 5 }} />
+            <Items>{selectedMasters.length}</Items>
+          </CouponWrapper>
+        </ContainerItems>
+      </BagTab>
+    )
   }
 
 
@@ -63,11 +74,12 @@ export const MasterCoupons: React.FC = () => {
         stickyHeaderIndices={[0]}
         ListHeaderComponent={() => <Header>Disponíveis</Header>}
         showsVerticalScrollIndicator={false}
+        keyExtractor={(item, index) => item.masterCouponId}
         renderItem={({ item }) => <CardMasterCoupons data={item} />}
       />
-
-      {selectedMasters.length > 0 && <BagTab />}
-    </Wrapper>
+      <ModalInfluencerLinkCoupons visible={showLinkModal} onClose={() => setShowLinkModal(false)} />
+      <BagTabCoupons />
+    </Wrapper >
   );
 }
 

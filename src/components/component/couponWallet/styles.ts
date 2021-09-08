@@ -9,7 +9,7 @@ import { CouponWalletBackground } from "../../../../assets/images/coupon_wallet_
 
 const Wrapper = styled.Pressable`
   height:200px;
-  width:48%;
+  width:180px;
   align-items: center;
   justify-content: flex-end;
   padding-bottom:4.5%;
@@ -98,6 +98,6 @@ export const InfluencerEmpty = styled(MotiView).attrs(props => ({
   width:80px;
   height:80px;
   border-radius: 40px;
-  bottom:18%;
+  bottom:20%;
   background-color: ${colors.COLOR_WHITE_40};
 `

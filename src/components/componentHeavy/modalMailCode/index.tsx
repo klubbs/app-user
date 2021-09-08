@@ -139,28 +139,26 @@ export const ModalMailCode = React.forwardRef<IModalRef, IModalCodeProps>((props
   }
 
   return (
-    <>
-      <ModalComponent visible={visible} onClose={hideModal}>
-        <Spinner loading={loading} />
-        <Container>
-          <Title>Verifique seu e-mail</Title>
-          <TitleDescription>Digite o código que enviamos para: {propsComp.registerParams?.mail ?? propsComp.recoverParams?.email}</TitleDescription>
-        </Container>
-        <Container>
-          <CodeBoxes
-            value={code}
-            onChangeText={(e) => setCode(e)}
-            renderCell={renderInput}
-            {...props}
-          />
-        </Container>
-        <Container>
-          <ButtonConfirm title={"Enviar"} onPress={handleConfirm} />
-          <TouchableReset onPress={handleResetCode} >
-            <TitleDescription>Reenviar código</TitleDescription>
-          </TouchableReset>
-        </Container>
-      </ModalComponent>
-    </>
+    <ModalComponent visible={visible} onClose={hideModal}>
+      <Spinner loading={loading} />
+      <Container>
+        <Title>Verifique seu e-mail</Title>
+        <TitleDescription>Digite o código que enviamos para: {propsComp.registerParams?.mail ?? propsComp.recoverParams?.email}</TitleDescription>
+      </Container>
+      <Container>
+        <CodeBoxes
+          value={code}
+          onChangeText={(e) => setCode(e)}
+          renderCell={renderInput}
+          {...props}
+        />
+      </Container>
+      <Container>
+        <ButtonConfirm title={"Enviar"} onPress={handleConfirm} />
+        <TouchableReset onPress={handleResetCode} >
+          <TitleDescription>Reenviar código</TitleDescription>
+        </TouchableReset>
+      </Container>
+    </ModalComponent>
   );
 })
