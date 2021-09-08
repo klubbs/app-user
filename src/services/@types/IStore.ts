@@ -18,3 +18,13 @@ export type ICategoryResponse = {
   description: string,
   model_business: string
 }
+
+
+export type GetAllMasterCouponsResponse = {
+  master_coupon_id: string,
+  master_coupon_off: number,
+  master_coupon_valid_at: number,
+  master_coupon_description: string,
+  establishment_name: string,
+  establishment_image: string
+}

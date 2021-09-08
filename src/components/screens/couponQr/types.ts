@@ -1,4 +1,4 @@
-export interface IMasterCouponDetails {
+export interface IMasterCouponQrDetails {
   master_coupon_off_percentual: number,
   master_coupon_description: string,
   master_coupon_valid_at: number,

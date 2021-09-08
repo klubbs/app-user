@@ -24,6 +24,7 @@ import {
 
 const Profile: React.FC = () => {
 
+  //TODO: Alterar para scroolView
   const MENU_DATA: IMenu[] = [
     // { key: "1", text: "Meus Dados", description: "Edite seus dados", icon: "user", logged: true, cb: () => { } },
     { key: "2", text: "Configurações", description: "Controle suas configurações", icon: "settings", logged: false, cb: () => { } },

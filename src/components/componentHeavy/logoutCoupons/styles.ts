@@ -15,7 +15,7 @@ export const UnregisterBoxText = styled.View`
   margin-top: 20%;
   width: 90%;
   height: 10%;
-  border-radius: 10;
+  border-radius: 10px;
 `
 
 export const UnregisterUserDesc = styled.Text`

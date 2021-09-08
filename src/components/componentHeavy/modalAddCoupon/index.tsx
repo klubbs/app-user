@@ -8,6 +8,7 @@ import { Spinner } from '../../component/spinner';
 import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
 import { SubtitleSaveCouponImage } from '../../../../assets/images/subtitle_save_coupon';
 import { IError } from '../../../settings/@types/IResponses';
+import { InfluencerService } from '../../../services/influencer_service';
 
 export const ModalSaveCoupon: React.FC<{ visible: boolean, onClose: any, isInfluencer: boolean }> = (props) => {
 
@@ -50,14 +51,14 @@ export const ModalSaveCoupon: React.FC<{ visible: boolean, onClose: any, isInflu
 
       Keyboard.dismiss();
 
-      await CouponService.createNewCouponCode(value)
+      await InfluencerService.createNewCouponCode(value)
 
-      NotificationsFlash.CustomMessage('Cupom criado', 'Só colar seu código para seus seguidores', 'SUCCESS')
+      NotificationsFlash.CustomMessage('Cupom criado', 'Só divulgar para seus seguidores', 'SUCCESS')
 
       onCloseHandler();
     } catch (error) {
 
-      CouponService.catchCreateNewCoupon(error as IError)
+      InfluencerService.catchCreateNewCoupon(error as IError)
 
     } finally {
       setLoading(false)

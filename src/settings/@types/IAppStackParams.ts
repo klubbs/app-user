@@ -10,6 +10,7 @@ export type IAppStackParams = {
   Restaurant: IRestaurants;
   CouponQr: Omit<IWalletCouponsReponse, 'wallet_id'>;
   Influencer: undefined;
+  MasterCoupons: undefined;
 };
 
 

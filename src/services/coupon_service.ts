@@ -50,33 +50,4 @@ export class CouponService {
 
   }
 
-  static async createNewCouponCode(code: string) {
-    await api.post('influencer/coupon', { code: code })
-  }
-
-  static catchCreateNewCoupon(error: IError) {
-
-    const actual = error.error[0].field.toUpperCase();
-
-    if (error.statusCode === 422) {
-
-      Haptic.notificationAsync(Haptic.NotificationFeedbackType.Warning)
-
-      if (actual === "CODE") {
-        NotificationsFlash.CustomMessage('Código inválido', "Espaços são proibidos e necessário 10 caracteres.", 'NEUTRAL')
-        return;
-      } else if (actual === "CODE EXIST") {
-        NotificationsFlash.CustomMessage('Código já existe', "Este código de cupom já esta em uso.", 'NEUTRAL')
-        return;
-      }
-
-    } else if (error.statusCode === 409) {
-      if (actual === "CODE") {
-        NotificationsFlash.CustomMessage('Código existente', "Este código de cupom já esta em uso.", 'NEUTRAL')
-        return;
-      }
-    }
-
-  }
-
 }

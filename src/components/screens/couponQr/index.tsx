@@ -5,7 +5,7 @@ import { CouponQrScreenProps } from '../../../settings/@types/IAppStackParams';
 import { EstablishmentCardQr } from '../../component/cardEstablishmentQr';
 import { BottomContainer, TopContainer, Wrapper, FlatListComponent, AnimatedWrapper, BackgroundCoupon, SubtitleHelp, ImageEstablishment } from './styles';
 import { MasterCouponDetailModal } from '../../componentHeavy/masterCouponDetailModal';
-import { IMasterCouponDetails } from './types';
+import { IMasterCouponQrDetails } from './types';
 import { AuthContext } from '../../../contexts/authContext';
 
 
@@ -13,9 +13,9 @@ export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
 
   const { user } = useContext(AuthContext)
 
-  const [activeMasterCoupon, setActiveMasterCoupon] = useState<IMasterCouponDetails | null>(null)
+  const [activeMasterCoupon, setActiveMasterCoupon] = useState<IMasterCouponQrDetails | null>(null)
 
-  function handlePressableCoupon(item: IMasterCouponDetails) {
+  function handlePressableCoupon(item: IMasterCouponQrDetails) {
     setActiveMasterCoupon(item)
   }
 
@@ -35,7 +35,7 @@ export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
       <BottomContainer>
 
         <FlatListComponent
-          data={route.params.master_coupons as IMasterCouponDetails[]}
+          data={route.params.master_coupons as IMasterCouponQrDetails[]}
           keyExtractor={item => item.key}
           renderItem={({ item }) => {
             return (
