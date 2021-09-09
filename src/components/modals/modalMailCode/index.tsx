@@ -4,12 +4,12 @@ import React, { useContext, useImperativeHandle, useState } from 'react';
 import { Alert, Keyboard } from 'react-native';
 import { Cursor, RenderCellOptions, useClearByFocusCell } from 'react-native-confirmation-code-field';
 import { AuthContext } from '../../../contexts/authContext';
-import { RegisterUserExecutor } from '../../../services/users/register_user_executor';
+import { LoginService } from '../../../services/loginService';
 import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
 import { ModalComponent } from '../../component/modal';
 import { Spinner } from '../../component/spinner';
 import { ButtonConfirm, CodeBoxes, Container, Input, Title, TitleDescription, TouchableReset } from './styles';
-import { IModalCodeProps, IModalRef } from './types';
+import { IModalCodeProps, IModalRef } from './@types';
 
 
 export const ModalMailCode = React.forwardRef<IModalRef, IModalCodeProps>((propsComp, ref) => {
@@ -120,7 +120,7 @@ export const ModalMailCode = React.forwardRef<IModalRef, IModalCodeProps>((props
             const user = propsComp.registerParams
 
             if (user) {
-              await RegisterUserExecutor._sendRegisterCode(user?.mail)
+              await LoginService._sendRegisterCode(user?.mail)
 
               NotificationsFlash.SuccessfullySentCode()
             }

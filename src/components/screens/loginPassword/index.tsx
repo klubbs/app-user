@@ -2,8 +2,8 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useContext, useState } from 'react';
 import { Keyboard } from 'react-native';
 import { AuthContext } from '../../../contexts/authContext';
-import { LoginService } from '../../../services/login_service';
-import { StoreService } from '../../../services/store_services';
+import { LoginService, LoginServiceExceptions } from '../../../services/loginService';
+import { StoreService } from '../../../services/storeServices';
 import { LoginPasswordScreenProps } from '../../../settings/@types/IAppStackParams';
 import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
 import { Spinner } from '../../component/spinner';
@@ -38,7 +38,7 @@ export const LoginPasswordScreen: React.FC<LoginPasswordScreenProps> = ({ route 
     } catch (error: any) {
       console.log(error)
 
-      LoginService.catchLogin(error)
+      LoginServiceExceptions.catchLogin(error)
     } finally {
       setLoading(false)
     }

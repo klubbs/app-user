@@ -8,7 +8,7 @@ import { SafeArea, tabStyle, HeaderContainer } from './styles';
 import colors from '../../../../assets/constants/colors';
 import { ButtonCreateCoupon } from '../../component/buttonCoupon';
 import { ModalComponent } from '../../component/modal';
-import { ModalSaveCoupon } from '../../componentHeavy/modalAddCoupon';
+import { ModalSaveCoupon } from '../../modals/modalAddCoupon';
 
 const Tab = createMaterialTopTabNavigator();
 

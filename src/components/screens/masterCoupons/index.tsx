@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { FlatList } from 'react-native';
 import colors from '../../../../assets/constants/colors';
 import { CouponIcon } from '../../../../assets/icons/coupon_icon';
-import { InfluencerService } from '../../../services/influencer_service';
+import { InfluencerService } from '../../../services/influencerService';
 import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
 import { BagTab } from '../../component/bagTab';
 import { CardMasterCoupons } from '../../componentHeavy/cardMasterCoupons';
 import { ICardMasterCoupons } from '../../componentHeavy/cardMasterCoupons/@types';
-import { ModalInfluencerLinkCoupons } from '../../componentHeavy/modalInfluencerLinkCoupons';
+import { ModalInfluencerCouponLink } from '../../modals/modalInfluencerCouponLink';
 
 import { Wrapper, FlatComponent, Header, ContainerItems, Items, CouponWrapper, ItemsSubtitle } from './styles';
 
@@ -77,7 +77,7 @@ export const MasterCoupons: React.FC = () => {
         keyExtractor={(item, index) => item.masterCouponId}
         renderItem={({ item }) => <CardMasterCoupons data={item} />}
       />
-      <ModalInfluencerLinkCoupons visible={showLinkModal} onClose={() => setShowLinkModal(false)} />
+      <ModalInfluencerCouponLink visible={showLinkModal} onClose={() => setShowLinkModal(false)} />
       <BagTabCoupons />
     </Wrapper >
   );

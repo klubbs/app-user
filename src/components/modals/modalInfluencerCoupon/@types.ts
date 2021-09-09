@@ -1,4 +1,4 @@
-export type IInfluencerCouponsResponse = {
+export type GetAllCouponsByInfluencerResponse = {
   coupon_id: string,
   coupon_code: string,
   influencer_id: string,

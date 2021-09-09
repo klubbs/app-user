@@ -3,7 +3,7 @@ import COLORS from '../../../../assets/constants/colors'
 
 
 export const Wrapper = styled.TouchableOpacity.attrs(() => ({
-  activeOpacity: 0.8
+  activeOpacity: 0.85
 }))`
   width: 90%;
   height: 60px;
@@ -13,7 +13,7 @@ export const Wrapper = styled.TouchableOpacity.attrs(() => ({
   align-items: center;
 `
 
-export const Title = styled.Text`
-  color:${COLORS.COLOR_WHITE};
+export const Title = styled.Text<{ color: string }>`
+  color:${props => props.color ?? COLORS.COLOR_WHITE}
   font-size:18px;
   font-family:'Nunito_Bold';`

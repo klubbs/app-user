@@ -1,9 +1,9 @@
 import React, { ReactElement, useState, useEffect, useRef } from 'react';
-import { CouponService } from '../../../services/coupon_service';
-import { ICouponsItem } from './interfaces';
+import { CouponService } from '../../../services/couponService';
+import { ICouponsItem } from './@types';
 import { Container, FlatComponent } from './styles';
 import { useNavigation } from '@react-navigation/native';
-import { CouponWallet } from '../../component/couponWallet'
+import { Coupon } from '../../component/coupon'
 
 const NUM_COLUMNS = 2
 
@@ -65,7 +65,7 @@ export const CouponsWalletTab: React.FC = () => {
         {item.empty && <Container empty={item.empty} />}
 
         {!item.empty &&
-          <CouponWallet
+          <Coupon
             data={item}
             onPress={() => navigation.navigate('CouponQr', {
               wallet_id: item.wallet_id,

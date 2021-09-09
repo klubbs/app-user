@@ -101,3 +101,19 @@ export const InfluencerEmpty = styled(MotiView).attrs(props => ({
   bottom:20%;
   background-color: ${colors.COLOR_WHITE_40};
 `
+
+export const CouponSubtitleIcon = styled(CouponIcon).attrs(props => ({
+  width: 10,
+  height: 10,
+  fill: colors.COLOR_BLACK80
+}))``
+
+
+export const CouponDefaultImage = styled(CouponIcon).attrs(props => ({
+  width: 20,
+  height: 20,
+  fill: colors.COLOR_WHITE
+}))`
+  left: 35%;
+  top: 35%;
+`

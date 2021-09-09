@@ -1,7 +1,7 @@
 import React, { useState, createContext, useMemo } from 'react';
-import { IRestaurants } from '../components/componentHeavy/restaurantsList/interfaces';
+import { IRestaurants } from '../components/componentHeavy/restaurantsList/@types';
 import { ICategoryResponse } from '../services/@types/IStore';
-import { StoreService } from '../services/store_services';
+import { StoreService } from '../services/storeServices';
 import { AsyncStorageUtils } from '../utils/asyncStorageUtils';
 import { format4TwoColumns } from '../utils/formatersUtils';
 

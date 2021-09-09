@@ -3,7 +3,7 @@ import * as Haptic from 'expo-haptics';
 import React, { useEffect, useState } from 'react';
 import { Keyboard } from 'react-native';
 import { CollOffsLogoSvg } from '../../../../assets/images/colloffs-logo';
-import { LoginService } from '../../../services/login_service';
+import { LoginService, LoginServiceExceptions } from '../../../services/loginService';
 import { IError } from '../../../settings/@types/IResponses';
 import { Spinner } from '../../component/spinner';
 import { ContainerBottom, ContainerTop, Description, EnterButton, ExplainText, MailInput, Title, Wrapper, WrapperImage, WrapperKeyboard } from './styles';
@@ -40,7 +40,7 @@ const LoginWelcome: React.FC = () => {
 
       Haptic.notificationAsync(Haptic.NotificationFeedbackType.Warning)
 
-      LoginService.catchValidateMail(error as IError)
+      LoginServiceExceptions.catchValidateMail(error as IError)
 
     } finally {
       setLoading(false)

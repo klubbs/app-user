@@ -4,7 +4,7 @@ import colors from '../../../../assets/constants/colors';
 import { CouponQrScreenProps } from '../../../settings/@types/IAppStackParams';
 import { EstablishmentCardQr } from '../../component/cardEstablishmentQr';
 import { BottomContainer, TopContainer, Wrapper, FlatListComponent, AnimatedWrapper, BackgroundCoupon, SubtitleHelp, ImageEstablishment } from './styles';
-import { MasterCouponDetailModal } from '../../componentHeavy/masterCouponDetailModal';
+import { ModalMasterCouponDetailQr } from '../../modals/ModalMasterCouponDetailQr';
 import { IMasterCouponQrDetails } from './types';
 import { AuthContext } from '../../../contexts/authContext';
 
@@ -52,7 +52,7 @@ export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
         <SubtitleHelp>Atente o estabelecimento de validar seu cupom</SubtitleHelp>
       </BottomContainer>
       {
-        activeMasterCoupon && <MasterCouponDetailModal data={activeMasterCoupon} onClose={() => setActiveMasterCoupon(null)} />
+        activeMasterCoupon && <ModalMasterCouponDetailQr data={activeMasterCoupon} onClose={() => setActiveMasterCoupon(null)} />
       }
     </Wrapper>
   );

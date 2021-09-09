@@ -5,12 +5,12 @@ import { useAnimationState, MotiView } from 'moti'
 import { Wrapper, Divider, Container, Code, Copy } from './styles';
 import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
 import { Pressable } from 'react-native';
-import { IInfluencerCouponsResponse } from './@types';
-import { InfluencerService } from '../../../services/influencer_service';
+import { GetAllCouponsByInfluencerResponse } from './@types';
+import { InfluencerService } from '../../../services/influencerService';
 
 export const ModalInfluencerCoupons: React.FC<{ onClose: any, visible: boolean }> = (props) => {
 
-  const [coupons, setCoupons] = useState<IInfluencerCouponsResponse[]>([])
+  const [coupons, setCoupons] = useState<GetAllCouponsByInfluencerResponse[]>([])
   const [activeCopy, setActiveCopy] = useState<any>({})
 
   const modalizeRef = useRef<Modalize>()
@@ -64,7 +64,7 @@ export const ModalInfluencerCoupons: React.FC<{ onClose: any, visible: boolean }
     setTimeout(() => setActiveCopy({ ...activeCopy, [id]: false }), 1000)
   }
 
-  function ItemRender(item: IInfluencerCouponsResponse): JSX.Element {
+  function ItemRender(item: GetAllCouponsByInfluencerResponse): JSX.Element {
     return (
       <Container key={item.coupon_id}>
         <Code>{item.coupon_code}</Code>

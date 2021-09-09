@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { MenuItem } from '../../component/menuItem';
 import { Wrapper, Container, SocialMediaContainer, SocialMediaSubtitle, Instagram, Twitter } from './styles';
-import { ModalSaveCoupon } from '../../componentHeavy/modalAddCoupon';
-import { ModalInfluencerCoupons } from '../../componentHeavy/modalInfluencerCoupon';
+import { ModalSaveCoupon } from '../../modals/modalAddCoupon';
+import { ModalInfluencerCoupons } from '../../modals/modalInfluencerCoupon';
 import { useNavigation } from '@react-navigation/native';
 
 export const Influencer: React.FC = () => {

@@ -17,7 +17,7 @@ api.interceptors.request.use(async (config) => {
 
   const token = await AsyncStorageUtils.getTokenInStorage();
 
-  config.baseURL = "http://192.168.1.101:5001/"
+  config.baseURL = "http://192.168.1.110:5001/"
 
   if (token !== null) {
     config.headers.Authorization = `Bearer ${token}`;
@@ -41,7 +41,7 @@ api.interceptors.response.use((response) => response,
     const message = error.response.data?.message
 
     if (statusCode === 401) {
-      EventEmitter.emit('LOGOUT_USER', {})
+      EventEmitter.emit('LOGOUT_USER', { })
     }
 
     if (statusCode === 500) {

@@ -3,12 +3,12 @@ import { Keyboard } from 'react-native'
 import { ModalComponent } from '../../component/modal';
 import { Input, Container, Wrapper } from './styles';
 import { ButtonStorage } from '../../component/buttonStorage';
-import { CouponService } from '../../../services/coupon_service';
+import { CouponService } from '../../../services/couponService';
 import { Spinner } from '../../component/spinner';
 import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
 import { SubtitleSaveCouponImage } from '../../../../assets/images/subtitle_save_coupon';
 import { IError } from '../../../settings/@types/IResponses';
-import { InfluencerService } from '../../../services/influencer_service';
+import { InfluencerService } from '../../../services/influencerService';
 
 export const ModalSaveCoupon: React.FC<{ visible: boolean, onClose: any, isInfluencer: boolean }> = (props) => {
 

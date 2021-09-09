@@ -4,13 +4,12 @@ import * as Haptic from 'expo-haptics';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Alert, Keyboard, ScrollView, useWindowDimensions } from 'react-native';
 import { default as COLORS } from '../../../../assets/constants/colors';
-import { RegisterUserExecutor } from '../../../services/users/register_user_executor';
-import { UserDomain } from '../../../services/users/user_domain';
+import { LoginService } from '../../../services/loginService';
 import { RegisterScreenProps } from '../../../settings/@types/IAppStackParams';
 import { maskPhone } from '../../../utils/masksUtils';
 import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
-import { ModalMailCode } from '../../componentHeavy/modalMailCode';
-import { IModalRef } from '../../componentHeavy/modalMailCode/types';
+import { ModalMailCode } from '../../modals/modalMailCode';
+import { IModalRef } from '../../modals/modalMailCode/@types';
 import { Confirm, containerBackButton, ContainerBottom, ContainerMiddle, ContainerScrool, ContainerTop, Description, Name, Password, Phone, Title, Wrapper, WrapperKeyboard } from './styles';
 
 
@@ -83,9 +82,9 @@ const Register: React.FC<RegisterScreenProps> = ({ route }) => {
 
       try {
 
-        UserDomain.validateUserCreateUser(route.params.mail, password, name, phone)
+        LoginService.validateUserCreateUser(route.params.mail, password, name, phone)
 
-        RegisterUserExecutor._sendRegisterCode(route.params.mail)
+        LoginService._sendRegisterCode(route.params.mail)
 
         modalCodeRef.current?.openModal()
 

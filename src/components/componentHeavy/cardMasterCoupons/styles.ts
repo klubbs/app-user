@@ -1,4 +1,3 @@
-import { color } from 'react-native-reanimated';
 import styled from 'styled-components/native';
 import colors from '../../../../assets/constants/colors';
 import { MotiView } from 'moti'
@@ -72,15 +71,6 @@ export const ValidAt = styled.Text`
   color:${colors.COLOR_BLACK40};
   font-size:11px;
   font-family:'Nunito_Bold';
-`
-
-export const Selection = styled.TouchableOpacity<{ active: boolean }>`
-  background-color: ${props => !props.active ? colors.COLOR_BLACK10 : colors.COLOR_YELLOW};
-  border-color: ${colors.COLOR_BLACK5};
-  border-width: 2px;
-  width: 22px;
-  height:22px;
-  border-radius: 11px;
 `
 
 export const WrapperOff = styled.View`

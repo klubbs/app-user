@@ -1,34 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import colors from '../../../../assets/constants/colors';
 import { ShopIcon } from '../../../../assets/icons/shop_icon';
 import { ICardMasterCoupons } from './@types';
-import * as Haptic from 'expo-haptics';
-
-import { WrapperCard, TopContainer, BottomContainer, Name, Selection, Rules, WrapperOff, Off, SeeMore, SubBottomContainer, ValidAt } from './styles';
+import { WrapperCard, TopContainer, BottomContainer, Name, Rules, WrapperOff, Off, SeeMore, SubBottomContainer, ValidAt } from './styles';
+import { Selector } from '../../component/selector';
 
 export const CardMasterCoupons: React.FC<{ data: ICardMasterCoupons }> = ({ data }) => {
-
-  const [selected, setSelected] = useState<boolean>(false)
-
-
-  function handlePress() {
-
-    Haptic.impactAsync(Haptic.ImpactFeedbackStyle.Light)
-
-    const isSelected = !selected;
-
-    setSelected(isSelected);
-
-    data.onPress(isSelected, data.masterCouponId)
-
-  }
 
   return (
     <WrapperCard key={data.masterCouponId}>
       <TopContainer>
         <ShopIcon width={15} height={15} fill={colors.COLOR_YELLOW} />
         <Name>{data?.establishment}</Name>
-        <Selection onPress={handlePress} active={selected} />
+        <Selector
+          onPress={(isSelected: boolean) => data.onPress(isSelected, data.masterCouponId)}
+        />
       </TopContainer>
 
       <BottomContainer>

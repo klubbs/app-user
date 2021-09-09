@@ -1,6 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { LoginService } from '../services/login_service';
-import { RegisterUserExecutor } from '../services/users/register_user_executor';
+import { LoginService } from '../services/loginService';
 import { ILoginResponse } from '../services/@types/IUser';
 import { AsyncStorageUtils } from '../utils/asyncStorageUtils';
 
@@ -53,7 +52,7 @@ const AuthProvider: React.FC = ({ children }) => {
 
   const register = async (mail: string, password: string, name: string, phone: string, code: string) => {
 
-    await RegisterUserExecutor.createUserAsync(mail, password, name, phone, code)
+    await LoginService.createUserAsync(mail, password, name, phone, code)
 
     setIsRegister(true)
 

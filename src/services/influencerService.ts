@@ -1,4 +1,4 @@
-import { IInfluencerCouponsResponse } from "../components/componentHeavy/modalInfluencerCoupon/@types";
+import { GetAllCouponsByInfluencerResponse } from "../components/modals/modalInfluencerCoupon/@types";
 import { IError, IResponseMessage } from "../settings/@types/IResponses";
 import api from "../settings/services/api";
 import * as Haptic from 'expo-haptics';
@@ -35,9 +35,9 @@ export class InfluencerService {
     }
   }
 
-  static async getAllCouponsByInfluencer(): Promise<IInfluencerCouponsResponse[]> {
+  static async getAllCouponsByInfluencer(): Promise<GetAllCouponsByInfluencerResponse[]> {
 
-    const { data } = await api.get<IResponseMessage<IInfluencerCouponsResponse[]>>('influencer/coupons');
+    const { data } = await api.get<IResponseMessage<GetAllCouponsByInfluencerResponse[]>>('influencer/coupons');
 
     return data.message;
   }
