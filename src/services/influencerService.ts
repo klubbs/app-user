@@ -49,4 +49,14 @@ export class InfluencerService {
     return data.message
   }
 
+  static async linkCouponInMasterCoupon(masterCoupons: string[], couponId: string) {
+
+    //TODO: Ajustar API para receber vários cupons master
+
+    masterCoupons.forEach(async element => {
+      await api.post('influencer/coupon/link', { master_coupon_id: element, coupon_id: couponId })
+    });
+
+  }
+
 }

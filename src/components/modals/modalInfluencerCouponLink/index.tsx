@@ -33,7 +33,7 @@ export const ModalInfluencerCouponLink: React.FC<IModalInfluencerLinkCoupons> = 
     const contract = {
       coupon_id: item.coupon_id,
       coupon_code: item.coupon_code,
-      influencer_image: '',//TODO
+      influencer_image: '',//TODO Adicionar imagem do influencer aqui
       master_coupons: item.master_coupons
     }
 
@@ -55,6 +55,16 @@ export const ModalInfluencerCouponLink: React.FC<IModalInfluencerLinkCoupons> = 
         }
       </>
     )
+  }
+
+  async function handleCouponLink() {
+
+    try {
+      await InfluencerService.linkCouponInMasterCoupon([], selectedCoupon);
+    } catch (error) {
+      //TODO: Validar erros
+    }
+
   }
 
 
