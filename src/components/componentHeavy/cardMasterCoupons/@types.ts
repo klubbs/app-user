@@ -1,8 +1,3 @@
-export type ICardMasterCoupons = {
-  masterCouponId: string
-  validAt: number
-  establishment: string
-  off: number
-  description: string
-  onPress: (value: boolean, masterCouponId: string) => void
-}
+import { GetAllMasterCouponsResponse } from "../../../services/@types/IStore"
+
+export type ICardMasterCouponsProps = GetAllMasterCouponsResponse & { onPress: (value: boolean, masterCouponId: string, establishmentId: string) => void }

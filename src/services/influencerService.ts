@@ -11,6 +11,33 @@ export class InfluencerService {
     await api.post('influencer/coupons', { code: code })
   }
 
+  static async getAllCouponsByInfluencer(): Promise<GetAllCouponsByInfluencerResponse[]> {
+
+    const { data } = await api.get<IResponseMessage<GetAllCouponsByInfluencerResponse[]>>('influencer/coupons');
+
+    return data.message;
+  }
+
+  static async getAllMasterCoupons(): Promise<GetAllMasterCouponsResponse[]> {
+
+    const { data } = await api.get<IResponseMessage<GetAllMasterCouponsResponse[]>>('stores/coupon');
+
+    return data.message
+  }
+
+  static async linkCouponInMasterCoupon(masterCoupons: string[], couponId: string): Promise<void> {
+
+    //TODO: Ajustar API para receber vários cupons master
+    for await (const element of masterCoupons) {
+      await api.post('influencer/coupons/link', { master_coupon_id: element, coupon_id: couponId })
+    }
+  }
+
+}
+
+
+export class InfluencerServiceException {
+
   static catchCreateNewCoupon(error: IError) {
 
     const actual = error.error[0].field.toUpperCase();
@@ -35,27 +62,24 @@ export class InfluencerService {
     }
   }
 
-  static async getAllCouponsByInfluencer(): Promise<GetAllCouponsByInfluencerResponse[]> {
+  static catchLinkCoupon(error: IError) {
+    const actual = error.error[0].field.toUpperCase();
 
-    const { data } = await api.get<IResponseMessage<GetAllCouponsByInfluencerResponse[]>>('influencer/coupons');
 
-    return data.message;
-  }
+    if (error.statusCode === 412) {
 
-  static async getAllMasterCoupons(): Promise<GetAllMasterCouponsResponse[]> {
+      Haptic.impactAsync(Haptic.ImpactFeedbackStyle.Light)
 
-    const { data } = await api.get<IResponseMessage<GetAllMasterCouponsResponse[]>>('stores/coupon');
+      if (actual === "MASTER COUPON") {
+        NotificationsFlash.CustomMessage('Desculpe', "Um dos cupons que você escolheu não esta mais válido", 'NEUTRAL')
+        return;
+      } else if (actual === "COUPON") {
+        NotificationsFlash.CustomMessage('Estranho', "O seu cupom não existe mais 🤔", 'NEUTRAL')
+      }
 
-    return data.message
-  }
-
-  static async linkCouponInMasterCoupon(masterCoupons: string[], couponId: string) {
-
-    //TODO: Ajustar API para receber vários cupons master
-
-    masterCoupons.forEach(async element => {
-      await api.post('influencer/coupon/link', { master_coupon_id: element, coupon_id: couponId })
-    });
+    } else {
+      NotificationsFlash.SomeoneBullshit()
+    }
 
   }
 

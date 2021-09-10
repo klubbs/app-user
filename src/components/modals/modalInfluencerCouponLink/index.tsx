@@ -1,17 +1,22 @@
-import React, { useRef, useEffect, ReactElement, useState } from 'react';
+import React, { useEffect, ReactElement, useState } from 'react';
 import { Modal, View } from 'react-native';
 import { Coupon } from '../../component/coupon';
 import { format4TwoColumns } from '../../../utils/formatersUtils'
-import { Wrapper, Header, BottomTab, Empty, Container, SelectorCoupon, ConfirmButton, FlatItems } from './styles';
-import { IInfluencerLinkCoupon, IModalInfluencerLinkCoupons } from './@types';
-import { InfluencerService } from '../../../services/influencerService';
-import { ISelectorRefs } from '../../component/selector/@types';
+import { Wrapper, Header, BottomTab, Empty, Container, SelectorCoupon, ConfirmButton, FlatItems, HeaderDisabled, SubtitleDisabled } from './styles';
+import { ICouponInfluencer, IModalInfluencerCouponLinkProps } from './@types';
+import { InfluencerService, InfluencerServiceException } from '../../../services/influencerService';
+import { Spinner } from '../../component/spinner';
+import { IError } from '../../../settings/@types/IResponses';
+import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 
-export const ModalInfluencerCouponLink: React.FC<IModalInfluencerLinkCoupons> = (props) => {
+export const ModalInfluencerCouponLink: React.FC<IModalInfluencerCouponLinkProps> = (props) => {
 
-  const [coupons, setCoupons] = useState<IInfluencerLinkCoupon[]>([])
+  const [coupons, setCoupons] = useState<ICouponInfluencer[]>([])
   const [selectedCoupon, setSelectedCoupon] = useState('')
+  const [disableSave, setDisableSave] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
 
@@ -21,35 +26,78 @@ export const ModalInfluencerCouponLink: React.FC<IModalInfluencerLinkCoupons> = 
 
         setCoupons(response)
 
-      } catch (error) { }
+      } catch (error) { NotificationsFlash.SpillCoffee() }
     })()
 
   }, [])
 
-  function RenderCoupon({ item, index }: { item: IInfluencerLinkCoupon, index: number }): ReactElement {
+
+  async function handleCouponLink() {
+
+    if (props.masterCoupons?.length <= 0) {
+      return
+    }
+
+    try {
+
+      setLoading(true)
+
+      await InfluencerService.linkCouponInMasterCoupon(props.masterCoupons.map(i => i.masterCouponId), selectedCoupon);
+
+      props.onClose();
+
+    } catch (error) {
+      InfluencerServiceException.catchLinkCoupon(error as IError)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  function handleSelectCoupon(coupon: ICouponInfluencer) {
+
+    setSelectedCoupon(coupon.coupon_id)
+    setDisableSave(false)
+
+    coupon.master_coupons.forEach(element => {
+
+      props.masterCoupons.forEach(subElement => {
+
+        if (element.establishment_id === subElement.establishmentId) {
+          setDisableSave(true)
+          return;
+        }
+
+      })
+
+    });
+
+
+  }
+
+  function RenderCoupon({ item, index }: { item: ICouponInfluencer, index: number }): ReactElement {
 
     const isToggleSelected = selectedCoupon === item.coupon_id;
-
-    const contract = {
-      coupon_id: item.coupon_id,
-      coupon_code: item.coupon_code,
-      influencer_image: '',//TODO Adicionar imagem do influencer aqui
-      master_coupons: item.master_coupons
-    }
 
     return (
       <>
         {item?.empty && <Empty />}
-
         {
           !item?.empty &&
           <Container>
-            <SelectorCoupon onPress={() => setSelectedCoupon(item.coupon_id)} toggle={isToggleSelected} />
+            <SelectorCoupon toggle={isToggleSelected} onPress={() => handleSelectCoupon(item)} />
             <Coupon
+              data={
+                {
+                  coupon_id: item.coupon_id,
+                  coupon_code: item.coupon_code,
+                  influencer_image: '', //TODO Adicionar imagem do influencer aqui
+                  master_coupons: item.master_coupons
+                }
+              }
               toggle={true}
               isActiveByToggle={isToggleSelected}
-              data={contract}
-              onPress={() => { }}
+              onPress={() => handleSelectCoupon(item)}
+
             />
           </Container>
         }
@@ -57,36 +105,30 @@ export const ModalInfluencerCouponLink: React.FC<IModalInfluencerLinkCoupons> = 
     )
   }
 
-  async function handleCouponLink() {
-
-    try {
-      await InfluencerService.linkCouponInMasterCoupon([], selectedCoupon);
-    } catch (error) {
-      //TODO: Validar erros
-    }
-
-  }
-
-
   return (
     <Modal
       animationType={'slide'}
       presentationStyle={'formSheet'}
-      onRequestClose={props.onClose}
+      onRequestClose={() => props.onClose}
       visible={props.visible}
     >
       <Wrapper>
         <Header>Selecione seu cupom</Header>
         <FlatItems
           data={format4TwoColumns(coupons, 2)}
-          renderItem={({ item, index }) => RenderCoupon({ item: item as IInfluencerLinkCoupon, index: index })}
+          renderItem={({ item, index }) => RenderCoupon({ item: item as ICouponInfluencer, index: index })}
         />
 
-        <BottomTab>
-          <ConfirmButton onPress={() => { }} />
+        <BottomTab disabled={disableSave}>
+
+          {disableSave && <HeaderDisabled>Cupom não permitido para adicionar</HeaderDisabled>}
+          {disableSave && <SubtitleDisabled>Cada cupom seu só pode armazenar ao menos um cupom de cada restaurante</SubtitleDisabled>}
+
+          {!disableSave && selectedCoupon !== '' && <ConfirmButton onPress={handleCouponLink} />}
         </BottomTab>
 
       </Wrapper>
+      <Spinner loading={loading} />
     </Modal >
   );
 }

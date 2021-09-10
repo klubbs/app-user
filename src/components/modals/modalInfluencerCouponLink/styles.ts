@@ -18,16 +18,26 @@ export const Header = styled.Text`
   font-family:'Nunito_Bold';
 `
 
-export const BottomTab = styled.View`
-  background-color: ${colors.COLOR_YELLOW};
+export const HeaderDisabled = styled.Text`
+  color:${colors.COLOR_WHITE};
+  margin-bottom: 5px;
+  font-size:12px;
+  font-family:'Nunito_Bold';
+`
+export const SubtitleDisabled = styled.Text`
+  color:${colors.COLOR_WHITE_80};
+  font-size:10px;
+  font-family:'Nunito_Regular';
+`
+
+export const BottomTab = styled.View<{ disabled: boolean }>`
+  background-color: ${props => props.disabled ? colors.COLOR_RED : colors.COLOR_YELLOW};
   height: 100px;
   width: 110%;
-  flex-direction: row;
-  padding-right:10%;
-  padding-top:2%;
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: center;
   border-width: 3px;
-  border-top-color: ${colors.COLOR_YELLOW_RATING};
+  border-top-color: ${props => props.disabled ? colors.COLOR_WHITE_20 : colors.COLOR_YELLOW_RATING};
   position: absolute;
   bottom: 0;
 `
@@ -51,9 +61,9 @@ export const SelectorCoupon = styled(Selector)`
 `
 
 export const ConfirmButton = styled(Button).attrs(props => ({
-  text: 'Vincular',
+  text: 'Adicionar',
   textColor: colors.COLOR_YELLOW,
-  styleContainer: { backgroundColor: colors.COLOR_WHITE, width: 150, height: 50 }
+  styleContainer: { backgroundColor: colors.COLOR_WHITE, width: 150, height: 50, alignSelf: 'flex-end', marginRight: '10%', marginBottom: '5%' }
 }))``
 
 export const FlatItems = styled.FlatList.attrs(props => ({

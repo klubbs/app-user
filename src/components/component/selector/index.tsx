@@ -26,6 +26,9 @@ export const SelectorForwardRef: ForwardRefRenderFunction<ISelectorRefs, ISelect
 
   function handlePress() {
 
+    if (props.toggle !== undefined && selected)
+      return
+
     Haptic.impactAsync(Haptic.ImpactFeedbackStyle.Light)
 
     setSelected(!selected);

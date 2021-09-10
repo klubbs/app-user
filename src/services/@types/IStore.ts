@@ -26,5 +26,6 @@ export type GetAllMasterCouponsResponse = {
   master_coupon_valid_at: number,
   master_coupon_description: string,
   establishment_name: string,
-  establishment_image: string
+  establishment_image: string,
+  establishment_id: string
 }

@@ -8,7 +8,7 @@ import { Spinner } from '../../component/spinner';
 import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
 import { SubtitleSaveCouponImage } from '../../../../assets/images/subtitle_save_coupon';
 import { IError } from '../../../settings/@types/IResponses';
-import { InfluencerService } from '../../../services/influencerService';
+import { InfluencerService, InfluencerServiceException } from '../../../services/influencerService';
 
 export const ModalSaveCoupon: React.FC<{ visible: boolean, onClose: any, isInfluencer: boolean }> = (props) => {
 
@@ -58,7 +58,7 @@ export const ModalSaveCoupon: React.FC<{ visible: boolean, onClose: any, isInflu
       onCloseHandler();
     } catch (error) {
 
-      InfluencerService.catchCreateNewCoupon(error as IError)
+      InfluencerServiceException.catchCreateNewCoupon(error as IError)
 
     } finally {
       setLoading(false)

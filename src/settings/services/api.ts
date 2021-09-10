@@ -41,7 +41,8 @@ api.interceptors.response.use((response) => response,
     const message = error.response.data?.message
 
     if (statusCode === 401) {
-      EventEmitter.emit('LOGOUT_USER', { })
+      console.warn(error)
+      EventEmitter.emit('LOGOUT_USER', {})
     }
 
     if (statusCode === 500) {

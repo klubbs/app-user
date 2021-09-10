@@ -6,49 +6,67 @@ import { InfluencerService } from '../../../services/influencerService';
 import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
 import { BagTab } from '../../component/bagTab';
 import { CardMasterCoupons } from '../../componentHeavy/cardMasterCoupons';
-import { ICardMasterCoupons } from '../../componentHeavy/cardMasterCoupons/@types';
+import { ICardMasterCouponsProps } from '../../componentHeavy/cardMasterCoupons/@types';
 import { ModalInfluencerCouponLink } from '../../modals/modalInfluencerCouponLink';
 
-import { Wrapper, FlatComponent, Header, ContainerItems, Items, CouponWrapper, ItemsSubtitle } from './styles';
+import { Wrapper, Header, ContainerItems, Items, CouponWrapper, ItemsSubtitle } from './styles';
+
+export const useModalState = (initialState: boolean) => {
+  const [modalVisible, setModalVisible] = useState(initialState);
+  const [forceModalVisible, setForceModalVisible] = useState(false);
+
+  const setModal = (modalState: boolean) => {
+    // tyring to open "already open" modal
+    if (modalState && modalVisible) {
+      setForceModalVisible(true);
+    }
+    setModalVisible(modalState);
+  };
+
+  useEffect(() => {
+    if (forceModalVisible && modalVisible) {
+      setModalVisible(false);
+    }
+    if (forceModalVisible && !modalVisible) {
+      setForceModalVisible(false);
+      setModalVisible(true);
+    }
+  }, [forceModalVisible, modalVisible]);
+
+  return [modalVisible, setModal];
+};
 
 export const MasterCoupons: React.FC = () => {
 
-  const [masterCoupons, setMasterCoupons] = useState<ICardMasterCoupons[]>([])
-  const [selectedMasters, setSelectedMaster] = useState<string[]>([])
+  const [masterCoupons, setMasterCoupons] = useState<ICardMasterCouponsProps[]>([])
+
+  const [selectedMasters, setSelectedMaster] = useState<{ masterCouponId: string, establishmentId: string }[]>([])
+
   const [showLinkModal, setShowLinkModal] = useState(false)
+
+  // const [modalVisible, setModalVisible] = useModalState(false)
+
 
   useEffect(() => {
 
-    getMasterCoupons();
+    (async function getMasterCoupons() {
+
+      try {
+        var response = await InfluencerService.getAllMasterCoupons();
+
+        setMasterCoupons(response.map(element => { return { ...element, onPress: handleCouponSelect } }));
+
+      } catch (error) {
+        NotificationsFlash.SpillCoffee();
+      }
+    })()
 
   }, [])
 
-  async function getMasterCoupons() {
-    try {
-      var response = await InfluencerService.getAllMasterCoupons();
-
-      var tmp: ICardMasterCoupons[] = response.map(item => {
-        return {
-          masterCouponId: item.master_coupon_id,
-          validAt: item.master_coupon_valid_at,
-          description: item.master_coupon_description,
-          establishment: item.establishment_name,
-          off: item.master_coupon_off,
-          onPress: handleCouponSelect
-        }
-      })
-
-      setMasterCoupons(tmp);
-
-    } catch (error) {
-      NotificationsFlash.SpillCoffee();
-    }
-  }
-
-  function handleCouponSelect(isSelected: boolean, masteCouponId: string) {
+  function handleCouponSelect(isSelected: boolean, masteCouponId: string, establishmentId: string) {
     isSelected
-      ? setSelectedMaster([...selectedMasters, masteCouponId])
-      : setSelectedMaster(selectedMasters.filter(item => item !== masteCouponId));
+      ? setSelectedMaster([...selectedMasters, { masterCouponId: masteCouponId, establishmentId: establishmentId }])
+      : setSelectedMaster(selectedMasters.filter(item => item.masterCouponId !== masteCouponId));
   }
 
   function BagTabCoupons(): JSX.Element {
@@ -74,10 +92,10 @@ export const MasterCoupons: React.FC = () => {
         stickyHeaderIndices={[0]}
         ListHeaderComponent={() => <Header>Disponíveis</Header>}
         showsVerticalScrollIndicator={false}
-        keyExtractor={(item, index) => item.masterCouponId}
+        keyExtractor={(item, index) => item.master_coupon_id}
         renderItem={({ item }) => <CardMasterCoupons data={item} />}
       />
-      <ModalInfluencerCouponLink visible={showLinkModal} onClose={() => setShowLinkModal(false)} />
+      {showLinkModal && <ModalInfluencerCouponLink masterCoupons={selectedMasters} visible={showLinkModal} onClose={() => setShowLinkModal(false)} />}
       <BagTabCoupons />
     </Wrapper >
   );

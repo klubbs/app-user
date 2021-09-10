@@ -7,6 +7,7 @@ export type GetAllCouponsByInfluencerResponse = {
     master_coupon_description: string,
     master_coupon_valid_at: number,
     establishment_name: string,
-    establishment_image: string
+    establishment_image: string,
+    establishment_id: string
   }[]
 }
