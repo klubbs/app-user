@@ -109,7 +109,7 @@ export const ModalInfluencerCouponLink: React.FC<IModalInfluencerCouponLinkProps
     <Modal
       animationType={'slide'}
       presentationStyle={'formSheet'}
-      onRequestClose={() => props.onClose}
+      onRequestClose={() => props.onClose()}
       visible={props.visible}
     >
       <Wrapper>
