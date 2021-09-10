@@ -85,7 +85,7 @@ export const CouponsWalletTab: React.FC = () => {
       refreshing={refresh}
       data={format4TwoColumns(walletCoupom)}
       numColumns={NUM_COLUMNS}
-      keyExtractor={(item: ICouponsItem) => item.wallet_id}
+      keyExtractor={(item: ICouponsItem, index: number) => item.wallet_id}
       renderItem={({ item }) => RenderCoupon(item as ICouponsItem)}
     />
   );

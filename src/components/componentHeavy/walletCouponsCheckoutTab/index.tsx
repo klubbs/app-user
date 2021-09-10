@@ -60,7 +60,7 @@ export const CouponsCheckout: React.FC = () => {
       data={checkouts}
       onRefresh={() => onRefreshCheckouts()}
       refreshing={refresh}
-      keyExtractor={item => `${item.checkout_id}`}
+      keyExtractor={(item: ICouponCheckoutItem, index: number) => item.checkout_id}
       ListEmptyComponent={({ item }) => <NothingTransactionSubtitle>Nenhuma transação ainda</NothingTransactionSubtitle>}
       renderItem={({ item }) =>
         <CouponsCheckoutItems data={item} />

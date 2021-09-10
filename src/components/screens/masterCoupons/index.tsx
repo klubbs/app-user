@@ -42,9 +42,7 @@ export const MasterCoupons: React.FC = () => {
 
   const [selectedMasters, setSelectedMaster] = useState<{ masterCouponId: string, establishmentId: string }[]>([])
 
-  const [showLinkModal, setShowLinkModal] = useState(false)
-
-  // const [modalVisible, setModalVisible] = useModalState(false)
+  const [modalLinkShow, setModalLinkShow] = useState(false)
 
 
   useEffect(() => {
@@ -72,7 +70,7 @@ export const MasterCoupons: React.FC = () => {
   function BagTabCoupons(): JSX.Element {
 
     return (
-      <BagTab show={selectedMasters.length > 0} onPress={() => setShowLinkModal(true)}>
+      <BagTab show={selectedMasters.length > 0} onPress={() => setModalLinkShow(true)}>
         <ContainerItems>
           <ItemsSubtitle>Definir meu cupom</ItemsSubtitle>
           <CouponWrapper>
@@ -95,7 +93,7 @@ export const MasterCoupons: React.FC = () => {
         keyExtractor={(item, index) => item.master_coupon_id}
         renderItem={({ item }) => <CardMasterCoupons data={item} />}
       />
-      {showLinkModal && <ModalInfluencerCouponLink masterCoupons={selectedMasters} visible={showLinkModal} onClose={() => setShowLinkModal(false)} />}
+      {modalLinkShow && <ModalInfluencerCouponLink masterCoupons={selectedMasters} visible={modalLinkShow} onClose={() => setModalLinkShow(false)} />}
       <BagTabCoupons />
     </Wrapper >
   );

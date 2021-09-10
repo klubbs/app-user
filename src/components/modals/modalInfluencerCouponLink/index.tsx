@@ -116,6 +116,7 @@ export const ModalInfluencerCouponLink: React.FC<IModalInfluencerCouponLinkProps
         <Header>Selecione seu cupom</Header>
         <FlatItems
           data={format4TwoColumns(coupons, 2)}
+          keyExtractor={(item: any, index: number) => item.coupon_id}
           renderItem={({ item, index }) => RenderCoupon({ item: item as ICouponInfluencer, index: index })}
         />
 
