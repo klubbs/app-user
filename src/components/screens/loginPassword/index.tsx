@@ -6,7 +6,7 @@ import { LoginService, LoginServiceExceptions } from '../../../services/loginSer
 import { StoreService } from '../../../services/storeServices';
 import { LoginPasswordScreenProps } from '../../../settings/@types/IAppStackParams';
 import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
-import { Spinner } from '../../component/spinner';
+import { Spinner } from '../../components/spinner';
 import { ContainerBottom, ContainerTop, Description, EnterButton, PasswordInput, Title, Wrapper, WrapperKeyboard } from './styles';
 
 

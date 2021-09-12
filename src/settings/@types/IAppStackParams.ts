@@ -1,5 +1,5 @@
 import { StackScreenProps } from "@react-navigation/stack";
-import { IRestaurants } from "../../components/componentHeavy/restaurantsList/@types";
+import { IRestaurants } from "../../components/organisms/restaurantsList/@types";
 import { IWalletCouponsReponse } from "../../services/@types/ICoupon";
 
 export type IAppStackParams = {

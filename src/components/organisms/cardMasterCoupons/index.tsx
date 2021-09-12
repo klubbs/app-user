@@ -3,7 +3,7 @@ import colors from '../../../../assets/constants/colors';
 import { ShopIcon } from '../../../../assets/icons/shop_icon';
 import { ICardMasterCouponsProps } from './@types';
 import { WrapperCard, TopContainer, BottomContainer, Name, Rules, WrapperOff, Off, SeeMore, SubBottomContainer, ValidAt } from './styles';
-import { Selector } from '../../component/selector';
+import { Selector } from '../../components/selector';
 
 export const CardMasterCoupons: React.FC<{ data: ICardMasterCouponsProps }> = ({ data }) => {
 

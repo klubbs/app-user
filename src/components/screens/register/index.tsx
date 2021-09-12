@@ -8,8 +8,8 @@ import { LoginService } from '../../../services/loginService';
 import { RegisterScreenProps } from '../../../settings/@types/IAppStackParams';
 import { maskPhone } from '../../../utils/masksUtils';
 import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
-import { ModalMailCode } from '../../modals/modalMailCode';
-import { IModalRef } from '../../modals/modalMailCode/@types';
+import { MailCodeModal } from '../../screensModals/mailCodeModal';
+import { IModalRef } from '../../screensModals/mailCodeModal/@types';
 import { Confirm, containerBackButton, ContainerBottom, ContainerMiddle, ContainerScrool, ContainerTop, Description, Name, Password, Phone, Title, Wrapper, WrapperKeyboard } from './styles';
 
 
@@ -194,7 +194,7 @@ const Register: React.FC<RegisterScreenProps> = ({ route }) => {
         <RenderButtons />
       </WrapperKeyboard>
 
-      <ModalMailCode ref={modalCodeRef} action={'REGISTER'} registerParams={{ mail: route.params.mail, phone, password, name }} />
+      <MailCodeModal ref={modalCodeRef} action={'REGISTER'} registerParams={{ mail: route.params.mail, phone, password, name }} />
 
     </Wrapper>
   );

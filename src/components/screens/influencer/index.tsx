@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { MenuItem } from '../../component/menuItem';
+import { MenuItem } from '../../components/menuItem';
 import { Wrapper, Container, SocialMediaContainer, SocialMediaSubtitle, Instagram, Twitter } from './styles';
-import { ModalSaveCoupon } from '../../modals/modalAddCoupon';
-import { ModalInfluencerCoupons } from '../../modals/modalInfluencerCoupon';
+import { AddCouponModal } from '../../screensModals/addCouponModal';
+import { InfluencerCouponsModal } from '../../screensModals/influencerCouponsModal';
 import { useNavigation } from '@react-navigation/native';
 
 export const Influencer: React.FC = () => {
@@ -25,8 +25,8 @@ export const Influencer: React.FC = () => {
         <MenuItem key={'2'} icon={'archive'} text={'Meus cupons'} description={'Cupons criados por você'} cb={() => setVisibleInfluencerCoupon(true)} />
         <MenuItem key={'3'} icon={'divide'} text={'Cupons disponíveis'} description={'Cupons de estabelecimentos'} cb={() => navigation.navigate('MasterCoupons')} />
       </Container>
-      <ModalInfluencerCoupons visible={visibleInfluencerCoupon} onClose={() => setVisibleInfluencerCoupon(false)} />
-      <ModalSaveCoupon visible={visibleCreateCoupon} onClose={() => setVisibleCreateCoupon(false)} isInfluencer={true} />
+      <InfluencerCouponsModal visible={visibleInfluencerCoupon} onClose={() => setVisibleInfluencerCoupon(false)} />
+      <AddCouponModal visible={visibleCreateCoupon} onClose={() => setVisibleCreateCoupon(false)} isInfluencer={true} />
     </Wrapper>
   );
 }

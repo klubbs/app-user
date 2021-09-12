@@ -1,14 +1,14 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../../contexts/authContext';
-import { CouponsCheckout } from '../../componentHeavy/walletCouponsCheckoutTab';
-import { CouponsEmpty } from '../../componentHeavy/logoutCoupons';
-import { CouponsWalletTab } from '../../componentHeavy/walletCouponsTab';
+import { CouponsCheckout } from '../../organisms/walletCouponsCheckoutTab';
+import { CouponsEmpty } from '../../organisms/logoutCoupons';
+import { CouponsWalletTab } from '../../organisms/walletCouponsTab';
 import { SafeArea, tabStyle, HeaderContainer } from './styles';
 import colors from '../../../../assets/constants/colors';
-import { ButtonCreateCoupon } from '../../component/buttonCoupon';
-import { ModalComponent } from '../../component/modal';
-import { ModalSaveCoupon } from '../../modals/modalAddCoupon';
+import { ButtonCreateCoupon } from '../../components/buttonCoupon';
+import { ModalComponent } from '../../components/modal';
+import { AddCouponModal } from '../../screensModals/addCouponModal';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -24,7 +24,7 @@ export const Coupons: React.FC = () => {
 
   return (
     <SafeArea>
-      <ModalSaveCoupon visible={visibleModal} onClose={() => setVisibleModal(false)} isInfluencer={false} />
+      <AddCouponModal visible={visibleModal} onClose={() => setVisibleModal(false)} isInfluencer={false} />
       <HeaderContainer>
         <ButtonCreateCoupon onPress={() => setVisibleModal(true)} />
       </HeaderContainer>

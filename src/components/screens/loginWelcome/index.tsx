@@ -5,7 +5,7 @@ import { Keyboard } from 'react-native';
 import { CollOffsLogoSvg } from '../../../../assets/images/colloffs-logo';
 import { LoginService, LoginServiceExceptions } from '../../../services/loginService';
 import { IError } from '../../../settings/@types/IResponses';
-import { Spinner } from '../../component/spinner';
+import { Spinner } from '../../components/spinner';
 import { ContainerBottom, ContainerTop, Description, EnterButton, ExplainText, MailInput, Title, Wrapper, WrapperImage, WrapperKeyboard } from './styles';
 
 const LoginWelcome: React.FC = () => {

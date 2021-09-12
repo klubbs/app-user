@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { Keyboard } from 'react-native'
-import { ModalComponent } from '../../component/modal';
+import { ModalComponent } from '../../components/modal';
 import { Input, Container, Wrapper } from './styles';
-import { ButtonStorage } from '../../component/buttonStorage';
+import { ButtonStorage } from '../../components/buttonStorage';
 import { CouponService } from '../../../services/couponService';
-import { Spinner } from '../../component/spinner';
+import { Spinner } from '../../components/spinner';
 import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
 import { SubtitleSaveCouponImage } from '../../../../assets/images/subtitle_save_coupon';
 import { IError } from '../../../settings/@types/IResponses';
 import { InfluencerService, InfluencerServiceException } from '../../../services/influencerService';
 
-export const ModalSaveCoupon: React.FC<{ visible: boolean, onClose: any, isInfluencer: boolean }> = (props) => {
+export const AddCouponModal: React.FC<{ visible: boolean, onClose: any, isInfluencer: boolean }> = (props) => {
 
   const [value, setValue] = useState("")
   const [loading, setLoading] = useState(false)

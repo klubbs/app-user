@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 import COLORS from '../../../../assets/constants/colors';
-import Button from '../../component/button';
+import Button from '../../components/button';
 
 export const Wrapper = styled.SafeAreaView`
   flex:1;

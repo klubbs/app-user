@@ -3,7 +3,7 @@ import { CouponService } from '../../../services/couponService';
 import { ICouponsItem } from './@types';
 import { Container, FlatComponent } from './styles';
 import { useNavigation } from '@react-navigation/native';
-import { Coupon } from '../../component/coupon'
+import { Coupon } from '../../components/coupon'
 
 const NUM_COLUMNS = 2
 

@@ -1,9 +1,9 @@
-import { GetAllCouponsByInfluencerResponse } from "../modalInfluencerCoupon/@types"
+import { GetAllCouponsByInfluencerResponse } from "../influencerCouponsModal/@types"
 
 export type IModalInfluencerCouponLinkProps = {
   masterCoupons: { masterCouponId: string, establishmentId: string }[],
   visible: boolean,
-  onClose: () => void
+  onClose: (cancel?: boolean) => void
 }
 
 export type ICouponInfluencer = GetAllCouponsByInfluencerResponse & { empty?: boolean }

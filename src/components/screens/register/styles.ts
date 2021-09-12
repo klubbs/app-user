@@ -2,7 +2,7 @@ import { Dimensions, TouchableOpacity, View } from 'react-native';
 import styled from 'styled-components/native';
 import COLORS from '../../../../assets/constants/colors';
 import { BEHAVIOR_KEYBOARD } from '../../../utils/behaviorUtils';
-import Input from '../../component/inputLine';
+import Input from '../../components/inputLine';
 
 const WIDTH_DIMENSION = Dimensions.get('window').width
 

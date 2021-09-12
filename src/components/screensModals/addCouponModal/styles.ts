@@ -1,7 +1,7 @@
 import { CodeField } from 'react-native-confirmation-code-field';
 import styled from 'styled-components/native';
 import colors from '../../../../assets/constants/colors';
-import InputLine from '../../component/inputLine';
+import InputLine from '../../components/inputLine';
 
 export const InputCoupon = styled(CodeField).attrs(props => ({
   cellCount: 10,

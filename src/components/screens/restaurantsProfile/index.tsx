@@ -5,8 +5,8 @@ import COLORS from '../../../../assets/constants/colors';
 import { ClockIcon } from '../../../../assets/icons/clockIcon';
 import { CouponIcon } from '../../../../assets/icons/coupon_icon';
 import { RestaurantScreenProps } from "../../../settings/@types/IAppStackParams";
-import UberButton from "../../component/buttonUber";
-import { RestaurantInteractions } from '../../componentHeavy/restaurantInteractions';
+import UberButton from "../../components/buttonUber";
+import { RestaurantInteractions } from '../../organisms/restaurantInteractions';
 import { BlocksWrapper, About, AboutSubtitle, BlocksValue, ContainerGetCoupon, ContainerImage, Container, IconsContainer, GetCouponText, RestaurantCategory, RestaurantName, Wrapper, NameContainer } from './styles';
 
 

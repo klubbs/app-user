@@ -5,7 +5,7 @@ import { Alert, FlatList, TouchableOpacity } from 'react-native';
 import CongratulationsCoupons from '../../../../assets/animations/congratulations_coupons.json';
 import { AuthContext } from '../../../contexts/authContext';
 import { IMenu } from './types';
-import { MenuItem } from '../../component/menuItem';
+import { MenuItem } from '../../components/menuItem';
 import {
   ContainerImage,
   ContainerPoints,

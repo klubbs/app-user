@@ -1,4 +1,4 @@
-import { GetAllCouponsByInfluencerResponse } from "../components/modals/modalInfluencerCoupon/@types";
+import { GetAllCouponsByInfluencerResponse } from "../components/screensModals/influencerCouponsModal/@types";
 import { IError, IResponseMessage } from "../settings/@types/IResponses";
 import api from "../settings/services/api";
 import * as Haptic from 'expo-haptics';

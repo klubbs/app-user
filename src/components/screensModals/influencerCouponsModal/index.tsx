@@ -8,7 +8,7 @@ import { Pressable } from 'react-native';
 import { GetAllCouponsByInfluencerResponse } from './@types';
 import { InfluencerService } from '../../../services/influencerService';
 
-export const ModalInfluencerCoupons: React.FC<{ onClose: any, visible: boolean }> = (props) => {
+export const InfluencerCouponsModal: React.FC<{ onClose: any, visible: boolean }> = (props) => {
 
   const [coupons, setCoupons] = useState<GetAllCouponsByInfluencerResponse[]>([])
   const [activeCopy, setActiveCopy] = useState<any>({})
@@ -59,7 +59,7 @@ export const ModalInfluencerCoupons: React.FC<{ onClose: any, visible: boolean }
 
     NotificationsFlash.CustomMessage('', 'Cupom copiado para área de transferência', 'NEUTRAL')
 
-    Clipboard.default.setString(code)
+    Clipboard.setString(code)
 
     setTimeout(() => setActiveCopy({ ...activeCopy, [id]: false }), 1000)
   }

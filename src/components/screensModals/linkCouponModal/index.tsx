@@ -1,17 +1,17 @@
 import React, { useEffect, ReactElement, useState } from 'react';
-import { Modal, View } from 'react-native';
-import { Coupon } from '../../component/coupon';
+import { Modal } from 'react-native';
+import { Coupon } from '../../components/coupon';
 import { format4TwoColumns } from '../../../utils/formatersUtils'
-import { Wrapper, Header, BottomTab, Empty, Container, SelectorCoupon, ConfirmButton, FlatItems, HeaderDisabled, SubtitleDisabled } from './styles';
+import { Wrapper, Header, BottomTab, Empty, Container, SelectorCoupon, ConfirmButton, FlatItems, HeaderDisabled, SubtitleDisabled, Cancel, HeaderContainer } from './styles';
 import { ICouponInfluencer, IModalInfluencerCouponLinkProps } from './@types';
 import { InfluencerService, InfluencerServiceException } from '../../../services/influencerService';
-import { Spinner } from '../../component/spinner';
+import { Spinner } from '../../components/spinner';
 import { IError } from '../../../settings/@types/IResponses';
 import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 
-export const ModalInfluencerCouponLink: React.FC<IModalInfluencerCouponLinkProps> = (props) => {
+export const LinkCouponModal: React.FC<IModalInfluencerCouponLinkProps> = (props) => {
 
   const [coupons, setCoupons] = useState<ICouponInfluencer[]>([])
   const [selectedCoupon, setSelectedCoupon] = useState('')
@@ -43,6 +43,8 @@ export const ModalInfluencerCouponLink: React.FC<IModalInfluencerCouponLinkProps
       setLoading(true)
 
       await InfluencerService.linkCouponInMasterCoupon(props.masterCoupons.map(i => i.masterCouponId), selectedCoupon);
+
+      NotificationsFlash.CustomMessage('Adicionado', 'Ofertas dos estabelecimentos adicionado ao cupom', 'SUCCESS')
 
       props.onClose();
 
@@ -109,11 +111,15 @@ export const ModalInfluencerCouponLink: React.FC<IModalInfluencerCouponLinkProps
     <Modal
       animationType={'slide'}
       presentationStyle={'formSheet'}
-      onRequestClose={() => props.onClose()}
       visible={props.visible}
     >
       <Wrapper>
-        <Header>Selecione seu cupom</Header>
+        <HeaderContainer>
+          <TouchableWithoutFeedback onPress={() => props.onClose(true)}>
+            <Cancel>Cancelar</Cancel>
+          </TouchableWithoutFeedback>
+          <Header>Selecione seu cupom</Header>
+        </HeaderContainer>
         <FlatItems
           data={format4TwoColumns(coupons, 2)}
           keyExtractor={(item: any, index: number) => item.coupon_id}

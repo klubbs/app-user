@@ -2,9 +2,9 @@ import React, { useState, useContext } from 'react';
 import QRCode from 'react-native-qrcode-svg';
 import colors from '../../../../assets/constants/colors';
 import { CouponQrScreenProps } from '../../../settings/@types/IAppStackParams';
-import { EstablishmentCardQr } from '../../component/cardEstablishmentQr';
+import { EstablishmentCardQr } from '../../components/cardEstablishmentQr';
 import { BottomContainer, TopContainer, Wrapper, FlatListComponent, AnimatedWrapper, BackgroundCoupon, SubtitleHelp, ImageEstablishment } from './styles';
-import { ModalMasterCouponDetailQr } from '../../modals/ModalMasterCouponDetailQr';
+import { MasterCouponDetailQrModal } from '../../screensModals/masterCouponDetailQrModal';
 import { IMasterCouponQrDetails } from './types';
 import { AuthContext } from '../../../contexts/authContext';
 
@@ -52,7 +52,7 @@ export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
         <SubtitleHelp>Atente o estabelecimento de validar seu cupom</SubtitleHelp>
       </BottomContainer>
       {
-        activeMasterCoupon && <ModalMasterCouponDetailQr data={activeMasterCoupon} onClose={() => setActiveMasterCoupon(null)} />
+        activeMasterCoupon && <MasterCouponDetailQrModal data={activeMasterCoupon} onClose={() => setActiveMasterCoupon(null)} />
       }
     </Wrapper>
   );

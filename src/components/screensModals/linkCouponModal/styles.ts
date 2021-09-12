@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import colors from '../../../../assets/constants/colors';
-import Button from '../../component/button';
-import { Selector } from '../../component/selector';
+import Button from '../../components/button';
+import { Selector } from '../../components/selector';
 
 
 export const Wrapper = styled.View`
@@ -15,7 +15,14 @@ export const Wrapper = styled.View`
 export const Header = styled.Text`
   color:${colors.COLOR_BLACK80};
   font-size:12px;
+  margin-left: 25%;
   font-family:'Nunito_Bold';
+`
+
+export const Cancel = styled.Text`
+  color:${colors.COLOR_BLACK50};
+  font-size:12px;
+  font-family:'Nunito_Regular';
 `
 
 export const HeaderDisabled = styled.Text`
@@ -56,6 +63,13 @@ export const Container = styled.View`
   margin-top: 20px;
 `
 
+export const HeaderContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 100%;
+`
+
 export const SelectorCoupon = styled(Selector)`
   margin-bottom: 10px;
 `
@@ -69,5 +83,6 @@ export const ConfirmButton = styled(Button).attrs(props => ({
 export const FlatItems = styled.FlatList.attrs(props => ({
   numColumns: 2,
   style: { marginTop: '20%' },
-  contentContainerStyle: { width: '100%' }
+  showsVerticalScrollIndicator: false,
+  contentContainerStyle: { width: '100%', paddingBottom: '25%' }
 }))``

@@ -2,7 +2,7 @@ import { TouchableOpacity } from 'react-native';
 import { CodeField } from 'react-native-confirmation-code-field';
 import styled from 'styled-components/native';
 import COLORS from '../../../../assets/constants/colors';
-import Button from '../../component/button'
+import Button from '../../components/button'
 
 export const Input = styled.Text`
     width: 60px;
