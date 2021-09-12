@@ -30,8 +30,17 @@ export const CardEstablishment: React.FC<ICardEstablishmentProps> = ({ data, onP
 
   const { getCategoriesDescription } = useContext(HomeContext)
 
-  //TODO: Recuperar somente a hora
-  const isOpen = data.closedAt < new Date().ToUnixEpoch() && data.openedAt < new Date().ToUnixEpoch()
+
+  function isOpen(): boolean {
+
+    const actualHour = new Date().getHours();
+
+    const closedHour = data.closedAt.ToDateFormat().getHours();
+
+    const openHour = data.openedAt.ToDateFormat().getHours();
+
+    return openHour < actualHour && actualHour < closedHour
+  }
 
   Animated.timing(opacityAnim, {
     toValue: 1,
@@ -40,11 +49,8 @@ export const CardEstablishment: React.FC<ICardEstablishmentProps> = ({ data, onP
   }).start();
 
   return (
-
     <Wrapper disabled={!onPress} onPress={onPress}>
-
-
-      <OpenIndicator open={isOpen} style={{ opacity: opacityAnim }} />
+      <OpenIndicator open={isOpen()} style={{ opacity: opacityAnim }} />
 
       {
         data.image &&
@@ -54,12 +60,9 @@ export const CardEstablishment: React.FC<ICardEstablishmentProps> = ({ data, onP
           source={{ uri: data.image }}
         />
       }
-
       {
         !data.image &&
-        <EmptyImage
-          key={'empty'}
-        >
+        <EmptyImage key={'empty'}>
           <EmptyShopIcon />
         </EmptyImage>
 

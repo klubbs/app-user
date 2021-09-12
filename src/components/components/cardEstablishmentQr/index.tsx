@@ -14,9 +14,11 @@ export const EstablishmentCardQr: React.FC<{ image: string, off: number } & Pres
     >
       <EstablishmentImage
         source={{
-          uri: 'https://www.infomoney.com.br/wp-content/uploads/2019/06/dominos-pizza-1.jpg?fit=900%2C450&quality=50&strip=all'
+          uri: props.image
         }}
       />
+
+      {/* TODO: Empty Image */}
 
       <ContainerToolbar>
         <ContainerOff>
