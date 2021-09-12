@@ -80,7 +80,7 @@ export const CardEstablishment: React.FC<ICardEstablishmentProps> = ({ data, onP
         <ContainerToolbar>
           <ContainerOff>
             <CouponIcon fill={colors.COLOR_WHITE_80} width={15} height={13} />
-            <OffCoupon>12%</OffCoupon>
+            <OffCoupon>XX%</OffCoupon>
           </ContainerOff>
 
           <ContainerDistance>

@@ -62,7 +62,7 @@ const Restaurant: React.FC<RestaurantScreenProps> = ({ route }) => {
           </BlocksWrapper>
           <BlocksWrapper>
             <CouponIcon width={14} height={14} fill={colors.COLOR_YELLOW_RATING} />
-            <BlocksValue>10%</BlocksValue>
+            <BlocksValue>XX%</BlocksValue>
           </BlocksWrapper>
           {/* <UberButton onPress={handleUberCall} /> */}
         </IconsContainer>

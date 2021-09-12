@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import * as Haptic from 'expo-haptics';
 import React, { useEffect, useState } from 'react';
 import { Keyboard } from 'react-native';
-import { CollOffsLogoSvg } from '../../../../assets/images/colloffs-logo';
+import { KlubbsLogo } from '../../../../assets/images/klubbsLogo';
 import { LoginService, LoginServiceExceptions } from '../../../services/loginService';
 import { IError } from '../../../settings/@types/IResponses';
 import { Spinner } from '../../components/spinner';
@@ -55,14 +55,14 @@ const LoginWelcome: React.FC = () => {
         {
           !keyboardOpen && <ContainerTop>
             <Title>Vamos lá!</Title>
-            <Description>Entre na sua conta{"\n"}e tenha toda a experiência!</Description>
+            <Description>Entre na sua conta{"\n"}e aproveite!</Description>
           </ContainerTop>
         }
 
         <ContainerBottom>
 
           <WrapperImage>
-            <CollOffsLogoSvg />
+            <KlubbsLogo />
           </WrapperImage>
 
           <MailInput

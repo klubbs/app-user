@@ -56,6 +56,7 @@ export const WrapperImage = styled.ImageBackground.attrs(props => ({
   source: require('../../../../assets/images/welcome-login-icons.png')
 }))`
   width:95%;
+  height:40%;
   justify-content: center;
   align-items:center;
   margin-bottom:25%;

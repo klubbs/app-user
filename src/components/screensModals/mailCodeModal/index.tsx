@@ -14,6 +14,8 @@ import { IModalCodeProps, IModalRef } from './@types';
 
 export const MailCodeModal = React.forwardRef<IModalRef, IModalCodeProps>((propsComp, ref) => {
 
+  const navigation = useNavigation()
+
   const [code, setCode] = useState("")
   const [visible, setVisible] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -21,8 +23,6 @@ export const MailCodeModal = React.forwardRef<IModalRef, IModalCodeProps>((props
   const { register, signIn } = useContext(AuthContext)
 
   const [props, getCellOnLayoutHandler] = useClearByFocusCell({ value: code, setValue: setCode });
-
-  const navigation = useNavigation()
 
   useImperativeHandle(ref, () => ({ hideModal, openModal }));
 
@@ -44,11 +44,19 @@ export const MailCodeModal = React.forwardRef<IModalRef, IModalCodeProps>((props
 
   const openModal = () => {
 
-    const user = propsComp.registerParams
-
-    if (user) {
+    try {
       setVisible(true)
+
+      if (propsComp.action === 'REGISTER') {
+        if (propsComp.registerParams) {
+          LoginService._sendRegisterCode(propsComp.registerParams.mail as string)
+        }
+      }
+
+    } catch (error) {
+      NotificationsFlash.SpillCoffee()
     }
+
   }
 
   const hideModal = () => {
@@ -72,7 +80,7 @@ export const MailCodeModal = React.forwardRef<IModalRef, IModalCodeProps>((props
     propsComp.action === 'REGISTER' ? await createUser() : null
   }
 
-  const createUser = async () => {
+  async function createUser() {
 
     try {
       setLoading(true)

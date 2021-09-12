@@ -107,6 +107,7 @@ class LoginServiceExceptions {
       NotificationsFlash.IncorrectPassword()
     }
   }
+
 }
 
 export { LoginService, LoginServiceExceptions }

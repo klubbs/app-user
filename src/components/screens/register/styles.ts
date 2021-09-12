@@ -59,7 +59,7 @@ export const Confirm = styled(TouchableOpacity).attrs(() => ({
 `
 
 export const Name = styled(Input).attrs(props => ({
-  placeHolder: "Nome",
+  placeHolder: "Como quer ser chamado?",
   keyboardType: "default",
   contentType: "name"
 })) <{ error: any }>`

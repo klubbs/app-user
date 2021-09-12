@@ -7,7 +7,7 @@ const AdvertisementsBanner: React.FC = () => {
 
   const refSlider = useRef(null)
 
-  const [items, setItems] = useState([{ index: 1 }, { index: 2 }])
+  const [items, setItems] = useState([{ index: 1 }])
 
   const animatedStyle = (index: number, animatedValue: any, carouselProps: any) => {
     return {
@@ -28,7 +28,7 @@ const AdvertisementsBanner: React.FC = () => {
         renderItem={(item, index) => {
           return (
             <ContainerImage >
-              <Image source={{ uri: "https://i.pinimg.com/564x/43/e7/04/43e704a78d20ce2bd20eaca44f389868.jpg" }} />
+              <Image source={require('../../../../assets/images/freeCoupons.png')} />
             </ContainerImage>
           )
         }}

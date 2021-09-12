@@ -114,7 +114,16 @@ const Profile: React.FC = () => {
         contentContainerStyle={{ height: '30%' }}
         keyExtractor={item => item.key}
         ListFooterComponent={() => MenuFooterItem()}
-        renderItem={({ item }) => <MenuItem key={item.key} icon={item.icon} description={item.description} text={item.text} cb={item.cb} logged={item.logged} />}
+        renderItem={({ item }) => {
+
+          if (item.key === "3" && user?.influencer_id === null) {
+            return <></>
+          }
+
+          return (
+            <MenuItem key={item.key} icon={item.icon} description={item.description} text={item.text} cb={item.cb} logged={item.logged} />
+          )
+        }}
       />
 
 
