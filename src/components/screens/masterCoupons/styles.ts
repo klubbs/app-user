@@ -49,3 +49,23 @@ export const FlatComponent = styled.FlatList.attrs(props => ({
   horizontal: true,
   showsHorizontalScrollIndicator: false
 }))``
+
+export const ContainerNotFound = styled.View`
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  height:150px
+`
+
+export const EmptyTitle = styled.Text`
+  color:${colors.COLOR_SECUNDARY_BLACK};
+  font-size: 12px;
+  font-family:'Nunito_Bold';
+  margin-top:10px;
+`
+
+export const EmptySubtitle = styled.Text`
+  color:${colors.COLOR_BLACK50};
+  font-size: 12px;
+  font-family:'Nunito_Regular';
+`

@@ -28,8 +28,8 @@ export const CardMasterCoupons: React.FC<{ data: ICardMasterCouponsProps }> = ({
       </BottomContainer>
       <SubBottomContainer>
         <ValidAt>Válido até { }
-          {data?.master_coupon_valid_at.ToDateFormat().getDate()}&#xB7;
-          {data?.master_coupon_valid_at.ToDateFormat().getMonth()}&#xB7;
+          {data?.master_coupon_valid_at.ToDateFormat().getDate()}-
+          {data?.master_coupon_valid_at.ToDateFormat().getMonth()}-
           {data?.master_coupon_valid_at.ToDateFormat().getFullYear().toString().slice(2, 4)}
         </ValidAt>
       </SubBottomContainer>

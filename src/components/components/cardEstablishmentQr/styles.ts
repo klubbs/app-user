@@ -1,5 +1,8 @@
 import styled from 'styled-components/native'
 import COLORS from '../../../../assets/constants/colors'
+import { ShopIcon } from '../../../../assets/icons/shop_icon';
+
+
 export const Wrapper = styled.Pressable`
     width: 150px;
     margin: 10px;
@@ -15,6 +18,22 @@ export const EstablishmentImage = styled.Image`
     width: 100%;
     bottom:5px;
 `
+
+export const EmptyImage = styled.View`
+    align-items:center;
+    justify-content:center;
+    flex:2;
+    border-radius: 10px;
+    width: 100%;
+    bottom:5px;
+    background-color: ${COLORS.COLOR_BLACK10};
+`
+
+export const EmptyIcon = styled(ShopIcon).attrs(props => ({
+  fill: COLORS.COLOR_BLACK40,
+  width: 40,
+  height: 40
+}))``
 
 export const ContainerToolbar = styled.View`
   flex:0.65;

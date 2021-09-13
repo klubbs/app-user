@@ -4,21 +4,23 @@ import colors from '../../../../assets/constants/colors';
 import { CouponIcon } from '../../../../assets/icons/coupon_icon';
 import { InfoIcon } from '../../../../assets/icons/info_icon';
 import { MarkerTimeIcon } from '../../../../assets/icons/marker-time_icon';
+import { ShopIcon } from '../../../../assets/icons/shop_icon';
 
-import { Wrapper, EstablishmentImage, ContainerToolbar, ContainerOff, OffCoupon } from './styles';
+import { Wrapper, EstablishmentImage, ContainerToolbar, ContainerOff, OffCoupon, EmptyImage, EmptyIcon } from './styles';
 
 export const EstablishmentCardQr: React.FC<{ image: string, off: number } & PressableProps> = (props) => {
   return (
     <Wrapper
       onLongPress={props.onLongPress}
     >
-      <EstablishmentImage
-        source={{
-          uri: props.image
-        }}
-      />
 
-      {/* TODO: Empty Image */}
+      {props.image && <EstablishmentImage source={{ uri: props.image }} />}
+
+      {!props.image &&
+        <EmptyImage>
+          <EmptyIcon />
+        </EmptyImage>
+      }
 
       <ContainerToolbar>
         <ContainerOff>

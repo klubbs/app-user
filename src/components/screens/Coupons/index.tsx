@@ -5,9 +5,7 @@ import { CouponsCheckout } from '../../organisms/walletCouponsCheckoutTab';
 import { CouponsEmpty } from '../../organisms/logoutCoupons';
 import { CouponsWalletTab } from '../../organisms/walletCouponsTab';
 import { SafeArea, tabStyle, HeaderContainer } from './styles';
-import colors from '../../../../assets/constants/colors';
 import { ButtonCreateCoupon } from '../../components/buttonCoupon';
-import { ModalComponent } from '../../components/modal';
 import { AddCouponModal } from '../../screensModals/addCouponModal';
 
 const Tab = createMaterialTopTabNavigator();

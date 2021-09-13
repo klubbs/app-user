@@ -4,6 +4,7 @@ import { ICouponsItem } from './@types';
 import { Container, FlatComponent } from './styles';
 import { useNavigation } from '@react-navigation/native';
 import { Coupon } from '../../components/coupon'
+import { format4TwoColumns } from '../../../utils/formatersUtils';
 
 const NUM_COLUMNS = 2
 
@@ -43,21 +44,6 @@ export const CouponsWalletTab: React.FC = () => {
     setRefresh(false)
   }
 
-  function format4TwoColumns(data: ICouponsItem[]): ICouponsItem[] {
-
-    const rowsNumber = Math.floor(data.length / NUM_COLUMNS)
-
-    let numItemsLastRow = data.length - (rowsNumber * NUM_COLUMNS)
-
-    while (numItemsLastRow !== NUM_COLUMNS && numItemsLastRow !== 0) {
-      data.push({ wallet_id: `blank-${numItemsLastRow}`, empty: true, coupon_code: '', coupon_id: '', influencer_image: '', master_coupons: [] })
-
-      numItemsLastRow++;
-    }
-
-    return data;
-  }
-
   function RenderCoupon(item: ICouponsItem): ReactElement {
 
     return (
@@ -83,7 +69,7 @@ export const CouponsWalletTab: React.FC = () => {
     <FlatComponent
       onRefresh={() => getAllWalletCoupons()}
       refreshing={refresh}
-      data={format4TwoColumns(walletCoupom)}
+      data={format4TwoColumns(walletCoupom, 2)}
       numColumns={NUM_COLUMNS}
       keyExtractor={(item: ICouponsItem, index: number) => item.wallet_id}
       renderItem={({ item }) => RenderCoupon(item as ICouponsItem)}

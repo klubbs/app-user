@@ -14,4 +14,4 @@ const Spinner: React.FC<{ loading: boolean }> = (props) => {
   );
 }
 
-export { Spinner };
+export { Spinner, SpinnerLoading };

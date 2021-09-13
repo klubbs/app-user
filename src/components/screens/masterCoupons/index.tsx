@@ -9,14 +9,27 @@ import { CardMasterCoupons } from '../../organisms/cardMasterCoupons';
 import { ICardMasterCouponsProps } from '../../organisms/cardMasterCoupons/@types';
 import { LinkCouponModal } from '../../screensModals/linkCouponModal';
 import { useNavigation } from '@react-navigation/native';
+import { NotFoundRestaurants } from '../../../../assets/images/notFoundRestaurants';
 
-import { Wrapper, Header, ContainerItems, Items, CouponWrapper, ItemsSubtitle } from './styles';
+import {
+  Wrapper,
+  Header,
+  ContainerItems,
+  Items,
+  CouponWrapper,
+  ItemsSubtitle,
+  ContainerNotFound,
+  EmptyTitle, EmptySubtitle
+} from './styles';
+import { SpinnerLoading } from '../../components/spinner';
+
 
 export const MasterCoupons: React.FC = () => {
 
   const [masterCoupons, setMasterCoupons] = useState<ICardMasterCouponsProps[]>([])
   const [selectedMasters, setSelectedMaster] = useState<{ masterCouponId: string, establishmentId: string }[]>([])
   const [modalLinkShow, setModalLinkShow] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const navigation = useNavigation();
 
@@ -25,9 +38,12 @@ export const MasterCoupons: React.FC = () => {
     (async function getMasterCoupons() {
 
       try {
+        setLoading(true)
+
         var response = await InfluencerService.getAllMasterCoupons();
         setMasterCoupons(response.map(element => { return { ...element, onPress: handleCouponSelect } }));
 
+        setLoading(false)
       } catch (error) {
         NotificationsFlash.SpillCoffee();
       }
@@ -63,6 +79,20 @@ export const MasterCoupons: React.FC = () => {
     setModalLinkShow(false);
   }
 
+  function LoadingOrEmptyRender() {
+    return (
+      <>
+        {loading && <SpinnerLoading />}
+        {!loading &&
+          <ContainerNotFound>
+            <NotFoundRestaurants height={160} />
+            <EmptyTitle>Puxa</EmptyTitle>
+            <EmptySubtitle>Nenhum estabelecimento liberou cupom ainda</EmptySubtitle>
+          </ContainerNotFound>
+        }
+      </>
+    )
+  }
 
 
   return (
@@ -70,9 +100,10 @@ export const MasterCoupons: React.FC = () => {
       <FlatList
         data={masterCoupons}
         stickyHeaderIndices={[0]}
-        ListHeaderComponent={() => <Header>Disponíveis</Header>}
         showsVerticalScrollIndicator={false}
         keyExtractor={(item, index) => item.master_coupon_id}
+        ListHeaderComponent={() => <Header>Disponíveis</Header>}
+        ListEmptyComponent={LoadingOrEmptyRender}
         renderItem={({ item }) => <CardMasterCoupons data={item} />}
       />
       {modalLinkShow && <LinkCouponModal masterCoupons={selectedMasters} visible={modalLinkShow} onClose={onCloseLinkModal} />}

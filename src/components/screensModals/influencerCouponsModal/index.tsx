@@ -7,11 +7,13 @@ import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
 import { Pressable } from 'react-native';
 import { GetAllCouponsByInfluencerResponse } from './@types';
 import { InfluencerService } from '../../../services/influencerService';
+import { SpinnerLoading } from '../../components/spinner';
 
 export const InfluencerCouponsModal: React.FC<{ onClose: any, visible: boolean }> = (props) => {
 
   const [coupons, setCoupons] = useState<GetAllCouponsByInfluencerResponse[]>([])
   const [activeCopy, setActiveCopy] = useState<any>({})
+  const [loading, setLoading] = useState<boolean>(false)
 
   const modalizeRef = useRef<Modalize>()
 
@@ -38,17 +40,18 @@ export const InfluencerCouponsModal: React.FC<{ onClose: any, visible: boolean }
   }, [props.visible])
 
   async function getAllCouponsAsync(): Promise<void> {
+
+    setLoading(true)
+
     const response = await InfluencerService.getAllCouponsByInfluencer()
-
     let tmp: any = {}
-
     response.forEach(element => {
       tmp[element.coupon_id] = false
     });
 
     setActiveCopy(tmp)
-
     setCoupons(response)
+    setLoading(false)
   }
 
   function onHandleCopy(code: string, id: string) {
@@ -75,7 +78,7 @@ export const InfluencerCouponsModal: React.FC<{ onClose: any, visible: boolean }
               key={item.coupon_id}
               state={animationState}
               onDidAnimate={() => animationState.transitionTo('from')}
-              transition={{ duration: 200, type: 'timing' }}
+              transition={{ duration: 150, type: 'timing' }}
             >
               <Copy />
             </MotiView>
@@ -98,6 +101,7 @@ export const InfluencerCouponsModal: React.FC<{ onClose: any, visible: boolean }
     >
       <Wrapper>
         <Divider />
+        {loading && <SpinnerLoading />}
         {coupons.map(ItemRender)}
       </Wrapper>
 
