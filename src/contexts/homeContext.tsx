@@ -38,12 +38,12 @@ const HomeProvider: React.FC = ({ children }) => {
 
       const data = await StoreService.getCategories();
 
-      //Move Todos to init
+      //Move 'Todos' to init
       const index = data.findIndex(item => item.id === '94d9ccaf-9a03-4b1d-9dc7-bec0931b1381');
       const element = data[index];
       data.splice(index, 1);
       data.splice(0, 0, element);
-      //Move Todos to init
+      //Move 'Todos' to init
 
       setSelectedCategory(element.id)
       setCategories(data)
