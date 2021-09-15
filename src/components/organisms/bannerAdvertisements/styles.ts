@@ -9,15 +9,13 @@ const WIDTH_DIMENSION = Dimensions.get('window').width
 export const ContainerImage = styled.View`
   justify-content: center;
   align-items: center;
-  flex-direction: row;
-  height: 150px;
+  height: 100%;
   margin-right: 10px;
 `;
 
 export const Image = styled.Image`
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
+  width: 90%;
+  height: 90%;
 `
 
 export const CarouselBanner = styled(Carousel).attrs(props => ({

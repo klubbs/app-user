@@ -57,7 +57,7 @@ export const CardEstablishment: React.FC<ICardEstablishmentProps> = ({ data, onP
         <Image
           key={'content'}
           style={{ opacity: opacityAnim }}
-          source={{ uri: data.image }}
+          source={{ uri: `https://klubbs-establishment.s3.amazonaws.com/${data.image}` }}
         />
       }
       {

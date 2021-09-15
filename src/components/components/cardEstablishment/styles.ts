@@ -5,14 +5,13 @@ import colors from '../../../../assets/constants/colors'
 import COLORS from '../../../../assets/constants/colors'
 import { isIphoneX } from '../../../utils/iphoneHelper'
 import { ShopIcon } from '../../../../assets/icons/shop_icon'
-import FastImage from 'react-native-fast-image'
 
 export const Wrapper = styled.TouchableOpacity.attrs(props => ({
   activeOpacity: 0.95
 }
 ))`
     height: 250px;
-    width: ${isIphoneX() ? '190px' : '175px'};
+    width: ${isIphoneX() ? '190px' : '45%'};
     align-items: center;
 `
 
@@ -20,7 +19,7 @@ export const Image = Animated.createAnimatedComponent(styled.Image.attrs(props =
 }))
   `
   height: 100px;
-  width: 190px;
+  width: 100%;
   border-radius: 10;
   `
 )
@@ -110,7 +109,6 @@ export const ContainerOff = styled(ToolbarBadgeDefault)`
 export const ContainerDistance = styled(ToolbarBadgeDefault)`
   justify-content: space-between;
   align-items: center;
-  justify-content: space-evenly;
   flex-direction: row;
 `
 

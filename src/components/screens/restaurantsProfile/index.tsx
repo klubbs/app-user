@@ -21,7 +21,7 @@ const Restaurant: React.FC<RestaurantScreenProps> = ({ route }) => {
 
   return (
     <Wrapper>
-      <ContainerImage source={{ uri: route?.params?.image }} />
+      <ContainerImage source={{ uri: `https://klubbs-establishment.s3.amazonaws.com/${route?.params?.image}` }} />
 
       <Container>
 
@@ -64,7 +64,6 @@ const Restaurant: React.FC<RestaurantScreenProps> = ({ route }) => {
             <CouponIcon width={14} height={14} fill={colors.COLOR_YELLOW_RATING} />
             <BlocksValue>XX%</BlocksValue>
           </BlocksWrapper>
-          {/* <UberButton onPress={handleUberCall} /> */}
         </IconsContainer>
 
         <RestaurantInteractions
