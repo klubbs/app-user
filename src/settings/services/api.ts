@@ -17,7 +17,7 @@ api.interceptors.request.use(async (config) => {
 
   const token = await AsyncStorageUtils.getTokenInStorage();
 
-  config.baseURL = "http://192.168.1.110:5001/"
+  config.baseURL = 'http://192.168.0.112:5000/';
 
   if (token !== null) {
     config.headers.Authorization = `Bearer ${token}`;
