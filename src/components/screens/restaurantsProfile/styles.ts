@@ -25,7 +25,6 @@ export const IconsContainer = styled.View`
   margin-top: 30px;
   justify-content: center;
   flex:1;
-  background-color: ${colors.COLOR_WHITE};
 `
 
 
@@ -35,7 +34,8 @@ export const ContainerGetCoupon = styled.TouchableOpacity.attrs(props => ({
   flex: 0.2;
   align-items: center;
   justify-content: center;
-  border-radius:10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   background-color: ${COLORS.COLOR_YELLOW};
 `
 
@@ -83,7 +83,6 @@ export const BlocksWrapper = styled.View`
   flex-direction: row;
   justify-content: center;
   flex:1;
-  height:80px;
 `
 export const BlocksValue = styled.Text`
   color:${COLORS.COLOR_YELLOW};

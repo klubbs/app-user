@@ -6,6 +6,7 @@ export const Wrapper = styled.SafeAreaView`
   flex:1;
   background-color: ${COLORS.COLOR_WHITE};
   align-items: center;
+  margin-bottom: 40px;
 `
 
 export const UnregisterBoxText = styled.View`
