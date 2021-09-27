@@ -66,7 +66,7 @@ export const Coupon: React.FC<ICouponProps> = (props) => {
           <CountCoupons>{couponsQtd}</CountCoupons>
           <CouponSubtitleIcon />
         </CouponContainer>
-        <OffCoupons>+ {minOff}%</OffCoupons>
+        {/* <OffCoupons>{minOff}%</OffCoupons> */}
       </Container>
       {
         props.data.influencer_image
