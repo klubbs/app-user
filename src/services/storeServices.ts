@@ -10,7 +10,7 @@ class StoreService {
   }
 
   static async getRestaurants(latitude: number, longitude: number): Promise<IStoresResponse[]> {
-    const { data } = await api.get<IResponseMessage<IStoresResponse[]>>('stores', { params: { latitude, longitude } })
+    const { data } = await api.get<IResponseMessage<IStoresResponse[]>>('stores/all', { params: { latitude, longitude } })
 
     return data.message
   }
