@@ -34,8 +34,18 @@ export const Description = styled.Text`
   text-align: center;
 `
 
-export const ExplainText = styled.Text`
+
+export const Subtitle = styled.Text`
   color:${COLORS.COLOR_WHITE_40};
+  font-size:14px;
+  margin-top:10px;
+  font-family:'Nunito_Light';
+  text-align: center;
+`
+
+
+export const ExplainText = styled.Text`
+  color:${COLORS.COLOR_WHITE_80};
   font-size:13px;
   font-family:'Nunito_Light';
   text-align: center;

@@ -6,7 +6,10 @@ import { KlubbsLogo } from '../../../../assets/images/klubbsLogo';
 import { LoginService, LoginServiceExceptions } from '../../../services/loginService';
 import { IError } from '../../../settings/@types/IResponses';
 import { Spinner } from '../../components/spinner';
-import { ContainerBottom, ContainerTop, Description, EnterButton, ExplainText, MailInput, Title, Wrapper, WrapperImage, WrapperKeyboard } from './styles';
+import {
+  ContainerBottom, ContainerTop, Description, EnterButton, ExplainText, MailInput, Title, Wrapper, WrapperImage,
+  WrapperKeyboard, Subtitle
+} from './styles';
 
 const LoginWelcome: React.FC = () => {
 
@@ -63,6 +66,7 @@ const LoginWelcome: React.FC = () => {
 
           <WrapperImage>
             <KlubbsLogo />
+            <Subtitle>Sua parceria em descontos</Subtitle>
           </WrapperImage>
 
           <MailInput

@@ -13,15 +13,12 @@ const axiosConfig = {
 const api = axios.create(axiosConfig);
 
 api.interceptors.request.use(async (config) => {
-  console.log('chamou a api')
 
   const token = await AsyncStorageUtils.getTokenInStorage();
 
   if (token !== null) {
     config.headers.Authorization = `Bearer ${token}`;
   }
-
-  console.log(config.baseURL)
 
   return config
 })
@@ -39,7 +36,6 @@ api.interceptors.response.use((response) => response,
     const message = error.response.data?.message
 
     if (statusCode === 401) {
-      console.warn(error)
       EventEmitter.emit('LOGOUT_USER', {})
     }
 

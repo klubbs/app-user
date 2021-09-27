@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import { Dimensions, StyleSheet } from 'react-native'
 import colors from '../../../../assets/constants/colors';
-import { QrCouponBackground } from '../../../../assets/images/qr_coupon_background';
+import { QrCouponBackground } from '../../../../assets/images/qrCouponBackground';
 import { LikeUpIcon } from '../../../../assets/icons/like_up_icon';
 import { MotiView } from 'moti'
 

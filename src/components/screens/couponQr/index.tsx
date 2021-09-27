@@ -5,7 +5,7 @@ import { CouponQrScreenProps } from '../../../settings/@types/IAppStackParams';
 import { EstablishmentCardQr } from '../../components/cardEstablishmentQr';
 import { BottomContainer, TopContainer, Wrapper, FlatListComponent, AnimatedWrapper, BackgroundCoupon, SubtitleHelp, ImageEstablishment } from './styles';
 import { MasterCouponDetailQrModal } from '../../screensModals/masterCouponDetailQrModal';
-import { IMasterCouponQrDetails } from './types';
+import { IMasterCouponQrDetails } from './@types';
 import { AuthContext } from '../../../contexts/authContext';
 
 
@@ -21,12 +21,12 @@ export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
 
   return (
     <Wrapper>
-      <ImageEstablishment source={require('../../../../assets/icon.png')} />
+      <ImageEstablishment source={require('../../../../assets/images/klubbsLogoCircle.png')} />
       <BackgroundCoupon />
       <TopContainer>
         <QRCode
           value={`${route?.params?.coupon_id}|${user?.id}`}
-          logo={require('../../../../assets/logo_circle.png')}
+          logo={require('../../../../assets/images/klubbsLogoCircle.png')}
           size={190}
           color={colors.COLOR_SECUNDARY_BLACK}
         />

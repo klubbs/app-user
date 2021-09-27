@@ -4,7 +4,7 @@ import styled from "styled-components/native";
 import colors from '../../../../assets/constants/colors';
 import COLORS from "../../../../assets/constants/colors";
 import { CouponIcon } from "../../../../assets/icons/coupon_icon";
-import { CouponWalletBackground } from "../../../../assets/images/coupon_wallet_background";
+import { CouponWalletBackground } from "../../../../assets/images/couponWalletBackground";
 
 
 const Wrapper = styled.Pressable`

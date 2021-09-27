@@ -4,7 +4,7 @@ import { Feather } from '@expo/vector-icons';
 import { MenuItemContainer, MenuText, MenuTextContainer, MenuTextDescription, MenuItemIcon, MenuItemArrow, ArrowRight } from './styles';
 import colors from '../../../../assets/constants/colors';
 import { AuthContext } from '../../../contexts/authContext';
-import { IMenu } from '../../screens/profile/types';
+import { IMenu } from '../../screens/profile/@types';
 
 export const MenuItem: React.FC<IMenu> = (props) => {
 

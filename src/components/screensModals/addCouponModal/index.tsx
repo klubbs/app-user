@@ -6,7 +6,7 @@ import { ButtonStorage } from '../../components/buttonStorage';
 import { CouponService } from '../../../services/couponService';
 import { Spinner } from '../../components/spinner';
 import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
-import { SubtitleSaveCouponImage } from '../../../../assets/images/subtitle_save_coupon';
+import { SubtitleSaveCouponImage } from '../../../../assets/images/subtitleSaveCoupon';
 import { IError } from '../../../settings/@types/IResponses';
 import { InfluencerService, InfluencerServiceException } from '../../../services/influencerService';
 

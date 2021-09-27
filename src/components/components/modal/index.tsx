@@ -2,7 +2,7 @@ import { Feather } from '@expo/vector-icons';
 import React, { useEffect, useState, useRef } from 'react';
 import { Animated, KeyboardAvoidingView, Modal, Platform } from 'react-native';
 import COLORS from '../../../../assets/constants/colors';
-import { IModalProps } from './interfaces';
+import { IModalProps } from './@types';
 import { Container, ContainerBlur, Header, Wrapper } from './styles';
 
 
