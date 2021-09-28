@@ -10,9 +10,9 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   icon: './assets/images/icon.png',
   orientation: "portrait",
   splash: {
-    image: "",
+    image: "./assets/images/splash.png",
     resizeMode: "contain",
-    backgroundColor: "#2D2F35"
+    backgroundColor: "#282A30"
   },
   updates: {
     fallbackToCacheTimeout: 0

@@ -54,7 +54,7 @@ const Register: React.FC<RegisterScreenProps> = ({ route }) => {
 
   const welcomeInformations = useCallback(() => {
     return currentScroll === SCROOL_INDEX.FIRST
-      ? { title: "Opa, tudo boom ?", description: "Conta um pouquinho mais sobre você ?" }
+      ? { title: `Opa, ${route.params.mail}`, description: "Conta um pouquinho mais sobre você ?" }
       : { title: "Para finalizar", description: "Estamos quase acabando !" }
 
   }, [currentScroll])

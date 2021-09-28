@@ -63,7 +63,7 @@ export const WrapperKeyboard = styled.KeyboardAvoidingView.attrs(props => ({
 `
 
 export const WrapperImage = styled.ImageBackground.attrs(props => ({
-  source: require('../../../../assets/images/welcome-login-icons.png')
+  source: require('../../../../assets/images/backgroundIcons.png')
 }))`
   width:95%;
   height:40%;
