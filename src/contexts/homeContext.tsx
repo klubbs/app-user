@@ -1,6 +1,6 @@
 import React, { useState, createContext, useMemo } from 'react';
 import { IRestaurants } from '../components/organisms/restaurantsList/@types';
-import { ICategoryResponse } from '../services/@types/IStore';
+import { ICategoryResponse } from '../services/@types/storeServiceTypes';
 import { StoreService } from '../services/storeServices';
 import { AsyncStorageUtils } from '../utils/asyncStorageUtils';
 import { format4TwoColumns } from '../utils/formatersUtils';
@@ -10,10 +10,10 @@ export const HomeContext = createContext(
     categories: ICategoryResponse[],
     selectedCategory: string,
     setSelectedCategory: (val: string) => void,
-    setRestaurants: (val: IRestaurants[]) => void,
     getCategoriesDescription(id: string): string | undefined,
     categorizedRestaurants: IRestaurants[],
-    getCategories: () => Promise<void>
+    getCategories: () => Promise<void>,
+    getRestaurants: (latitude: number, longitude: number) => Promise<void>
   });
 
 
@@ -27,6 +27,7 @@ const HomeProvider: React.FC = ({ children }) => {
 
 
   async function getCategories() {
+    //TODO: Remover esse trycatch
     try {
 
       const storedCategories = await AsyncStorageUtils.getCategoriesInStorage();
@@ -54,11 +55,30 @@ const HomeProvider: React.FC = ({ children }) => {
     }
   }
 
+  async function getRestaurants(latitude: number, longitude: number) {
+    const data = await StoreService.getRestaurants(latitude, longitude);
+
+    setRestaurants(data)
+
+    if (data.length > 0) {
+      let mappedData: IRestaurants[] = data.map(item => { return { ...item, empty: false } })
+
+      mappedData.push({ empty: true } as IRestaurants)
+
+      setRestaurants(mappedData)
+    }
+
+  }
+
   const categorizedRestaurants = useMemo(
     () => {
       const tmp = restaurants.filter(item => selectedCategory === item.business_category_id || selectedCategory === '94d9ccaf-9a03-4b1d-9dc7-bec0931b1381')
 
-      return format4TwoColumns(tmp, 2, { empty: true, name: '', image: '' })
+      if (selectedCategory === '94d9ccaf-9a03-4b1d-9dc7-bec0931b1381' && restaurants.length === 0) {
+        return []
+      }
+
+      return format4TwoColumns(tmp, 2)
 
     }, [selectedCategory, restaurants]);
 
@@ -73,9 +93,9 @@ const HomeProvider: React.FC = ({ children }) => {
       categories,
       selectedCategory,
       setSelectedCategory,
-      setRestaurants,
       getCategoriesDescription,
-      categorizedRestaurants
+      categorizedRestaurants,
+      getRestaurants
     }}>
       {children}
     </ HomeContext.Provider>

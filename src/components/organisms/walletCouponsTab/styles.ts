@@ -3,7 +3,7 @@ import COLORS from '../../../../assets/constants/colors';
 
 export const Container = styled.TouchableOpacity.attrs(props => ({
   activeOpacity: 0.8
-}))<{ empty: boolean }>`
+})) <{ empty: boolean }>`
   background-color: ${props => props.empty ? 'transparent' : COLORS.COLOR_SECUNDARY_WHITE};
   justify-content: center;
   align-items: center;
@@ -27,5 +27,12 @@ export const FlatComponent = styled.FlatList.attrs(props => ({
   height: 100%;
   padding: 10px;
   background-color: ${COLORS.COLOR_SECUNDARY_WHITE};
+`
 
+export const NothingCouponsSubtitle = styled.Text`
+  color:${COLORS.COLOR_BLACK50};
+  font-size:14px;
+  margin-top:20px;
+  align-self: center;
+  font-family:'Nunito_Light';
 `

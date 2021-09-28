@@ -1,6 +1,6 @@
 import { IResponseMessage } from '../settings/@types/IResponses'
 import api from '../settings/services/api'
-import { ICategoryResponse, IStoresResponse } from './@types/IStore'
+import { ICategoryResponse, IStoresResponse } from './@types/storeServiceTypes'
 
 class StoreService {
   static async getCategories(): Promise<ICategoryResponse[]> {

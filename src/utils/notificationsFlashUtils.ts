@@ -30,7 +30,7 @@ class NotificationsFlash {
     showFlash({ type: "NEUTRAL", title: '', desc: 'Faltou preencher com o seu nome.' })
 
   static IncompleteRegisterInputs = () =>
-    showFlash({ type: "NEUTRAL", title: '', desc: 'Faltou preencher alguns campos corretamente.' })
+    showFlash({ type: "NEUTRAL", title: '', desc: 'Alguns campos parecem esta incorretos' })
 
   static InvalidPassword = () =>
     showFlash({

@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { ICategoryResponse } from '../services/@types/IStore';
-import { ILoginResponse } from '../services/@types/IUser';
+import { ICategoryResponse } from '../services/@types/storeServiceTypes';
+import { ILoginResponse } from '../services/@types/userServiceTypes';
 
 
 

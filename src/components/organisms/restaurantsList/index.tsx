@@ -10,6 +10,7 @@ import { LocationAccuracy, LocationObject } from 'expo-location';
 import { HomeContext } from '../../../contexts/homeContext';
 import { NotFoundRestaurants } from '../../../../assets/images/notFoundRestaurants';
 import { LocationDeniedImage } from '../../../../assets/images/locationDeniedImage';
+import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
 
 let userLocation: LocationObject | undefined = undefined;
 
@@ -17,17 +18,17 @@ export const RestaurantsList: React.FC = (props) => {
 
   const navigation = useNavigation();
 
-  const { categorizedRestaurants, getCategoriesDescription, setRestaurants } = useContext(HomeContext)
+  const { categorizedRestaurants, getCategoriesDescription, getRestaurants } = useContext(HomeContext)
 
   const [loading, setLoading] = useState(false)
 
   const [locationDenied, setLocationDenied] = useState<boolean>(false)
 
   useEffect(() => {
-    getAllEstablishments()
+    loadAllRestaurants()
   }, [])
 
-  async function getAllEstablishments() {
+  async function loadAllRestaurants() {
     try {
 
       setLoading(true)
@@ -39,22 +40,15 @@ export const RestaurantsList: React.FC = (props) => {
         return;
       }
 
-      let location = await Location.getCurrentPositionAsync({ accuracy: LocationAccuracy.Balanced });
+      const location = await Location.getCurrentPositionAsync({ accuracy: LocationAccuracy.Balanced });
 
       userLocation = location
 
-      const data = await StoreService.getRestaurants(location.coords.latitude, location.coords.longitude);
-
-      let mappedData: IRestaurants[] = data.map(item => { return { ...item, empty: false } })
-
-      mappedData.push({ empty: true } as IRestaurants)
-
-      setRestaurants(mappedData)
+      await getRestaurants(location.coords.latitude, location.coords.longitude);
 
     } catch (error) {
-    } finally {
-      setLoading(false)
-    }
+      NotificationsFlash.CustomMessage('Nos desculpe', 'Ocorreu um erro ao recuperar os restaurantes', 'NEUTRAL')
+    } finally { setLoading(false) }
   }
 
   const HowItemRender = ({ item }: { item: IRestaurants }) => {
@@ -99,7 +93,7 @@ export const RestaurantsList: React.FC = (props) => {
     <FlatList
       data={categorizedRestaurants}
       refreshing={loading}
-      onRefresh={getAllEstablishments}
+      onRefresh={loadAllRestaurants}
       showsVerticalScrollIndicator={false}
       numColumns={2}
       columnWrapperStyle={wrapperStyle as any}

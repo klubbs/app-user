@@ -39,6 +39,7 @@
     "react-native": "0.63.4",
     "react-native-confirmation-code-field": "^7.1.0",
     "react-native-gesture-handler": "~1.10.2",
+    "react-native-masked-text": "^1.13.0",
     "react-native-modalize": "^2.0.8",
     "react-native-pager-view": "5.0.12",
     "react-native-qrcode-svg": "^6.1.1",

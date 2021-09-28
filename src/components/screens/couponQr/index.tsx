@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import QRCode from 'react-native-qrcode-svg';
 import colors from '../../../../assets/constants/colors';
-import { CouponQrScreenProps } from '../../../settings/@types/IAppStackParams';
+import { CouponQrScreenProps } from '../../../settings/@types/appStackTypes';
 import { EstablishmentCardQr } from '../../components/cardEstablishmentQr';
 import { BottomContainer, TopContainer, Wrapper, FlatListComponent, AnimatedWrapper, BackgroundCoupon, SubtitleHelp, ImageEstablishment } from './styles';
 import { MasterCouponDetailQrModal } from '../../screensModals/masterCouponDetailQrModal';

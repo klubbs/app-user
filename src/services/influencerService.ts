@@ -3,7 +3,7 @@ import { IError, IResponseMessage } from "../settings/@types/IResponses";
 import api from "../settings/services/api";
 import * as Haptic from 'expo-haptics';
 import { NotificationsFlash } from "../utils/notificationsFlashUtils";
-import { GetAllMasterCouponsResponse } from "./@types/IStore";
+import { GetAllMasterCouponsResponse } from "./@types/storeServiceTypes";
 
 export class InfluencerService {
 
@@ -49,14 +49,11 @@ export class InfluencerServiceException {
       if (actual === "CODE") {
         NotificationsFlash.CustomMessage('Código inválido', "Espaços são proibidos e necessário 10 caracteres.", 'NEUTRAL')
         return;
-      } else if (actual === "CODE EXIST") {
-        NotificationsFlash.CustomMessage('Código já existe', "Este código de cupom já esta em uso.", 'NEUTRAL')
-        return;
       }
 
     } else if (error.statusCode === 409) {
       if (actual === "CODE") {
-        NotificationsFlash.CustomMessage('Código existente', "Este código de cupom já esta em uso.", 'NEUTRAL')
+        NotificationsFlash.CustomMessage('Código já em uso', "Este código de cupom já esta sendo usado", 'WARNING')
         return;
       }
     }

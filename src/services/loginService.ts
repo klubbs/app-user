@@ -3,7 +3,11 @@ import api from '../settings/services/api'
 import { ErrorException } from '../utils/errorException'
 import { NotificationsFlash } from '../utils/notificationsFlashUtils'
 import { validMail, validPhone } from '../utils/validationFields'
-import { ICreateUserResponse, ILoginResponse } from './@types/IUser'
+import { ICreateUserResponse, ILoginResponse } from './@types/userServiceTypes'
+import { Validator } from 'fluentvalidation-ts'
+import { ValidationErrors } from 'fluentvalidation-ts/dist/ValidationErrors'
+import { IRegisterUser } from './@types/loginServiceTypes'
+
 
 class LoginService {
 
@@ -16,27 +20,30 @@ class LoginService {
         password: password
       }
     })
+
     return data.message
   }
 
-  static async createUserAsync(mail: string, password: string, userName: string, phone: string, code: string): Promise<ICreateUserResponse> {
+  static async registerUser(user: IRegisterUser, code: string): Promise<ICreateUserResponse> {
 
-    const domain = this.createUser(mail, password, userName, phone, code);
+    const domain = this.registerContract(user, code);
 
     const { data } = await api.post<IResponseMessage<ICreateUserResponse>>('users', { mail: domain.mail, phone: domain.phone, password: domain.password, name: domain.name, code: domain.code })
 
     return data.message
   }
 
-  static async _sendRegisterCode(mail: string): Promise<void> {
+  static registerContract(user: IRegisterUser, code: string): IRegisterUser & { code: string } {
+    user.phone = user.phone.replace(/\D/g, "")
 
-    this.onlyValidMail(mail)
+    return { phone: user.phone, code: code, password: user.password, mail: user.mail, name: user.name }
+  }
 
+  static async sendRegisterCode(mail: string): Promise<void> {
     await api.post(`users/code/register/mail`, {}, { params: { mail: mail } })
   }
 
   static async validateMail(email: string): Promise<boolean> {
-    console.log('dentro da validacao de email')
     if (!validMail(email))
       throw ErrorException.Throw(422)
 
@@ -45,49 +52,10 @@ class LoginService {
     return data.message
   }
 
-  static createUser(mail: string, password: string, name: string, phone: string, code: string): { mail: string, password: string, name: string, phone: string, code: string } {
+  static validateRegister(params: IRegisterUser): ValidationErrors<IRegisterUser> {
+    const validator = new LoginServiceValidator()
 
-    this.validateUserCreateUser(mail, password, name, phone)
-
-    if (code.length < 5) {
-      throw ErrorException.Throw(412, "code")
-    }
-
-    phone = phone.replace(/\D/g, "")
-
-    return { mail, password, code, phone, name }
-  }
-
-  static validateUserCreateUser(mail: string, password: string, name: string, phone: string): void {
-
-    const errors = []
-
-    //TODO: ADICIONAR FLUENT TS
-    if (!validMail(mail)) {
-      errors.push({ field: 'Mail' })
-    }
-
-    if (name.length <= 0) {
-      errors.push({ field: 'Name' })
-    }
-
-    if (!validPhone(phone)) {
-      errors.push({ field: 'Phone' })
-    }
-
-    if (password.length < 5) {
-      errors.push({ field: 'Password' })
-    }
-
-    if (errors.length) {
-      throw ErrorException.Throw(422, "Unprocessable Entity", errors)
-    }
-  }
-
-  static onlyValidMail(mail: string) {
-    if (!validMail(mail)) {
-      throw ErrorException.Throw(422, "Unprocessable Entity", [{ field: 'mail' }])
-    }
+    return validator.validate(params)
   }
 
 }
@@ -109,6 +77,36 @@ class LoginServiceExceptions {
   }
 
 }
+
+class LoginServiceValidator extends Validator<IRegisterUser> {
+  constructor() {
+    super()
+
+    this
+      .ruleFor('mail')
+      .emailAddress()
+      .when(src => src.mail !== undefined)
+
+    this
+      .ruleFor('name')
+      .notEmpty()
+      .notNull()
+      .when(src => src.name !== undefined)
+
+    this
+      .ruleFor('password')
+      .must(item => item.length >= 5)
+      .when(src => src.password !== undefined)
+
+    this.ruleFor('phone')
+      .notEmpty()
+      .matches(new RegExp(/^\([1-9]{2}\) (?:[2-8]|9[1-9])[0-9]{3}\-[0-9]{4}$/))
+      .withMessage('Preencha com um telefone válido.')
+      .when(src => src.phone !== undefined)
+  }
+}
+
+
 
 export { LoginService, LoginServiceExceptions }
 

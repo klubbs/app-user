@@ -1,6 +1,6 @@
 import api from "../settings/services/api";
 import { NotificationsFlash } from "../utils/notificationsFlashUtils";
-import { ICouponCheckoutResponse, IWalletCouponsReponse } from './@types/ICoupon';
+import { ICouponCheckoutResponse, IWalletCouponsReponse } from './@types/couponServiceTypes';
 import * as Haptic from 'expo-haptics';
 import { IResponseMessage, IError } from "../settings/@types/IResponses";
 

@@ -12,9 +12,9 @@ export const Home: React.FC = () => {
     <HomeProvider>
       <Wrapper>
 
-        <Container>
+        {/* <Container>
           <AdvertisementsSlider />
-        </Container>
+        </Container> */}
         <ContainerBottom>
           <MainCategories />
           <RestaurantsList />

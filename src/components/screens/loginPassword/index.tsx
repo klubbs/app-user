@@ -4,7 +4,7 @@ import { Keyboard } from 'react-native';
 import { AuthContext } from '../../../contexts/authContext';
 import { LoginService, LoginServiceExceptions } from '../../../services/loginService';
 import { StoreService } from '../../../services/storeServices';
-import { LoginPasswordScreenProps } from '../../../settings/@types/IAppStackParams';
+import { LoginPasswordScreenProps } from '../../../settings/@types/appStackTypes';
 import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
 import { Spinner } from '../../components/spinner';
 import { ContainerBottom, ContainerTop, Description, EnterButton, PasswordInput, Title, Wrapper, WrapperKeyboard } from './styles';
@@ -36,8 +36,6 @@ export const LoginPasswordScreen: React.FC<LoginPasswordScreenProps> = ({ route 
       navigation.navigate('Tabs', { signUser: true })
 
     } catch (error: any) {
-      console.log(error)
-
       LoginServiceExceptions.catchLogin(error)
     } finally {
       setLoading(false)

@@ -1,7 +1,8 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { LoginService } from '../services/loginService';
-import { ILoginResponse } from '../services/@types/IUser';
+import { ILoginResponse } from '../services/@types/userServiceTypes';
 import { AsyncStorageUtils } from '../utils/asyncStorageUtils';
+import { EventEmitter } from '../utils/emitter';
 
 
 export const AuthContext = createContext(
@@ -33,7 +34,7 @@ const AuthProvider: React.FC = ({ children }) => {
     setUser(userStorage)
   }
 
-  const signIn = async (mail: string, password: string) => {
+  async function signIn(mail: string, password: string): Promise<void> {
 
     const userData = await LoginService.login(mail, password);
 
@@ -52,10 +53,9 @@ const AuthProvider: React.FC = ({ children }) => {
 
   const register = async (mail: string, password: string, name: string, phone: string, code: string) => {
 
-    await LoginService.createUserAsync(mail, password, name, phone, code)
+    await LoginService.registerUser({ mail, password, name, phone }, code)
 
     setIsRegister(true)
-
   }
 
   useEffect(() => {
@@ -77,23 +77,6 @@ const AuthProvider: React.FC = ({ children }) => {
   );
 }
 
-
-export const EventEmitter = {
-  events: new Map(),
-  listen: (topic: any, cb: any) => {
-    const oldEvents = EventEmitter.events.get(topic)
-    if (EventEmitter.events.has(topic)) {
-      return EventEmitter.events.set(topic, [...oldEvents, cb])
-    }
-    return EventEmitter.events.set(topic, [cb])
-  },
-  emit: (topic: any, data: any) => {
-    const myListeners = EventEmitter.events.get(topic)
-    if (Array.isArray(myListeners) && myListeners.length) {
-      myListeners.forEach(event => event(data))
-    }
-  }
-}
 
 export { AuthProvider };
 

@@ -31,27 +31,28 @@ export const ContainerPoints = styled.View`
   padding-left: 10%;
 `;
 
-export const UserImage = styled.Image`
-  width: 100px;
-  height: 100px;
-  border-radius: 50px;
+export const UserImage = styled.Image.attrs({
+  resizeMode: 'contain'
+})`
+  width: 70px;
+  height: 70px;
   z-index: 10;
 `;
 
 export const ContainerImage = styled.View`
-  flex: 2;
+  flex: 1;
   align-items: center;
   justify-content: center;
 `;
 
-export const ImageBorder = styled.View<{ selected: any }>`
-  width: 115px;
-  height: 115px;
-  border-radius: 57.5px;
+export const ImageBorder = styled.View`
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
   border-width: 5px;
   border-right-color: ${COLORS.COLOR_YELLOW};
   border-bottom-color: ${COLORS.COLOR_YELLOW};
-  background-color: ${props => props.selected ? 'transparent' : COLORS.COLOR_BLACK10};
+  background-color: ${COLORS.COLOR_BLACK10};
   border-color: transparent;
   justify-content: center;
   align-items: center;

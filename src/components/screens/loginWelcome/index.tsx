@@ -35,6 +35,7 @@ const LoginWelcome: React.FC = () => {
 
       setLoading(true)
 
+      //TODO: Validar email antes
       const response = await LoginService.validateMail(mail);
 
       navigation.navigate(response ? 'LoginPassword' : 'Register', { mail: mail });

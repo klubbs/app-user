@@ -86,7 +86,7 @@ export const MasterCoupons: React.FC = () => {
         {!loading &&
           <ContainerNotFound>
             <NotFoundRestaurants height={160} />
-            <EmptyTitle>Puxa</EmptyTitle>
+            <EmptyTitle>Eita</EmptyTitle>
             <EmptySubtitle>Nenhum estabelecimento liberou cupom ainda</EmptySubtitle>
           </ContainerNotFound>
         }

@@ -1,6 +1,6 @@
+import { EventEmitter } from './../../utils/emitter';
 import axios from 'axios';
 import Constants from 'expo-constants';
-import { EventEmitter } from '../../contexts/authContext';
 import { AsyncStorageUtils } from '../../utils/asyncStorageUtils';
 import { NotificationsFlash } from '../../utils/notificationsFlashUtils';
 const { showFlash } = require('flash-notify');

@@ -8,9 +8,11 @@ import WelcomeLoginScreen from "../../components/screens/loginWelcome";
 import Register from "../../components/screens/register";
 import Restaurant from "../../components/screens/restaurantsProfile";
 import Tabs from "./appTabStack";
-import { IAppStackParams } from "../@types/IAppStackParams";
+import { IAppStackParams } from "../@types/appStackTypes";
 import { Influencer } from "../../components/screens/influencer";
 import { MasterCoupons } from "../../components/screens/masterCoupons";
+import { ConfigurationsScreen } from "../../components/screens/configurations";
+import { HelpScreen } from "../../components/screens/help";
 
 
 
@@ -26,14 +28,16 @@ const App: React.FC<{}> = () => {
       headerTintColor: COLORS.COLOR_YELLOW,
       headerTitleStyle: { color: "transparent" }
     })} >
-      <AppStack.Screen name="Tabs" component={Tabs} />
-      <AppStack.Screen name="LoginWelcome" component={WelcomeLoginScreen} />
-      <AppStack.Screen name="LoginPassword" component={LoginPasswordScreen} />
-      <AppStack.Screen name="Register" component={Register} options={{ headerShown: true }} />
-      <AppStack.Screen name="Restaurant" component={Restaurant} />
+      <AppStack.Screen name='Tabs' component={Tabs} />
+      <AppStack.Screen name='LoginWelcome' component={WelcomeLoginScreen} />
+      <AppStack.Screen name='LoginPassword' component={LoginPasswordScreen} />
+      <AppStack.Screen name='Register' component={Register} options={{ headerShown: true }} />
+      <AppStack.Screen name='Restaurant' component={Restaurant} />
       <AppStack.Screen name="CouponQr" component={CouponQrScreen} options={{ headerTintColor: COLORS.COLOR_WHITE }} />
       <AppStack.Screen name="Influencer" component={Influencer} />
       <AppStack.Screen name="MasterCoupons" component={MasterCoupons} />
+      <AppStack.Screen name='Configurations' component={ConfigurationsScreen} />
+      <AppStack.Screen name='Help' component={HelpScreen} />
     </AppStack.Navigator >
   );
 };

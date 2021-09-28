@@ -1,12 +1,13 @@
+import * as Haptic from 'expo-haptics';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import * as Haptic from 'expo-haptics';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Alert, Keyboard, ScrollView, useWindowDimensions } from 'react-native';
+import { Alert, Keyboard, ScrollView, Dimensions } from 'react-native';
 import { default as COLORS } from '../../../../assets/constants/colors';
+import { IRegisterUser } from '../../../services/@types/loginServiceTypes';
 import { LoginService } from '../../../services/loginService';
-import { RegisterScreenProps } from '../../../settings/@types/IAppStackParams';
-import { maskPhone } from '../../../utils/masksUtils';
+import { RegisterScreenProps } from '../../../settings/@types/appStackTypes';
+import { isEmpty, nameof } from '../../../utils/extensions/objectExtensions';
 import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
 import { MailCodeModal } from '../../screensModals/mailCodeModal';
 import { IModalRef } from '../../screensModals/mailCodeModal/@types';
@@ -14,6 +15,7 @@ import { Confirm, containerBackButton, ContainerBottom, ContainerMiddle, Contain
 
 
 const SCROOL_INDEX = { FIRST: 0, LAST: 1 };
+const WIDTH = Dimensions.get('window').width
 
 const Register: React.FC<RegisterScreenProps> = ({ route }) => {
 
@@ -28,7 +30,6 @@ const Register: React.FC<RegisterScreenProps> = ({ route }) => {
   const modalCodeRef = useRef<IModalRef>(null)
 
   const navigation = useNavigation()
-  const WIDTH = useWindowDimensions().width
 
   useEffect(() => {
     navigation.addListener('beforeRemove', (e) => {
@@ -76,47 +77,51 @@ const Register: React.FC<RegisterScreenProps> = ({ route }) => {
     scroolRef.current?.scrollTo({ x: distance, y: 0, animated: true })
   }
 
-  const handleConfirm = async () => {
+  async function handleRegister() {
 
-    if (currentScroll === SCROOL_INDEX.LAST) {
+    if (currentScroll !== SCROOL_INDEX.LAST) {
+      onAnimatedScroll(true)
+      return;
+    }
 
-      try {
+    try {
+      const isValidFields = LoginService
+        .validateRegister({
+          mail: route.params.mail,
+          password: password,
+          name: name,
+          phone: phone
+        })
 
-        LoginService.validateUserCreateUser(route.params.mail, password, name, phone)
 
-        LoginService._sendRegisterCode(route.params.mail)
-
-        modalCodeRef.current?.openModal()
-
-      } catch (error: any) {
-
-        Haptic.notificationAsync(Haptic.NotificationFeedbackType.Error)
+      if (!isEmpty(isValidFields)) {
+        Haptic.impactAsync(Haptic.ImpactFeedbackStyle.Medium)
 
         let errorInputTmp = errorInput
 
-        error.error.forEach((element: any) => {
-          if (element.field === 'Name')
-            errorInputTmp.name = true
+        if (isValidFields.hasOwnProperty(nameof<IRegisterUser>("password"))) {
+          errorInputTmp.password = true
+        }
 
-          if (element.field === 'Phone')
-            errorInputTmp.phone = true
+        if (isValidFields.hasOwnProperty(nameof<IRegisterUser>("phone"))) {
+          errorInputTmp.phone = true
+        }
 
-          if (element.field === 'Password')
-            errorInputTmp.password = true
-        });
+        if (isValidFields.hasOwnProperty(nameof<IRegisterUser>("name"))) {
+          errorInputTmp.name = true
+        }
 
-        if (errorInputTmp.name || errorInputTmp.phone)
-          NotificationsFlash.IncompleteRegisterInputs()
-
-
-        if (errorInputTmp.password)
-          NotificationsFlash.InvalidPassword()
+        NotificationsFlash.IncompleteRegisterInputs()
 
         setErrorInput({ ...errorInput })
+
+        return;
       }
-    } else {
-      onAnimatedScroll(true)
-    }
+
+      modalCodeRef.current?.openModal()
+
+    } catch (error: any) { NotificationsFlash.SpillCoffee() }
+
   }
 
   const RenderScrolls = () => {
@@ -131,8 +136,8 @@ const Register: React.FC<RegisterScreenProps> = ({ route }) => {
             error={errorInput.name}
           />
           <Phone
-            value={maskPhone(phone)}
-            onChangeText={(txt) => setPhone(maskPhone(txt))}
+            value={phone}
+            onChangeText={(e) => setPhone(e)}
             onTouchEnd={() => errorInput.phone ? setErrorInput({ ...errorInput, phone: false }) : null}
             error={errorInput.phone}
           />
@@ -155,17 +160,18 @@ const Register: React.FC<RegisterScreenProps> = ({ route }) => {
     return (
       <ContainerBottom>
 
-        {currentScroll === SCROOL_INDEX.LAST ?
+        {
+          currentScroll === SCROOL_INDEX.LAST &&
           <Feather
             name={"chevron-left"}
             size={15}
             style={containerBackButton as any}
             color={errorInput.name || errorInput.phone ? COLORS.COLOR_RED : COLORS.COLOR_SECUNDARY_WHITE}
             onPress={() => onAnimatedScroll(false)}
-          /> : null}
+          />
+        }
 
-
-        <Confirm onPress={handleConfirm}>
+        <Confirm onPress={handleRegister}>
           <Feather name={"chevron-right"} size={15} color={COLORS.COLOR_WHITE} />
         </Confirm>
       </ContainerBottom>
@@ -194,7 +200,10 @@ const Register: React.FC<RegisterScreenProps> = ({ route }) => {
         <RenderButtons />
       </WrapperKeyboard>
 
-      <MailCodeModal ref={modalCodeRef} action={'REGISTER'} registerParams={{ mail: route.params.mail, phone, password, name }} />
+      <MailCodeModal
+        ref={modalCodeRef}
+        action={'REGISTER'}
+        registerParams={{ mail: route.params.mail, phone, password, name }} />
 
     </Wrapper>
   );

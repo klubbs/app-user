@@ -2,9 +2,9 @@ import styled from 'styled-components/native';
 import COLORS from '../../../../assets/constants/colors';
 
 export const SpinnerLoading = styled.ActivityIndicator.attrs({
-  color: COLORS.COLOR_SECUNDARY_WHITE,
+  color: COLORS.COLOR_WHITE,
   size: "large",
-  animating: true
+  animating: true,
 })`
     z-index:10;
 `;

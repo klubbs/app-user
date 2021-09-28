@@ -1,3 +1,3 @@
-import { IStoresResponse } from "../../../services/@types/IStore";
+import { IStoresResponse } from "../../../services/@types/storeServiceTypes";
 
-export type IRestaurants = IStoresResponse & { empty: boolean }
+export type IRestaurants = IStoresResponse & { empty?: boolean }

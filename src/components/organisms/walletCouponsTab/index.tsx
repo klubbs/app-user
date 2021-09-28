@@ -1,7 +1,7 @@
-import React, { ReactElement, useState, useEffect, useRef } from 'react';
+import React, { ReactElement, useState, useEffect } from 'react';
 import { CouponService } from '../../../services/couponService';
 import { ICouponsItem } from './@types';
-import { Container, FlatComponent } from './styles';
+import { Container, FlatComponent, NothingCouponsSubtitle } from './styles';
 import { useNavigation } from '@react-navigation/native';
 import { Coupon } from '../../components/coupon'
 import { format4TwoColumns } from '../../../utils/formatersUtils';
@@ -72,6 +72,7 @@ export const CouponsWalletTab: React.FC = () => {
       data={format4TwoColumns(walletCoupom, 2)}
       numColumns={NUM_COLUMNS}
       keyExtractor={(item: ICouponsItem, index: number) => item.wallet_id}
+      ListEmptyComponent={() => <NothingCouponsSubtitle>Nenhum cupom adicionado ainda</NothingCouponsSubtitle>}
       renderItem={({ item }) => RenderCoupon(item as ICouponsItem)}
     />
   );

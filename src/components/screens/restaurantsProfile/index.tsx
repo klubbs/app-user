@@ -4,7 +4,7 @@ import colors from '../../../../assets/constants/colors';
 import COLORS from '../../../../assets/constants/colors';
 import { ClockIcon } from '../../../../assets/icons/clockIcon';
 import { CouponIcon } from '../../../../assets/icons/coupon_icon';
-import { RestaurantScreenProps } from "../../../settings/@types/IAppStackParams";
+import { RestaurantScreenProps } from "../../../settings/@types/appStackTypes";
 import UberButton from "../../components/buttonUber";
 import { RestaurantInteractions } from '../../organisms/restaurantInteractions';
 import { BlocksWrapper, About, AboutSubtitle, BlocksValue, ContainerGetCoupon, ContainerImage, Container, IconsContainer, GetCouponText, RestaurantCategory, RestaurantName, Wrapper, NameContainer } from './styles';

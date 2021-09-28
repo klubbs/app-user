@@ -22,13 +22,16 @@ import {
 } from './styles';
 
 
+const INFLUENCER_KEY = "999";
+
 const Profile: React.FC = () => {
 
   //TODO: Alterar para scroolView
   const MENU_DATA: IMenu[] = [
     // { key: "1", text: "Meus Dados", description: "Edite seus dados", icon: "user", logged: true, cb: () => { } },
-    { key: "2", text: "Configurações", description: "Controle suas configurações", icon: "settings", logged: false, cb: () => { } },
-    { key: '3', text: "Influenciador", description: 'Gerencie sua influência', icon: "thumbs-up", logged: true, cb: () => navigation.navigate('Influencer') }
+    { key: "2", text: "Configurações", description: "Controle suas configurações", icon: "settings", logged: false, cb: () => navigation.navigate('Configurations') },
+    { key: "3", text: "Dúvidas", description: "Precisa de alguma ajuda", icon: "help-circle", logged: false, cb: () => navigation.navigate('Help') },
+    { key: INFLUENCER_KEY, text: "Influenciador", description: 'Gerencie sua influência', icon: "thumbs-up", logged: true, cb: () => navigation.navigate('Influencer') }
   ]
 
   const { user, isRegister, logout } = useContext(AuthContext)
@@ -46,7 +49,7 @@ const Profile: React.FC = () => {
 
   const handlelogout = async () => {
 
-    Alert.alert('Não se vá', 'Quer realmente nos deixar ?', [
+    Alert.alert('Gostaria de sair ?', 'Mas volte logo, por favor !', [
       {
         text: 'Não',
         style: 'cancel',
@@ -85,7 +88,7 @@ const Profile: React.FC = () => {
             </>
             :
             <TouchableOpacity onPress={() => navigation.navigate("LoginWelcome")}>
-              <Point>Entrar ou Cadastrar-se</Point>
+              <Point>Entrar ou {'\n'}Cadastrar-se</Point>
             </TouchableOpacity>
         }
       </ContainerPoints>
@@ -97,12 +100,12 @@ const Profile: React.FC = () => {
       {isRegister && <LottieView source={CongratulationsCoupons} loop={false} ref={animRef} />}
       <WrapperTop >
         <ContainerImage >
-          <ImageBorder selected={user?.image}>
-            {user?.image
-              ? <UserImage source={{ uri: `${user?.image}` }} />
-              : <IconUser />
-            }
-          </ImageBorder>
+          {
+            user &&
+            <ImageBorder>
+              <UserImage source={require('../../../../assets/images/profile1.png')} />
+            </ImageBorder>
+          }
         </ContainerImage>
         <RenderPoints />
       </WrapperTop>
@@ -116,7 +119,8 @@ const Profile: React.FC = () => {
         ListFooterComponent={() => MenuFooterItem()}
         renderItem={({ item }) => {
 
-          if (item.key === "3" && user?.influencer_id === null) {
+
+          if (item.key === INFLUENCER_KEY && user?.influencer_id === null) {
             return <></>
           }
 

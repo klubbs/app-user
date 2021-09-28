@@ -43,13 +43,14 @@ export const AddCouponModal: React.FC<{ visible: boolean, onClose: any, isInflue
 
     try {
 
-      if (value.length <= 0) {
+      Keyboard.dismiss();
+
+      if (value.trim().length < 10) {
+        NotificationsFlash.CustomMessage('Cupom inválido', 'Seu cupom precisa ter 10 caracteres', 'NEUTRAL')
         return;
       }
 
       setLoading(true)
-
-      Keyboard.dismiss();
 
       await InfluencerService.createNewCouponCode(value)
 
@@ -80,7 +81,7 @@ export const AddCouponModal: React.FC<{ visible: boolean, onClose: any, isInflue
           <ButtonStorage onPress={() => props.isInfluencer ? onCreateNewCoupon() : onSaveCoupon()} size={25} />
         </Container>
 
-        <SubtitleSaveCouponImage />
+        <SubtitleSaveCouponImage style={{ bottom: '10%' }} />
       </Wrapper>
     </ModalComponent >
   );

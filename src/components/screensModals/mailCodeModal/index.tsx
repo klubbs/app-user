@@ -42,39 +42,37 @@ export const MailCodeModal = React.forwardRef<IModalRef, IModalCodeProps>((props
     );
   };
 
-  const openModal = () => {
+  function openModal() {
 
     try {
       setVisible(true)
 
       if (propsComp.action === 'REGISTER') {
         if (propsComp.registerParams) {
-          LoginService._sendRegisterCode(propsComp.registerParams.mail as string)
+          LoginService.sendRegisterCode(propsComp.registerParams.mail as string)
         }
       }
 
-    } catch (error) {
-      NotificationsFlash.SpillCoffee()
-    }
+    } catch (error) { NotificationsFlash.SpillCoffee() }
 
   }
 
-  const hideModal = () => {
-    Alert.alert('Sair', 'Ao sair, um novo código precisará ser enviado.', [
+  function hideModal() {
+    Alert.alert('Gostaria de fechar ?', 'Um novo código precisará ser enviado.', [
       {
         text: 'Não sair',
         style: 'cancel',
         onPress: () => { }
       },
       {
-        text: 'Sim, quero sair.',
+        text: 'Sim, quero fechar',
         style: 'destructive',
         onPress: () => setVisible(false)
       }
     ])
   }
 
-  const handleConfirm = async () => {
+  async function handleConfirm() {
     Keyboard.dismiss()
 
     propsComp.action === 'REGISTER' ? await createUser() : null
@@ -87,15 +85,17 @@ export const MailCodeModal = React.forwardRef<IModalRef, IModalCodeProps>((props
 
       const user = propsComp.registerParams
 
-      if (user) {
-        await register(user?.mail, user?.password, user?.name, user?.phone, code)
-
-        await signIn(user.mail, user.password);
+      if (!user) {
+        return;
       }
 
-      navigation.removeListener('beforeRemove', () => { })
+      await register(user?.mail, user?.password, user?.name, user?.phone, code)
 
-      navigation.navigate('Tabs')
+      await signIn(user.mail, user.password);
+
+      navigation.removeListener('beforeRemove', () => { })
+      //TODO: TO AQUI.l
+      navigation.navigate('Tabs');
     } catch (error: any) {
 
       if (error?.statusCode === 412) {
@@ -106,12 +106,10 @@ export const MailCodeModal = React.forwardRef<IModalRef, IModalCodeProps>((props
         NotificationsFlash.SpillCoffee()
       }
 
-    } finally {
-      setLoading(false)
-    }
+    } finally { setLoading(false) }
   }
 
-  const handleResetCode = () => {
+  function handleResetCode() {
 
     Alert.alert('Reenviar código ', 'Gostaria de enviar um novo código de autenticação ?', [
       {
@@ -128,13 +126,13 @@ export const MailCodeModal = React.forwardRef<IModalRef, IModalCodeProps>((props
             const user = propsComp.registerParams
 
             if (user) {
-              await LoginService._sendRegisterCode(user?.mail)
+              await LoginService.sendRegisterCode(user?.mail)
 
               NotificationsFlash.SuccessfullySentCode()
             }
 
           } catch (error) {
-            Haptic.notificationAsync(Haptic.NotificationFeedbackType.Warning)
+            Haptic.impactAsync(Haptic.ImpactFeedbackStyle.Medium)
 
             NotificationsFlash.SpillCoffee()
           } finally {

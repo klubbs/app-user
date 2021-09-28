@@ -34,7 +34,7 @@ export const Description = styled.Text`
 
 export const EnterButton = styled(Button).attrs(props => ({
   text: 'Entrar',
-  styleContainer: { width: '60%' }
+  styleContainer: { width: '60%', marginBottom: '5%' }
 }))``
 
 

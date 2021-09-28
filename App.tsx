@@ -9,7 +9,7 @@ import './src/utils/extensions/dateExtensions';
 import './src/utils/extensions/objectExtensions';
 import FlashComponent from 'flash-notify'
 
-// LogBox.ignoreLogs(['Expected style']); // Ignore log notification by message
+LogBox.ignoreLogs(['Expected style']);
 
 export default function App() {
 
