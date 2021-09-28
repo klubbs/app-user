@@ -7,7 +7,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   owner: "klubbs",
   slug: "klubbs",
   scheme: 'klubbs',
-  icon: '',
+  icon: './assets/images/icon.png',
   orientation: "portrait",
   splash: {
     image: "",

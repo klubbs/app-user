@@ -48,8 +48,19 @@ export const SubtitleHelp = styled.Text`
   font-size:15px;
   font-family:'Nunito_Bold';
 `
+export const EmptyImage = styled.View`
+  position: absolute;
+  align-items:center;
+  justify-content: center;
+  z-index:10;
+  top:13.5%;
+  height:60px;
+  width: 60px;
+  border-radius:30px;
+  background-color: ${colors.COLOR_SECUNDARY_WHITE};
+`
 
-export const ImageEstablishment = styled.Image`
+export const ImageInfluencer = styled.Image`
   position: absolute;
   z-index:10;
   top:13.5%;

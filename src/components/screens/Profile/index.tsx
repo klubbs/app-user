@@ -49,7 +49,7 @@ const Profile: React.FC = () => {
 
   const handlelogout = async () => {
 
-    Alert.alert('Gostaria de sair ?', 'Mas volte logo, por favor !', [
+    Alert.alert('Quer sair ?', 'Mas volte logo, por favor !', [
       {
         text: 'Não',
         style: 'cancel',

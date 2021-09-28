@@ -3,6 +3,7 @@ export interface ICouponsItem {
   coupon_code: string
   coupon_id: string
   influencer_image: string
+  empty: boolean
   master_coupons: {
     master_coupon_off_percentual: number,
     master_coupon_description: string,
@@ -10,5 +11,4 @@ export interface ICouponsItem {
     establishment_name: string,
     establishment_image: string
   }[]
-  empty: boolean
 }

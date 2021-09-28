@@ -1,6 +1,6 @@
 import { StackScreenProps } from "@react-navigation/stack";
 import { IRestaurants } from "../../components/organisms/restaurantsList/@types";
-import { IWalletCouponsReponse } from "../../services/@types/couponServiceTypes";
+import { ICouponsItem } from "../../components/organisms/walletCouponsTab/@types";
 
 export type IAppStackParams = {
   Tabs: undefined;
@@ -8,7 +8,7 @@ export type IAppStackParams = {
   LoginPassword: { mail: string };
   Register: { mail: string };
   Restaurant: IRestaurants;
-  CouponQr: Omit<IWalletCouponsReponse, 'wallet_id'>;
+  CouponQr: ICouponsItem;
   Influencer: undefined;
   MasterCoupons: undefined;
   Configurations: undefined;

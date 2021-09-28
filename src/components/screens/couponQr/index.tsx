@@ -3,10 +3,15 @@ import QRCode from 'react-native-qrcode-svg';
 import colors from '../../../../assets/constants/colors';
 import { CouponQrScreenProps } from '../../../settings/@types/appStackTypes';
 import { EstablishmentCardQr } from '../../components/cardEstablishmentQr';
-import { BottomContainer, TopContainer, Wrapper, FlatListComponent, AnimatedWrapper, BackgroundCoupon, SubtitleHelp, ImageEstablishment } from './styles';
+import {
+  BottomContainer, TopContainer, Wrapper, FlatListComponent, AnimatedWrapper, BackgroundCoupon,
+  SubtitleHelp, ImageInfluencer, EmptyImage
+} from './styles';
 import { MasterCouponDetailQrModal } from '../../screensModals/masterCouponDetailQrModal';
 import { IMasterCouponQrDetails } from './@types';
 import { AuthContext } from '../../../contexts/authContext';
+import { JsxAST } from 'react-native-svg';
+import { UserIcon } from '../../../../assets/icons/user_icon';
 
 
 export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
@@ -19,9 +24,38 @@ export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
     setActiveMasterCoupon(item)
   }
 
+  function RenderEstablishmentCard({ item }: { item: IMasterCouponQrDetails }): JSX.Element {
+    return (
+      <AnimatedWrapper>
+        <EstablishmentCardQr
+          onLongPress={() => handlePressableCoupon(item)}
+          off={item.master_coupon_off_percentual}
+          image={item.establishment_image}
+        />
+      </AnimatedWrapper>
+    )
+  }
+
+  function RenderInfluencerImage(): JSX.Element {
+
+    return (
+      <>
+        {
+          route.params.influencer_image !== ''
+          && <ImageInfluencer source={{ uri: route.params.influencer_image }} />
+        }
+        {!route.params.influencer_image &&
+          <EmptyImage>
+            <UserIcon width={30} height={30} fill={colors.COLOR_BLACK40} />
+          </EmptyImage>
+        }
+      </>
+    )
+  }
+
   return (
     <Wrapper>
-      <ImageEstablishment source={require('../../../../assets/images/klubbsLogoCircle.png')} />
+      <RenderInfluencerImage />
       <BackgroundCoupon />
       <TopContainer>
         <QRCode
@@ -38,15 +72,7 @@ export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
           data={route.params.master_coupons as IMasterCouponQrDetails[]}
           keyExtractor={item => item.key}
           renderItem={({ item }) => {
-            return (
-              <AnimatedWrapper>
-                <EstablishmentCardQr
-                  onLongPress={() => handlePressableCoupon(item)}
-                  off={item.master_coupon_off_percentual}
-                  image={item.establishment_image}
-                />
-              </AnimatedWrapper>
-            )
+            return (<RenderEstablishmentCard item={item as IMasterCouponQrDetails} />)
           }}
         />
         <SubtitleHelp>Atente o estabelecimento de validar seu cupom</SubtitleHelp>
