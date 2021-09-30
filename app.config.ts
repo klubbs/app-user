@@ -34,7 +34,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     versionCode: 1
   },
   extra: {
-    ENVIRONMENT_API_EARTH: process.env.ENVIRONMENT_API_EARTH
+    ENVIRONMENT_API_URL: process.env.ENVIRONMENT_API_URL
   }
 });
 
