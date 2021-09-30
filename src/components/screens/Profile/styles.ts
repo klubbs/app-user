@@ -103,4 +103,7 @@ export const MenuTextLogout = styled.Text`
   font-family:'Nunito_Regular';
 `
 
+export const ContainerScroll = styled.ScrollView`
+	padding:20px;
+`
 

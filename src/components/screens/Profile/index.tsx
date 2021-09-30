@@ -18,7 +18,8 @@ import {
   PointValues,
   SafeArea,
   UserImage,
-  WrapperTop
+  WrapperTop,
+  ContainerScroll
 } from './styles';
 
 
@@ -64,7 +65,7 @@ const Profile: React.FC = () => {
 
   }
 
-  function MenuFooterItem() {
+  function MenuFooterItem(): JSX.Element {
 
     return (
       user && <MenuLogoutContainer>
@@ -110,7 +111,18 @@ const Profile: React.FC = () => {
         <RenderPoints />
       </WrapperTop>
 
-      <FlatList
+      <ContainerScroll>
+        {
+          MENU_DATA.map(item => {
+            return (
+              <MenuItem key={item.key} icon={item.icon} description={item.description} text={item.text} cb={item.cb} logged={item.logged} />
+            )
+          })
+        }
+        <MenuFooterItem />
+      </ContainerScroll>
+
+      {/* <FlatList
         data={MENU_DATA}
         showsVerticalScrollIndicator={false}
         style={{ paddingHorizontal: 20 }}
@@ -128,7 +140,7 @@ const Profile: React.FC = () => {
             <MenuItem key={item.key} icon={item.icon} description={item.description} text={item.text} cb={item.cb} logged={item.logged} />
           )
         }}
-      />
+      /> */}
 
 
     </SafeArea >
