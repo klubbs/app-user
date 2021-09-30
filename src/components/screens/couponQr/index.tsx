@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-import { Dimensions } from 'react-native'
 import QRCode from 'react-native-qrcode-svg';
 import colors from '../../../../assets/constants/colors';
 import { CouponQrScreenProps } from '../../../settings/@types/appStackTypes';
