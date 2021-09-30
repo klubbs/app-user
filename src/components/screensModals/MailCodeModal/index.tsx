@@ -6,8 +6,8 @@ import { Cursor, RenderCellOptions, useClearByFocusCell } from 'react-native-con
 import { AuthContext } from '../../../contexts/authContext';
 import { LoginService } from '../../../services/loginService';
 import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
-import { ModalComponent } from '../../components/1Modal';
-import { Spinner } from '../../components/1Spinner';
+import { ModalComponent } from '../../components/Modal';
+import { Spinner } from '../../components/Spinner';
 import {
   ButtonConfirm,
   CodeBoxes,

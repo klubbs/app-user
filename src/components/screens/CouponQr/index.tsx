@@ -7,7 +7,7 @@ import {
   BottomContainer, TopContainer, Wrapper, FlatListComponent, AnimatedWrapper, BackgroundCoupon,
   SubtitleHelp, ImageInfluencer, EmptyImage
 } from './styles';
-import { MasterCouponDetailQrModal } from '../../screensModals/masterCouponDetailQrModal';
+import { MasterCouponDetailQrModal } from '../../screensModals/MasterCouponDetailQrModal';
 import { IMasterCouponQrDetails } from './@types';
 import { AuthContext } from '../../../contexts/authContext';
 import { UserIcon } from '../../../../assets/icons/user_icon';

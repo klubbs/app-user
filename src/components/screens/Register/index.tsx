@@ -9,8 +9,8 @@ import { LoginService } from '../../../services/loginService';
 import { RegisterScreenProps } from '../../../settings/@types/appStackTypes';
 import { isEmpty, nameof } from '../../../utils/extensions/objectExtensions';
 import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
-import { MailCodeModal } from '../../screensModals/1mailCodeModal';
-import { IModalRef } from '../../screensModals/1mailCodeModal/@types';
+import { MailCodeModal } from '../../screensModals/MailCodeModal';
+import { IModalRef } from '../../screensModals/MailCodeModal/@types';
 import { Confirm, containerBackButton, ContainerBottom, ContainerMiddle, ContainerScrool, ContainerTop, Description, Name, Password, Phone, Title, Wrapper, WrapperKeyboard } from './styles';
 
 

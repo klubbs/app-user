@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { MenuItem } from '../../components/1MenuItem';
+import { MenuItem } from '../../components/MenuItem';
 import { Wrapper, Container, SocialMediaContainer, SocialMediaSubtitle, Instagram, Twitter } from './styles';
-import { AddCouponModal } from '../../screensModals/1addCouponModal';
-import { InfluencerCouponsModal } from '../../screensModals/1influencerCouponsModal';
+import { AddCouponModal } from '../../screensModals/AddCouponModal';
+import { InfluencerCouponsModal } from '../../screensModals/InfluencerCouponsModal';
 import { useNavigation } from '@react-navigation/native';
 import { KeyboardAvoidingView } from 'react-native';
 import { BEHAVIOR_KEYBOARD } from '../../../utils/behaviorUtils';

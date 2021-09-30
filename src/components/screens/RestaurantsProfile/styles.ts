@@ -36,7 +36,8 @@ export const ContainerGetCoupon = styled.TouchableOpacity.attrs(props => ({
   justify-content: center;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  background-color: ${COLORS.COLOR_YELLOW};
+  /* background-color: ${COLORS.COLOR_YELLOW}; */
+  background-color: ${COLORS.COLOR_BLACK10};
 `
 
 export const GetCouponText = styled.Text`

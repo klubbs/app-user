@@ -1,6 +1,6 @@
 import { StackScreenProps } from "@react-navigation/stack";
-import { IRestaurants } from "../../components/organisms/1RestaurantsList/@types";
-import { ICouponsItem } from "../../components/organisms/1WalletCouponsTab/@types";
+import { IRestaurants } from "../../components/organisms/RestaurantsList/@types";
+import { ICouponsItem } from "../../components/organisms/WalletCouponsTab/@types";
 
 export type IAppStackParams = {
   Tabs: undefined;

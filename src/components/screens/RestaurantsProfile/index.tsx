@@ -5,8 +5,8 @@ import COLORS from '../../../../assets/constants/colors';
 import { ClockIcon } from '../../../../assets/icons/clockIcon';
 import { CouponIcon } from '../../../../assets/icons/coupon_icon';
 import { RestaurantScreenProps } from "../../../settings/@types/appStackTypes";
-import UberButton from "../../components/1ButtonUber";
-import { RestaurantInteractions } from '../../organisms/1RestaurantInteractions';
+import UberButton from "../../components/ButtonUber";
+import { RestaurantInteractions } from '../../organisms/RestaurantInteractions';
 import { BlocksWrapper, About, AboutSubtitle, BlocksValue, ContainerGetCoupon, ContainerImage, Container, IconsContainer, GetCouponText, RestaurantCategory, RestaurantName, Wrapper, NameContainer } from './styles';
 
 
@@ -78,7 +78,10 @@ const Restaurant: React.FC<RestaurantScreenProps> = ({ route }) => {
 
       </Container>
 
-      <ContainerGetCoupon onPress={handleCouponCall}>
+      <ContainerGetCoupon
+        disabled={true}
+        onPress={handleCouponCall}
+      >
         <GetCouponText>PEGAR CUPOM</GetCouponText>
       </ContainerGetCoupon>
     </Wrapper>

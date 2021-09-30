@@ -7,7 +7,7 @@ import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
 import { Pressable } from 'react-native';
 import { GetAllCouponsByInfluencerResponse } from './@types';
 import { InfluencerService } from '../../../services/influencerService';
-import { SpinnerLoading } from '../../components/1Spinner';
+import { SpinnerLoading } from '../../components/Spinner';
 
 export const InfluencerCouponsModal: React.FC<{ onClose: any, visible: boolean }> = (props) => {
 

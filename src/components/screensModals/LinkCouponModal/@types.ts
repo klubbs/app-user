@@ -1,4 +1,4 @@
-import { GetAllCouponsByInfluencerResponse } from "../1influencerCouponsModal/@types"
+import { GetAllCouponsByInfluencerResponse } from "../InfluencerCouponsModal/@types"
 
 export type IModalInfluencerCouponLinkProps = {
   masterCoupons: { masterCouponId: string, establishmentId: string }[],

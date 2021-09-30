@@ -5,7 +5,7 @@ import { Keyboard } from 'react-native';
 import { KlubbsLogo } from '../../../../assets/images/klubbsLogo';
 import { LoginService, LoginServiceExceptions } from '../../../services/loginService';
 import { IError } from '../../../settings/@types/IResponses';
-import { Spinner } from '../../components/1Spinner';
+import { Spinner } from '../../components/Spinner';
 import {
   ContainerBottom, ContainerTop, Description, EnterButton, ExplainText, MailInput, Title, Wrapper, WrapperImage,
   WrapperKeyboard, Subtitle

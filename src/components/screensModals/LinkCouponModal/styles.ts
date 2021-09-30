@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import colors from '../../../../assets/constants/colors';
 import Button from '../../components/Button';
-import { Selector } from '../../components/1Selector';
+import { Selector } from '../../components/Selector';
 
 
 export const Wrapper = styled.View`
