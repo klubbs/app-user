@@ -2,16 +2,16 @@ import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import COLORS from '../../../assets/constants/colors';
 import Tabs from './appTabStack';
-import WelcomeLoginScreen from '../../components/screens/LoginWelcome';
-import Register from '../../components/screens/Register';
-import Restaurant from '../../components/screens/RestaurantsProfile';
+import WelcomeLoginScreen from '../../components/screens/1LoginWelcome';
+import Register from '../../components/screens/1Register';
+import Restaurant from '../../components/screens/1RestaurantsProfile';
 import { IAppStackParams } from '../@types/appStackTypes';
-import { CouponQrScreen } from '../../components/screens/CouponQr';
-import { LoginPasswordScreen } from '../../components/screens/LoginPassword';
-import { Influencer } from '../../components/screens/Influencer';
-import { MasterCoupons } from '../../components/screens/MasterCoupons';
-import { ConfigurationsScreen } from '../../components/screens/Configurations';
-import { HelpScreen } from '../../components/screens/Help';
+import { CouponQrScreen } from '../../components/screens/1CouponQr';
+import { LoginPasswordScreen } from '../../components/screens/1LoginPassword';
+import { Influencer } from '../../components/screens/1Influencer';
+import { MasterCoupons } from '../../components/screens/1MasterCoupons';
+import { ConfigurationsScreen } from '../../components/screens/1Configurations';
+import { HelpScreen } from '../../components/screens/1Help';
 
 
 
