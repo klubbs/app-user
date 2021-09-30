@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Keyboard } from 'react-native'
-import { ModalComponent } from '../../components/Modal';
+import { ModalComponent } from '../../components/1Modal';
 import { Input, Container, Wrapper } from './styles';
-import { ButtonStorage } from '../../components/ButtonStorage';
+import { ButtonStorage } from '../../components/1ButtonStorage';
 import { CouponService } from '../../../services/couponService';
-import { Spinner } from '../../components/Spinner';
+import { Spinner } from '../../components/1Spinner';
 import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
 import { SubtitleSaveCouponImage } from '../../../../assets/images/coupons/contributeInfluencer';
 import { IError } from '../../../settings/@types/IResponses';

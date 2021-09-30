@@ -4,10 +4,10 @@ import colors from '../../../../assets/constants/colors';
 import { CouponIcon } from '../../../../assets/icons/coupon_icon';
 import { InfluencerService } from '../../../services/influencerService';
 import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
-import { BagTab } from '../../components/BagTab';
-import { CardMasterCoupons } from '../../organisms/CardMasterCoupons';
-import { ICardMasterCouponsProps } from '../../organisms/CardMasterCoupons/@types';
-import { LinkCouponModal } from '../../screensModals/linkCouponModal';
+import { BagTab } from '../../components/1BagTab';
+import { CardMasterCoupons } from '../../organisms/1CardMasterCoupons';
+import { ICardMasterCouponsProps } from '../../organisms/1CardMasterCoupons/@types';
+import { LinkCouponModal } from '../../screensModals/1linkCouponModal';
 import { useNavigation } from '@react-navigation/native';
 import { NotFoundRestaurants } from '../../../../assets/images/notFounds/notFoundRestaurants';
 
@@ -21,7 +21,7 @@ import {
   ContainerNotFound,
   EmptyTitle, EmptySubtitle
 } from './styles';
-import { SpinnerLoading } from '../../components/Spinner';
+import { SpinnerLoading } from '../../components/1Spinner';
 
 
 export const MasterCoupons: React.FC = () => {

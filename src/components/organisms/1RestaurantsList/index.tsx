@@ -3,7 +3,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StoreService } from '../../../services/storeServices';
-import { CardEstablishment } from "../../components/CardEstablishment";
+import { CardEstablishment } from "../../components/1CardEstablishment";
 import { containerStyle, EmptyCard, Header, WrapperNotFound, wrapperStyle, NotFoundTitle, NotFoundSubtitle, WrapperDenied } from './styles';
 import { IRestaurants } from './@types';
 import { LocationAccuracy, LocationObject } from 'expo-location';

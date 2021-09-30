@@ -1,12 +1,12 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../../contexts/authContext';
-import { CouponsCheckout } from '../../organisms/WalletCouponsCheckoutTab';
-import { CouponsEmpty } from '../../organisms/LogoutCoupons';
-import { CouponsWalletTab } from '../../organisms/WalletCouponsTab';
+import { CouponsCheckout } from '../../organisms/1WalletCouponsCheckoutTab';
+import { CouponsEmpty } from '../../organisms/1LogoutCoupons';
+import { CouponsWalletTab } from '../../organisms/1WalletCouponsTab';
 import { SafeArea, tabStyle, HeaderContainer } from './styles';
-import { ButtonCreateCoupon } from '../../components/ButtonCoupon';
-import { AddCouponModal } from '../../screensModals/addCouponModal';
+import { ButtonCreateCoupon } from '../../components/1ButtonCoupon';
+import { AddCouponModal } from '../../screensModals/1addCouponModal';
 
 const Tab = createMaterialTopTabNavigator();
 
