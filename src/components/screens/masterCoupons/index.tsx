@@ -4,12 +4,12 @@ import colors from '../../../../assets/constants/colors';
 import { CouponIcon } from '../../../../assets/icons/coupon_icon';
 import { InfluencerService } from '../../../services/influencerService';
 import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
-import { BagTab } from '../../components/bagTab';
-import { CardMasterCoupons } from '../../organisms/cardMasterCoupons';
-import { ICardMasterCouponsProps } from '../../organisms/cardMasterCoupons/@types';
+import { BagTab } from '../../components/BagTab';
+import { CardMasterCoupons } from '../../organisms/CardMasterCoupons';
+import { ICardMasterCouponsProps } from '../../organisms/CardMasterCoupons/@types';
 import { LinkCouponModal } from '../../screensModals/linkCouponModal';
 import { useNavigation } from '@react-navigation/native';
-import { NotFoundRestaurants } from '../../../../assets/images/notFoundRestaurants';
+import { NotFoundRestaurants } from '../../../../assets/images/notFounds/notFoundRestaurants';
 
 import {
   Wrapper,
@@ -21,7 +21,7 @@ import {
   ContainerNotFound,
   EmptyTitle, EmptySubtitle
 } from './styles';
-import { SpinnerLoading } from '../../components/spinner';
+import { SpinnerLoading } from '../../components/Spinner';
 
 
 export const MasterCoupons: React.FC = () => {

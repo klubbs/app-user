@@ -2,7 +2,8 @@ import { TouchableOpacity } from 'react-native';
 import { CodeField } from 'react-native-confirmation-code-field';
 import styled from 'styled-components/native';
 import COLORS from '../../../../assets/constants/colors';
-import Button from '../../components/button'
+import { BEHAVIOR_KEYBOARD } from '../../../utils/behaviorUtils';
+import Button from '../../components/Button'
 
 export const Input = styled.Text`
     width: 60px;
@@ -64,3 +65,10 @@ export const ButtonConfirm = styled(Button).attrs(props => ({
   text: 'Pronto',
   styleContainer: { width: '60%' }
 }))``
+
+
+export const WrapperKeyboard = styled.KeyboardAvoidingView.attrs(props => ({
+  behavior: BEHAVIOR_KEYBOARD,
+}))`
+  flex:5
+`

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Keyboard } from 'react-native'
-import { ModalComponent } from '../../components/modal';
+import { ModalComponent } from '../../components/Modal';
 import { Input, Container, Wrapper } from './styles';
-import { ButtonStorage } from '../../components/buttonStorage';
+import { ButtonStorage } from '../../components/ButtonStorage';
 import { CouponService } from '../../../services/couponService';
-import { Spinner } from '../../components/spinner';
+import { Spinner } from '../../components/Spinner';
 import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
-import { SubtitleSaveCouponImage } from '../../../../assets/images/subtitleSaveCoupon';
+import { SubtitleSaveCouponImage } from '../../../../assets/images/coupons/contributeInfluencer';
 import { IError } from '../../../settings/@types/IResponses';
 import { InfluencerService, InfluencerServiceException } from '../../../services/influencerService';
 
@@ -22,7 +22,7 @@ export const AddCouponModal: React.FC<{ visible: boolean, onClose: any, isInflue
       Keyboard.dismiss();
 
       if (!CouponService.valid4SaveInWallet(value)) {
-        NotificationsFlash.CustomMessage('', "🚫 Cupom Inválido.", 'DANGER')
+        NotificationsFlash.CustomMessage('', '🚫 Cupom Inválido.', 'DANGER')
         return;
       }
 
@@ -77,7 +77,11 @@ export const AddCouponModal: React.FC<{ visible: boolean, onClose: any, isInflue
       <Spinner loading={loading} />
       <Wrapper>
         <Container>
-          <Input value={value} onChangeText={(e) => setValue(e.toUpperCase().trim())} />
+          <Input
+            autoCorrect={false}
+            value={value}
+            onChangeText={(e) => setValue(e.toUpperCase().trim())}
+          />
           <ButtonStorage onPress={() => props.isInfluencer ? onCreateNewCoupon() : onSaveCoupon()} size={25} />
         </Container>
 

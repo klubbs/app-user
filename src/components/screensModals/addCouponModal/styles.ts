@@ -1,7 +1,7 @@
 import { CodeField } from 'react-native-confirmation-code-field';
 import styled from 'styled-components/native';
 import colors from '../../../../assets/constants/colors';
-import InputLine from '../../components/inputLine';
+import InputLine from '../../components/Input';
 
 export const InputCoupon = styled(CodeField).attrs(props => ({
   cellCount: 10,
@@ -12,12 +12,13 @@ export const InputCoupon = styled(CodeField).attrs(props => ({
 }))``
 
 
-export const Input = styled.TextInput.attrs(props => ({
+export const Input = styled.TextInput.attrs(({
   placeholder: 'Digite o código do cupom',
   placeholderTextColor: colors.COLOR_BLACK20,
   keyboardType: 'default',
   returnKeyType: 'done',
   textAlign: 'center',
+  autoCapitalize: "characters",//This correct text for not duplicate values
   maxLength: 10,
   selectionColor: colors.COLOR_YELLOW
 }))`
@@ -33,6 +34,7 @@ export const Input = styled.TextInput.attrs(props => ({
 
 export const Container = styled.View`
   flex-direction: row;
+  flex:1;
   justify-content:space-between;
 `
 export const Wrapper = styled.View`

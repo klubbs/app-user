@@ -18,6 +18,7 @@ export const tabStyle = {
 
 export const HeaderContainer = styled.View`
   flex-direction: row;
+  flex:0.08;
   justify-content: flex-end;
   padding-horizontal:10px;
 `

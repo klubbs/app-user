@@ -1,8 +1,8 @@
 import React from 'react';
 import { HomeProvider } from '../../../contexts/homeContext';
-import AdvertisementsSlider from "../../organisms/bannerAdvertisements";
-import MainCategories from '../../organisms/restaurantsCategories';
-import { RestaurantsList } from '../../organisms/restaurantsList';
+import AdvertisementsSlider from "../../organisms/BannerAdvertisements";
+import MainCategories from '../../organisms/RestaurantsCategories';
+import { RestaurantsList } from '../../organisms/RestaurantsList';
 import { Container, ContainerBottom, Wrapper } from './styles';
 
 export const Home: React.FC = () => {

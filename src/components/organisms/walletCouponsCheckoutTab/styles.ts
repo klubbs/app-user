@@ -96,7 +96,7 @@ export const SquareSkeleton = styled(Skeleton).attrs(props => ({
   colors: [COLORS.COLOR_WHITE_40, COLORS.COLOR_BLACK20]
 }))``
 
-export const LineSkeleton = styled(Skeleton).attrs(props => ({
+export const LineSkeleton = styled(Skeleton).attrs((props) => ({
   width: props.top ? '90%' : '40%',
   height: 15,
   radius: 4,

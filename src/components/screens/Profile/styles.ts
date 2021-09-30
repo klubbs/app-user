@@ -15,12 +15,6 @@ export const IconLogout = styled(Feather).attrs(props => ({
   colors: COLORS.COLOR_BLACK40
 }))``
 
-export const IconUser = styled(Feather).attrs(props => ({
-  name: 'user',
-  size: 35,
-  color: COLORS.COLOR_BLACK40
-}))``
-
 export const ContainerPoints = styled.View`
   border-left-width: 0.8px;
   border-left-color: ${COLORS.COLOR_BLACK20};
@@ -44,20 +38,6 @@ export const ContainerImage = styled.View`
   align-items: center;
   justify-content: center;
 `;
-
-export const ImageBorder = styled.View`
-  width: 100px;
-  height: 100px;
-  border-radius: 50px;
-  border-width: 5px;
-  border-right-color: ${COLORS.COLOR_YELLOW};
-  border-bottom-color: ${COLORS.COLOR_YELLOW};
-  background-color: ${COLORS.COLOR_BLACK10};
-  border-color: transparent;
-  justify-content: center;
-  align-items: center;
-`;
-
 
 export const WrapperTop = styled.View`
   flex-direction: row;

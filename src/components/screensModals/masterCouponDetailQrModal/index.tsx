@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Modalize } from 'react-native-modalize'
-import { IMasterCouponQrDetails } from '../../screens/couponQr/@types';
+import { IMasterCouponQrDetails } from '../../screens/CouponQr/@types';
 
 import { Wrapper, Name, Description, Divider } from './styles';
 

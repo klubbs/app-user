@@ -1,5 +1,5 @@
 import React, { useState, createContext, useMemo } from 'react';
-import { IRestaurants } from '../components/organisms/restaurantsList/@types';
+import { IRestaurants } from '../components/organisms/RestaurantsList/@types';
 import { ICategoryResponse } from '../services/@types/storeServiceTypes';
 import { StoreService } from '../services/storeServices';
 import { AsyncStorageUtils } from '../utils/asyncStorageUtils';

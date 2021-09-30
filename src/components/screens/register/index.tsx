@@ -198,12 +198,13 @@ const Register: React.FC<RegisterScreenProps> = ({ route }) => {
           </ScrollView>
         </ContainerMiddle>
         <RenderButtons />
+
+        <MailCodeModal
+          ref={modalCodeRef}
+          action={'REGISTER'}
+          registerParams={{ mail: route.params.mail, phone, password, name }} />
       </WrapperKeyboard>
 
-      <MailCodeModal
-        ref={modalCodeRef}
-        action={'REGISTER'}
-        registerParams={{ mail: route.params.mail, phone, password, name }} />
 
     </Wrapper>
   );

@@ -4,7 +4,8 @@ import styled from "styled-components/native";
 import colors from '../../../../assets/constants/colors';
 import COLORS from "../../../../assets/constants/colors";
 import { CouponIcon } from "../../../../assets/icons/coupon_icon";
-import { CouponWalletBackground } from "../../../../assets/images/couponWalletBackground";
+import { ShopIcon } from '../../../../assets/icons/shop_icon';
+import { CouponWalletBackground } from "../../../../assets/images/coupons/walletCoupon";
 
 
 const Wrapper = styled.Pressable`
@@ -102,11 +103,13 @@ export const InfluencerEmpty = styled(MotiView).attrs(props => ({
   background-color: ${colors.COLOR_WHITE_40};
 `
 
-export const CouponSubtitleIcon = styled(CouponIcon).attrs(props => ({
+export const ShopSubtitleIcon = styled(ShopIcon).attrs(props => ({
   width: 10,
   height: 10,
-  fill: colors.COLOR_BLACK80
-}))``
+  fill: colors.COLOR_BLACK80,
+}))`
+  margin-left:5px;
+`
 
 
 export const CouponDefaultImage = styled(CouponIcon).attrs(props => ({

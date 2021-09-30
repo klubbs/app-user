@@ -1,8 +1,8 @@
 import styled from 'styled-components/native';
 import COLORS from '../../../../assets/constants/colors';
 import { BEHAVIOR_KEYBOARD } from '../../../utils/behaviorUtils';
-import Button from '../../components/button';
-import Input from '../../components/inputLine';
+import Button from '../../components/Button';
+import Input from '../../components/Input';
 
 export const Wrapper = styled.SafeAreaView`
   background-color: ${COLORS.COLOR_SECUNDARY_BLACK};

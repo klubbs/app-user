@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import { Dimensions, StyleSheet } from 'react-native'
 import colors from '../../../../assets/constants/colors';
-import { QrCouponBackground } from '../../../../assets/images/qrCouponBackground';
+import { QrCouponBackground } from '../../../../assets/images/backgrounds/backgroundQrCoupon';
 import { LikeUpIcon } from '../../../../assets/icons/like_up_icon';
 import { MotiView } from 'moti'
 
@@ -44,8 +44,8 @@ export const BackgroundCoupon = styled(QrCouponBackground).attrs(props => ({
 export const SubtitleHelp = styled.Text`
   color:${colors.COLOR_WHITE_80};
   position: absolute;
-  bottom: 12%;
-  font-size:15px;
+  margin-top: 65%;
+  font-size:14px;
   font-family:'Nunito_Bold';
 `
 export const EmptyImage = styled.View`
@@ -53,17 +53,17 @@ export const EmptyImage = styled.View`
   align-items:center;
   justify-content: center;
   z-index:10;
-  top:13.5%;
-  height:60px;
-  width: 60px;
-  border-radius:30px;
+  top:${height > 640 ? '13.5%' : '6%'};
+  height:50px;
+  width: 50px;
+  border-radius:25px;
   background-color: ${colors.COLOR_SECUNDARY_WHITE};
 `
 
 export const ImageInfluencer = styled.Image`
   position: absolute;
   z-index:10;
-  top:13.5%;
+  top:${height > 640 ? '13.5%' : '6%'};
   height:60px;
   width: 60px;
   border-radius:30px;

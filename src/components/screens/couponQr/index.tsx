@@ -1,8 +1,9 @@
 import React, { useState, useContext } from 'react';
+import { Dimensions } from 'react-native'
 import QRCode from 'react-native-qrcode-svg';
 import colors from '../../../../assets/constants/colors';
 import { CouponQrScreenProps } from '../../../settings/@types/appStackTypes';
-import { EstablishmentCardQr } from '../../components/cardEstablishmentQr';
+import { EstablishmentCardQr } from '../../components/CardEstablishmentQr';
 import {
   BottomContainer, TopContainer, Wrapper, FlatListComponent, AnimatedWrapper, BackgroundCoupon,
   SubtitleHelp, ImageInfluencer, EmptyImage
@@ -10,8 +11,8 @@ import {
 import { MasterCouponDetailQrModal } from '../../screensModals/masterCouponDetailQrModal';
 import { IMasterCouponQrDetails } from './@types';
 import { AuthContext } from '../../../contexts/authContext';
-import { JsxAST } from 'react-native-svg';
 import { UserIcon } from '../../../../assets/icons/user_icon';
+import { isIphoneX } from '../../../utils/iphoneHelper';
 
 
 export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
@@ -46,7 +47,7 @@ export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
         }
         {!route.params.influencer_image &&
           <EmptyImage>
-            <UserIcon width={30} height={30} fill={colors.COLOR_BLACK40} />
+            <UserIcon width={25} height={25} fill={colors.COLOR_BLACK40} />
           </EmptyImage>
         }
       </>
@@ -61,7 +62,7 @@ export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
         <QRCode
           value={`${route?.params?.coupon_id}|${user?.id}`}
           logo={require('../../../../assets/images/klubbsLogoCircle.png')}
-          size={190}
+          size={isIphoneX() ? 195 : 180}
           color={colors.COLOR_SECUNDARY_BLACK}
         />
       </TopContainer>

@@ -6,9 +6,18 @@ import { Cursor, RenderCellOptions, useClearByFocusCell } from 'react-native-con
 import { AuthContext } from '../../../contexts/authContext';
 import { LoginService } from '../../../services/loginService';
 import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
-import { ModalComponent } from '../../components/modal';
-import { Spinner } from '../../components/spinner';
-import { ButtonConfirm, CodeBoxes, Container, Input, Title, TitleDescription, TouchableReset } from './styles';
+import { ModalComponent } from '../../components/Modal';
+import { Spinner } from '../../components/Spinner';
+import {
+  ButtonConfirm,
+  CodeBoxes,
+  Container,
+  Input,
+  Title,
+  TitleDescription,
+  TouchableReset,
+  WrapperKeyboard
+} from './styles';
 import { IModalCodeProps, IModalRef } from './@types';
 
 
@@ -91,10 +100,10 @@ export const MailCodeModal = React.forwardRef<IModalRef, IModalCodeProps>((props
 
       await register(user?.mail, user?.password, user?.name, user?.phone, code)
 
+      navigation.removeListener('beforeRemove', () => { })
+
       await signIn(user.mail, user.password);
 
-      navigation.removeListener('beforeRemove', () => { })
-      //TODO: TO AQUI.l
       navigation.navigate('Tabs');
     } catch (error: any) {
 

@@ -1,11 +1,11 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../../contexts/authContext';
-import { CouponsCheckout } from '../../organisms/walletCouponsCheckoutTab';
-import { CouponsEmpty } from '../../organisms/logoutCoupons';
-import { CouponsWalletTab } from '../../organisms/walletCouponsTab';
+import { CouponsCheckout } from '../../organisms/WalletCouponsCheckoutTab';
+import { CouponsEmpty } from '../../organisms/LogoutCoupons';
+import { CouponsWalletTab } from '../../organisms/WalletCouponsTab';
 import { SafeArea, tabStyle, HeaderContainer } from './styles';
-import { ButtonCreateCoupon } from '../../components/buttonCoupon';
+import { ButtonCreateCoupon } from '../../components/ButtonCoupon';
 import { AddCouponModal } from '../../screensModals/addCouponModal';
 
 const Tab = createMaterialTopTabNavigator();
@@ -22,7 +22,6 @@ export const Coupons: React.FC = () => {
 
   return (
     <SafeArea>
-      <AddCouponModal visible={visibleModal} onClose={() => setVisibleModal(false)} isInfluencer={false} />
       <HeaderContainer>
         <ButtonCreateCoupon onPress={() => setVisibleModal(true)} />
       </HeaderContainer>
@@ -31,6 +30,7 @@ export const Coupons: React.FC = () => {
         <Tab.Screen name="Carteira" children={() => <CouponsWalletTab />} />
         <Tab.Screen name="Utilizados" children={() => <CouponsCheckout />} />
       </Tab.Navigator>
+      <AddCouponModal visible={visibleModal} onClose={() => setVisibleModal(false)} isInfluencer={false} />
     </SafeArea>
   );
 }

@@ -5,13 +5,12 @@ import { Alert, FlatList, TouchableOpacity } from 'react-native';
 import CongratulationsCoupons from '../../../../assets/animations/congratulations_coupons.json';
 import { AuthContext } from '../../../contexts/authContext';
 import { IMenu } from './@types';
-import { MenuItem } from '../../components/menuItem';
+import { MenuItem } from '../../components/MenuItem';
+import Character from '../../../../assets/images/characters/character.png'
 import {
   ContainerImage,
   ContainerPoints,
   IconLogout,
-  IconUser,
-  ImageBorder,
   MenuLogoutContainer,
   MenuTextLogout,
   Point,
@@ -65,17 +64,6 @@ const Profile: React.FC = () => {
 
   }
 
-  function MenuFooterItem(): JSX.Element {
-
-    return (
-      user && <MenuLogoutContainer>
-        <IconLogout onPress={handlelogout} />
-        <MenuTextLogout>Sair</MenuTextLogout>
-      </MenuLogoutContainer>
-    )
-
-  }
-
   function RenderPoints(): JSX.Element {
 
     return (
@@ -102,10 +90,7 @@ const Profile: React.FC = () => {
       <WrapperTop >
         <ContainerImage >
           {
-            user &&
-            <ImageBorder>
-              <UserImage source={require('../../../../assets/images/profile1.png')} />
-            </ImageBorder>
+            user && <UserImage source={Character} />
           }
         </ContainerImage>
         <RenderPoints />
@@ -114,34 +99,24 @@ const Profile: React.FC = () => {
       <ContainerScroll>
         {
           MENU_DATA.map(item => {
+
+            if (item.key === INFLUENCER_KEY && user?.influencer_id === null) {
+              return <></>
+            }
+
             return (
               <MenuItem key={item.key} icon={item.icon} description={item.description} text={item.text} cb={item.cb} logged={item.logged} />
             )
           })
         }
-        <MenuFooterItem />
+        {
+          user &&
+          <MenuLogoutContainer>
+            <IconLogout onPress={handlelogout} />
+            <MenuTextLogout>Sair</MenuTextLogout>
+          </MenuLogoutContainer>
+        }
       </ContainerScroll>
-
-      {/* <FlatList
-        data={MENU_DATA}
-        showsVerticalScrollIndicator={false}
-        style={{ paddingHorizontal: 20 }}
-        contentContainerStyle={{ height: '30%' }}
-        keyExtractor={item => item.key}
-        ListFooterComponent={() => MenuFooterItem()}
-        renderItem={({ item }) => {
-
-
-          if (item.key === INFLUENCER_KEY && user?.influencer_id === null) {
-            return <></>
-          }
-
-          return (
-            <MenuItem key={item.key} icon={item.icon} description={item.description} text={item.text} cb={item.cb} logged={item.logged} />
-          )
-        }}
-      /> */}
-
 
     </SafeArea >
   );

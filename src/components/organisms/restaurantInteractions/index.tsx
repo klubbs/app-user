@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, FlatList } from 'react-native';
-import { UberLogo } from '../../../../assets/images/uberLogo';
+import { UberLogo } from '../../../../assets/images/others/uber';
 import * as Linking from 'expo-linking';
 
 import { Container, Header, TouchableContainer } from './styles';

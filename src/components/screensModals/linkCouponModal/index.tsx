@@ -1,11 +1,11 @@
 import React, { useEffect, ReactElement, useState } from 'react';
 import { Modal } from 'react-native';
-import { Coupon } from '../../components/coupon';
+import { Coupon } from '../../components/Coupon';
 import { format4TwoColumns } from '../../../utils/formatersUtils'
 import { Wrapper, Header, BottomTab, Empty, Container, SelectorCoupon, ConfirmButton, FlatItems, HeaderDisabled, SubtitleDisabled, Cancel, HeaderContainer } from './styles';
 import { ICouponInfluencer, IModalInfluencerCouponLinkProps } from './@types';
 import { InfluencerService, InfluencerServiceException } from '../../../services/influencerService';
-import { Spinner } from '../../components/spinner';
+import { Spinner } from '../../components/Spinner';
 import { IError } from '../../../settings/@types/IResponses';
 import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Linking, View } from 'react-native';
-import { MenuItem } from '../../components/menuItem';
+import { MenuItem } from '../../components/MenuItem';
 
 import { Wrapper, ContainerScroll } from './styles';
 

@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import colors from '../../../../assets/constants/colors';
-import { CouponIcon } from '../../../../assets/icons/coupon_icon';
 import { ICouponProps } from './@types';
 import {
   MotifiedWrapper,
@@ -12,7 +10,7 @@ import {
   CouponContainer,
   Influencer,
   InfluencerEmpty,
-  CouponSubtitleIcon,
+  ShopSubtitleIcon,
   CouponDefaultImage
 } from './styles';
 
@@ -64,9 +62,8 @@ export const Coupon: React.FC<ICouponProps> = (props) => {
       <Container>
         <CouponContainer>
           <CountCoupons>{couponsQtd}</CountCoupons>
-          <CouponSubtitleIcon />
+          <ShopSubtitleIcon />
         </CouponContainer>
-        {/* <OffCoupons>{minOff}%</OffCoupons> */}
       </Container>
       {
         props.data.influencer_image

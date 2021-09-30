@@ -8,6 +8,7 @@ import "./src/utils/base64Initialization";
 import './src/utils/extensions/dateExtensions';
 import './src/utils/extensions/objectExtensions';
 import FlashComponent from 'flash-notify'
+import colors from "./assets/constants/colors";
 
 LogBox.ignoreLogs(['Expected style']);
 
@@ -41,7 +42,11 @@ export default function App() {
     <AuthProvider>
       <NavigationContainer>
         <FlashComponent />
-        <StatusBar animated={true} barStyle={'dark-content'} />
+        <StatusBar
+          backgroundColor={colors.COLOR_SECUNDARY_WHITE}
+          animated={true}
+          barStyle={'dark-content'}
+        />
         <AppStack />
       </NavigationContainer >
     </AuthProvider>

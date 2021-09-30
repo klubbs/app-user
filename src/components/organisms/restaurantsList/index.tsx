@@ -3,13 +3,13 @@ import React, { useEffect, useState, useContext } from 'react';
 import { FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { StoreService } from '../../../services/storeServices';
-import { CardEstablishment } from "../../components/cardEstablishment";
+import { CardEstablishment } from "../../components/CardEstablishment";
 import { containerStyle, EmptyCard, Header, WrapperNotFound, wrapperStyle, NotFoundTitle, NotFoundSubtitle, WrapperDenied } from './styles';
 import { IRestaurants } from './@types';
 import { LocationAccuracy, LocationObject } from 'expo-location';
 import { HomeContext } from '../../../contexts/homeContext';
-import { NotFoundRestaurants } from '../../../../assets/images/notFoundRestaurants';
-import { LocationDeniedImage } from '../../../../assets/images/locationDeniedImage';
+import { NotFoundRestaurants } from '../../../../assets/images/notFounds/notFoundRestaurants';
+import { LocationDeniedImage } from '../../../../assets/images/notFounds/locationDenied';
 import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
 
 let userLocation: LocationObject | undefined = undefined;
