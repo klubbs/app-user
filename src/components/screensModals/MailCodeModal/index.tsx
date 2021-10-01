@@ -94,7 +94,13 @@ export const MailCodeModal = React.forwardRef<IModalRef, IModalCodeProps>((props
 
       const user = propsComp.registerParams
 
+      if (code.trim().length < 5) {
+        NotificationsFlash.InvalidCode()
+        return
+      }
+
       if (!user) {
+        NotificationsFlash.SpillCoffee()
         return;
       }
 
@@ -107,8 +113,9 @@ export const MailCodeModal = React.forwardRef<IModalRef, IModalCodeProps>((props
       navigation.navigate('Tabs');
     } catch (error: any) {
 
+      console.log(error)
       if (error?.statusCode === 412) {
-        NotificationsFlash.InvalidCode()
+        NotificationsFlash.SomeoneBullshit()
       }
 
       if (error?.statusCode === 422) {
@@ -164,6 +171,7 @@ export const MailCodeModal = React.forwardRef<IModalRef, IModalCodeProps>((props
         <CodeBoxes
           value={code}
           onChangeText={(e) => setCode(e)}
+          onSubmitEditing={(e) => Keyboard.dismiss()}
           renderCell={renderInput}
           {...props}
         />

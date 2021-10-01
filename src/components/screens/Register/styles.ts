@@ -48,6 +48,15 @@ export const Description = styled.Text`
   text-align: center;
 `
 
+
+export const SubtitlePassword = styled.Text`
+  color:${COLORS.COLOR_WHITE_80};
+  font-size:12px;
+  margin-top:10px;
+  font-family:'Nunito_Light';
+  text-align: center;
+`
+
 export const Confirm = styled(TouchableOpacity).attrs(() => ({
   activeOpacity: 0.8
 }))`

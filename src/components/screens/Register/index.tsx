@@ -11,7 +11,22 @@ import { isEmpty, nameof } from '../../../utils/extensions/objectExtensions';
 import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
 import { MailCodeModal } from '../../screensModals/MailCodeModal';
 import { IModalRef } from '../../screensModals/MailCodeModal/@types';
-import { Confirm, containerBackButton, ContainerBottom, ContainerMiddle, ContainerScrool, ContainerTop, Description, Name, Password, Phone, Title, Wrapper, WrapperKeyboard } from './styles';
+import {
+  Confirm,
+  containerBackButton,
+  ContainerBottom,
+  ContainerMiddle,
+  ContainerScrool,
+  ContainerTop,
+  Description,
+  Name,
+  Password,
+  Phone,
+  Title,
+  Wrapper,
+  WrapperKeyboard,
+  SubtitlePassword
+} from './styles';
 
 
 const SCROOL_INDEX = { FIRST: 0, LAST: 1 };
@@ -150,6 +165,7 @@ const Register: React.FC<RegisterScreenProps> = ({ route }) => {
             onTouchEnd={() => errorInput.password ? setErrorInput({ ...errorInput, password: false }) : null}
             error={errorInput.password}
           />
+          <SubtitlePassword>Pelo menos 5 caracteres</SubtitlePassword>
         </ContainerScrool>
       </>
     )
@@ -200,12 +216,12 @@ const Register: React.FC<RegisterScreenProps> = ({ route }) => {
         <RenderButtons />
 
       </WrapperKeyboard>
-        <MailCodeModal
-          ref={modalCodeRef}
-          action={'REGISTER'}
-          registerParams={{ mail: route.params.mail, phone, password, name }} />
-
+      <MailCodeModal
+        ref={modalCodeRef}
+        action={'REGISTER'}
+        registerParams={{ mail: route.params.mail, phone, password, name }} />
     </Wrapper>
+
   );
 }
 

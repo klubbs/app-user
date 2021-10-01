@@ -26,9 +26,9 @@ api.interceptors.request.use(async (config) => {
 api.interceptors.response.use((response) => response,
   (error): Promise<IError> => {
 
-    console.log("########################################################")
-    console.error(error)
-    console.log("########################################################")
+    // console.log("########################################################")
+    // console.error(error)
+    // console.log("########################################################")
 
     const statusCode = error.response.data?.statusCode
 

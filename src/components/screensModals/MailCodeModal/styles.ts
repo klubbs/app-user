@@ -56,7 +56,7 @@ export const TouchableReset = styled(TouchableOpacity).attrs(props => ({
 
 export const CodeBoxes = styled(CodeField).attrs(props => ({
   cellCount: 5,
-  returnKeyType: 'none',
+  returnKeyType: 'done',
   keyboardType: 'default',
   textContentType: 'oneTimeCode'
 }))``

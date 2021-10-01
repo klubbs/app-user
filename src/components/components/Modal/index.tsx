@@ -11,7 +11,7 @@ export const ModalComponent: React.FC<IModalProps> = (props) => {
   return (
     <Modal animationType={"slide"} transparent={true} visible={props.visible} >
       <KeyboardAvoidingView
-        behavior={BEHAVIOR_KEYBOARD}
+        behavior={'position'}
         contentContainerStyle={{ flex: 1 }}
         style={{ flex: 1 }}
       >
