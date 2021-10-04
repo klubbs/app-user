@@ -6,7 +6,7 @@ import { CouponsEmpty } from '../../organisms/LogoutCoupons';
 import { CouponsWalletTab } from '../../organisms/WalletCouponsTab';
 import { SafeArea, tabStyle, HeaderContainer } from './styles';
 import { ButtonCreateCoupon } from '../../components/ButtonCoupon';
-import { AddCouponModal } from '../../screensModals/AddCouponModal';
+import { SaveOrCreateCoupon } from '../../screensModals/SaveOrCreateCoupon';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -30,7 +30,7 @@ export const Coupons: React.FC = () => {
         <Tab.Screen name="Carteira" children={() => <CouponsWalletTab />} />
         <Tab.Screen name="Utilizados" children={() => <CouponsCheckout />} />
       </Tab.Navigator>
-      <AddCouponModal visible={visibleModal} onClose={() => setVisibleModal(false)} isInfluencer={false} />
+      <SaveOrCreateCoupon visible={visibleModal} onClose={() => setVisibleModal(false)} isInfluencer={false} />
     </SafeArea>
   );
 }

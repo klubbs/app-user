@@ -113,7 +113,6 @@ export const MailCodeModal = React.forwardRef<IModalRef, IModalCodeProps>((props
       navigation.navigate('Tabs');
     } catch (error: any) {
 
-      console.log(error)
       if (error?.statusCode === 412) {
         NotificationsFlash.SomeoneBullshit()
       }

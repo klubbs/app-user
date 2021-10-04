@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { MenuItem } from '../../components/MenuItem';
 import { Wrapper, Container, SocialMediaContainer, SocialMediaSubtitle, Instagram, Twitter } from './styles';
-import { AddCouponModal } from '../../screensModals/AddCouponModal';
-import { InfluencerCouponsModal } from '../../screensModals/InfluencerCouponsModal';
+import { SaveOrCreateCoupon } from '../../screensModals/SaveOrCreateCoupon';
+import { CouponsInfluencer } from '../../screensModals/CouponsInfluencer';
 import { useNavigation } from '@react-navigation/native';
 import { KeyboardAvoidingView } from 'react-native';
 import { BEHAVIOR_KEYBOARD } from '../../../utils/behaviorUtils';
@@ -27,10 +27,8 @@ export const Influencer: React.FC = () => {
         <MenuItem key={'2'} icon={'archive'} text={'Meus cupons'} description={'Cupons criados por você'} cb={() => setVisibleInfluencerCoupon(true)} />
         <MenuItem key={'3'} icon={'divide'} text={'Estabelecimentos disponíveis'} description={'Associe seus cupons'} cb={() => navigation.navigate('MasterCoupons')} />
       </Container>
-      <KeyboardAvoidingView behavior={'position'}>
-        <InfluencerCouponsModal visible={visibleInfluencerCoupon} onClose={() => setVisibleInfluencerCoupon(false)} />
-      </KeyboardAvoidingView>
-      <AddCouponModal visible={visibleCreateCoupon} onClose={() => setVisibleCreateCoupon(false)} isInfluencer={true} />
+      <CouponsInfluencer visible={visibleInfluencerCoupon} onClose={() => setVisibleInfluencerCoupon(false)} />
+      <SaveOrCreateCoupon visible={visibleCreateCoupon} onClose={() => setVisibleCreateCoupon(false)} isInfluencer={true} />
     </Wrapper>
   );
 }

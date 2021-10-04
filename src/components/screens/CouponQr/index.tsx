@@ -7,12 +7,13 @@ import {
   BottomContainer, TopContainer, Wrapper, FlatListComponent, AnimatedWrapper, BackgroundCoupon,
   SubtitleHelp, ImageInfluencer, EmptyImage
 } from './styles';
-import { MasterCouponDetailQrModal } from '../../screensModals/MasterCouponDetailQrModal';
+import { QrCouponsRules } from '../../screensModals/QrCouponsRules';
 import { IMasterCouponQrDetails } from './@types';
 import { AuthContext } from '../../../contexts/authContext';
 import { UserIcon } from '../../../../assets/icons/user_icon';
 import { isIphoneX } from '../../../utils/iphoneHelper';
 
+let key = 0;
 
 export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
 
@@ -70,15 +71,16 @@ export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
 
         <FlatListComponent
           data={route.params.master_coupons as IMasterCouponQrDetails[]}
-          keyExtractor={item => item.key}
+          keyExtractor={item => `${key}`}
           renderItem={({ item }) => {
-            return (<RenderEstablishmentCard item={item as IMasterCouponQrDetails} />)
+            key++;
+            return (<RenderEstablishmentCard key={key} item={item as IMasterCouponQrDetails} />)
           }}
         />
         <SubtitleHelp>Atente o estabelecimento de validar seu cupom</SubtitleHelp>
       </BottomContainer>
       {
-        activeMasterCoupon && <MasterCouponDetailQrModal data={activeMasterCoupon} onClose={() => setActiveMasterCoupon(null)} />
+        activeMasterCoupon && <QrCouponsRules data={activeMasterCoupon} onClose={() => setActiveMasterCoupon(null)} />
       }
     </Wrapper>
   );

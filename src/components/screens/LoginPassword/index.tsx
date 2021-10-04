@@ -33,7 +33,7 @@ export const LoginPasswordScreen: React.FC<LoginPasswordScreenProps> = ({ route 
 
       await signIn(route.params.mail, password)
 
-      navigation.navigate('Tabs', { signUser: true })
+      navigation.navigate('Tabs')
 
     } catch (error: any) {
       LoginServiceExceptions.catchLogin(error)

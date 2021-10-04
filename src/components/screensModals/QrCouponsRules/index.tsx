@@ -4,7 +4,7 @@ import { IMasterCouponQrDetails } from '../../screens/CouponQr/@types';
 
 import { Wrapper, Name, Description, Divider } from './styles';
 
-export const MasterCouponDetailQrModal: React.FC<{ data: IMasterCouponQrDetails | null, onClose: any }> = (props) => {
+export const QrCouponsRules: React.FC<{ data: IMasterCouponQrDetails | null, onClose: any }> = (props) => {
 
   const modalizeRef = useRef<Modalize>()
 

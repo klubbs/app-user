@@ -26,24 +26,27 @@ api.interceptors.request.use(async (config) => {
 api.interceptors.response.use((response) => response,
   (error): Promise<IError> => {
 
-    // console.log("########################################################")
-    // console.error(error)
-    // console.log("########################################################")
+    if (error.response.data) {
+      const statusCode = error.response.data?.statusCode
 
-    const statusCode = error.response.data?.statusCode
+      const validationError = error.response.data?.error
+      const message = error.response.data?.message
 
-    const validationError = error.response.data?.error
-    const message = error.response.data?.message
+      if (statusCode === 401) {
+        EventEmitter.emit('LOGOUT_USER', {})
+      }
 
-    if (statusCode === 401) {
-      EventEmitter.emit('LOGOUT_USER', {})
+      if (statusCode === 500) {
+        NotificationsFlash.SomeoneBullshit()
+      }
+
+      return Promise.reject({ message, error: validationError, statusCode: Number(statusCode) });
     }
 
-    if (statusCode === 500) {
-      NotificationsFlash.SomeoneBullshit()
-    }
-
-    return Promise.reject({ message, error: validationError, statusCode: Number(statusCode) });
+    console.log("########################################################")
+    console.error(error)
+    console.log("########################################################")
+    return Promise.reject(error);
   });
 
 

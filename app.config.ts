@@ -24,9 +24,9 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   ios: {
     supportsTablet: false,
     bundleIdentifier: "app.klubbs.user",
-    buildNumber: "0.0.3",
+    buildNumber: "0.0.4",
     infoPlist: {
-
+      NSLocationWhenInUseUsageDescription: "Isso nos permite usar a localização para fornecer certos recursos como localização de estabelecimentos próximos.",
     }
   },
   android: {

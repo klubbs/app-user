@@ -9,7 +9,7 @@ import { GetAllCouponsByInfluencerResponse } from './@types';
 import { InfluencerService } from '../../../services/influencerService';
 import { SpinnerLoading } from '../../components/Spinner';
 
-export const InfluencerCouponsModal: React.FC<{ onClose: any, visible: boolean }> = (props) => {
+export const CouponsInfluencer: React.FC<{ onClose: any, visible: boolean }> = (props) => {
 
   const [coupons, setCoupons] = useState<GetAllCouponsByInfluencerResponse[]>([])
   const [activeCopy, setActiveCopy] = useState<any>({})

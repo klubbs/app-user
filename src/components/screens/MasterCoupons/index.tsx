@@ -7,7 +7,7 @@ import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
 import { BagTab } from '../../components/BagTab';
 import { CardMasterCoupons } from '../../organisms/CardMasterCoupons';
 import { ICardMasterCouponsProps } from '../../organisms/CardMasterCoupons/@types';
-import { LinkCouponModal } from '../../screensModals/LinkCouponModal';
+import { LinkMasterCoupons } from '../../screensModals/LinkMasterCoupons';
 import { useNavigation } from '@react-navigation/native';
 import { NotFoundRestaurants } from '../../../../assets/images/notFounds/notFoundRestaurants';
 
@@ -106,7 +106,7 @@ export const MasterCoupons: React.FC = () => {
         ListEmptyComponent={LoadingOrEmptyRender}
         renderItem={({ item }) => <CardMasterCoupons data={item} />}
       />
-      {modalLinkShow && <LinkCouponModal masterCoupons={selectedMasters} visible={modalLinkShow} onClose={onCloseLinkModal} />}
+      {modalLinkShow && <LinkMasterCoupons masterCoupons={selectedMasters} visible={modalLinkShow} onClose={onCloseLinkModal} />}
       <CouponsBagTab />
     </Wrapper >
   );

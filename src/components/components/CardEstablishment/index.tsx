@@ -47,7 +47,7 @@ export const CardEstablishment: React.FC<ICardEstablishmentProps> = ({ data, onP
     duration: 350,
     useNativeDriver: true
   }).start();
-  console.log(data.image)
+
   return (
     <Wrapper disabled={!onPress} onPress={onPress}>
       <OpenIndicator open={isOpen()} style={{ opacity: opacityAnim }} />

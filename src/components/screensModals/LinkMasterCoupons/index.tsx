@@ -11,7 +11,7 @@ import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 
-export const LinkCouponModal: React.FC<IModalInfluencerCouponLinkProps> = (props) => {
+export const LinkMasterCoupons: React.FC<IModalInfluencerCouponLinkProps> = (props) => {
 
   const [coupons, setCoupons] = useState<ICouponInfluencer[]>([])
   const [selectedCoupon, setSelectedCoupon] = useState('')
@@ -44,7 +44,7 @@ export const LinkCouponModal: React.FC<IModalInfluencerCouponLinkProps> = (props
 
       await InfluencerService.linkCouponInMasterCoupon(props.masterCoupons.map(i => i.masterCouponId), selectedCoupon);
 
-      NotificationsFlash.CustomMessage('Adicionado', 'Ofertas dos estabelecimentos adicionado ao cupom', 'SUCCESS')
+      NotificationsFlash.CustomMessage('Adicionado', 'Oferta dos estabelecimentos adicionado ao cupom', 'SUCCESS')
 
       props.onClose();
 

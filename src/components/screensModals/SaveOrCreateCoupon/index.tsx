@@ -10,7 +10,7 @@ import { SubtitleSaveCouponImage } from '../../../../assets/images/coupons/contr
 import { IError } from '../../../settings/@types/IResponses';
 import { InfluencerService, InfluencerServiceException } from '../../../services/influencerService';
 
-export const AddCouponModal: React.FC<{ visible: boolean, onClose: any, isInfluencer: boolean }> = (props) => {
+export const SaveOrCreateCoupon: React.FC<{ visible: boolean, onClose: any, isInfluencer: boolean }> = (props) => {
 
   const [value, setValue] = useState("")
   const [loading, setLoading] = useState(false)
