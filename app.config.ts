@@ -20,11 +20,11 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   experiments: {
     "turboModules": true
   },
-  version: "0.0.1",
+  version: "0.0.2",
   ios: {
     supportsTablet: false,
     bundleIdentifier: "app.klubbs.user",
-    buildNumber: "0.0.5",
+    buildNumber: "0.0.6",
     infoPlist: {
       NSLocationAlwaysAndWhenInUseUsageDescription: "Isso nos permite usar a localização para fornecer certos recursos como localização de estabelecimentos próximos.",
       NSLocationWhenInUseUsageDescription: "Isso nos permite usar a localização para fornecer certos recursos como localização de estabelecimentos próximos.",
