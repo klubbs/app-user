@@ -2,7 +2,20 @@ import React, { useEffect, ReactElement, useState } from 'react';
 import { Modal } from 'react-native';
 import { Coupon } from '../../components/Coupon';
 import { format4TwoColumns } from '../../../utils/formatersUtils'
-import { Wrapper, Header, BottomTab, Empty, Container, SelectorCoupon, ConfirmButton, FlatItems, HeaderDisabled, SubtitleDisabled, Cancel, HeaderContainer } from './styles';
+import {
+  Wrapper,
+  Header,
+  BottomTab,
+  Empty,
+  Container,
+  SelectorCoupon,
+  ConfirmButton,
+  FlatItems,
+  HeaderDisabled,
+  SubtitleDisabled,
+  Cancel,
+  HeaderContainer
+} from './styles';
 import { ICouponInfluencer, IModalInfluencerCouponLinkProps } from './@types';
 import { InfluencerService, InfluencerServiceException } from '../../../services/influencerService';
 import { Spinner } from '../../components/Spinner';
@@ -128,8 +141,8 @@ export const LinkMasterCoupons: React.FC<IModalInfluencerCouponLinkProps> = (pro
 
         <BottomTab disabled={disableSave}>
 
-          {disableSave && <HeaderDisabled>Cupom não permitido para adicionar</HeaderDisabled>}
-          {disableSave && <SubtitleDisabled>Cada cupom seu só pode armazenar ao menos um cupom de cada restaurante</SubtitleDisabled>}
+          {disableSave && <HeaderDisabled>Indisponível para vincular</HeaderDisabled>}
+          {disableSave && <SubtitleDisabled>Cada cupom só pode ser vinculado a uma promoção por estabelecimento</SubtitleDisabled>}
 
           {!disableSave && selectedCoupon !== '' && <ConfirmButton onPress={handleCouponLink} />}
         </BottomTab>
