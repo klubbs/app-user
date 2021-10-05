@@ -83,3 +83,10 @@ export const ImageEmpty = styled(Skeleton).attrs(props => ({
   radius: 'round',
   colors: [COLORS.COLOR_SECUNDARY_WHITE, COLORS.COLOR_WHITE_20]
 }))``
+
+export const EstablishmentImage = styled.Image`
+  width:80px;
+  height:80px;
+  border-radius:40px;
+`
+

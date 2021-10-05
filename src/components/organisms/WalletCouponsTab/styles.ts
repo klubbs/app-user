@@ -21,7 +21,7 @@ export const FlatComponent = styled.FlatList.attrs(props => ({
   contentContainerStyle: {
     backgroundColor: COLORS.COLOR_WHITE, alignItems: 'center', borderRadius: 10, paddingBottom: 80
   },
-  columnWrapperStyle: { justifyContent: 'space-around', alignItems: 'center', width: '100%', paddingVertical: 15, paddingHorizontal: 15 }
+  columnWrapperStyle: { justifyContent: 'space-around', alignItems: 'center', width: '100%', paddingVertical: 10, paddingHorizontal: 5 }
 }))`
   width: 100%;
   height: 100%;

@@ -9,7 +9,8 @@ import {
   Percent, Time,
   RightContainer,
   Wrapper,
-  ImageEmpty
+  ImageEmpty,
+  EstablishmentImage
 } from './styles';
 
 
@@ -27,7 +28,9 @@ export const CouponsCheckoutItems: React.FC<{ data: ICouponCheckoutItem }> = (pr
       </ContainerLeft>
       <RightContainer >
         <Box>
-          <ImageEmpty />
+          <ImageEmpty show={props.data?.image?.trim() === ''}>
+            <EstablishmentImage source={{ uri: `https://klubbs-establishment.s3.amazonaws.com/${props.data.image}` }} />
+          </ImageEmpty>
         </Box>
         <ContainerText>
           <Name>{props.data.establishment_name}</Name>

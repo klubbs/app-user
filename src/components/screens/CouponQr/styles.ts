@@ -17,7 +17,7 @@ export const Wrapper = styled.SafeAreaView`
 export const TopContainer = styled.View`
   flex: 1.4;
   width: 100%;
-  padding-top: 9%;
+  padding-top: ${height < 700 ? '2%' : '9%'};
   justify-content: center;
   align-items: center;
 
@@ -53,7 +53,7 @@ export const EmptyImage = styled.View`
   align-items:center;
   justify-content: center;
   z-index:10;
-  top:${height > 640 ? '13.5%' : '6%'};
+  top:${height > 700 ? '13.5%' : '6%'};
   height:50px;
   width: 50px;
   border-radius:25px;
@@ -63,7 +63,7 @@ export const EmptyImage = styled.View`
 export const ImageInfluencer = styled.Image`
   position: absolute;
   z-index:10;
-  top:${height > 640 ? '13.5%' : '6%'};
+  top:${height > 700 ? '13.5%' : '6%'};
   height:60px;
   width: 60px;
   border-radius:30px;

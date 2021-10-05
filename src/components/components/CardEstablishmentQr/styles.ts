@@ -8,7 +8,7 @@ export const Wrapper = styled.Pressable`
     margin: 10px;
     height:140px;
     align-items: center;
-    align-items: flex-start;
+    top:2%;
 `
 
 export const EstablishmentImage = styled.Image`

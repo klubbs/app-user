@@ -9,12 +9,13 @@ import { ShopIcon } from '../../../../assets/icons/shop_icon';
 import { Wrapper, EstablishmentImage, ContainerToolbar, ContainerOff, OffCoupon, EmptyImage, EmptyIcon } from './styles';
 
 export const EstablishmentCardQr: React.FC<{ image: string, off: number } & PressableProps> = (props) => {
+
   return (
     <Wrapper
       onLongPress={props.onLongPress}
     >
 
-      {props.image && <EstablishmentImage source={{ uri: props.image }} />}
+      {props.image && <EstablishmentImage source={{ uri: `https://klubbs-establishment.s3.amazonaws.com/${props.image}` }} />}
 
       {!props.image &&
         <EmptyImage>

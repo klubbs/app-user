@@ -16,9 +16,7 @@ export const CouponsWalletTab: React.FC = () => {
   const [walletCoupom, setWalletCoupon] = useState<ICouponsItem[]>([])
 
   useEffect(() => {
-
-    getAllWalletCoupons()
-
+    setTimeout(() => { getAllWalletCoupons() }, 2000)
   }, [])
 
   async function getAllWalletCoupons() {
