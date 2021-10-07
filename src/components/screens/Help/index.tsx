@@ -15,7 +15,8 @@ export const HelpScreen: React.FC = () => {
           icon='book-open'
           cb={
             () => Linking
-              .openURL('https://enshrined-bubbler-645.notion.site/Klubbs-para-estabelecimentos-3052e0851f824962882da94b7705d02d')}
+              .openURL('https://enshrined-bubbler-645.notion.site/Klubbs-cf170a68e1254a9a97434a0f7b1a7541')
+          }
         />
 
         <MenuItem
@@ -25,7 +26,26 @@ export const HelpScreen: React.FC = () => {
           icon='mail'
           cb={
             () => Linking
-              .openURL('mailto: marketing@klubbs.com.br?subject=Oi, Klubbs tenho uma sugestão!')}
+              .openURL('mailto: marketing@klubbs.com.br?subject=Oi, Klubbs tenho uma sugestão!')
+          }
+        />
+        <MenuItem
+          key={'2'}
+          text='Termos e condições'
+          description='Termos e condições do serviço'
+          icon='key'
+          cb={() => Linking
+            .openURL('https://enshrined-bubbler-645.notion.site/Termos-e-condi-es-47a39b695c174d059c49e49e6b657848')
+          }
+        />
+        <MenuItem
+          key={'3'}
+          text='Políticas de privacidade'
+          description='Políticas de privacidade do serviço'
+          icon='shield'
+          cb={() => Linking
+            .openURL('https://enshrined-bubbler-645.notion.site/Privacy-Policy-klubbs-4be747dae70a451d805540db6fb24957')
+          }
         />
       </ContainerScroll>
     </Wrapper>
