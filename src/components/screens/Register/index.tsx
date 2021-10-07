@@ -27,6 +27,7 @@ import {
   WrapperKeyboard,
   SubtitlePassword
 } from './styles';
+import { Spinner } from '../../components/Spinner';
 
 
 const SCROOL_INDEX = { FIRST: 0, LAST: 1 };
@@ -40,6 +41,7 @@ const Register: React.FC<RegisterScreenProps> = ({ route }) => {
 
   const [errorInput, setErrorInput] = useState({ password: false, name: false, phone: false })
   const [currentScroll, setCurrentScroll] = useState(0)
+  const [loading, setLoading] = useState(false)
 
   const scroolRef = useRef<ScrollView>(null)
   const modalCodeRef = useRef<IModalRef>(null)
@@ -100,7 +102,9 @@ const Register: React.FC<RegisterScreenProps> = ({ route }) => {
     }
 
     try {
-      const isValidFields = LoginService
+      setLoading(true)
+
+      const isValidFields = await LoginService
         .validateRegister({
           mail: route.params.mail,
           password: password,
@@ -126,7 +130,11 @@ const Register: React.FC<RegisterScreenProps> = ({ route }) => {
           errorInputTmp.name = true
         }
 
-        NotificationsFlash.IncompleteRegisterInputs()
+        if (errorInputTmp.phone && !errorInputTmp.password && !errorInputTmp.name) {
+          NotificationsFlash.CustomMessage('', 'Telefone já em uso ou incorreto')
+        } else {
+          NotificationsFlash.IncompleteRegisterInputs()
+        }
 
         setErrorInput({ ...errorInput })
 
@@ -135,7 +143,10 @@ const Register: React.FC<RegisterScreenProps> = ({ route }) => {
 
       modalCodeRef.current?.openModal()
 
-    } catch (error: any) { NotificationsFlash.SpillCoffee() }
+    } catch (error: any) {
+      NotificationsFlash.SpillCoffee()
+    }
+    finally { setLoading(false) }
 
   }
 
@@ -220,6 +231,7 @@ const Register: React.FC<RegisterScreenProps> = ({ route }) => {
         ref={modalCodeRef}
         action={'REGISTER'}
         registerParams={{ mail: route.params.mail, phone, password, name }} />
+      <Spinner loading={loading} />
     </Wrapper>
 
   );
