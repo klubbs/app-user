@@ -47,7 +47,6 @@ export const RestaurantsList: React.FC = (props) => {
       await getRestaurants(location.coords.latitude, location.coords.longitude);
 
     } catch (error) {
-      console.log(error)
       NotificationsFlash.CustomMessage('Nos desculpe', 'Ocorreu um erro ao recuperar os restaurantes', 'NEUTRAL')
     } finally { setLoading(false) }
   }

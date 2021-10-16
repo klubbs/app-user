@@ -26,11 +26,7 @@ export class InfluencerService {
   }
 
   static async linkCouponInMasterCoupon(masterCoupons: string[], couponId: string): Promise<void> {
-
-    //TODO: Ajustar API para receber vários cupons master
-    for await (const element of masterCoupons) {
-      await api.post('influencer/coupons/link', { master_coupon_id: element, coupon_id: couponId })
-    }
+    await api.post('influencer/coupons/link', { master_coupons: masterCoupons, coupon_id: couponId })
   }
 
 }

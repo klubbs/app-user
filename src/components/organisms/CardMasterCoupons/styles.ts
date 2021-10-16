@@ -13,7 +13,7 @@ export const WrapperCard = styled(MotiView).attrs(props => ({
 }))`
   width: 90%;
   align-self:center;
-  height: 220px;
+  height: 230px;
   border-color:${colors.COLOR_BLACK10};
   border-width: 2px;
   border-radius:8px;
@@ -28,10 +28,14 @@ export const TopContainer = styled.View`
   flex:1;
 `
 
+export const FinancesInformationWrapper = styled.View`
+  justify-content: space-between;
+  flex-direction: row;
+`
+
 export const BottomContainer = styled.View`
-  justify-content: space-around;
-  align-items: flex-start;
   padding:10px;
+  justify-content: flex-start;
   flex:2;
 `
 export const SubBottomContainer = styled.View`
@@ -43,6 +47,8 @@ export const SubBottomContainer = styled.View`
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
 `
+
+
 
 export const Name = styled.Text`
   color:${colors.COLOR_SECUNDARY_BLACK};
@@ -57,8 +63,9 @@ export const Rules = styled.Text`
 `
 
 export const SeeMore = styled.Text`
-  color:${colors.COLOR_YELLOW};
+  color:${colors.COLOR_BLACK20};
   font-size:11px;
+  top: 10%;
   font-family:'Nunito_SemiBold';
 `
 export const Off = styled.Text`
@@ -79,5 +86,18 @@ export const WrapperOff = styled.View`
   justify-content: center;
   align-items: center;
   border-radius: 5px;
-  background-color: ${colors.COLOR_YELLOW};
+  background-color: ${colors.COLOR_SECUNDARY_BLACK};
+`
+
+export const MinimumTicketSubtitle = styled.Text`
+  color:${colors.COLOR_BLACK40};
+  font-size:13px;
+  left:100%;
+  font-family:'Nunito_Regular';
+`
+
+export const MinimumTicket = styled.Text`
+  color:${colors.COLOR_GREEN};
+  font-size:13px;
+  font-family:'Nunito_ExtraBold';
 `

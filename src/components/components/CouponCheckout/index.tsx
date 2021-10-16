@@ -18,7 +18,6 @@ import {
 
 export const CouponsCheckoutItems: React.FC<{ data: ICouponCheckoutItem }> = (props) => {
 
-
   return (
     <Wrapper >
       <ContainerLeft >
@@ -28,7 +27,7 @@ export const CouponsCheckoutItems: React.FC<{ data: ICouponCheckoutItem }> = (pr
       </ContainerLeft>
       <RightContainer >
         <Box>
-          <ImageEmpty show={props.data?.image?.trim() === ''}>
+          <ImageEmpty show={props.data?.image?.trim() === '' || props.data?.image === null}>
             <EstablishmentImage source={{ uri: `https://klubbs-establishment.s3.amazonaws.com/${props.data.image}` }} />
           </ImageEmpty>
         </Box>

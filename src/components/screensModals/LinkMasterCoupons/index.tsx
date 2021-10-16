@@ -141,8 +141,8 @@ export const LinkMasterCoupons: React.FC<IModalInfluencerCouponLinkProps> = (pro
 
         <BottomTab disabled={disableSave}>
 
-          {disableSave && <HeaderDisabled>Indisponível para vincular</HeaderDisabled>}
-          {disableSave && <SubtitleDisabled>Cada cupom só pode ser vinculado a uma promoção por estabelecimento</SubtitleDisabled>}
+          {disableSave && <HeaderDisabled>Indisponível para associar</HeaderDisabled>}
+          {disableSave && <SubtitleDisabled>Cada cupom só pode ser associado a uma oferta por estabelecimento</SubtitleDisabled>}
 
           {!disableSave && selectedCoupon !== '' && <ConfirmButton onPress={handleCouponLink} />}
         </BottomTab>

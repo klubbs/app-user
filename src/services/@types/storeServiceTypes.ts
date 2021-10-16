@@ -27,5 +27,7 @@ export type GetAllMasterCouponsResponse = {
   master_coupon_description: string,
   establishment_name: string,
   establishment_image: string,
-  establishment_id: string
+  establishment_id: string,
+  working_days: number[]
+  minimum_ticket: number
 }

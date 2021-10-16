@@ -1,11 +1,8 @@
-import { Feather } from '@expo/vector-icons';
 import React from 'react';
 import colors from '../../../../assets/constants/colors';
-import COLORS from '../../../../assets/constants/colors';
 import { ClockIcon } from '../../../../assets/icons/clockIcon';
 import { CouponIcon } from '../../../../assets/icons/coupon_icon';
 import { RestaurantScreenProps } from "../../../settings/@types/appStackTypes";
-import UberButton from "../../components/ButtonUber";
 import { RestaurantInteractions } from '../../organisms/RestaurantInteractions';
 import { BlocksWrapper, About, AboutSubtitle, BlocksValue, ContainerGetCoupon, ContainerImage, Container, IconsContainer, GetCouponText, RestaurantCategory, RestaurantName, Wrapper, NameContainer } from './styles';
 
@@ -39,7 +36,8 @@ const Restaurant: React.FC<RestaurantScreenProps> = ({ route }) => {
             <BlocksValue>
               {
                 route.params
-                  .openedAt.ToDateFormat()
+                  .openedAt
+                  .ToDateFormat()
                   .toLocaleTimeString("pt-br",
                     {
                       formatMatcher: "best fit",
@@ -50,7 +48,8 @@ const Restaurant: React.FC<RestaurantScreenProps> = ({ route }) => {
               { } &#xB7; { }
               {
                 route.params
-                  .closedAt.ToDateFormat()
+                  .closedAt
+                  .ToDateFormat()
                   .toLocaleTimeString("pt-br",
                     {
                       formatMatcher: "best fit",

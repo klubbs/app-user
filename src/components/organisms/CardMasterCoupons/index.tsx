@@ -2,35 +2,55 @@ import React from 'react';
 import colors from '../../../../assets/constants/colors';
 import { ShopIcon } from '../../../../assets/icons/shop_icon';
 import { ICardMasterCouponsProps } from './@types';
-import { WrapperCard, TopContainer, BottomContainer, Name, Rules, WrapperOff, Off, SeeMore, SubBottomContainer, ValidAt } from './styles';
+import {
+  WrapperCard, TopContainer, BottomContainer, Name, Rules, WrapperOff, Off, SeeMore,
+  SubBottomContainer,
+  ValidAt,
+  FinancesInformationWrapper,
+  MinimumTicketSubtitle,
+  MinimumTicket
+} from './styles';
 import { Selector } from '../../components/Selector';
+import { DaysOfWeek } from '../../components/DaysOfWeek';
 
-export const CardMasterCoupons: React.FC<{ data: ICardMasterCouponsProps }> = ({ data }) => {
+export const CardMasterCoupons: React.FC<ICardMasterCouponsProps> = (props) => {
 
   return (
-    <WrapperCard key={data.master_coupon_id}>
+    <WrapperCard key={props.master_coupon_id}>
       <TopContainer>
         <ShopIcon width={15} height={15} fill={colors.COLOR_YELLOW} />
-        <Name>{data?.establishment_name}</Name>
+        <Name>{props?.establishment_name}</Name>
         <Selector
-          onPress={(isSelected: boolean) => data.onPress(isSelected, data.master_coupon_id, data.establishment_id)}
+          onPress={(isSelected: boolean) => props.onPress ? props.onPress(isSelected) : null}
         />
       </TopContainer>
 
       <BottomContainer>
-        <WrapperOff>
-          <Off>{data?.master_coupon_off}%</Off>
-        </WrapperOff>
+        <FinancesInformationWrapper>
+          <WrapperOff>
+            <Off>{props?.master_coupon_off}%</Off>
+          </WrapperOff>
+
+          <MinimumTicketSubtitle>• valor mínimo </MinimumTicketSubtitle>
+          <MinimumTicket>{props.minimum_ticket
+            .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}</MinimumTicket>
+
+        </FinancesInformationWrapper>
+        <SeeMore>Dias da semana</SeeMore>
+        <DaysOfWeek
+          hasSelector={false}
+          initSelectedDays={props.working_days ?? []}
+        />
         <Rules>
-          {data?.master_coupon_description?.slice(0, 150)}  { }
-          <SeeMore>Ver mais</SeeMore>
+          {props?.master_coupon_description?.slice(0, 150)}  { }
+          {/* <SeeMore>Ver mais</SeeMore> */}
         </Rules>
       </BottomContainer>
       <SubBottomContainer>
-        <ValidAt>Válido até { }
-          {data?.master_coupon_valid_at.ToDateFormat().getDate()}-
-          {data?.master_coupon_valid_at.ToDateFormat().getMonth()}-
-          {data?.master_coupon_valid_at.ToDateFormat().getFullYear().toString().slice(2, 4)}
+        <ValidAt>Válido até: { }
+          {props?.master_coupon_valid_at
+            .ToDateFormat()
+            .toLocaleDateString('pt-BR', { year: 'numeric', month: 'long', day: 'numeric' })}
         </ValidAt>
       </SubBottomContainer>
 

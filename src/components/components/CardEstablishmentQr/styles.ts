@@ -3,7 +3,9 @@ import COLORS from '../../../../assets/constants/colors'
 import { ShopIcon } from '../../../../assets/icons/shop_icon';
 
 
-export const Wrapper = styled.Pressable`
+export const Wrapper = styled.TouchableOpacity.attrs(({
+  activeOpacity: 0.85
+}))`
     width: 150px;
     margin: 10px;
     height:140px;

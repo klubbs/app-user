@@ -12,7 +12,7 @@ export const EstablishmentCardQr: React.FC<{ image: string, off: number } & Pres
 
   return (
     <Wrapper
-      onLongPress={props.onLongPress}
+      onPress={props.onPress}
     >
 
       {props.image && <EstablishmentImage source={{ uri: `https://klubbs-establishment.s3.amazonaws.com/${props.image}` }} />}
