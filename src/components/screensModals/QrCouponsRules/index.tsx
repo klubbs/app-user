@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Modalize } from 'react-native-modalize'
 import { DaysOfWeek } from '../../components/DaysOfWeek';
-import { IWalletCouponsResponseMasterCouponData } from '../../../services/@types/couponServiceTypes';
+import { IWalletCouponsResponseOfferData } from '../../../services/@types/couponServiceTypes';
 import {
   Wrapper,
   Name,
@@ -15,7 +15,7 @@ import {
   Off
 } from './styles';
 
-export const QrCouponsRules: React.FC<{ data: IWalletCouponsResponseMasterCouponData | null, onClose: any }> =
+export const QrCouponsRules: React.FC<{ data: IWalletCouponsResponseOfferData | null, onClose: any }> =
   (props) => {
 
     const modalizeRef = useRef<Modalize>()

@@ -18,13 +18,13 @@ export const Coupon: React.FC<ICouponProps> = (props) => {
 
   const [minOff, setMinOff] = useState(0)
 
-  const couponsQtd = props.data.master_coupons?.length
+  const offersQtd = props.data.master_coupons?.length
   const couponsActive = defineIsActive()
 
   function defineIsActive() {
 
     if (!props.toggle) {
-      if (couponsQtd >= 1) {
+      if (offersQtd >= 1) {
         return true
       }
 
@@ -40,7 +40,7 @@ export const Coupon: React.FC<ICouponProps> = (props) => {
 
   useEffect(() => {
 
-    if (couponsQtd >= 1) {
+    if (offersQtd >= 1) {
       const offValues = props.data.master_coupons.map(item => item.master_coupon_off_percentual);
 
       setMinOff(Math.min(...offValues) ?? 0)
@@ -61,7 +61,7 @@ export const Coupon: React.FC<ICouponProps> = (props) => {
       <BackgroundCoupon active={couponsActive} />
       <Container>
         <CouponContainer>
-          <CountCoupons>{couponsQtd}</CountCoupons>
+          <CountCoupons>{offersQtd}</CountCoupons>
           <ShopSubtitleIcon />
         </CouponContainer>
       </Container>

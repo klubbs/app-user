@@ -3,7 +3,7 @@ import { IError, IResponseMessage } from "../settings/@types/IResponses";
 import api from "../settings/services/api";
 import * as Haptic from 'expo-haptics';
 import { NotificationsFlash } from "../utils/notificationsFlashUtils";
-import { GetAllMasterCouponsResponse } from "./@types/storeServiceTypes";
+import { GetAllOffersResponse } from "./@types/storeServiceTypes";
 
 export class InfluencerService {
 
@@ -18,14 +18,14 @@ export class InfluencerService {
     return data.message;
   }
 
-  static async getAllMasterCoupons(): Promise<GetAllMasterCouponsResponse[]> {
+  static async getAllOffers(): Promise<GetAllOffersResponse[]> {
 
-    const { data } = await api.get<IResponseMessage<GetAllMasterCouponsResponse[]>>('stores/coupon');
+    const { data } = await api.get<IResponseMessage<GetAllOffersResponse[]>>('stores/coupon');
 
     return data.message
   }
 
-  static async linkCouponInMasterCoupon(masterCoupons: string[], couponId: string): Promise<void> {
+  static async linkCouponInOffers(masterCoupons: string[], couponId: string): Promise<void> {
     await api.post('influencer/coupons/link', { master_coupons: masterCoupons, coupon_id: couponId })
   }
 
@@ -64,7 +64,7 @@ export class InfluencerServiceException {
       Haptic.impactAsync(Haptic.ImpactFeedbackStyle.Light)
 
       if (actual === "MASTER COUPON") {
-        NotificationsFlash.CustomMessage('Desculpe', "Um dos cupons que você escolheu não esta mais válido", 'NEUTRAL')
+        NotificationsFlash.CustomMessage('Desculpe', "Uma das ofertas que você escolheu não esta mais válida", 'NEUTRAL')
         return;
       } else if (actual === "COUPON") {
         NotificationsFlash.CustomMessage('Estranho', "O seu cupom não existe mais 🤔", 'NEUTRAL')

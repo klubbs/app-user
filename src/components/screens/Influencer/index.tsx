@@ -25,7 +25,7 @@ export const Influencer: React.FC = () => {
       <Container>
         <MenuItem key={'1'} icon={'plus'} text={'Novo cupom'} description={'Crie um código só seu'} cb={() => setVisibleCreateCoupon(true)} />
         <MenuItem key={'2'} icon={'archive'} text={'Meus cupons'} description={'Cupons criados por você'} cb={() => setVisibleInfluencerCoupon(true)} />
-        <MenuItem key={'3'} icon={'divide'} text={'Estabelecimentos disponíveis'} description={'Associe seus cupons'} cb={() => navigation.navigate('MasterCoupons')} />
+        <MenuItem key={'3'} icon={'divide'} text={'Ofertas disponíveis'} description={'Associe seus cupons'} cb={() => navigation.navigate('Offers')} />
       </Container>
       <CouponsInfluencer visible={visibleInfluencerCoupon} onClose={() => setVisibleInfluencerCoupon(false)} />
       <SaveOrCreateCoupon visible={visibleCreateCoupon} onClose={() => setVisibleCreateCoupon(false)} isInfluencer={true} />

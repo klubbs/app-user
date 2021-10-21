@@ -1,7 +1,7 @@
 import React from 'react';
 import colors from '../../../../assets/constants/colors';
 import { ShopIcon } from '../../../../assets/icons/shop_icon';
-import { ICardMasterCouponsProps } from './@types';
+import { ICardOffersProps } from './@types';
 import {
   WrapperCard, TopContainer, BottomContainer, Name, Rules, WrapperOff, Off, SeeMore,
   SubBottomContainer,
@@ -13,7 +13,7 @@ import {
 import { Selector } from '../../components/Selector';
 import { DaysOfWeek } from '../../components/DaysOfWeek';
 
-export const CardMasterCoupons: React.FC<ICardMasterCouponsProps> = (props) => {
+export const CardOffers: React.FC<ICardOffersProps> = (props) => {
 
   return (
     <WrapperCard key={props.master_coupon_id}>

@@ -7,7 +7,7 @@ import { QrCouponsRules } from '../../screensModals/QrCouponsRules';
 import { AuthContext } from '../../../contexts/authContext';
 import { UserIcon } from '../../../../assets/icons/user_icon';
 import { isIphoneX } from '../../../utils/iphoneHelper';
-import { IWalletCouponsResponseMasterCouponData } from '../../../services/@types/couponServiceTypes';
+import { IWalletCouponsResponseOfferData } from '../../../services/@types/couponServiceTypes';
 import {
   BottomContainer,
   TopContainer,
@@ -26,13 +26,13 @@ export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
 
   const { user } = useContext(AuthContext)
 
-  const [activeMasterCoupon, setActiveMasterCoupon] = useState<IWalletCouponsResponseMasterCouponData | null>(null)
+  const [activeOffer, setActiveOffer] = useState<IWalletCouponsResponseOfferData | null>(null)
 
-  function RenderEstablishmentCard({ item }: { item: IWalletCouponsResponseMasterCouponData }): JSX.Element {
+  function RenderEstablishmentCard({ item }: { item: IWalletCouponsResponseOfferData }): JSX.Element {
     return (
       <AnimatedWrapper>
         <EstablishmentCardQr
-          onPress={() => setActiveMasterCoupon(item)}
+          onPress={() => setActiveOffer(item)}
           off={item.master_coupon_off_percentual}
           image={item.establishment_image}
         />
@@ -73,20 +73,20 @@ export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
       <BottomContainer>
 
         <FlatListComponent
-          data={route.params.master_coupons as IWalletCouponsResponseMasterCouponData[]}
+          data={route.params.master_coupons as IWalletCouponsResponseOfferData[]}
           keyExtractor={item => `${key}`}
           renderItem={({ item }) => {
             key++;
-            return (<RenderEstablishmentCard key={key} item={item as IWalletCouponsResponseMasterCouponData} />)
+            return (<RenderEstablishmentCard key={key} item={item as IWalletCouponsResponseOfferData} />)
           }}
         />
         <SubtitleHelp>Atente o estabelecimento de validar seu cupom</SubtitleHelp>
       </BottomContainer>
       {
-        activeMasterCoupon &&
+        activeOffer &&
         <QrCouponsRules
-          data={activeMasterCoupon}
-          onClose={() => setActiveMasterCoupon(null)}
+          data={activeOffer}
+          onClose={() => setActiveOffer(null)}
         />
       }
     </Wrapper>

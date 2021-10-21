@@ -20,7 +20,7 @@ export type ICategoryResponse = {
 }
 
 
-export type GetAllMasterCouponsResponse = {
+export type GetAllOffersResponse = {
   master_coupon_id: string,
   master_coupon_off: number,
   master_coupon_valid_at: number,

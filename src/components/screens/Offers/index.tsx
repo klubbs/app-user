@@ -5,9 +5,9 @@ import { CouponIcon } from '../../../../assets/icons/coupon_icon';
 import { InfluencerService } from '../../../services/influencerService';
 import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
 import { BagTab } from '../../components/BagTab';
-import { CardMasterCoupons } from '../../organisms/CardMasterCoupons';
-import { ICardMasterCouponsProps } from '../../organisms/CardMasterCoupons/@types';
-import { LinkMasterCoupons } from '../../screensModals/LinkMasterCoupons';
+import { CardOffers } from '../../organisms/CardOffers';
+import { ICardOffersProps } from '../../organisms/CardOffers/@types';
+import { LinkCouponOffers } from '../../screensModals/LinkCouponOffers';
 import { useNavigation } from '@react-navigation/native';
 import { NotFoundRestaurants } from '../../../../assets/images/notFounds/notFoundRestaurants';
 import * as Haptic from 'expo-haptics';
@@ -21,30 +21,29 @@ import {
   ContainerNotFound,
   EmptyTitle, EmptySubtitle
 } from './styles';
-import { SpinnerLoading } from '../../components/Spinner';
 
 
-export const MasterCoupons: React.FC = () => {
+export const Offers: React.FC = () => {
 
-  const [masterCoupons, setMasterCoupons] = useState<ICardMasterCouponsProps[]>([])
-  const [selectedMasters, setSelectedMaster] = useState<{ masterCouponId: string, establishmentId: string }[]>([])
+  const [offers, setOffers] = useState<ICardOffersProps[]>([])
+  const [selectedOffers, setSelectedOffer] = useState<{ masterCouponId: string, establishmentId: string }[]>([])
   const [modalLinkShow, setModalLinkShow] = useState(false)
   const [loading, setLoading] = useState(false)
 
   const navigation = useNavigation();
 
   useEffect(() => {
-    getMasterCoupons()
+    getOffers()
   }, [])
 
-  async function getMasterCoupons() {
+  async function getOffers() {
 
     try {
       setLoading(true)
 
-      var response = await InfluencerService.getAllMasterCoupons();
+      var response = await InfluencerService.getAllOffers();
 
-      setMasterCoupons(response);
+      setOffers(response);
     } catch (error) {
       NotificationsFlash.SpillCoffee();
     } finally {
@@ -52,20 +51,20 @@ export const MasterCoupons: React.FC = () => {
     }
   }
 
-  function handleCouponSelect(isSelected: boolean, masteCouponId: string, establishmentId: string) {
+  function handleOfferSelect(isSelected: boolean, masteCouponId: string, establishmentId: string) {
     isSelected
-      ? setSelectedMaster([...selectedMasters, { masterCouponId: masteCouponId, establishmentId: establishmentId }])
-      : setSelectedMaster(selectedMasters.filter(item => item.masterCouponId !== masteCouponId));
+      ? setSelectedOffer([...selectedOffers, { masterCouponId: masteCouponId, establishmentId: establishmentId }])
+      : setSelectedOffer(selectedOffers.filter(item => item.masterCouponId !== masteCouponId));
   }
 
   function handleOpenBagTab() {
-    const uniqueEstablishmentsId = [...new Set(selectedMasters.map(a => a.establishmentId))];
+    const uniqueEstablishmentsId = [...new Set(selectedOffers.map(a => a.establishmentId))];
 
     let errors: any[] = []
 
     uniqueEstablishmentsId.forEach(element => {
 
-      let matchs = selectedMasters.filter(item => item.establishmentId === element)
+      let matchs = selectedOffers.filter(item => item.establishmentId === element)
 
       if (matchs.length > 1) {
         errors.push(matchs)
@@ -90,15 +89,15 @@ export const MasterCoupons: React.FC = () => {
     setModalLinkShow(true)
   }
 
-  function CouponsBagTab(): JSX.Element {
+  function OffersBagTab(): JSX.Element {
 
     return (
-      <BagTab show={selectedMasters.length > 0} onPress={handleOpenBagTab}>
+      <BagTab show={selectedOffers.length > 0} onPress={handleOpenBagTab}>
         <ContainerItems>
           <ItemsSubtitle>Definir meu cupom</ItemsSubtitle>
           <CouponWrapper>
             <CouponIcon width={15} height={15} fill={colors.COLOR_WHITE} style={{ marginRight: 5 }} />
-            <Items>{selectedMasters.length}</Items>
+            <Items>{selectedOffers.length}</Items>
           </CouponWrapper>
         </ContainerItems>
       </BagTab >
@@ -117,7 +116,7 @@ export const MasterCoupons: React.FC = () => {
       <ContainerNotFound>
         <NotFoundRestaurants height={160} />
         <EmptyTitle>Eita</EmptyTitle>
-        <EmptySubtitle>Nenhum estabelecimento liberou cupom ainda</EmptySubtitle>
+        <EmptySubtitle>Nenhum estabelecimento liberou oferta ainda</EmptySubtitle>
       </ContainerNotFound>
     )
   }
@@ -126,8 +125,8 @@ export const MasterCoupons: React.FC = () => {
   return (
     <Wrapper>
       <FlatList
-        data={masterCoupons}
-        onRefresh={getMasterCoupons}
+        data={offers}
+        onRefresh={getOffers}
         refreshing={loading}
         stickyHeaderIndices={[0]}
         showsVerticalScrollIndicator={false}
@@ -135,13 +134,13 @@ export const MasterCoupons: React.FC = () => {
         ListHeaderComponent={() => <Header>Disponíveis</Header>}
         ListEmptyComponent={LoadingOrEmptyRender}
         renderItem={({ item }) =>
-          <CardMasterCoupons
+          <CardOffers
             {...item}
-            onPress={(isSelected: boolean) => handleCouponSelect(isSelected, item.master_coupon_id, item.establishment_id)} />
+            onPress={(isSelected: boolean) => handleOfferSelect(isSelected, item.master_coupon_id, item.establishment_id)} />
         }
       />
-      {modalLinkShow && <LinkMasterCoupons masterCoupons={selectedMasters} visible={modalLinkShow} onClose={onCloseLinkModal} />}
-      <CouponsBagTab />
+      {modalLinkShow && <LinkCouponOffers masterCoupons={selectedOffers} visible={modalLinkShow} onClose={onCloseLinkModal} />}
+      <OffersBagTab />
     </Wrapper >
   );
 }

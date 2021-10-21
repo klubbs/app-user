@@ -10,7 +10,7 @@ export type IAppStackParams = {
   Restaurant: IRestaurants;
   CouponQr: ICouponsItem;
   Influencer: undefined;
-  MasterCoupons: undefined;
+  Offers: undefined;
   Configurations: undefined;
   Help: undefined
 };

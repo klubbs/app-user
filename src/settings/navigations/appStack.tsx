@@ -9,7 +9,7 @@ import { IAppStackParams } from '../@types/appStackTypes';
 import { CouponQrScreen } from '../../components/screens/CouponQr';
 import { LoginPasswordScreen } from '../../components/screens/LoginPassword';
 import { Influencer } from '../../components/screens/Influencer';
-import { MasterCoupons } from '../../components/screens/MasterCoupons';
+import { Offers } from '../../components/screens/Offers';
 import { ConfigurationsScreen } from '../../components/screens/Configurations';
 import { HelpScreen } from '../../components/screens/Help';
 
@@ -34,7 +34,7 @@ const App: React.FC<{}> = () => {
       <AppStack.Screen name='Restaurant' component={Restaurant} />
       <AppStack.Screen name='CouponQr' component={CouponQrScreen} options={{ headerTintColor: COLORS.COLOR_WHITE }} />
       <AppStack.Screen name='Influencer' component={Influencer} />
-      <AppStack.Screen name='MasterCoupons' component={MasterCoupons} />
+      <AppStack.Screen name='Offers' component={Offers} />
       <AppStack.Screen name='Configurations' component={ConfigurationsScreen} />
       <AppStack.Screen name='Help' component={HelpScreen} />
     </AppStack.Navigator >
