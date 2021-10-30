@@ -22,7 +22,6 @@ export const Dot = styled.View<{ active: boolean }>`
 export const WrapplerTouchable = styled.TouchableOpacity`
   margin-left: 10px;
   width:100px;
-  height:30px;
   padding: 1px;
   border-radius:5px;
   flex-direction: row;

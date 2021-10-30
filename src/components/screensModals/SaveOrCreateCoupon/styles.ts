@@ -35,11 +35,11 @@ export const Input = styled.TextInput.attrs(({
 export const Container = styled.View`
   flex-direction: row;
   flex:1;
+  width:100%;
   justify-content:space-between;
 `
 export const Wrapper = styled.View`
   padding:10px;
   align-items:center;
   justify-content: space-between;
-  /* justify-content: space-between; */
 `

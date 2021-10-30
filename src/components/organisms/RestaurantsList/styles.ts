@@ -6,7 +6,7 @@ import { isIphoneX } from '../../../utils/iphoneHelper'
 
 export const containerStyle = { height: '100%' }
 
-export const wrapperStyle = { justifyContent: 'space-around' }
+export const wrapperStyle = { justifyContent: 'space-around', flex: 5 }
 
 export const EmptyCard = styled.View`
   height: 250px;

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Platform } from 'react-native'
 import colors from '../../../../assets/constants/colors';
 import { ClockIcon } from '../../../../assets/icons/clockIcon';
 import { CouponIcon } from '../../../../assets/icons/coupon_icon';
@@ -7,6 +8,11 @@ import { RestaurantInteractions } from '../../organisms/RestaurantInteractions';
 import { BlocksWrapper, About, AboutSubtitle, BlocksValue, ContainerGetCoupon, ContainerImage, Container, IconsContainer, GetCouponText, RestaurantCategory, RestaurantName, Wrapper, NameContainer } from './styles';
 
 
+const DATE_FORMAT: any = {
+  formatMatcher: "best fit",
+  hour: '2-digit',
+  minute: '2-digit'
+}
 
 const Restaurant: React.FC<RestaurantScreenProps> = ({ route }) => {
 
@@ -35,27 +41,31 @@ const Restaurant: React.FC<RestaurantScreenProps> = ({ route }) => {
             <ClockIcon width={14} height={14} fill={colors.COLOR_YELLOW_RATING} />
             <BlocksValue>
               {
-                route.params
-                  .openedAt
-                  .ToDateFormat()
-                  .toLocaleTimeString("pt-br",
-                    {
-                      formatMatcher: "best fit",
-                      hour: '2-digit',
-                      minute: '2-digit'
-                    })
+                Platform.select({
+                  ios: (() => route.params
+                    .openedAt
+                    .ToDateFormat()
+                    .toLocaleTimeString("pt-br", DATE_FORMAT))(),
+                  android: (() => route.params
+                    .openedAt
+                    .ToDateFormat()
+                    .toLocaleTimeString("pt-br", DATE_FORMAT)
+                    .slice(0, -3))()
+                })
               }
               { } &#xB7; { }
               {
-                route.params
-                  .closedAt
-                  .ToDateFormat()
-                  .toLocaleTimeString("pt-br",
-                    {
-                      formatMatcher: "best fit",
-                      hour: '2-digit',
-                      minute: '2-digit'
-                    })
+                Platform.select({
+                  ios: (() => route.params
+                    .closedAt
+                    .ToDateFormat()
+                    .toLocaleTimeString("pt-br", DATE_FORMAT))(),
+                  android: (() => route.params
+                    .closedAt
+                    .ToDateFormat()
+                    .toLocaleTimeString("pt-br", DATE_FORMAT)
+                    .slice(0, -3))()
+                })
               }
             </BlocksValue>
           </BlocksWrapper>

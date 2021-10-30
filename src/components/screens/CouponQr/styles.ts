@@ -1,11 +1,12 @@
 import styled from 'styled-components/native';
-import { Dimensions, StyleSheet } from 'react-native'
+import { Dimensions } from 'react-native'
 import colors from '../../../../assets/constants/colors';
 import { QrCouponBackground } from '../../../../assets/images/backgrounds/backgroundQrCoupon';
-import { LikeUpIcon } from '../../../../assets/icons/like_up_icon';
 import { MotiView } from 'moti'
 
 const { width, height } = Dimensions.get('window');
+
+const IS_LOWER = height < 700;
 
 export const Wrapper = styled.SafeAreaView`
   background-color: ${colors.COLOR_YELLOW};
@@ -17,7 +18,7 @@ export const Wrapper = styled.SafeAreaView`
 export const TopContainer = styled.View`
   flex: 1.4;
   width: 100%;
-  padding-top: ${height < 700 ? '2%' : '9%'};
+  padding-top: ${IS_LOWER ? '2%' : '9%'};
   justify-content: center;
   align-items: center;
 
@@ -31,14 +32,13 @@ export const BottomContainer = styled.View`
 
 export const BackgroundCoupon = styled(QrCouponBackground).attrs(props => ({
   height: height,
-  width: width - 40
+  width: IS_LOWER ? width - 80 : width - 40
 }))`
   position: absolute;
   right: 0;
-  top: 0;
+  top:  ${IS_LOWER ? '-3.5%' : 0};
   bottom: 0;
-  align-self: center;
-  left: 5%;
+  left:  ${IS_LOWER ? '10%' : '5%'};
 `
 
 export const SubtitleHelp = styled.Text`
@@ -53,7 +53,7 @@ export const EmptyImage = styled.View`
   align-items:center;
   justify-content: center;
   z-index:10;
-  top:${height > 700 ? '13.5%' : '6%'};
+  top:${IS_LOWER ? '4%' : '13.5%'};
   height:50px;
   width: 50px;
   border-radius:25px;
@@ -63,7 +63,7 @@ export const EmptyImage = styled.View`
 export const ImageInfluencer = styled.Image`
   position: absolute;
   z-index:10;
-  top:${height > 700 ? '13.5%' : '6%'};
+  top:${IS_LOWER ? '4%' : '13.5%'};
   height:60px;
   width: 60px;
   border-radius:30px;

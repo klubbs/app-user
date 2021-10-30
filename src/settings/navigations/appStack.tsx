@@ -25,7 +25,7 @@ const App: React.FC<{}> = () => {
       headerTransparent: true,
       headerBackTitleVisible: false,
       headerTintColor: COLORS.COLOR_YELLOW,
-      headerTitleStyle: { color: 'transparent' }
+      headerTitleStyle: { color: 'transparent', width: 0 }
     })} >
       <AppStack.Screen name='Tabs' component={Tabs} />
       <AppStack.Screen name='LoginWelcome' component={WelcomeLoginScreen} />
