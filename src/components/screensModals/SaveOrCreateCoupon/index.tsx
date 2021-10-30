@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useImperativeHandle } from 'react';
 import { Keyboard } from 'react-native'
 import { ModalComponent } from '../../components/Modal';
 import { Input, Container, Wrapper } from './styles';
@@ -6,14 +6,18 @@ import { ButtonStorage } from '../../components/ButtonStorage';
 import { CouponService } from '../../../services/couponService';
 import { Spinner } from '../../components/Spinner';
 import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
-import { SubtitleSaveCouponImage } from '../../../../assets/images/coupons/contributeInfluencer';
 import { IError } from '../../../settings/@types/IResponses';
 import { InfluencerService, InfluencerServiceException } from '../../../services/influencerService';
+import { ISaveOrCreateCouponProps, ISaveOrCreateCouponRef } from './@types';
+import { SubtitleSaveCouponImage } from '../../../../assets/images/coupons/contributeInfluencer';
 
-export const SaveOrCreateCoupon: React.FC<{ visible: boolean, onClose: any, isInfluencer: boolean }> = (props) => {
+export const SaveOrCreateCoupon = React.forwardRef<ISaveOrCreateCouponRef, ISaveOrCreateCouponProps>((props, ref) => {
 
+  const [visibleModal, setVisibleModal] = useState(false);
   const [value, setValue] = useState("")
   const [loading, setLoading] = useState(false)
+
+  useImperativeHandle(ref, () => ({ hide: () => setVisibleModal(false), show: () => setVisibleModal(true) }));
 
   async function onSaveCoupon() {
     try {
@@ -68,12 +72,12 @@ export const SaveOrCreateCoupon: React.FC<{ visible: boolean, onClose: any, isIn
 
   function onCloseHandler() {
     setValue('')
-    props.onClose();
+    setVisibleModal(false)
   }
 
   return (
 
-    <ModalComponent visible={props.visible} onClose={() => onCloseHandler()}>
+    <ModalComponent visible={visibleModal} onClose={onCloseHandler}>
       <Spinner loading={loading} />
       <Wrapper>
         <Container>
@@ -85,8 +89,8 @@ export const SaveOrCreateCoupon: React.FC<{ visible: boolean, onClose: any, isIn
           <ButtonStorage onPress={() => props.isInfluencer ? onCreateNewCoupon() : onSaveCoupon()} size={25} />
         </Container>
 
-        <SubtitleSaveCouponImage style={{ bottom: '10%' }} />
+        <SubtitleSaveCouponImage />
       </Wrapper>
     </ModalComponent >
   );
-}
+})
