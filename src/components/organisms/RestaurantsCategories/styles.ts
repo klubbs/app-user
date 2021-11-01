@@ -33,7 +33,7 @@ export const WrapplerTouchable = styled.TouchableOpacity`
 export const FlatComponent = styled.FlatList.attrs(props => ({
   horizontal: true,
   showsHorizontalScrollIndicator: false,
-  contentContainerStyle: { paddingVertical: 20, marginBottom: 10, marginTop: 20 }
+  contentContainerStyle: { paddingVertical: 20, marginBottom: 10, marginTop: 20, height: '100%' }
 }))``
 
 

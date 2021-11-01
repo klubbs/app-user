@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FlatList } from 'react-native';
+import * as Haptic from 'expo-haptics';
 import colors from '../../../../assets/constants/colors';
 import { CouponIcon } from '../../../../assets/icons/coupon_icon';
 import { InfluencerService } from '../../../services/influencerService';
@@ -8,9 +9,8 @@ import { BagTab } from '../../components/BagTab';
 import { CardOffers } from '../../organisms/CardOffers';
 import { ICardOffersProps } from '../../organisms/CardOffers/@types';
 import { LinkCouponOffers } from '../../screensModals/LinkCouponOffers';
-import { useNavigation } from '@react-navigation/native';
 import { NotFoundRestaurants } from '../../../../assets/images/notFounds/notFoundRestaurants';
-import * as Haptic from 'expo-haptics';
+import { ILinkCouponOffersRef } from '../../screensModals/LinkCouponOffers/@types';
 import {
   Wrapper,
   Header,
@@ -25,12 +25,11 @@ import {
 
 export const Offers: React.FC = () => {
 
+  const couponOffersRef = useRef<ILinkCouponOffersRef>(null)
+
   const [offers, setOffers] = useState<ICardOffersProps[]>([])
   const [selectedOffers, setSelectedOffer] = useState<{ masterCouponId: string, establishmentId: string }[]>([])
-  const [modalLinkShow, setModalLinkShow] = useState(false)
   const [loading, setLoading] = useState(false)
-
-  const navigation = useNavigation();
 
   useEffect(() => {
     getOffers()
@@ -86,7 +85,7 @@ export const Offers: React.FC = () => {
       return;
     }
 
-    setModalLinkShow(true)
+    couponOffersRef.current?.showModal();
   }
 
   function OffersBagTab(): JSX.Element {
@@ -102,13 +101,6 @@ export const Offers: React.FC = () => {
         </ContainerItems>
       </BagTab >
     )
-  }
-
-  function onCloseLinkModal(cancel?: boolean) {
-    if (!cancel)
-      navigation.goBack()
-
-    setModalLinkShow(false);
   }
 
   function LoadingOrEmptyRender() {
@@ -139,7 +131,7 @@ export const Offers: React.FC = () => {
             onPress={(isSelected: boolean) => handleOfferSelect(isSelected, item.master_coupon_id, item.establishment_id)} />
         }
       />
-      {modalLinkShow && <LinkCouponOffers masterCoupons={selectedOffers} visible={modalLinkShow} onClose={onCloseLinkModal} />}
+      <LinkCouponOffers masterCoupons={selectedOffers} ref={couponOffersRef} />
       <OffersBagTab />
     </Wrapper >
   );

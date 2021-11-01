@@ -1,7 +1,13 @@
-import React, { useEffect, ReactElement, useState } from 'react';
-import { Modal } from 'react-native';
+import React, { useEffect, ReactElement, useState, useImperativeHandle } from 'react';
+import { Modal, TouchableWithoutFeedback } from 'react-native';
 import { Coupon } from '../../components/Coupon';
 import { format4TwoColumns } from '../../../utils/formatersUtils'
+import { ICouponInfluencer, ILinkCouponOffersProps, ILinkCouponOffersRef } from './@types';
+import { InfluencerService, InfluencerServiceException } from '../../../services/influencerService';
+import { Spinner } from '../../components/Spinner';
+import { IError } from '../../../settings/@types/IResponses';
+import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
+import { useNavigation } from '@react-navigation/native';
 import {
   Wrapper,
   Header,
@@ -16,20 +22,19 @@ import {
   Cancel,
   HeaderContainer
 } from './styles';
-import { ICouponInfluencer, IModalInfluencerCouponLinkProps } from './@types';
-import { InfluencerService, InfluencerServiceException } from '../../../services/influencerService';
-import { Spinner } from '../../components/Spinner';
-import { IError } from '../../../settings/@types/IResponses';
-import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 
-export const LinkCouponOffers: React.FC<IModalInfluencerCouponLinkProps> = (props) => {
+export const LinkCouponOffers = React.forwardRef<ILinkCouponOffersRef, ILinkCouponOffersProps>((props, ref) => {
 
+  const navigation = useNavigation();
+
+  const [visible, setVisible] = useState(false)
   const [coupons, setCoupons] = useState<ICouponInfluencer[]>([])
   const [selectedCoupon, setSelectedCoupon] = useState('')
   const [disableSave, setDisableSave] = useState(false)
   const [loading, setLoading] = useState(false)
+
+  useImperativeHandle(ref, () => ({ showModal: () => setVisible(true) }));
 
   useEffect(() => {
 
@@ -59,7 +64,9 @@ export const LinkCouponOffers: React.FC<IModalInfluencerCouponLinkProps> = (prop
 
       NotificationsFlash.CustomMessage('Adicionado', 'Oferta dos estabelecimentos adicionado ao cupom', 'SUCCESS')
 
-      props.onClose();
+      setVisible(false)
+
+      navigation.goBack()
 
     } catch (error) {
       InfluencerServiceException.catchLinkCoupon(error as IError)
@@ -101,6 +108,9 @@ export const LinkCouponOffers: React.FC<IModalInfluencerCouponLinkProps> = (prop
           <Container>
             <SelectorCoupon toggle={isToggleSelected} onPress={() => handleSelectCoupon(item)} />
             <Coupon
+              toggle={true}
+              isActiveByToggle={isToggleSelected}
+              onPress={() => handleSelectCoupon(item)}
               data={
                 {
                   coupon_id: item.coupon_id,
@@ -109,10 +119,6 @@ export const LinkCouponOffers: React.FC<IModalInfluencerCouponLinkProps> = (prop
                   master_coupons: item.master_coupons
                 }
               }
-              toggle={true}
-              isActiveByToggle={isToggleSelected}
-              onPress={() => handleSelectCoupon(item)}
-
             />
           </Container>
         }
@@ -124,11 +130,11 @@ export const LinkCouponOffers: React.FC<IModalInfluencerCouponLinkProps> = (prop
     <Modal
       animationType={'slide'}
       presentationStyle={'formSheet'}
-      visible={props.visible}
+      visible={visible}
     >
       <Wrapper>
         <HeaderContainer>
-          <TouchableWithoutFeedback onPress={() => props.onClose(true)}>
+          <TouchableWithoutFeedback onPress={() => setVisible(false)}>
             <Cancel>Cancelar</Cancel>
           </TouchableWithoutFeedback>
           <Header>Selecione seu cupom</Header>
@@ -151,5 +157,5 @@ export const LinkCouponOffers: React.FC<IModalInfluencerCouponLinkProps> = (prop
       <Spinner loading={loading} />
     </Modal >
   );
-}
+})
 

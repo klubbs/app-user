@@ -50,7 +50,7 @@ export const CardOffers: React.FC<ICardOffersProps> = (props) => {
         <ValidAt>Válido até: { }
           {props?.master_coupon_valid_at
             .ToDateFormat()
-            .toLocaleDateString('pt-BR', { year: 'numeric', month: 'long', day: 'numeric' })}
+            .toCustomLocaleDateString()}
         </ValidAt>
       </SubBottomContainer>
 

@@ -40,7 +40,7 @@ export const QrCouponsRules: React.FC<{ data: IWalletCouponsResponseOfferData | 
           <ExpireIn>Esta oferta expira em: {props
             .data?.master_coupon_valid_at
             .ToDateFormat()
-            .toLocaleDateString('pt-BR', { year: 'numeric', month: 'long', day: 'numeric' })}</ExpireIn>
+            .toCustomLocaleDateString()}</ExpireIn>
           <Divider />
           <DaysOfWeek hasSelector={false} initSelectedDays={props.data?.master_coupon_working_days} />
 

@@ -16,8 +16,6 @@ import {
 
 export const Coupon: React.FC<ICouponProps> = (props) => {
 
-  const [minOff, setMinOff] = useState(0)
-
   const offersQtd = props.data.master_coupons?.length
   const couponsActive = defineIsActive()
 
@@ -42,8 +40,6 @@ export const Coupon: React.FC<ICouponProps> = (props) => {
 
     if (offersQtd >= 1) {
       const offValues = props.data.master_coupons.map(item => item.master_coupon_off_percentual);
-
-      setMinOff(Math.min(...offValues) ?? 0)
     }
 
   }, [props.data])
@@ -72,7 +68,7 @@ export const Coupon: React.FC<ICouponProps> = (props) => {
             <CouponDefaultImage />
           </InfluencerEmpty>
       }
-      <CouponCode active={couponsActive}>{props.data.coupon_code}</CouponCode>
+      <CouponCode putMarginBottom={props.toggle} active={couponsActive}>{props.data.coupon_code}</CouponCode>
     </MotifiedWrapper >
   );
 }

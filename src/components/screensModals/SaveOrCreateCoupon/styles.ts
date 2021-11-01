@@ -41,5 +41,6 @@ export const Container = styled.View`
 export const Wrapper = styled.View`
   padding:10px;
   align-items:center;
+  flex: 1;
   justify-content: space-between;
 `

@@ -88,8 +88,11 @@ export const SaveOrCreateCoupon = React.forwardRef<ISaveOrCreateCouponRef, ISave
           />
           <ButtonStorage onPress={() => props.isInfluencer ? onCreateNewCoupon() : onSaveCoupon()} size={25} />
         </Container>
+        <Container>
 
-        <SubtitleSaveCouponImage />
+          <SubtitleSaveCouponImage />
+        </Container>
+
       </Wrapper>
     </ModalComponent >
   );
