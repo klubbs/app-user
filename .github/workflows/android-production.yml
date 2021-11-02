@@ -37,10 +37,6 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      - name: Download S3 files to prepare app
-        run: |
-          aws s3 cp s3://credentials-apple/ios-google-service-info.plist ios-google-service-info.plist
-
       - name: Download Yarn dependencies
         run: |
             ls
