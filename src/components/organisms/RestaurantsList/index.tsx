@@ -2,15 +2,15 @@ import * as Location from 'expo-location';
 import React, { useEffect, useState, useContext } from 'react';
 import { FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { StoreService } from '../../../services/storeServices';
 import { CardEstablishment } from "../../components/CardEstablishment";
-import { containerStyle, EmptyCard, Header, WrapperNotFound, wrapperStyle, NotFoundTitle, NotFoundSubtitle, WrapperDenied } from './styles';
 import { IRestaurants } from './@types';
 import { LocationAccuracy, LocationObject } from 'expo-location';
 import { HomeContext } from '../../../contexts/homeContext';
 import { NotFoundRestaurants } from '../../../../assets/images/notFounds/notFoundRestaurants';
 import { LocationDeniedImage } from '../../../../assets/images/notFounds/locationDenied';
 import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
+import { EmptyCard, Header, WrapperNotFound, wrapperStyle, NotFoundTitle, NotFoundSubtitle, WrapperDenied } from './styles';
+
 
 let userLocation: LocationObject | undefined = undefined;
 
@@ -97,7 +97,6 @@ export const RestaurantsList: React.FC = (props) => {
       showsVerticalScrollIndicator={false}
       numColumns={2}
       columnWrapperStyle={wrapperStyle as any}
-      contentContainerStyle={containerStyle}
       keyExtractor={(item: IRestaurants, index: number) => `${item.id}`}
       ListHeaderComponent={() => <Header>Restaurantes</Header>}
       ListEmptyComponent={() => <NotFound />}

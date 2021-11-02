@@ -14,6 +14,7 @@ export const Container = styled.View`
 `
 
 export const ContainerBottom = styled.View`
+  flex: 0.8;
   padding-left:2%;
   padding-right:2%;
   justify-content: center;

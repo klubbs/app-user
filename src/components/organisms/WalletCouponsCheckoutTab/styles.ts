@@ -84,8 +84,9 @@ export const NothingTransactionSubtitle = styled.Text`
   align-self: center;
   font-family:'Nunito_Light';
 `
-export const CheckoutsFlatList = styled.FlatList.attrs(props => ({
-  showsVerticalScrollIndicator: false
+export const CheckoutsFlatList = styled.FlatList.attrs(({
+  showsVerticalScrollIndicator: false,
+  contentContainerStyle: { paddingBottom: '20%' }
 }))`
   background-color: ${colors.COLOR_WHITE};
 `

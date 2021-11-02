@@ -9,7 +9,7 @@ import { ShopIcon } from "../../../assets/icons/shop_icon";
 import { Coupons } from '../../components/screens/Coupons';
 import { Home } from '../../components/screens/Home';
 import Profile from '../../components/screens/Profile';
-import { isIphoneX } from "../../utils/iphoneHelper";
+import { isIphoneX } from "../../utils/dimensionsHelper";
 import { ITabsParamList } from "./interfaces/ITabParams";
 
 interface AppStackProps { }

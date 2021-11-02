@@ -1,9 +1,7 @@
-import { MotiView, motify } from 'moti'
 import styled from 'styled-components/native'
-import { Animated } from 'react-native'
-import colors from '../../../../assets/constants/colors'
+import { Animated, Platform } from 'react-native'
 import COLORS from '../../../../assets/constants/colors'
-import { isIphoneX } from '../../../utils/iphoneHelper'
+import { isIphoneX, isSmallAndroid } from '../../../utils/dimensionsHelper'
 import { ShopIcon } from '../../../../assets/icons/shop_icon'
 
 export const Wrapper = styled.TouchableOpacity.attrs(props => ({
@@ -19,15 +17,14 @@ export const Image = Animated.createAnimatedComponent(styled.Image.attrs(props =
 }))
   `
   height: 100px;
-  width: 100%;
+  width: ${Platform.select({
+    ios: '190px',
+    android: isSmallAndroid() ? '160px' : '190px'
+  })};
   border-radius: 10;
   `
 )
-export const OpenIndicator = Animated.createAnimatedComponent(styled.View.attrs(props => ({
-  /* from: { opacity: 0 },
-  animate: { opacity: 1 },
-  transition: { type: 'timing' } */
-})) <{ open: boolean }>`
+export const OpenIndicator = Animated.createAnimatedComponent(styled.View<{ open: boolean }>`
   width: 15px;
   height: 15px;
   border-radius: 7.5px;
@@ -36,22 +33,25 @@ export const OpenIndicator = Animated.createAnimatedComponent(styled.View.attrs(
   right:-48%;
   border-width: 1px;
   border-color: ${COLORS.COLOR_WHITE};
-  background-color: ${props => props.open ? colors.COLOR_GREEN : colors.COLOR_RED};
+  background-color: ${props => props.open ? COLORS.COLOR_GREEN : COLORS.COLOR_RED};
 `
 )
 
 export const EmptyImage = styled.View`
   height: 100px;
-  width: 190px;
+  width: ${Platform.select({
+  ios: '190px',
+  android: isSmallAndroid() ? '160px' : '190px'
+})};
   justify-content:center;
   align-items:center;
   border-radius: 10px;
-  background-color:${colors.COLOR_BLACK10}
+  background-color:${COLORS.COLOR_BLACK10}
 `
 export const EmptyShopIcon = styled(ShopIcon).attrs(props => ({
   width: 20,
   height: 20,
-  fill: colors.COLOR_BLACK40
+  fill: COLORS.COLOR_BLACK40
 }))``
 
 

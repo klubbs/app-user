@@ -3,4 +3,4 @@ export interface ISaveOrCreateCouponProps {
 }
 
 
-export interface ISaveOrCreateCouponRef { hide: any, show: () => void) }
+export interface ISaveOrCreateCouponRef { hide: any, show: () => void }

@@ -14,3 +14,10 @@ export function isIphoneX() {
       || (dimen.height === 926 || dimen.width === 926))
   );
 }
+
+
+export function isSmallAndroid() {
+  const dimen = Dimensions.get('window');
+
+  return Platform.OS === 'android' && Dimensions.get('window').width <= 360
+}

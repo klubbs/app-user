@@ -1,8 +1,9 @@
 import styled from 'styled-components/native';
-import { Dimensions } from 'react-native'
+import { Dimensions, Platform } from 'react-native'
 import colors from '../../../../assets/constants/colors';
 import { QrCouponBackground } from '../../../../assets/images/backgrounds/backgroundQrCoupon';
 import { MotiView } from 'moti'
+import { isSmallAndroid } from '../../../utils/dimensionsHelper';
 
 const { width, height } = Dimensions.get('window');
 
@@ -36,9 +37,16 @@ export const BackgroundCoupon = styled(QrCouponBackground).attrs(props => ({
 }))`
   position: absolute;
   right: 0;
-  top:  ${IS_LOWER ? '-3.5%' : 0};
-  bottom: 0;
-  left:  ${IS_LOWER ? '10%' : '5%'};
+  bottom: ${Platform
+    .select({
+      ios: IS_LOWER ? '3.5%' : 0,
+      android: IS_LOWER ? '-0.2%' : '-1%'
+    })
+  };
+  left:  ${Platform.select({
+    ios: IS_LOWER ? '10%' : '5%',
+    android: isSmallAndroid() ? '10.8%' : '5%'
+  })};
 `
 
 export const SubtitleHelp = styled.Text`
@@ -53,7 +61,12 @@ export const EmptyImage = styled.View`
   align-items:center;
   justify-content: center;
   z-index:10;
-  top:${IS_LOWER ? '4%' : '13.5%'};
+  top:  ${Platform
+    .select({
+      ios: IS_LOWER ? '4%' : '13.5%',
+      android: IS_LOWER ? '4%' : '8%'
+    })
+  };
   height:50px;
   width: 50px;
   border-radius:25px;

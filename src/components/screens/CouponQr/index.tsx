@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { Dimensions, Platform } from 'react-native'
 import QRCode from 'react-native-qrcode-svg';
 import colors from '../../../../assets/constants/colors';
 import { CouponQrScreenProps } from '../../../settings/@types/appStackTypes';
@@ -6,7 +7,7 @@ import { EstablishmentCardQr } from '../../components/CardEstablishmentQr';
 import { QrCouponsRules } from '../../screensModals/QrCouponsRules';
 import { AuthContext } from '../../../contexts/authContext';
 import { UserIcon } from '../../../../assets/icons/user_icon';
-import { isIphoneX } from '../../../utils/iphoneHelper';
+import { isIphoneX, isSmallAndroid } from '../../../utils/dimensionsHelper';
 import { IWalletCouponsResponseOfferData } from '../../../services/@types/couponServiceTypes';
 import {
   BottomContainer,
@@ -65,7 +66,10 @@ export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
         <QRCode
           value={`${route?.params?.coupon_id}|${user?.id}`}
           logo={require('../../../../assets/images/klubbsLogoCircle.png')}
-          size={isIphoneX() ? 195 : 180}
+          size={Platform.select({
+            ios: isIphoneX() ? 195 : 180,
+            android: isSmallAndroid() ? 150 : 180
+          })}
           color={colors.COLOR_SECUNDARY_BLACK}
         />
       </TopContainer>

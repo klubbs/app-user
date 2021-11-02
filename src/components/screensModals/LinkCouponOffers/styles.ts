@@ -60,6 +60,8 @@ export const Empty = styled.View`
 
 export const Container = styled.View`
   align-items: center;
+  width: 50%;
+  margin-bottom: 5%;
   margin-top: 20px;
 `
 

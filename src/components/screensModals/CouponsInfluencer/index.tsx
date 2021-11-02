@@ -4,10 +4,12 @@ import * as Clipboard from 'expo-clipboard';
 import { useAnimationState, MotiView } from 'moti'
 import { Wrapper, Divider, Container, Code, Copy } from './styles';
 import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
-import { Pressable } from 'react-native';
+import { Pressable, Dimensions } from 'react-native';
 import { GetAllCouponsByInfluencerResponse } from './@types';
 import { InfluencerService } from '../../../services/influencerService';
 import { SpinnerLoading } from '../../components/Spinner';
+
+const { height } = Dimensions.get('window');
 
 export const CouponsInfluencer: React.FC<{ onClose: any, visible: boolean }> = (props) => {
 
@@ -95,7 +97,7 @@ export const CouponsInfluencer: React.FC<{ onClose: any, visible: boolean }> = (
   return (
     <Modalize
       onClose={props.onClose}
-      modalHeight={600}
+      modalHeight={height * 0.8}
       scrollViewProps={{ showsVerticalScrollIndicator: false }}
       ref={modalizeRef}
     >

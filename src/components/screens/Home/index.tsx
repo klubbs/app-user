@@ -1,4 +1,5 @@
 import React from 'react';
+import { View } from 'react-native'
 import { HomeProvider } from '../../../contexts/homeContext';
 import AdvertisementsSlider from "../../organisms/BannerAdvertisements";
 import MainCategories from '../../organisms/RestaurantsCategories';
@@ -16,8 +17,12 @@ export const Home: React.FC = () => {
           <AdvertisementsSlider />
         </Container> */}
         <ContainerBottom>
-          <MainCategories />
-          <RestaurantsList />
+          <View style={{ flex: 1 }}>
+            <MainCategories />
+          </View>
+          <View style={{ flex: 5 }}>
+            <RestaurantsList />
+          </View>
         </ContainerBottom>
       </Wrapper>
     </HomeProvider>

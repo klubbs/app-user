@@ -1,9 +1,11 @@
 import styled from 'styled-components/native';
+import { Dimensions } from 'react-native'
 import COLORS from '../../../../assets/constants/colors';
 import { BEHAVIOR_KEYBOARD } from '../../../utils/behaviorUtils';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
-import BackgroundIcons from '../../../../assets/images/backgrounds/backgroundIcons.png'
+
+const { width } = Dimensions.get('window');
 
 export const Wrapper = styled.SafeAreaView`
   background-color: ${COLORS.COLOR_SECUNDARY_BLACK};
@@ -64,10 +66,10 @@ export const WrapperKeyboard = styled.KeyboardAvoidingView.attrs(props => ({
 `
 
 export const WrapperImage = styled.ImageBackground.attrs(props => ({
-  source: BackgroundIcons
+  source: require('../../../../assets/images/backgrounds/backgroundIcons.png')
 }))`
   width:95%;
-  height:40%;
+  height:${width <= 360 ? '30%' : '40%'};
   justify-content: center;
   align-items:center;
   margin-bottom:25%;

@@ -24,7 +24,7 @@ export const Coupons: React.FC = () => {
   return (
     <SafeArea>
       <HeaderContainer>
-        <ButtonCreateCoupon onPress={modalRef.current?.show} />
+        <ButtonCreateCoupon onPress={() => modalRef.current?.show()} />
       </HeaderContainer>
 
       <Tab.Navigator tabBarOptions={tabStyle} >

@@ -1,10 +1,7 @@
 import { MotiView } from '@motify/components'
 import styled from 'styled-components/native'
 import COLORS from '../../../../assets/constants/colors'
-import { isIphoneX } from '../../../utils/iphoneHelper'
-
-
-export const containerStyle = { height: '100%' }
+import { isIphoneX } from '../../../utils/dimensionsHelper'
 
 export const wrapperStyle = { justifyContent: 'space-around', flex: 5 }
 
