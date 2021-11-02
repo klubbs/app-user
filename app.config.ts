@@ -32,7 +32,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
   android: {
     package: "app.klubbs.user",
-    versionCode: 1
+    permissions: ['CAMERA', 'ACCESS_FINE_LOCATION', 'ACCESS_BACKGROUND_LOCATION', 'ACCESS_COARSE_LOCATION'],
+    versionCode: 4
   },
   extra: {
     ENVIRONMENT_API_URL: process.env.ENVIRONMENT_API_URL
