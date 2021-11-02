@@ -20,18 +20,20 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   experiments: {
     "turboModules": true
   },
-  version: "0.0.1",
+  version: "0.0.3",
   ios: {
     supportsTablet: false,
     bundleIdentifier: "app.klubbs.user",
-    buildNumber: "0.0.1",
+    buildNumber: "0.0.8",
     infoPlist: {
-
+      NSLocationAlwaysAndWhenInUseUsageDescription: "Isso nos permite usar a localização para fornecer certos recursos como localização de estabelecimentos próximos.",
+      NSLocationWhenInUseUsageDescription: "Isso nos permite usar a localização para fornecer certos recursos como localização de estabelecimentos próximos.",
     }
   },
   android: {
     package: "app.klubbs.user",
-    versionCode: 1
+    permissions: ['CAMERA', 'ACCESS_FINE_LOCATION', 'ACCESS_BACKGROUND_LOCATION', 'ACCESS_COARSE_LOCATION'],
+    versionCode: 4
   },
   extra: {
     ENVIRONMENT_API_URL: process.env.ENVIRONMENT_API_URL

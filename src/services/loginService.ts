@@ -4,7 +4,7 @@ import { ErrorException } from '../utils/errorException'
 import { NotificationsFlash } from '../utils/notificationsFlashUtils'
 import { validMail, validPhone } from '../utils/validationFields'
 import { ICreateUserResponse, ILoginResponse } from './@types/userServiceTypes'
-import { Validator } from 'fluentvalidation-ts'
+import { AsyncValidator, Validator } from 'fluentvalidation-ts'
 import { ValidationErrors } from 'fluentvalidation-ts/dist/ValidationErrors'
 import { IRegisterUser } from './@types/loginServiceTypes'
 
@@ -52,10 +52,17 @@ class LoginService {
     return data.message
   }
 
-  static validateRegister(params: IRegisterUser): ValidationErrors<IRegisterUser> {
+  static async validateRegister(params: IRegisterUser): Promise<ValidationErrors<IRegisterUser>> {
     const validator = new LoginServiceValidator()
 
-    return validator.validate(params)
+    return await validator.validateAsync(params)
+  }
+
+  static async alreadyPhone(phone: string): Promise<boolean> {
+
+    const { data } = await api.get<IResponseMessage<boolean>>(`users/infos/phone`, { params: { phone: phone } })
+
+    return data.message
   }
 
 }
@@ -78,7 +85,7 @@ class LoginServiceExceptions {
 
 }
 
-class LoginServiceValidator extends Validator<IRegisterUser> {
+class LoginServiceValidator extends AsyncValidator<IRegisterUser> {
   constructor() {
     super()
 
@@ -99,8 +106,17 @@ class LoginServiceValidator extends Validator<IRegisterUser> {
       .when(src => src.password !== undefined)
 
     this.ruleFor('phone')
-      .notEmpty()
-      .matches(new RegExp(/^\([1-9]{2}\) (?:[2-8]|9[1-9])[0-9]{3}\-[0-9]{4}$/))
+      .mustAsync(async (phone: string) => {
+        try {
+
+          if (!validPhone(phone))
+            return false
+
+          const already = await LoginService.alreadyPhone(phone)
+
+          return !already
+        } catch (error) { return false }
+      })
       .withMessage('Preencha com um telefone válido.')
       .when(src => src.phone !== undefined)
   }

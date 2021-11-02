@@ -1,8 +1,7 @@
 export const validPhone = (number: string): boolean => {
-  let value = number.replace(/\D/g, "")
+  let reg = new RegExp(/^\([1-9]{2}\) (?:[2-8]|9[1-9])[0-9]{3}\-[0-9]{4}$/)
 
-  //55 21 99999 9999
-  return value.length === 13 ? true : false
+  return reg.test(number) === false ? false : true
 }
 
 

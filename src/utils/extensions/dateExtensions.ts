@@ -1,3 +1,5 @@
+import { Platform } from "react-native";
+
 export { };
 
 declare global {
@@ -9,6 +11,7 @@ declare global {
     isSameDate(date: Date): boolean;
     ToUnixEpoch(): number;
     ToDateFormat(epoch: number): Date;
+    toCustomLocaleDateString(): string
   }
 
   interface Number {
@@ -50,8 +53,22 @@ Date.prototype.ToDateFormat = function (unixEpoch) {
   return date;
 }
 
-
 Number.prototype.ToDateFormat = function () {
   let date = new Date(this as number * 1000)
   return date;
+}
+
+
+Date.prototype.toCustomLocaleDateString = function (): string {
+  if (Platform.OS === 'ios')
+    return this.toLocaleDateString('pt-BR', { year: 'numeric', month: 'long', day: 'numeric' });
+  else {
+
+    const dayOfWeek = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sab", "Dom"]
+
+    const monthName = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+      "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
+
+    return `${dayOfWeek[this.getDay() - 1]}, ${this.getDate()} ${monthName[this.getMonth()]}, ${this.getFullYear()}`;
+  }
 }

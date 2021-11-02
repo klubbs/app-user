@@ -41,7 +41,6 @@ export default function App() {
   return (
     <AuthProvider>
       <NavigationContainer>
-        <FlashComponent />
         <StatusBar
           backgroundColor={colors.COLOR_SECUNDARY_WHITE}
           animated={true}
@@ -49,6 +48,7 @@ export default function App() {
         />
         <AppStack />
       </NavigationContainer >
+      <FlashComponent />
     </AuthProvider>
   );
 };

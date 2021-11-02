@@ -20,12 +20,14 @@ export type ICategoryResponse = {
 }
 
 
-export type GetAllMasterCouponsResponse = {
+export type GetAllOffersResponse = {
   master_coupon_id: string,
   master_coupon_off: number,
   master_coupon_valid_at: number,
   master_coupon_description: string,
   establishment_name: string,
   establishment_image: string,
-  establishment_id: string
+  establishment_id: string,
+  working_days: number[]
+  minimum_ticket: number
 }
