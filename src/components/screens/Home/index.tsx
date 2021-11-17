@@ -16,14 +16,14 @@ export const Home: React.FC = () => {
         {/* <Container>
           <AdvertisementsSlider />
         </Container> */}
-        <ContainerBottom>
-          <View style={{ flex: 1 }}>
-            <MainCategories />
-          </View>
-          <View style={{ flex: 5 }}>
-            <RestaurantsList />
-          </View>
-        </ContainerBottom>
+        {/* <ContainerBottom> */}
+        <View style={{ flex: 1 }}>
+          <MainCategories />
+        </View>
+        <View style={{ flex: 5, paddingLeft: '2%', paddingRight: '2%' }}>
+          <RestaurantsList />
+        </View>
+        {/* </ContainerBottom> */}
       </Wrapper>
     </HomeProvider>
   );

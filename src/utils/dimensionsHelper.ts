@@ -16,8 +16,8 @@ export function isIphoneX() {
 }
 
 
-export function isSmallAndroid() {
+export function isBiggerAndroid() {
   const dimen = Dimensions.get('window');
 
-  return Platform.OS === 'android' && Dimensions.get('window').width <= 360
+  return Platform.OS === 'android' && Dimensions.get('window').width >= 360
 }

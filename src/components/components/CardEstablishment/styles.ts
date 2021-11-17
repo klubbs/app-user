@@ -1,7 +1,7 @@
 import styled from 'styled-components/native'
 import { Animated, Platform } from 'react-native'
 import COLORS from '../../../../assets/constants/colors'
-import { isIphoneX, isSmallAndroid } from '../../../utils/dimensionsHelper'
+import { isIphoneX, isBiggerAndroid } from '../../../utils/dimensionsHelper'
 import { ShopIcon } from '../../../../assets/icons/shop_icon'
 
 export const Wrapper = styled.TouchableOpacity.attrs(props => ({
@@ -9,7 +9,7 @@ export const Wrapper = styled.TouchableOpacity.attrs(props => ({
 }
 ))`
     height: 250px;
-    width: ${isIphoneX() ? '190px' : '45%'};
+    width: ${isIphoneX() ? '48%' : '48%'};
     align-items: center;
 `
 
@@ -18,8 +18,8 @@ export const Image = Animated.createAnimatedComponent(styled.Image.attrs(props =
   `
   height: 100px;
   width: ${Platform.select({
-    ios: '190px',
-    android: isSmallAndroid() ? '160px' : '190px'
+    ios: '100%',
+    android: isBiggerAndroid() ? '190px' : '160px'
   })};
   border-radius: 10;
   `
@@ -40,8 +40,8 @@ export const OpenIndicator = Animated.createAnimatedComponent(styled.View<{ open
 export const EmptyImage = styled.View`
   height: 100px;
   width: ${Platform.select({
-  ios: '190px',
-  android: isSmallAndroid() ? '160px' : '190px'
+  ios: '100%',
+  android: isBiggerAndroid() ? '190px' : '160px'
 })};
   justify-content:center;
   align-items:center;

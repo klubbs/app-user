@@ -3,7 +3,7 @@ import { Dimensions, Platform } from 'react-native'
 import colors from '../../../../assets/constants/colors';
 import { QrCouponBackground } from '../../../../assets/images/backgrounds/backgroundQrCoupon';
 import { MotiView } from 'moti'
-import { isSmallAndroid } from '../../../utils/dimensionsHelper';
+import { isBiggerAndroid, isIphoneX } from '../../../utils/dimensionsHelper';
 
 const { width, height } = Dimensions.get('window');
 
@@ -33,19 +33,19 @@ export const BottomContainer = styled.View`
 
 export const BackgroundCoupon = styled(QrCouponBackground).attrs(props => ({
   height: height,
-  width: IS_LOWER ? width - 80 : width - 40
+  width: IS_LOWER ? width * 0.84 : width - 40
 }))`
   position: absolute;
   right: 0;
   bottom: ${Platform
     .select({
-      ios: IS_LOWER ? '3.5%' : 0,
+      ios: isIphoneX() ? 0 : '0.8%',
       android: IS_LOWER ? '-0.2%' : '-1%'
     })
   };
   left:  ${Platform.select({
-    ios: IS_LOWER ? '10%' : '5%',
-    android: isSmallAndroid() ? '10.8%' : '5%'
+    ios: IS_LOWER ? '8%' : '5%',
+    android: isBiggerAndroid() ? '5%' : '10.8%'
   })};
 `
 
@@ -63,7 +63,7 @@ export const EmptyImage = styled.View`
   z-index:10;
   top:  ${Platform
     .select({
-      ios: IS_LOWER ? '4%' : '13.5%',
+      ios: IS_LOWER ? '6%' : '13.5%',
       android: IS_LOWER ? '4%' : '8%'
     })
   };
