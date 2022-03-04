@@ -6,7 +6,6 @@ import CongratulationsCoupons from '../../../../assets/animations/congratulation
 import { AuthContext } from '../../../contexts/authContext';
 import { IMenu } from './@types';
 import { MenuItem } from '../../components/MenuItem';
-import Character from '../../../../assets/images/characters/character.png'
 import {
   ContainerImage,
   ContainerPoints,
@@ -26,9 +25,7 @@ const INFLUENCER_KEY = "999";
 
 const Profile: React.FC = () => {
 
-  //TODO: Alterar para scroolView
   const MENU_DATA: IMenu[] = [
-    // { key: "1", text: "Meus Dados", description: "Edite seus dados", icon: "user", logged: true, cb: () => { } },
     { key: "2", text: "Configurações", description: "Controle suas configurações", icon: "settings", logged: false, cb: () => navigation.navigate('Configurations') },
     { key: "3", text: "Dúvidas", description: "Precisa de alguma ajuda", icon: "help-circle", logged: false, cb: () => navigation.navigate('Help') },
     { key: INFLUENCER_KEY, text: "Influenciador", description: 'Gerencie sua influência', icon: "thumbs-up", logged: true, cb: () => navigation.navigate('Influencer') }
@@ -90,7 +87,7 @@ const Profile: React.FC = () => {
       <WrapperTop >
         <ContainerImage >
           {
-            user && <UserImage source={Character} />
+            user && <UserImage source={require('../../../../assets/images/characters/character.png')} />
           }
         </ContainerImage>
         <RenderPoints />

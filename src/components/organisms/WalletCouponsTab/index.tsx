@@ -60,9 +60,9 @@ export const CouponsWalletTab: React.FC = () => {
     <FlatComponent
       onRefresh={() => getAllWalletCoupons()}
       refreshing={refresh}
-      data={format4TwoColumns(walletCoupom, 2)}
+      data={format4TwoColumns<ICouponsItem>(walletCoupom, 2)}
       numColumns={NUM_COLUMNS}
-      keyExtractor={(item: ICouponsItem, index: number) => item.wallet_id}
+      keyExtractor={(item, index) => { return `${item?.wallet_id}` }}
       ListEmptyComponent={() => <NothingCouponsSubtitle>Nenhum cupom adicionado ainda</NothingCouponsSubtitle>}
       renderItem={({ item }) => RenderCoupon(item as ICouponsItem)}
     />

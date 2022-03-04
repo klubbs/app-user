@@ -10,7 +10,7 @@ export const SafeArea = styled.SafeAreaView`
 export const tabStyle = {
   activeTintColor: COLORS.COLOR_YELLOW,
   inactiveTintColor: COLORS.COLOR_BLACK50,
-  indicatorStyle: { borderWidth: 1.5, borderColor: COLORS.COLOR_YELLOW, width: '25%', marginLeft: '9%', borderRadius: 10 },
+  indicatorStyle: { borderWidth: 1.5, borderColor: COLORS.COLOR_YELLOW, width: '25%', marginLeft: '9%', backgroundColor: COLORS.COLOR_YELLOW },
   style: { backgroundColor: COLORS.COLOR_SECUNDARY_WHITE },
   labelStyle: { fontFamily: 'Nunito_SemiBold' }
 }

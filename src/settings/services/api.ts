@@ -7,7 +7,7 @@ const { showFlash } = require('flash-notify');
 import { IError } from '../@types/IResponses'
 
 const axiosConfig = {
-  baseURL: Constants.manifest.extra?.ENVIRONMENT_API_URL
+  baseURL: Constants.manifest?.extra?.ENVIRONMENT_API_URL
 }
 
 const api = axios.create(axiosConfig);
