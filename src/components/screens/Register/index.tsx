@@ -3,14 +3,14 @@ import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Alert, Keyboard, ScrollView, Dimensions } from 'react-native';
-import { default as COLORS } from '../../../../assets/constants/colors';
+import { default as colors } from '../../../../assets/constants/colors';
 import { IRegisterUser } from '../../../services/@types/loginServiceTypes';
 import { LoginService } from '../../../services/loginService';
 import { RegisterScreenProps } from '../../../settings/@types/appStackTypes';
 import { isEmpty, nameof } from '../../../utils/extensions/objectExtensions';
 import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
-import { MailCodeModal } from '../../screensModals/MailCodeModal';
-import { IModalRef } from '../../screensModals/MailCodeModal/@types';
+import { MailCodeModal } from '../../modals/MailCodeModal';
+import { IModalRef } from '../../modals/MailCodeModal/@types';
 import {
   Confirm,
   containerBackButton,
@@ -131,9 +131,9 @@ const Register: React.FC<RegisterScreenProps> = ({ route }) => {
         }
 
         if (errorInputTmp.phone && !errorInputTmp.password && !errorInputTmp.name) {
-          NotificationsFlash.CustomMessage('', 'Telefone já em uso ou incorreto')
+          NotificationsFlash.customMessage('', 'Telefone já em uso ou incorreto')
         } else {
-          NotificationsFlash.IncompleteRegisterInputs()
+          NotificationsFlash.incompleteRegisterInputs()
         }
 
         setErrorInput({ ...errorInput })
@@ -144,7 +144,7 @@ const Register: React.FC<RegisterScreenProps> = ({ route }) => {
       modalCodeRef.current?.openModal()
 
     } catch (error: any) {
-      NotificationsFlash.SpillCoffee()
+      NotificationsFlash.spillCoffee()
     }
     finally { setLoading(false) }
 
@@ -193,13 +193,13 @@ const Register: React.FC<RegisterScreenProps> = ({ route }) => {
             name={"chevron-left"}
             size={15}
             style={containerBackButton as any}
-            color={errorInput.name || errorInput.phone ? COLORS.COLOR_RED : COLORS.COLOR_SECUNDARY_WHITE}
+            color={errorInput.name || errorInput.phone ? colors.COLOR_RED : colors.COLOR_SECUNDARY_WHITE}
             onPress={() => onAnimatedScroll(false)}
           />
         }
 
         <Confirm onPress={handleRegister}>
-          <Feather name={"chevron-right"} size={15} color={COLORS.COLOR_WHITE} />
+          <Feather name={"chevron-right"} size={15} color={colors.COLOR_WHITE} />
         </Confirm>
       </ContainerBottom>
     )

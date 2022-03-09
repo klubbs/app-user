@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FlatList } from 'react-native';
 import * as Haptic from 'expo-haptics';
-import colors from '../../../../assets/constants/colors';
+import { colors } from '../../../../assets/constants/colors';
 import { CouponIcon } from '../../../../assets/icons/coupon_icon';
 import { InfluencerService } from '../../../services/influencerService';
 import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
 import { BagTab } from '../../components/BagTab';
-import { CardOffers } from '../../organisms/CardOffers';
-import { ICardOffersProps } from '../../organisms/CardOffers/@types';
-import { LinkCouponOffers } from '../../screensModals/LinkCouponOffers';
+import { CardOffers } from '../../components_heavy/CardOffers';
+import { ICardOffersProps } from '../../components_heavy/CardOffers/@types';
+import { LinkCouponOffers } from '../../modals/LinkCouponOffers';
 import { NotFoundRestaurants } from '../../../../assets/images/notFounds/notFoundRestaurants';
-import { ILinkCouponOffersRef } from '../../screensModals/LinkCouponOffers/@types';
+import { ILinkCouponOffersRef } from '../../modals/LinkCouponOffers/@types';
 import {
   Wrapper,
   Header,
@@ -44,7 +44,7 @@ export const Offers: React.FC = () => {
 
       setOffers(response);
     } catch (error) {
-      NotificationsFlash.SpillCoffee();
+      NotificationsFlash.spillCoffee();
     } finally {
       setLoading(false)
     }
@@ -77,7 +77,7 @@ export const Offers: React.FC = () => {
 
       Haptic.notificationAsync(Haptic.NotificationFeedbackType.Warning)
 
-      NotificationsFlash.CustomMessage(
+      NotificationsFlash.customMessage(
         "Ofertas do mesmo estabelecimento",
         "Cada cupom seu só pode ser associado a 1 oferta do mesmo estabelecimento"
       )

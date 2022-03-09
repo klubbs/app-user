@@ -1,12 +1,10 @@
 import React, { useState, useRef } from 'react';
 import { MenuItem } from '../../components/MenuItem';
 import { Wrapper, Container, SocialMediaContainer, SocialMediaSubtitle, Instagram, Twitter } from './styles';
-import { SaveOrCreateCoupon } from '../../screensModals/SaveOrCreateCoupon';
-import { CouponsInfluencer } from '../../screensModals/CouponsInfluencer';
+import { SaveOrCreateCoupon } from '../../modals/SaveOrCreateCoupon';
+import { CouponsInfluencer } from '../../modals/CouponsInfluencer';
 import { useNavigation } from '@react-navigation/native';
-import { KeyboardAvoidingView } from 'react-native';
-import { BEHAVIOR_KEYBOARD } from '../../../utils/behaviorUtils';
-import { ISaveOrCreateCouponRef } from '../../screensModals/SaveOrCreateCoupon/@types';
+import { ISaveOrCreateCouponRef } from '../../modals/SaveOrCreateCoupon/@types';
 
 export const Influencer: React.FC = () => {
 

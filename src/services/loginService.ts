@@ -1,10 +1,9 @@
 import { IError, IResponseMessage } from '../settings/@types/IResponses'
 import api from '../settings/services/api'
-import { ErrorException } from '../utils/errorException'
 import { NotificationsFlash } from '../utils/notificationsFlashUtils'
-import { validMail, validPhone } from '../utils/validationFields'
+import { beValidMail, keyHasInObjectValidator, validPhone } from '../utils/documentsUtils'
 import { ICreateUserResponse, ILoginResponse } from './@types/userServiceTypes'
-import { AsyncValidator, Validator } from 'fluentvalidation-ts'
+import { AsyncValidator } from 'fluentvalidation-ts'
 import { ValidationErrors } from 'fluentvalidation-ts/dist/ValidationErrors'
 import { IRegisterUser } from './@types/loginServiceTypes'
 
@@ -33,7 +32,7 @@ class LoginService {
     return data.message
   }
 
-  static registerContract(user: IRegisterUser, code: string): IRegisterUser & { code: string } {
+  private static registerContract(user: IRegisterUser, code: string): IRegisterUser & { code: string } {
     user.phone = user.phone.replace(/\D/g, "")
 
     return { phone: user.phone, code: code, password: user.password, mail: user.mail, name: user.name }
@@ -43,10 +42,15 @@ class LoginService {
     await api.post(`users/code/register/mail`, {}, { params: { mail: mail } })
   }
 
-  static async validateMail(email: string): Promise<boolean> {
-    if (!validMail(email))
-      throw ErrorException.Throw(422)
+  static async sendForgetMailCode(mail: string): Promise<void> {
+    await api.post('users/code/forget/login', {}, { params: { mail: mail } })
+  }
 
+  static async updatePassword(password: string, mail: string, code: string): Promise<void> {
+    await api.put('users/update/password', {}, { auth: { password: password, username: mail }, params: { code: code } })
+  }
+
+  static async mailAlreadyInUse(email: string): Promise<boolean> {
     const { data } = await api.get<IResponseMessage<boolean>>(`users/infos/mail`, { params: { mail: email } })
 
     return data.message
@@ -65,21 +69,38 @@ class LoginService {
     return data.message
   }
 
+  static async validatePropertyAsync(
+    value: any,
+    param: keyof IRegisterUser
+  ): Promise<Partial<IRegisterUser>> {
+
+    const validator = new LoginServiceValidator();
+
+    const errors = await validator.validateAsync(
+      { [param]: value } as any
+    )
+
+    return keyHasInObjectValidator<IRegisterUser>(
+      errors,
+      param as keyof IRegisterUser
+    )
+  }
+
 }
 
 class LoginServiceExceptions {
 
   static catchValidateMail(error: IError) {
     if (error.statusCode === 422)
-      NotificationsFlash.InvalidMail()
+      NotificationsFlash.invalidMail()
     else {
-      NotificationsFlash.SpillCoffee()
+      NotificationsFlash.spillCoffee()
     }
   }
 
   static catchLogin(error: IError) {
     if (error.statusCode === 403) {
-      NotificationsFlash.IncorrectPassword()
+      NotificationsFlash.incorrectPassword()
     }
   }
 
@@ -91,7 +112,9 @@ class LoginServiceValidator extends AsyncValidator<IRegisterUser> {
 
     this
       .ruleFor('mail')
-      .emailAddress()
+      .must((mail: string) => {
+        return beValidMail(mail)
+      })
       .when(src => src.mail !== undefined)
 
     this

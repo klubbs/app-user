@@ -2,46 +2,32 @@ import { showFlash } from 'flash-notify'
 
 class NotificationsFlash {
 
-  static SomeoneBullshit = () =>
+  static someoneBullshit = () =>
     showFlash({ type: 'WARNING', title: 'Acho que alguém fez besteira', desc: 'Já estamos resolvendo este problema, desculpe.' })
 
-  static SpillCoffee = () =>
+  static spillCoffee = () =>
     showFlash({ type: 'DANGER', title: 'Caiu café aqui', desc: 'Desculpe, já estamos limpando a bagunça.' })
 
-  static DisconnectedWire = () =>
+  static disconnectedWire = () =>
     showFlash({ type: 'NEUTRAL', title: 'Um fio desconectou', desc: 'Tente novamente mais tarde.' })
 
-  static IncorrectPassword = () =>
+  static incorrectPassword = () =>
     showFlash({ type: "NEUTRAL", title: 'Senha incorreta', desc: 'Será que temos um Sherlock Holmes aqui ? 🧐' })
 
-  static ClearMemory = () =>
-    showFlash({ type: 'NEUTRAL', title: 'Feito.', desc: 'Memória liberada com sucesso.' })
-
-  static InvalidMail = () =>
+  static invalidMail = () =>
     showFlash({ type: "NEUTRAL", title: 'E-mail inválido', desc: 'Verifique se o e-mail está correto.' })
 
-  static InvalidCode = () =>
+  static invalidCode = () =>
     showFlash({ type: "WARNING", title: 'Código inválido.', desc: 'Código de verificação incorreto.' })
 
-  static InvalidPhone = () =>
-    showFlash({ type: "NEUTRAL", title: 'Telefone inválido.', desc: 'Preencha com um telefone válido.' })
-
-  static IncompleteName = () =>
-    showFlash({ type: "NEUTRAL", title: '', desc: 'Faltou preencher com o seu nome.' })
-
-  static IncompleteRegisterInputs = () =>
+  static incompleteRegisterInputs = () =>
     showFlash({ type: "NEUTRAL", title: '', desc: 'Alguns campos parecem incorretos' })
 
-  static InvalidPassword = () =>
-    showFlash({
-      type: "NEUTRAL", title: 'Senha inválida',
-      desc: 'Sua senha deve conter 5 ou mais caracteres.'
-    })
 
-  static SuccessfullySentCode = () =>
+  static successfullySentCode = () =>
     showFlash({ type: "NEUTRAL", title: 'Verifique seu e-mail', desc: 'Código enviado com sucesso.' })
 
-  static CustomMessage = (title: string, message: string, type?: 'WARNING' | 'NEUTRAL' | 'DANGER' | 'SUCCESS') =>
+  static customMessage = (title: string, message: string, type?: 'WARNING' | 'NEUTRAL' | 'DANGER' | 'SUCCESS') =>
     showFlash({ type: type ?? "NEUTRAL", title: title, desc: message })
 
 }

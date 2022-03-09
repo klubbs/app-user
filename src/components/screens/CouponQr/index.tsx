@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react';
 import { Dimensions, Platform } from 'react-native'
 import QRCode from 'react-native-qrcode-svg';
-import colors from '../../../../assets/constants/colors';
+import { colors } from '../../../../assets/constants/colors';
 import { CouponQrScreenProps } from '../../../settings/@types/appStackTypes';
 import { EstablishmentCardQr } from '../../components/CardEstablishmentQr';
-import { QrCouponsRules } from '../../screensModals/QrCouponsRules';
+import { QrCouponsRules } from '../../modals/QrCouponsRules';
 import { AuthContext } from '../../../contexts/authContext';
 import { UserIcon } from '../../../../assets/icons/user_icon';
 import { isIphoneX, isBiggerAndroid } from '../../../utils/dimensionsHelper';

@@ -1,9 +1,9 @@
 import styled from 'styled-components/native'
-import COLORS from '../../../../assets/constants/colors'
+import { colors } from '../../../../assets/constants/colors'
 
 export const Wrapper = styled.SafeAreaView`
   flex: 1;
-  background-color: ${COLORS.COLOR_WHITE};
+  background-color: ${colors.COLOR_WHITE};
 `
 
 export const ContainerScroll = styled.ScrollView`

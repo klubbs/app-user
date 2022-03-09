@@ -1,8 +1,6 @@
-import { Skeleton } from '@motify/skeleton';
 import { motify, MotiImage, MotiView } from 'moti'
 import styled from "styled-components/native";
-import colors from '../../../../assets/constants/colors';
-import COLORS from "../../../../assets/constants/colors";
+import { colors } from '../../../../assets/constants/colors';
 import { CouponIcon } from "../../../../assets/icons/coupon_icon";
 import { ShopIcon } from '../../../../assets/icons/shop_icon';
 import { CouponWalletBackground } from "../../../../assets/images/coupons/walletCoupon";
@@ -31,7 +29,7 @@ export const BackgroundCoupon = styled(CouponWalletBackground).attrs(props => ({
 `
 
 export const CouponCode = styled.Text<{ active: boolean, putMarginBottom?: boolean }>`
-  color:${props => props.active ? COLORS.COLOR_YELLOW_BUTTON_TEXT : COLORS.COLOR_BLACK80};
+  color:${props => props.active ? colors.COLOR_YELLOW_BUTTON_TEXT : colors.COLOR_BLACK80};
   font-size:14px;
   margin-bottom:${props => props.putMarginBottom ? '3%' : 0};
   font-family:'Nunito_SemiBold';
@@ -53,13 +51,13 @@ export const CouponContainer = styled.View`
 `
 
 export const CountCoupons = styled.Text`
-  color:${COLORS.COLOR_BLACK80};
+  color:${colors.COLOR_BLACK80};
   font-size:12px;
   font-family:'Nunito_Bold';
 `
 
 export const OffCoupons = styled.Text`
-color:${COLORS.COLOR_BLACK80};
+color:${colors.COLOR_BLACK80};
 font-size:12px;
 font-family:'Nunito_Bold';
 /* left:380%; */

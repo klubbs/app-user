@@ -1,5 +1,5 @@
 import styled from 'styled-components/native'
-import colors from '../../../../assets/constants/colors';
+import { colors } from '../../../../assets/constants/colors';
 import { Dimensions } from 'react-native'
 
 const { width } = Dimensions.get('window')

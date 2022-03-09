@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 import { Animated, Platform } from 'react-native'
-import COLORS from '../../../../assets/constants/colors'
+import { colors } from '../../../../assets/constants/colors'
 import { isIphoneX, isBiggerAndroid } from '../../../utils/dimensionsHelper'
 import { ShopIcon } from '../../../../assets/icons/shop_icon'
 
@@ -32,8 +32,8 @@ export const OpenIndicator = Animated.createAnimatedComponent(styled.View<{ open
   top:5%;
   right:-48%;
   border-width: 1px;
-  border-color: ${COLORS.COLOR_WHITE};
-  background-color: ${props => props.open ? COLORS.COLOR_GREEN : COLORS.COLOR_RED};
+  border-color: ${colors.COLOR_WHITE};
+  background-color: ${props => props.open ? colors.COLOR_GREEN : colors.COLOR_RED};
 `
 )
 
@@ -46,12 +46,12 @@ export const EmptyImage = styled.View`
   justify-content:center;
   align-items:center;
   border-radius: 10px;
-  background-color:${COLORS.COLOR_BLACK10}
+  background-color:${colors.COLOR_BLACK10}
 `
 export const EmptyShopIcon = styled(ShopIcon).attrs(props => ({
   width: 20,
   height: 20,
-  fill: COLORS.COLOR_BLACK40
+  fill: colors.COLOR_BLACK40
 }))``
 
 
@@ -69,14 +69,14 @@ export const ContainerDescriptions = styled.View`
 `
 
 export const EstablishmentName = styled.Text`
-  color:${COLORS.COLOR_SECUNDARY_BLACK};
+  color:${colors.COLOR_SECUNDARY_BLACK};
   font-size:16px;
   font-family:'Nunito_Bold';
   margin-bottom: 1%;
 `;
 
 export const StablishmentCategory = styled.Text`
-  color:${COLORS.COLOR_BLACK50};
+  color:${colors.COLOR_BLACK50};
   font-size:12px;
   font-family:'Nunito_Light';
 `;
@@ -84,7 +84,7 @@ export const StablishmentCategory = styled.Text`
 export const ContainerToolbar = styled.View`
   flex:2;
   width: 100%;
-  background-color: ${COLORS.COLOR_BLACK};
+  background-color: ${colors.COLOR_BLACK};
   border-radius: 10px;
   justify-content: flex-start;
   padding-horizontal:5px;
@@ -99,7 +99,7 @@ const ToolbarBadgeDefault = styled.View`
 `
 
 export const ContainerOff = styled(ToolbarBadgeDefault)`
-  background-color: ${COLORS.COLOR_SECUNDARY_BLACK};
+  background-color: ${colors.COLOR_SECUNDARY_BLACK};
   border-radius: 10px;
   justify-content: space-evenly;
   flex-direction: row;
@@ -113,13 +113,13 @@ export const ContainerDistance = styled(ToolbarBadgeDefault)`
 `
 
 export const OffCoupon = styled.Text`
-  color:${COLORS.COLOR_YELLOW};
+  color:${colors.COLOR_YELLOW};
   font-size:11px;
   font-family:'Nunito_Bold';
 `;
 
 export const DistanceLocation = styled.Text`
-  color:${COLORS.COLOR_WHITE_80};
+  color:${colors.COLOR_WHITE_80};
   font-size:10px;
   font-family:'Nunito_Regular';
 `;

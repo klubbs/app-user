@@ -40,10 +40,10 @@ export class CouponService {
       Haptic.notificationAsync(Haptic.NotificationFeedbackType.Warning)
 
       if (actual === "WALLET") {
-        NotificationsFlash.CustomMessage('🏷 Ai sim', "Cupom já adicionado a carteira.", 'SUCCESS')
+        NotificationsFlash.customMessage('🏷 Ai sim', "Cupom já adicionado a carteira.", 'SUCCESS')
         return;
       } else if (actual === "CODE") {
-        NotificationsFlash.CustomMessage('', "🛑 Cupom Inválido.", 'DANGER')
+        NotificationsFlash.customMessage('', "🛑 Cupom Inválido.", 'DANGER')
       }
 
     }

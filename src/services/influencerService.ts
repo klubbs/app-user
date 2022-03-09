@@ -1,4 +1,4 @@
-import { GetAllCouponsByInfluencerResponse } from "../components/screensModals/CouponsInfluencer/@types";
+import { GetAllCouponsByInfluencerResponse } from "../components/modals/CouponsInfluencer/@types";
 import { IError, IResponseMessage } from "../settings/@types/IResponses";
 import api from "../settings/services/api";
 import * as Haptic from 'expo-haptics';
@@ -43,13 +43,13 @@ export class InfluencerServiceException {
       Haptic.impactAsync(Haptic.ImpactFeedbackStyle.Light)
 
       if (actual === "CODE") {
-        NotificationsFlash.CustomMessage('Código inválido', "Espaços são proibidos e necessário 10 caracteres.", 'NEUTRAL')
+        NotificationsFlash.customMessage('Código inválido', "Espaços são proibidos e necessário 10 caracteres.", 'NEUTRAL')
         return;
       }
 
     } else if (error.statusCode === 409) {
       if (actual === "CODE") {
-        NotificationsFlash.CustomMessage('Código já em uso', "Este código de cupom já esta sendo usado", 'WARNING')
+        NotificationsFlash.customMessage('Código já em uso', "Este código de cupom já esta sendo usado", 'WARNING')
         return;
       }
     }
@@ -64,14 +64,14 @@ export class InfluencerServiceException {
       Haptic.impactAsync(Haptic.ImpactFeedbackStyle.Light)
 
       if (actual === "MASTER COUPON") {
-        NotificationsFlash.CustomMessage('Desculpe', "Uma das ofertas que você escolheu não esta mais válida", 'NEUTRAL')
+        NotificationsFlash.customMessage('Desculpe', "Uma das ofertas que você escolheu não esta mais válida", 'NEUTRAL')
         return;
       } else if (actual === "COUPON") {
-        NotificationsFlash.CustomMessage('Estranho', "O seu cupom não existe mais 🤔", 'NEUTRAL')
+        NotificationsFlash.customMessage('Estranho', "O seu cupom não existe mais 🤔", 'NEUTRAL')
       }
 
     } else {
-      NotificationsFlash.SomeoneBullshit()
+      NotificationsFlash.someoneBullshit()
     }
 
   }

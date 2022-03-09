@@ -3,14 +3,14 @@ import { BottomTabBar, createBottomTabNavigator } from "@react-navigation/bottom
 import React from "react";
 import { TouchableOpacity, View } from "react-native";
 import Svg, { Path } from 'react-native-svg';
-import COLORS from '../../../assets/constants/colors';
+import { colors } from '../../../assets/constants/colors';
 import { CouponIcon } from "../../../assets/icons/coupon_icon";
 import { ShopIcon } from "../../../assets/icons/shop_icon";
 import { Coupons } from '../../components/screens/Coupons';
 import { Home } from '../../components/screens/Home';
 import Profile from '../../components/screens/Profile';
 import { isIphoneX } from "../../utils/dimensionsHelper";
-import { ITabsParamList } from "./interfaces/ITabParams";
+import { ITabsParamList } from "../@types/tabStackTypes";
 
 interface AppStackProps { }
 
@@ -22,19 +22,19 @@ const TabBarCustomButton = ({ accessibilityState, children, onPress }: any) => {
     return (
       <View style={{ flex: 1, alignItems: "center" }}>
         <View style={{ flexDirection: 'row', position: 'absolute', top: 0 }}>
-          <View style={{ flex: 1, backgroundColor: COLORS.COLOR_SECUNDARY_BLACK }}></View>
+          <View style={{ flex: 1, backgroundColor: colors.COLOR_SECUNDARY_BLACK }}></View>
           <Svg width={75} height={61} viewBox="0 0 75 61" >
             <Path
               d="M75.2 0v61H0V0c4.1 0 7.4 3.1 7.9 7.1C10 21.7 22.5 33 37.7 33c15.2 0 27.7-11.3 29.7-25.9.5-4 3.9-7.1 7.9-7.1h-.1z"
-              fill={COLORS.COLOR_SECUNDARY_BLACK}
+              fill={colors.COLOR_SECUNDARY_BLACK}
             />
           </Svg>
-          <View style={{ flex: 1, backgroundColor: COLORS.COLOR_SECUNDARY_BLACK }}></View>
+          <View style={{ flex: 1, backgroundColor: colors.COLOR_SECUNDARY_BLACK }}></View>
         </View>
 
         <TouchableOpacity
           style={{
-            top: -22.5, justifyContent: 'center', alignItems: 'center', width: 50, height: 50, borderRadius: 25, backgroundColor: COLORS.COLOR_SECUNDARY_BLACK
+            top: -22.5, justifyContent: 'center', alignItems: 'center', width: 50, height: 50, borderRadius: 25, backgroundColor: colors.COLOR_SECUNDARY_BLACK
           }}
           onPress={onPress}
         >
@@ -48,7 +48,7 @@ const TabBarCustomButton = ({ accessibilityState, children, onPress }: any) => {
         style={{
           flex: 1,
           height: 50,
-          backgroundColor: COLORS.COLOR_SECUNDARY_BLACK
+          backgroundColor: colors.COLOR_SECUNDARY_BLACK
         }}
         activeOpacity={1}
         onPress={onPress}
@@ -68,7 +68,7 @@ const CustomTabBar = ({ props }: any) => {
         left: 0,
         right: 0,
         height: isIphoneX() ? 40 : 10,
-        backgroundColor: COLORS.COLOR_SECUNDARY_BLACK
+        backgroundColor: colors.COLOR_SECUNDARY_BLACK
       }}
     ></View>
     <BottomTabBar
@@ -84,7 +84,7 @@ const Tabs: React.FC<AppStackProps> = () => {
 
   const IconTab = ({ focused, icon }: { focused: boolean, icon: any }) => {
     return (
-      <Feather name={icon} size={20} color={focused ? COLORS.COLOR_YELLOW : COLORS.COLOR_SECUNDARY_WHITE} />
+      <Feather name={icon} size={20} color={focused ? colors.COLOR_YELLOW : colors.COLOR_SECUNDARY_WHITE} />
     )
   }
 
@@ -99,7 +99,7 @@ const Tabs: React.FC<AppStackProps> = () => {
         name="Home"
         component={Home}
         options={{
-          tabBarIcon: ({ focused }) => <ShopIcon fill={focused ? COLORS.COLOR_YELLOW : COLORS.COLOR_SECUNDARY_WHITE} width={18} height={18} />,
+          tabBarIcon: ({ focused }) => <ShopIcon fill={focused ? colors.COLOR_YELLOW : colors.COLOR_SECUNDARY_WHITE} width={18} height={18} />,
           tabBarButton: (props) => (<TabBarCustomButton {...props} />)
         }}
       />
@@ -108,7 +108,7 @@ const Tabs: React.FC<AppStackProps> = () => {
         name="Coupon"
         component={Coupons}
         options={{
-          tabBarIcon: ({ focused }) => <CouponIcon fill={focused ? COLORS.COLOR_YELLOW : COLORS.COLOR_SECUNDARY_WHITE} width={18} height={18} />,
+          tabBarIcon: ({ focused }) => <CouponIcon fill={focused ? colors.COLOR_YELLOW : colors.COLOR_SECUNDARY_WHITE} width={18} height={18} />,
           tabBarButton: (props) => (<TabBarCustomButton {...props} />)
         }}
       />

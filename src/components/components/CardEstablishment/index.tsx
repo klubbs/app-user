@@ -1,6 +1,6 @@
 import React, { useContext, useRef } from 'react';
 import { View, Animated } from 'react-native';
-import colors from '../../../../assets/constants/colors';
+import { colors } from '../../../../assets/constants/colors';
 import { CouponIcon } from '../../../../assets/icons/coupon_icon';
 import { MarkerTimeIcon } from '../../../../assets/icons/marker-time_icon';
 import { distanceInKm } from '../../../utils/distanceUtils'

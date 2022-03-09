@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 import { Dimensions, Platform } from 'react-native'
-import colors from '../../../../assets/constants/colors';
+import { colors } from '../../../../assets/constants/colors';
 import { QrCouponBackground } from '../../../../assets/images/backgrounds/backgroundQrCoupon';
 import { MotiView } from 'moti'
 import { isBiggerAndroid, isIphoneX } from '../../../utils/dimensionsHelper';

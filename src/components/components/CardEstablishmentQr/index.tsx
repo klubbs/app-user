@@ -1,6 +1,6 @@
 import React from 'react';
 import { PressableProps } from 'react-native';
-import colors from '../../../../assets/constants/colors';
+import { colors } from '../../../../assets/constants/colors';
 import { CouponIcon } from '../../../../assets/icons/coupon_icon';
 import { InfoIcon } from '../../../../assets/icons/info_icon';
 import { MarkerTimeIcon } from '../../../../assets/icons/marker-time_icon';
