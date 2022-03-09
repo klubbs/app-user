@@ -1,24 +1,16 @@
 import React, { useState, useEffect, useContext, useRef } from 'react'
 import { CodeField, Cursor, useClearByFocusCell } from 'react-native-confirmation-code-field'
 import { useNavigation } from '@react-navigation/native';
-import {
-	Wrapper,
-	ConfirmButton,
-	Input,
-	Subtitle,
-	Email,
-	Password,
-	ContainerAnimated
-} from './styles'
-import { AuthContext } from '../../../contexts/authContext'
 import { ForgetPasswordScreenProps } from '../../../settings/@types/appStackTypes'
 import { Spinner } from '../../components/Spinner'
 import { LoginService } from '../../../services/loginService'
 import { IError } from '../../../settings/@types/IResponses'
-import { isEmpty } from '../../../utils/extensions/objectExtensions';
 import { isAPIException } from '../../../utils/documentsUtils';
 import { Middlewares } from '../../../utils/middlewares';
 import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
+import { IRegisterUser } from '../../../services/@types/loginServiceTypes';
+import { Wrapper, ConfirmButton, Input, Subtitle, Email, Password, ContainerAnimated } from './styles'
+import { nameof } from '../../../utils/extensions/objectExtensions';
 
 export const ForgetPasswordScreen: React.FC<ForgetPasswordScreenProps> = ({ route }) => {
 
@@ -78,7 +70,7 @@ export const ForgetPasswordScreen: React.FC<ForgetPasswordScreenProps> = ({ rout
 
 			const valid = await LoginService.validatePropertyAsync(password, 'password');
 
-			if (!isEmpty(valid)) {
+			if (nameof<IRegisterUser>('password') in valid) {
 				NotificationsFlash.customMessage("Necessário ao menos 5 caracteres", 'Senha inválida', 'NEUTRAL')
 				return
 			}
@@ -95,8 +87,6 @@ export const ForgetPasswordScreen: React.FC<ForgetPasswordScreenProps> = ({ rout
 				if (isAPIException(error)) {
 					const actual = error as IError
 					const actualFieldError = actual.error[0].field.toUpperCase()
-
-					console.log(actualFieldError)
 
 					switch (actual.statusCode) {
 						case 412:

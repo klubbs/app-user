@@ -1,7 +1,7 @@
 import { IError, IResponseMessage } from '../settings/@types/IResponses'
 import api from '../settings/services/api'
 import { NotificationsFlash } from '../utils/notificationsFlashUtils'
-import { beValidMail, keyHasInObjectValidator, validPhone } from '../utils/documentsUtils'
+import { beValidMail, validPhone } from '../utils/documentsUtils'
 import { ICreateUserResponse, ILoginResponse } from './@types/userServiceTypes'
 import { AsyncValidator } from 'fluentvalidation-ts'
 import { ValidationErrors } from 'fluentvalidation-ts/dist/ValidationErrors'
@@ -69,6 +69,7 @@ class LoginService {
     return data.message
   }
 
+  //TODO: Transformar em uma classe utils
   static async validatePropertyAsync(
     value: any,
     param: keyof IRegisterUser
@@ -80,10 +81,7 @@ class LoginService {
       { [param]: value } as any
     )
 
-    return keyHasInObjectValidator<IRegisterUser>(
-      errors,
-      param as keyof IRegisterUser
-    )
+    return errors as Partial<IRegisterUser>
   }
 
 }

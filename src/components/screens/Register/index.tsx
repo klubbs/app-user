@@ -3,7 +3,7 @@ import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Alert, Keyboard, ScrollView, Dimensions } from 'react-native';
-import { default as colors } from '../../../../assets/constants/colors';
+import { colors } from '../../../../assets/constants/colors';
 import { IRegisterUser } from '../../../services/@types/loginServiceTypes';
 import { LoginService } from '../../../services/loginService';
 import { RegisterScreenProps } from '../../../settings/@types/appStackTypes';
@@ -104,29 +104,27 @@ const Register: React.FC<RegisterScreenProps> = ({ route }) => {
     try {
       setLoading(true)
 
-      const isValidFields = await LoginService
-        .validateRegister({
-          mail: route.params.mail,
-          password: password,
-          name: name,
-          phone: phone
-        })
+      const fieldsValidation = await LoginService.validateRegister({
+        mail: route.params.mail,
+        password: password,
+        name: name,
+        phone: phone
+      })
 
-
-      if (!isEmpty(isValidFields)) {
+      if (!isEmpty(fieldsValidation)) {
         Haptic.impactAsync(Haptic.ImpactFeedbackStyle.Medium)
 
         let errorInputTmp = errorInput
 
-        if (isValidFields.hasOwnProperty(nameof<IRegisterUser>("password"))) {
+        if ("password" as keyof IRegisterUser in fieldsValidation) {
           errorInputTmp.password = true
         }
 
-        if (isValidFields.hasOwnProperty(nameof<IRegisterUser>("phone"))) {
+        if ("phone" as keyof IRegisterUser in fieldsValidation) {
           errorInputTmp.phone = true
         }
 
-        if (isValidFields.hasOwnProperty(nameof<IRegisterUser>("name"))) {
+        if ("name" as keyof IRegisterUser in fieldsValidation) {
           errorInputTmp.name = true
         }
 

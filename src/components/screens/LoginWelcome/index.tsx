@@ -5,13 +5,14 @@ import { Keyboard } from 'react-native';
 import { KlubbsLogo } from '../../../../assets/images/klubbsLogo';
 import { LoginService, LoginServiceExceptions } from '../../../services/loginService';
 import { IError } from '../../../settings/@types/IResponses';
-import { isEmpty } from '../../../utils/extensions/objectExtensions';
+import { nameof } from '../../../utils/extensions/objectExtensions';
 import { Spinner } from '../../components/Spinner';
 import {
   ContainerBottom, ContainerTop, Description, EnterButton, ExplainText, MailInput, Title, Wrapper, WrapperImage,
   WrapperKeyboard, Subtitle
 } from './styles';
 import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
+import { IRegisterUser } from '../../../services/@types/loginServiceTypes';
 
 const LoginWelcome: React.FC = () => {
 
@@ -39,7 +40,7 @@ const LoginWelcome: React.FC = () => {
 
       const valid = await LoginService.validatePropertyAsync(mail, 'mail')
 
-      if (!isEmpty(valid)) {
+      if ("mail" as keyof IRegisterUser in valid) {
         NotificationsFlash.invalidMail()
         return;
       }

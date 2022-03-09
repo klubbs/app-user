@@ -17,19 +17,6 @@ export function beValidMail(email: string): boolean {
 }
 
 
-export function keyHasInObjectValidator<T>(errors: ValidationErrors<T>, paramKey: keyof T): Object {
-  if (!isEmpty(errors)) {
-    if (errors.hasOwnProperty(nameof<T>(paramKey as any))) {
-      return { [paramKey]: errors[paramKey] as any };
-    } else {
-      return {};
-    }
-  } else {
-    return errors;
-  }
-}
-
-
 export function isAPIException(error: any) {
   if (
     error?.hasOwnProperty(nameof<IError>('error')) &&
