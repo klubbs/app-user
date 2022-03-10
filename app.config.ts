@@ -20,11 +20,11 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   experiments: {
     "turboModules": true
   },
-  version: "0.0.4",
+  version: "0.0.5",
   ios: {
     supportsTablet: false,
     bundleIdentifier: "app.klubbs.user",
-    buildNumber: "0.0.10",
+    buildNumber: "0.0.11",
     infoPlist: {
       NSLocationAlwaysAndWhenInUseUsageDescription: "Isso nos permite usar a localização para fornecer certos recursos como localização de estabelecimentos próximos.",
       NSLocationWhenInUseUsageDescription: "Isso nos permite usar a localização para fornecer certos recursos como localização de estabelecimentos próximos.",
@@ -33,7 +33,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   android: {
     package: "app.klubbs.user",
     permissions: ['CAMERA', 'ACCESS_FINE_LOCATION', 'ACCESS_COARSE_LOCATION'],
-    versionCode: 9,
+    versionCode: 10,
     adaptiveIcon: {
       foregroundImage: './assets/images/icon.png',
       backgroundColor: "#1F1F1F"
