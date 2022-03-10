@@ -10,7 +10,7 @@ import { CouponQrScreen } from '../../components/screens/CouponQr';
 import { LoginPasswordScreen } from '../../components/screens/LoginPassword';
 import { Influencer } from '../../components/screens/Influencer';
 import { Offers } from '../../components/screens/Offers';
-import { ConfigurationsScreen } from '../../components/screens/Configurations';
+import { SettingsScreen } from '../../components/screens/Settings';
 import { HelpScreen } from '../../components/screens/Help';
 import { ForgetPasswordScreen } from '../../components/screens/ForgetPassword';
 
@@ -36,7 +36,7 @@ const App: React.FC<{}> = () => {
       <AppStack.Screen name='CouponQr' component={CouponQrScreen} options={{ headerTintColor: colors.COLOR_WHITE }} />
       <AppStack.Screen name='Influencer' component={Influencer} />
       <AppStack.Screen name='Offers' component={Offers} />
-      <AppStack.Screen name='Configurations' component={ConfigurationsScreen} />
+      <AppStack.Screen name='Settings' component={SettingsScreen} />
       <AppStack.Screen name='Help' component={HelpScreen} />
       <AppStack.Screen name='ForgetPassword' component={ForgetPasswordScreen} />
     </AppStack.Navigator >

@@ -11,7 +11,7 @@ export type IAppStackParams = {
   CouponQr: ICouponsItem;
   Influencer: undefined;
   Offers: undefined;
-  Configurations: undefined;
+  Settings: undefined;
   Help: undefined;
   ForgetPassword: { mail: string }
 };

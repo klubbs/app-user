@@ -6,11 +6,10 @@ import { ShopIcon } from '../../../../assets/icons/shop_icon';
 export const Wrapper = styled.TouchableOpacity.attrs(({
   activeOpacity: 0.85
 }))`
-    width: 150px;
+    width: 200px;
     margin: 10px;
     height:140px;
     align-items: center;
-    top:2%;
 `
 
 export const EstablishmentImage = styled.Image`
