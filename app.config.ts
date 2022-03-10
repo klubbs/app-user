@@ -26,7 +26,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     bundleIdentifier: "app.klubbs.user",
     buildNumber: "0.0.13",
     //https://github.com/expo/expo-cli/issues/4253
-    bitcode: "Debug",
+    // bitcode: "Debug",
     infoPlist: {
       NSLocationAlwaysAndWhenInUseUsageDescription: "Isso nos permite usar a localização para fornecer certos recursos como localização de estabelecimentos próximos.",
       NSLocationWhenInUseUsageDescription: "Isso nos permite usar a localização para fornecer certos recursos como localização de estabelecimentos próximos.",
