@@ -20,11 +20,11 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   experiments: {
     "turboModules": true
   },
-  version: "0.0.5",
+  version: "0.0.6",
   ios: {
     supportsTablet: false,
     bundleIdentifier: "app.klubbs.user",
-    buildNumber: "0.0.13",
+    buildNumber: "0.0.14",
     //https://github.com/expo/expo-cli/issues/4253
     // bitcode: "Debug",
     infoPlist: {
@@ -35,7 +35,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   android: {
     package: "app.klubbs.user",
     permissions: ['CAMERA', 'ACCESS_FINE_LOCATION', 'ACCESS_COARSE_LOCATION'],
-    versionCode: 10,
+    versionCode: 11,
     adaptiveIcon: {
       foregroundImage: './assets/images/icon.png',
       backgroundColor: "#1F1F1F"

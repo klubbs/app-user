@@ -25,7 +25,7 @@ export const SaveOrCreateCoupon = React.forwardRef<ISaveOrCreateCouponRef, ISave
 
       Keyboard.dismiss();
 
-      if (!CouponService.valid4SaveInWallet(value)) {
+      if (value.trim().length < 5) {
         NotificationsFlash.customMessage('', '🚫 Cupom Inválido.', 'DANGER')
         return;
       }
@@ -49,8 +49,8 @@ export const SaveOrCreateCoupon = React.forwardRef<ISaveOrCreateCouponRef, ISave
 
       Keyboard.dismiss();
 
-      if (value.trim().length < 10) {
-        NotificationsFlash.customMessage('Cupom inválido', 'Seu cupom precisa ter 10 caracteres', 'NEUTRAL')
+      if (value.trim().length < 5) {
+        NotificationsFlash.customMessage('Cupom inválido', 'Seu cupom precisa ter 5 ou mais caracteres', 'NEUTRAL')
         return;
       }
 

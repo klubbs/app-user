@@ -19,7 +19,7 @@ export const Input = styled.TextInput.attrs(({
   returnKeyType: 'done',
   textAlign: 'center',
   autoCapitalize: "characters",//This correct text for not duplicate values
-  maxLength: 10,
+  maxLength: 20,
   selectionColor: colors.COLOR_YELLOW
 }))`
     width: 80%;

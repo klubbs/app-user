@@ -15,7 +15,8 @@ import {
   AnimatedWrapper,
   SubtitleHelp,
   ImageInfluencer,
-  ContainerImage
+  ContainerImage,
+  ContainerQr
 } from './styles';
 import { QrCouponBackground } from '../../../../assets/images/backgrounds/backgroundQrCoupon';
 
@@ -29,7 +30,7 @@ export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
 
   function RenderInfluencerImage(): JSX.Element {
 
-    if (route.params.influencer_image) {
+    if (!route.params.influencer_image) {
       return (
         <ContainerImage>
           <UserIcon width={25} height={25} fill={colors.COLOR_BLACK40} />
@@ -43,7 +44,6 @@ export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
     )
   }
 
-
   return (
     <Wrapper>
       <ContainerCoupon>
@@ -51,15 +51,17 @@ export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
       </ContainerCoupon>
 
       <RenderInfluencerImage />
-      <QRCode
-        value={`${route?.params?.coupon_id}|${user?.id}`}
-        backgroundColor='transparent'
-        logo={require('../../../../assets/images/klubbsLogoCircle.png')}
-        size={Dimensions.get('window').width * 0.45}
-        color={colors.COLOR_SECUNDARY_BLACK}
-      />
+      <ContainerQr distanceInBottom={route.params?.master_coupons?.length <= 0}>
+        <QRCode
+          value={`${route?.params?.coupon_id}|${user?.id}`}
+          backgroundColor='transparent'
+          logo={require('../../../../assets/images/klubbsLogoCircle.png')}
+          size={Dimensions.get('window').width * 0.45}
+          color={colors.COLOR_SECUNDARY_BLACK}
+        />
+      </ContainerQr>
       <FlatListComponent
-        data={route.params.master_coupons}
+        data={route.params?.master_coupons}
         keyExtractor={item => `${++key}`}
         renderItem={({ item, index }: { item: IWalletCouponsResponseOfferData, index: number }) => {
           return (

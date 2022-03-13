@@ -33,7 +33,13 @@ const App: React.FC<{}> = () => {
       <AppStack.Screen name='LoginPassword' component={LoginPasswordScreen} />
       <AppStack.Screen name='Register' component={Register} options={{ headerShown: true }} />
       <AppStack.Screen name='Restaurant' component={Restaurant} />
-      <AppStack.Screen name='CouponQr' component={CouponQrScreen} options={{ headerTintColor: colors.COLOR_WHITE }} />
+      <AppStack.Screen name='CouponQr' component={CouponQrScreen}
+        options={({ route }) => ({
+          headerTintColor: colors.COLOR_WHITE,
+          headerTitle: route.params.coupon_code,
+          headerTitleStyle: { color: colors.COLOR_WHITE_80, width: '100%', fontFamily: 'Nunito_Regular', fontSize: 15 }
+        })}
+      />
       <AppStack.Screen name='Influencer' component={Influencer} />
       <AppStack.Screen name='Offers' component={Offers} />
       <AppStack.Screen name='Settings' component={SettingsScreen} />

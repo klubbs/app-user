@@ -23,14 +23,6 @@ export class CouponService {
     await api.post('users/wallets/coupons', null, { params: { code: code } });
   }
 
-  static valid4SaveInWallet(code: string): boolean {
-    if (code.length === 10) {
-      return true
-    }
-
-    return false
-  }
-
   static catchSaveCouponInWallet(error: IError) {
 
     if (error.statusCode === 412) {

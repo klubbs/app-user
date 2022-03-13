@@ -29,7 +29,7 @@ export const SubtitleHelp = styled.Text`
   bottom:${Platform.select({
   ios: '0',
   android: PixelRatio.get() === 3 ? 0 : '3%'
-})}; 
+})};
 `
 export const ContainerImage = styled.View`
   align-items:center;
@@ -59,7 +59,7 @@ export const FlatListComponent = styled.FlatList.attrs(props => ({
   showsHorizontalScrollIndicator: false
 }))`
 top:  ${Platform.select({ ios: 0, android: PixelRatio.get() === 3 ? '12%' : '3%' })};;
-margin-top: ${Platform.select({ ios: '6h%', android: '9.5%' })};
+margin-top: ${Platform.select({ ios: '6%', android: '9.5%' })};
 padding-horizontal: 15px;
 width: 80% ;
 flex-grow: 0;
@@ -71,3 +71,8 @@ export const AnimatedWrapper = styled(MotiView).attrs(props => ({
   transition: { type: 'spring', duration: 1000 }
 
 }))``
+
+
+export const ContainerQr = styled.View<{ distanceInBottom: boolean }>`
+  bottom: ${props => props.distanceInBottom ? '6.5%' : 0};
+`

@@ -28,7 +28,9 @@ export const BackgroundCoupon = styled(CouponWalletBackground).attrs(props => ({
   align-self: center;
 `
 
-export const CouponCode = styled.Text<{ active: boolean, putMarginBottom?: boolean }>`
+export const CouponCode = styled.Text.attrs(props => ({
+  numberOfLines: 1,
+})) <{ active: boolean, putMarginBottom?: boolean }>`
   color:${props => props.active ? colors.COLOR_YELLOW_BUTTON_TEXT : colors.COLOR_BLACK80};
   font-size:14px;
   margin-bottom:${props => props.putMarginBottom ? '3%' : 0};
