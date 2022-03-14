@@ -28,7 +28,7 @@ export const HelpScreen: React.FC = () => {
           icon='mail'
           cb={
             () => Linking
-              .openURL('mailto: marketing@klubbs.com.br?subject=Oi, Klubbs tenho uma sugestão!')
+              .openURL('mailto:marketing@klubbs.com.br?subject=Oi, Klubbs tenho uma sugestão!')
           }
         />
         <MenuItem

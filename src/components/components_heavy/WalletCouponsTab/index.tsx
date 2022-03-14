@@ -44,6 +44,7 @@ export const CouponsWalletTab: React.FC = () => {
 
   function RenderCoupon(item: ICouponsItem): ReactElement {
 
+
     return (
       <>
         {item.empty && <Container empty={item.empty} />}

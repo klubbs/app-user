@@ -22,7 +22,7 @@ export const SettingsScreen: React.FC = () => {
           icon='thumbs-up'
           cb={() => Linking
             .openURL(
-              `mailto: marketing@klubbs.com.br
+              `mailto:marketing@klubbs.com.br
               ?subject=Solicitar acesso de influenciador
               &body=Conta um pouquinho sobre você . Ah , diz também as suas redes sociais de trabalho para gente ;)                                     
           `)}

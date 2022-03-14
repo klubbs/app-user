@@ -13,38 +13,44 @@ import { Offers } from '../../components/screens/Offers';
 import { SettingsScreen } from '../../components/screens/Settings';
 import { HelpScreen } from '../../components/screens/Help';
 import { ForgetPasswordScreen } from '../../components/screens/ForgetPassword';
+import { RemoveOfferInfluencerScreen } from '../../components/screens/RemoveOfferInfluencer';
 
 
 
 const AppStack = createStackNavigator<IAppStackParams>();
 
+const DEFAULT_OPTIONS = {
+  headerTransparent: true,
+  headerBackTitleVisible: false,
+  headerTintColor: colors.COLOR_YELLOW,
+  headerTitleStyle: { color: 'transparent', width: 0 }
+}
 
 const App: React.FC<{}> = () => {
   return (
-    <AppStack.Navigator screenOptions={({ navigation, route }) =>
-    ({
-      headerTransparent: true,
-      headerBackTitleVisible: false,
-      headerTintColor: colors.COLOR_YELLOW,
-      headerTitleStyle: { color: 'transparent', width: 0 }
-    })} >
+    <AppStack.Navigator screenOptions={({ navigation, route }) => (DEFAULT_OPTIONS)} >
       <AppStack.Screen name='Tabs' component={Tabs} />
       <AppStack.Screen name='LoginWelcome' component={WelcomeLoginScreen} />
       <AppStack.Screen name='LoginPassword' component={LoginPasswordScreen} />
       <AppStack.Screen name='Register' component={Register} options={{ headerShown: true }} />
       <AppStack.Screen name='Restaurant' component={Restaurant} />
-      <AppStack.Screen name='CouponQr' component={CouponQrScreen}
-        options={({ route }) => ({
-          headerTintColor: colors.COLOR_WHITE,
-          headerTitle: route.params.coupon_code,
-          headerTitleStyle: { color: colors.COLOR_WHITE_80, width: '100%', fontFamily: 'Nunito_Regular', fontSize: 15 }
-        })}
-      />
-      <AppStack.Screen name='Influencer' component={Influencer} />
       <AppStack.Screen name='Offers' component={Offers} />
       <AppStack.Screen name='Settings' component={SettingsScreen} />
       <AppStack.Screen name='Help' component={HelpScreen} />
       <AppStack.Screen name='ForgetPassword' component={ForgetPasswordScreen} />
+      <AppStack.Screen name='Influencer' component={Influencer} />
+      <AppStack.Screen name='RemoveOfferInfluencer'
+        component={RemoveOfferInfluencerScreen}
+        options={{ headerTintColor: colors.COLOR_WHITE }}
+      />
+      <AppStack.Screen name='CouponQr' component={CouponQrScreen}
+        options={({ route }) => ({
+          headerTintColor: colors.COLOR_WHITE,
+          headerTitle: route.params.coupon_code,
+          headerTitleAlign: 'center',
+          headerTitleStyle: { color: colors.COLOR_WHITE_80, fontFamily: 'Nunito_Regular', fontSize: 15 }
+        })}
+      />
     </AppStack.Navigator >
   );
 };

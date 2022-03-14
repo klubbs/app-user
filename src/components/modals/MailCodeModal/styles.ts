@@ -65,9 +65,3 @@ export const ButtonConfirm = styled(Button).attrs(props => ({
   styleContainer: { width: '60%' }
 }))``
 
-
-export const WrapperKeyboard = styled.KeyboardAvoidingView.attrs(props => ({
-  behavior: Platform.OS == 'ios' ? 'padding' : 'height',
-}))`
-  flex:5
-`

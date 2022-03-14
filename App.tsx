@@ -9,6 +9,7 @@ import './src/utils/extensions/objectExtensions';
 import FlashComponent from 'flash-notify'
 import { colors } from "./assets/constants/colors";
 import { decode, encode } from "base-64";
+import { InfluencerProvider } from "./src/contexts/influencerContext";
 
 LogBox.ignoreLogs(['Expected style']);
 
@@ -40,15 +41,17 @@ export default function App() {
 
   return (
     <AuthProvider>
-      <NavigationContainer>
-        <StatusBar
-          backgroundColor={colors.COLOR_SECUNDARY_WHITE}
-          animated={true}
-          barStyle={'dark-content'}
-        />
-        <AppStack />
-      </NavigationContainer >
-      <FlashComponent />
+      <InfluencerProvider>
+        <NavigationContainer>
+          <StatusBar
+            backgroundColor={colors.COLOR_SECUNDARY_WHITE}
+            animated={true}
+            barStyle={'dark-content'}
+          />
+          <AppStack />
+        </NavigationContainer >
+        <FlashComponent />
+      </InfluencerProvider>
     </AuthProvider>
   );
 };

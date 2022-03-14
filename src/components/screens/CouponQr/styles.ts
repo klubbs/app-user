@@ -40,7 +40,7 @@ export const ContainerImage = styled.View`
   overflow:hidden ;
   top: ${Platform.select({
   ios: '10%',
-  android: PixelRatio.get() === 3 ? 0 : '6%'
+  android: PixelRatio.get() === 3 ? '2%' : '6%'
 })};
   margin-top: ${Platform.select({
   ios: 0,
@@ -74,5 +74,5 @@ export const AnimatedWrapper = styled(MotiView).attrs(props => ({
 
 
 export const ContainerQr = styled.View<{ distanceInBottom: boolean }>`
-  bottom: ${props => props.distanceInBottom ? '6.5%' : 0};
+  bottom: ${props => props.distanceInBottom ? Platform.select({ ios: '6.5%', android: PixelRatio.get() === 3 ? '10%' : '7%' }) : 0};
 `

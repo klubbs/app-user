@@ -1,59 +1,59 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { Modalize } from 'react-native-modalize'
 import * as Clipboard from 'expo-clipboard';
 import { useAnimationState, MotiView } from 'moti'
-import { Wrapper, Divider, Container, Code, Copy } from './styles';
+import {
+  Wrapper, Divider, Container, Code, Copy, ContainerPressable, ContainerCouponInformation, ShopSubtitleIcon,
+  ContainerShop, ShopSubtitle
+} from './styles';
 import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
 import { Pressable, Dimensions } from 'react-native';
-import { GetAllCouponsByInfluencerResponse } from './@types';
-import { InfluencerService } from '../../../services/influencerService';
+import { GetAllCouponsByInfluencerResponse, IModalCouponsInfluencerRef } from './@types';
 import { SpinnerLoading } from '../../components/Spinner';
+import { useNavigation } from '@react-navigation/native';
+import { InfluencerContext } from '../../../contexts/influencerContext';
 
 const { height } = Dimensions.get('window');
 
-export const CouponsInfluencer: React.FC<{ onClose: any, visible: boolean }> = (props) => {
+export const CouponsInfluencerModal = React.forwardRef<IModalCouponsInfluencerRef, {}>((props, ref) => {
 
-  const [coupons, setCoupons] = useState<GetAllCouponsByInfluencerResponse[]>([])
+  const { coupons, getAllCoupons } = useContext(InfluencerContext)
+
   const [activeCopy, setActiveCopy] = useState<any>({})
   const [loading, setLoading] = useState<boolean>(false)
 
+  const navigation = useNavigation()
   const modalizeRef = useRef<Modalize>()
 
+  useImperativeHandle(ref, () => ({ openModal }));
+
+
   const animationState = useAnimationState({
-    from: {
-      opacity: 1,
-      scale: 1,
-    },
-    animate: {
-      scale: 1.2,
-      opacity: 0,
-    },
+    from: { opacity: 1, scale: 1 },
+    animate: { scale: 1.2, opacity: 0 },
   })
 
-  useEffect(() => {
+  async function openModal() {
 
-    if (props.visible) {
-
-      getAllCouponsAsync();
+    try {
 
       modalizeRef.current?.open();
+
+      setLoading(true)
+
+      await getAllCoupons()
+
+      let tmp: any = {}
+
+      coupons.forEach(element => {
+        tmp[element.coupon_id] = false
+      });
+
+      setActiveCopy(tmp)
+    } finally {
+      setLoading(false)
     }
 
-  }, [props.visible])
-
-  async function getAllCouponsAsync(): Promise<void> {
-
-    setLoading(true)
-
-    const response = await InfluencerService.getAllCouponsByInfluencer()
-    let tmp: any = {}
-    response.forEach(element => {
-      tmp[element.coupon_id] = false
-    });
-
-    setActiveCopy(tmp)
-    setCoupons(response)
-    setLoading(false)
   }
 
   function onHandleCopy(code: string, id: string) {
@@ -70,33 +70,41 @@ export const CouponsInfluencer: React.FC<{ onClose: any, visible: boolean }> = (
   }
 
   function ItemRender(item: GetAllCouponsByInfluencerResponse): JSX.Element {
-    return (
-      <Container key={item.coupon_id}>
-        <Code>{item.coupon_code}</Code>
-        <Pressable onPress={() => onHandleCopy(item.coupon_code, item.coupon_id)}>
-          {
-            activeCopy[item.coupon_id] &&
-            <MotiView
-              key={item.coupon_id}
-              state={animationState}
-              onDidAnimate={() => animationState.transitionTo('from')}
-              transition={{ duration: 150, type: 'timing' }}
-            >
-              <Copy />
-            </MotiView>
-          }
 
-          {
-            !activeCopy[item.coupon_id] && <Copy />
-          }
-        </Pressable>
+    const couponId = item.coupon_id
+
+    return (
+      <Container
+        key={couponId}
+        onPress={() => navigation.navigate('RemoveOfferInfluencer', { couponId: couponId })}
+      >
+        <ContainerCouponInformation>
+          <Code>{item.coupon_code}</Code>
+        </ContainerCouponInformation>
+        <ContainerShop>
+          <ShopSubtitle>{item.master_coupons.length}</ShopSubtitle>
+          <ShopSubtitleIcon />
+        </ContainerShop>
+        <ContainerPressable>
+          <Pressable onPress={() => onHandleCopy(item.coupon_code, couponId)}>
+            {
+              !activeCopy[couponId]
+                ? <Copy />
+                : <MotiView key={couponId} state={animationState}
+                  onDidAnimate={() => animationState.transitionTo('from')}
+                  transition={{ duration: 150, type: 'timing' }}
+                >
+                  <Copy />
+                </MotiView>
+            }
+          </Pressable>
+        </ContainerPressable>
       </Container>
     )
   }
 
   return (
     <Modalize
-      onClose={props.onClose}
       modalHeight={height * 0.8}
       scrollViewProps={{ showsVerticalScrollIndicator: false }}
       ref={modalizeRef}
@@ -109,5 +117,4 @@ export const CouponsInfluencer: React.FC<{ onClose: any, visible: boolean }> = (
 
     </Modalize>
   );
-}
-
+})

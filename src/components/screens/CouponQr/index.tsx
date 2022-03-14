@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Dimensions, PixelRatio, View } from 'react-native'
 import QRCode from 'react-native-qrcode-svg';
 import { colors } from '../../../../assets/constants/colors';

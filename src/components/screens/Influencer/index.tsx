@@ -2,17 +2,17 @@ import React, { useState, useRef } from 'react';
 import { MenuItem } from '../../components/MenuItem';
 import { Wrapper, Container, SocialMediaContainer, SocialMediaSubtitle, Instagram, Twitter } from './styles';
 import { SaveOrCreateCoupon } from '../../modals/SaveOrCreateCoupon';
-import { CouponsInfluencer } from '../../modals/CouponsInfluencer';
+import { CouponsInfluencerModal } from '../../modals/CouponsInfluencer';
 import { useNavigation } from '@react-navigation/native';
 import { ISaveOrCreateCouponRef } from '../../modals/SaveOrCreateCoupon/@types';
+import { IModalCouponsInfluencerRef } from '../../modals/CouponsInfluencer/@types';
 
 export const Influencer: React.FC = () => {
 
   const navigation = useNavigation()
 
   const createCouponRef = useRef<ISaveOrCreateCouponRef>(null)
-
-  const [visibleInfluencerCoupon, setVisibleInfluencerCoupon] = useState(false)
+  const couponsInfluencerRef = useRef<IModalCouponsInfluencerRef>(null)
 
   return (
     <Wrapper>
@@ -24,10 +24,10 @@ export const Influencer: React.FC = () => {
       </SocialMediaContainer>
       <Container>
         <MenuItem key={'1'} icon={'plus'} text={'Novo cupom'} description={'Crie um código só seu'} cb={() => createCouponRef.current?.show()} />
-        <MenuItem key={'2'} icon={'archive'} text={'Meus cupons'} description={'Cupons criados por você'} cb={() => setVisibleInfluencerCoupon(true)} />
+        <MenuItem key={'2'} icon={'archive'} text={'Meus cupons'} description={'Cupons criados por você'} cb={() => couponsInfluencerRef.current?.openModal()} />
         <MenuItem key={'3'} icon={'divide'} text={'Ofertas disponíveis'} description={'Associe seus cupons'} cb={() => navigation.navigate('Offers')} />
       </Container>
-      <CouponsInfluencer visible={visibleInfluencerCoupon} onClose={() => setVisibleInfluencerCoupon(false)} />
+      <CouponsInfluencerModal ref={couponsInfluencerRef} />
       <SaveOrCreateCoupon ref={createCouponRef} isInfluencer={true} />
     </Wrapper>
   );

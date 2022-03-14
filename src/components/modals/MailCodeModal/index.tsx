@@ -8,6 +8,7 @@ import { LoginService } from '../../../services/loginService';
 import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
 import { ModalComponent } from '../../components/Modal';
 import { Spinner } from '../../components/Spinner';
+import { IModalCodeProps, IModalRef } from './@types';
 import {
   ButtonConfirm,
   CodeBoxes,
@@ -15,10 +16,8 @@ import {
   Input,
   Title,
   TitleDescription,
-  TouchableReset,
-  WrapperKeyboard
+  TouchableReset
 } from './styles';
-import { IModalCodeProps, IModalRef } from './@types';
 
 
 export const MailCodeModal = React.forwardRef<IModalRef, IModalCodeProps>((propsComp, ref) => {

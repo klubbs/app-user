@@ -11,7 +11,8 @@ declare global {
     isSameDate(date: Date): boolean;
     ToUnixEpoch(): number;
     ToDateFormat(epoch: number): Date;
-    toCustomLocaleDateString(): string
+    toCustomLocaleDateString(): string;
+    toFormattedDate(): string
   }
 
   interface Number {
@@ -66,9 +67,21 @@ Date.prototype.toCustomLocaleDateString = function (): string {
 
     const dayOfWeek = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sab", "Dom"]
 
-    const monthName = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
-      "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
+    const monthName = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun",
+      "Jul", "Ag", "Set", "Out", "Nov", "Dez"]
 
     return `${dayOfWeek[this.getDay() - 1]}, ${this.getDate()} ${monthName[this.getMonth()]}, ${this.getFullYear()}`;
   }
+}
+
+Date.prototype.toFormattedDate = function (): string {
+  var year = this.getFullYear();
+
+  var month = (1 + this.getMonth()).toString();
+  month = month.length > 1 ? month : '0' + month;
+
+  var day = this.getDate().toString();
+  day = day.length > 1 ? day : '0' + day;
+
+  return day + '/' + month + '/' + year;
 }

@@ -29,6 +29,10 @@ export class InfluencerService {
     await api.post('influencer/coupons/link', { master_coupons: masterCoupons, coupon_id: couponId })
   }
 
+  static async RemoveOffer(offerId: string, couponId: string) {
+    await api.put('influencer/coupons/offers/remove', { offers: [offerId], coupon_id: couponId })
+  }
+
 }
 
 

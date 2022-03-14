@@ -43,7 +43,6 @@ const AuthProvider: React.FC = ({ children }) => {
     await reloadUser();
   }
 
-
   const logout = async () => {
 
     await AsyncStorageUtils.clearAllStorage()
