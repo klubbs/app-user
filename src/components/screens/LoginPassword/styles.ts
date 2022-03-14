@@ -1,11 +1,11 @@
+import { Platform } from 'react-native';
 import styled from 'styled-components/native';
-import COLORS from '../../../../assets/constants/colors';
-import { BEHAVIOR_KEYBOARD } from '../../../utils/behaviorUtils';
+import { colors } from '../../../../assets/constants/colors';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 
 export const Wrapper = styled.SafeAreaView`
-  background-color: ${COLORS.COLOR_SECUNDARY_BLACK};
+  background-color: ${colors.COLOR_SECUNDARY_BLACK};
   flex: 1;
 `
 
@@ -21,12 +21,12 @@ export const ContainerBottom = styled.View`
   align-items: center;
 `
 export const Title = styled.Text`
-  color:${COLORS.COLOR_WHITE};
+  color:${colors.COLOR_WHITE};
   font-size:20px;
   font-family:'Nunito_Bold';`
 
 export const Description = styled.Text`
-  color:${COLORS.COLOR_SECUNDARY_WHITE_60};
+  color:${colors.COLOR_SECUNDARY_WHITE_60};
   font-size:16px;
   font-family:'Nunito_Regular';
   text-align: center;
@@ -39,7 +39,7 @@ export const EnterButton = styled(Button).attrs(props => ({
 
 
 export const WrapperKeyboard = styled.KeyboardAvoidingView.attrs(props => ({
-  behavior: BEHAVIOR_KEYBOARD,
+  behavior: Platform.OS == 'ios' ? 'padding' : 'height',
 }))`
   flex:1
 `
@@ -49,4 +49,16 @@ export const PasswordInput = styled(Input).attrs(props => ({
   isPassword: true,
   keyboardType: "default"
 }))`
+`
+
+export const ForgotPasswordTouch = styled.TouchableOpacity`
+  justify-content:center;
+  align-items:center;
+  width:100%;
+`
+
+export const ForgotPasswordSubtitle = styled.Text`
+  color:${colors.COLOR_WHITE_80};
+  font-size:12px;
+  font-family:'Nunito_Light';
 `

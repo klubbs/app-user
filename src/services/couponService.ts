@@ -23,14 +23,6 @@ export class CouponService {
     await api.post('users/wallets/coupons', null, { params: { code: code } });
   }
 
-  static valid4SaveInWallet(code: string): boolean {
-    if (code.length === 10) {
-      return true
-    }
-
-    return false
-  }
-
   static catchSaveCouponInWallet(error: IError) {
 
     if (error.statusCode === 412) {
@@ -40,10 +32,10 @@ export class CouponService {
       Haptic.notificationAsync(Haptic.NotificationFeedbackType.Warning)
 
       if (actual === "WALLET") {
-        NotificationsFlash.CustomMessage('🏷 Ai sim', "Cupom já adicionado a carteira.", 'SUCCESS')
+        NotificationsFlash.customMessage('🏷 Ai sim', "Cupom já adicionado a carteira.", 'SUCCESS')
         return;
       } else if (actual === "CODE") {
-        NotificationsFlash.CustomMessage('', "🛑 Cupom Inválido.", 'DANGER')
+        NotificationsFlash.customMessage('', "🛑 Cupom Inválido.", 'DANGER')
       }
 
     }

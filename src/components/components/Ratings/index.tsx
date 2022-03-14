@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import COLORS from '../../../../assets/constants/colors';
+import { colors } from '../../../../assets/constants/colors';
 import { StarFilledIcon } from '../../../../assets/icons/star-filled_icon';
 
 
@@ -19,7 +19,7 @@ const Ratings: React.FC<{ rating: number }> = ({ rating }) => {
       rows.push(<StarFilledIcon
         width={11}
         height={11}
-        fill={COLORS.COLOR_YELLOW_RATING}
+        fill={colors.COLOR_YELLOW_RATING}
         style={{ marginRight: 2 }}
         key={index}
       />)
@@ -34,7 +34,7 @@ const Ratings: React.FC<{ rating: number }> = ({ rating }) => {
     var rows = [];
 
     for (let index = 0; index < offStars; index++) {
-      rows.push(<StarFilledIcon width={11} height={11} fill={COLORS.COLOR_BLACK20} style={{ marginRight: 2 }} key={index} />)
+      rows.push(<StarFilledIcon width={11} height={11} fill={colors.COLOR_BLACK20} style={{ marginRight: 2 }} key={index} />)
     }
 
     return rows;

@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Linking, View } from 'react-native';
+import { AuthContext } from '../../../contexts/authContext';
 import { MenuItem } from '../../components/MenuItem';
 
 import { Wrapper, ContainerScroll } from './styles';
 
 export const HelpScreen: React.FC = () => {
+
   return (
     <Wrapper>
       <ContainerScroll>
@@ -26,7 +28,7 @@ export const HelpScreen: React.FC = () => {
           icon='mail'
           cb={
             () => Linking
-              .openURL('mailto: marketing@klubbs.com.br?subject=Oi, Klubbs tenho uma sugestão!')
+              .openURL('mailto:marketing@klubbs.com.br?subject=Oi, Klubbs tenho uma sugestão!')
           }
         />
         <MenuItem

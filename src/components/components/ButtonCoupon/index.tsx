@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import colors from '../../../../assets/constants/colors';
+import { colors } from '../../../../assets/constants/colors';
 import { CouponIcon } from '../../../../assets/icons/coupon_icon';
 
 import { Wrapper } from './styles';

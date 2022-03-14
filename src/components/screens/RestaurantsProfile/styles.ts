@@ -1,11 +1,10 @@
 import styled from 'styled-components/native'
-import colors from '../../../../assets/constants/colors'
-import COLORS from '../../../../assets/constants/colors'
+import { colors } from '../../../../assets/constants/colors'
 
 
 export const Wrapper = styled.View`
   flex: 1;
-  background-color: ${COLORS.COLOR_SECUNDARY_WHITE};
+  background-color: ${colors.COLOR_SECUNDARY_WHITE};
 `
 
 export const ContainerImage = styled.Image`
@@ -16,7 +15,7 @@ export const ContainerImage = styled.Image`
 export const Container = styled.View`
   flex: 1;
   padding:20px;
-  background-color: ${COLORS.COLOR_WHITE};
+  background-color: ${colors.COLOR_WHITE};
 `
 
 
@@ -36,36 +35,36 @@ export const ContainerGetCoupon = styled.TouchableOpacity.attrs(props => ({
   justify-content: center;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  /* background-color: ${COLORS.COLOR_YELLOW}; */
-  background-color: ${COLORS.COLOR_BLACK10};
+  /* background-color: ${colors.COLOR_YELLOW}; */
+  background-color: ${colors.COLOR_BLACK10};
 `
 
 export const GetCouponText = styled.Text`
-  color:${COLORS.COLOR_WHITE};
+  color:${colors.COLOR_WHITE};
   font-size:18px;
   font-family:'Nunito_Bold';
 `
 export const RestaurantName = styled.Text`
-  color:${COLORS.COLOR_SECUNDARY_BLACK};
+  color:${colors.COLOR_SECUNDARY_BLACK};
   font-size:20px;
   font-family:'Nunito_Bold';
 `;
 
 export const RestaurantCategory = styled.Text`
-  color:${COLORS.COLOR_BLACK80};
+  color:${colors.COLOR_BLACK80};
   font-size:12px;
   font-family:'Nunito_Light';
 `;
 
 export const AboutSubtitle = styled.Text`
-  color:${COLORS.COLOR_BLACK80};
+  color:${colors.COLOR_BLACK80};
   font-size:16px;
   margin-top:10%;
   font-family:'Nunito_Bold';
 `;
 
 export const About = styled.Text`
-  color:${COLORS.COLOR_BLACK50};
+  color:${colors.COLOR_BLACK50};
   font-size:14px;
   margin-top:5%;
   letter-spacing: 0.5px;
@@ -86,7 +85,7 @@ export const BlocksWrapper = styled.View`
   flex:1;
 `
 export const BlocksValue = styled.Text`
-  color:${COLORS.COLOR_YELLOW};
+  color:${colors.COLOR_YELLOW};
   margin-left: 5px;
   font-size:14px;
   font-family:'Nunito_Bold';

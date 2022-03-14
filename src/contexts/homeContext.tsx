@@ -1,8 +1,8 @@
 import React, { useState, createContext, useMemo } from 'react';
-import { IRestaurants } from '../components/organisms/RestaurantsList/@types';
+import { IRestaurants } from '../components/components_heavy/RestaurantsList/@types';
 import { ICategoryResponse } from '../services/@types/storeServiceTypes';
 import { StoreService } from '../services/storeServices';
-import { AsyncStorageUtils } from '../utils/asyncStorageUtils';
+import { AsyncStorageUtils } from '../utils/asyncStorage';
 import { format4TwoColumns } from '../utils/formatersUtils';
 
 export const HomeContext = createContext(
@@ -20,39 +20,33 @@ export const HomeContext = createContext(
 const HomeProvider: React.FC = ({ children }) => {
 
   const [categories, setCategories] = useState<ICategoryResponse[]>([])
-
   const [selectedCategory, setSelectedCategory] = useState("")
-
   const [restaurants, setRestaurants] = useState<IRestaurants[]>([])
 
 
   async function getCategories() {
-    //TODO: Remover esse trycatch
-    try {
 
-      const storedCategories = await AsyncStorageUtils.getCategoriesInStorage();
+    const storedCategories = await AsyncStorageUtils.getCategoriesInStorage();
 
-      if (storedCategories !== null) {
-        setCategories(storedCategories);
-        setSelectedCategory(storedCategories[0].id)
-      }
-
-      const data = await StoreService.getCategories();
-
-      //Move 'Todos' to init
-      const index = data.findIndex(item => item.id === '94d9ccaf-9a03-4b1d-9dc7-bec0931b1381');
-      const element = data[index];
-      data.splice(index, 1);
-      data.splice(0, 0, element);
-      //Move 'Todos' to init
-
-      setSelectedCategory(element.id)
-      setCategories(data)
-
-      await AsyncStorageUtils.saveCategoriesInStorage(data);
-
-    } catch (error) {
+    if (storedCategories !== null) {
+      setCategories(storedCategories);
+      setSelectedCategory(storedCategories[0].id)
     }
+
+    const data = await StoreService.getCategories();
+
+    //Move 'Todos' to init
+    const index = data.findIndex(item => item.id === '94d9ccaf-9a03-4b1d-9dc7-bec0931b1381');
+    const element = data[index];
+    data.splice(index, 1);
+    data.splice(0, 0, element);
+    //Move 'Todos' to init
+
+    setSelectedCategory(element.id)
+    setCategories(data)
+
+    await AsyncStorageUtils.saveCategoriesInStorage(data);
+
   }
 
   async function getRestaurants(latitude: number, longitude: number) {

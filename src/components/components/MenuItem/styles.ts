@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import COLORS from '../../../../assets/constants/colors';
+import { colors } from '../../../../assets/constants/colors';
 import { Feather } from '@expo/vector-icons';
 export const MenuItemContainer = styled.TouchableOpacity.attrs(props => ({
   activeOpacity: 0.8
@@ -11,12 +11,12 @@ export const MenuItemContainer = styled.TouchableOpacity.attrs(props => ({
 `;
 
 export const MenuText = styled.Text`
-  color:${COLORS.COLOR_SECUNDARY_BLACK};
+  color:${colors.COLOR_SECUNDARY_BLACK};
   font-size:16px;
   font-family:'Nunito_SemiBold';
 `
 export const MenuTextDescription = styled.Text`
-  color:${COLORS.COLOR_BLACK50};
+  color:${colors.COLOR_BLACK50};
   font-size:14px;
   font-family:'Nunito_Regular';
 `
@@ -27,7 +27,7 @@ export const MenuTextContainer = styled.View`
 `
 
 export const MenuItemIcon = styled.View`
-  background-color: ${`${COLORS.COLOR_YELLOW}40`};
+  background-color: ${`${colors.COLOR_YELLOW}40`};
   width: 55px;
   height: 55px;
   border-radius: 27.5px;
@@ -41,12 +41,12 @@ export const MenuItemArrow = styled.View`
   border-radius: 10px;
   justify-content: center;
   align-items: center;
-  background-color: ${COLORS.COLOR_BLACK10};
+  background-color: ${colors.COLOR_BLACK10};
 `;
 
 
 export const ArrowRight = styled(Feather).attrs(props => ({
   name: "chevron-right",
   size: 18,
-  colors: COLORS.COLOR_SECUNDARY_BLACK
+  colors: colors.COLOR_SECUNDARY_BLACK
 }))``

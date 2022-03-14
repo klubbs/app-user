@@ -1,13 +1,12 @@
 import { EventEmitter } from './../../utils/emitter';
 import axios from 'axios';
 import Constants from 'expo-constants';
-import { AsyncStorageUtils } from '../../utils/asyncStorageUtils';
+import { AsyncStorageUtils } from '../../utils/asyncStorage';
 import { NotificationsFlash } from '../../utils/notificationsFlashUtils';
-const { showFlash } = require('flash-notify');
 import { IError } from '../@types/IResponses'
 
 const axiosConfig = {
-  baseURL: Constants.manifest.extra?.ENVIRONMENT_API_URL
+  baseURL: Constants.manifest?.extra?.ENVIRONMENT_API_URL
 }
 
 const api = axios.create(axiosConfig);
@@ -37,15 +36,12 @@ api.interceptors.response.use((response) => response,
       }
 
       if (statusCode === 500) {
-        NotificationsFlash.SomeoneBullshit()
+        NotificationsFlash.someoneBullshit()
       }
 
       return Promise.reject({ message, error: validationError, statusCode: Number(statusCode) });
     }
 
-    console.log("########################################################")
-    console.error(error)
-    console.log("########################################################")
     return Promise.reject(error);
   });
 

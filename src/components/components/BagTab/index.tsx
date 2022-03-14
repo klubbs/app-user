@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native'
-import { useLayout } from '../../../utils/layoutHooks'
+import { useLayout } from '../../../utils/hooks/layoutHooks'
 
 import { Container, Wrapper } from './styles';
 

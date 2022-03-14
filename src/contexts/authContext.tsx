@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { LoginService } from '../services/loginService';
 import { ILoginResponse } from '../services/@types/userServiceTypes';
-import { AsyncStorageUtils } from '../utils/asyncStorageUtils';
+import { AsyncStorageUtils } from '../utils/asyncStorage';
 import { EventEmitter } from '../utils/emitter';
 
 
@@ -42,7 +42,6 @@ const AuthProvider: React.FC = ({ children }) => {
 
     await reloadUser();
   }
-
 
   const logout = async () => {
 

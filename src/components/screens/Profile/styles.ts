@@ -1,23 +1,23 @@
 import { Feather } from '@expo/vector-icons';
 import styled from 'styled-components/native';
-import COLORS from '../../../../assets/constants/colors';
+import { colors } from '../../../../assets/constants/colors';
 
 
 export const SafeArea = styled.SafeAreaView`
   flex:1;
-  background-color: ${COLORS.COLOR_WHITE};
+  background-color: ${colors.COLOR_WHITE};
 
 `
 
 export const IconLogout = styled(Feather).attrs(props => ({
   name: 'log-out',
   size: 16,
-  colors: COLORS.COLOR_BLACK40
+  colors: colors.COLOR_BLACK40
 }))``
 
 export const ContainerPoints = styled.View`
   border-left-width: 0.8px;
-  border-left-color: ${COLORS.COLOR_BLACK20};
+  border-left-color: ${colors.COLOR_BLACK20};
   flex: 1;
   height: 20%;
   margin-left: 5%;
@@ -47,14 +47,14 @@ export const WrapperTop = styled.View`
 `;
 
 export const PointValues = styled.Text`
-  color:${COLORS.COLOR_BLACK40};
+  color:${colors.COLOR_BLACK40};
   font-size:14px;
   font-family:'Nunito_Light';
 `
 
 
 export const Point = styled.Text`
-  color:${COLORS.COLOR_BLACK80};
+  color:${colors.COLOR_BLACK80};
   font-size:14px;
   font-family:'Nunito_Regular';
 `
@@ -78,7 +78,7 @@ export const MenuLogoutContainer = styled.TouchableOpacity.attrs(props => ({
 `;
 
 export const MenuTextLogout = styled.Text`
-  color:${COLORS.COLOR_BLACK40};
+  color:${colors.COLOR_BLACK40};
   font-size:16px;
   font-family:'Nunito_Regular';
 `

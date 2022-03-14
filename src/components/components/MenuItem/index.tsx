@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Feather } from '@expo/vector-icons';
 
 import { MenuItemContainer, MenuText, MenuTextContainer, MenuTextDescription, MenuItemIcon, MenuItemArrow, ArrowRight } from './styles';
-import colors from '../../../../assets/constants/colors';
+import { colors } from '../../../../assets/constants/colors';
 import { AuthContext } from '../../../contexts/authContext';
 import { IMenu } from '../../screens/Profile/@types';
 

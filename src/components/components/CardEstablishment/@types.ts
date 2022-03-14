@@ -1,4 +1,4 @@
-import { IRestaurants } from "../../organisms/RestaurantsList/@types";
+import { IRestaurants } from "../../components_heavy/RestaurantsList/@types";
 import { LocationObject } from 'expo-location';
 
 export type ICardEstablishmentProps = { data: IRestaurants } &

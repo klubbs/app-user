@@ -1,6 +1,6 @@
 import { StackScreenProps } from "@react-navigation/stack";
-import { IRestaurants } from "../../components/organisms/RestaurantsList/@types";
-import { ICouponsItem } from "../../components/organisms/WalletCouponsTab/@types";
+import { IRestaurants } from "../../components/components_heavy/RestaurantsList/@types";
+import { ICouponsItem } from "../../components/components_heavy/WalletCouponsTab/@types";
 
 export type IAppStackParams = {
   Tabs: undefined;
@@ -11,8 +11,10 @@ export type IAppStackParams = {
   CouponQr: ICouponsItem;
   Influencer: undefined;
   Offers: undefined;
-  Configurations: undefined;
-  Help: undefined
+  Settings: undefined;
+  Help: undefined;
+  ForgetPassword: { mail: string };
+  RemoveOfferInfluencer: { couponId: string },
 };
 
 
@@ -23,4 +25,8 @@ export type LoginPasswordScreenProps = StackScreenProps<IAppStackParams, 'LoginP
 export type RegisterScreenProps = StackScreenProps<IAppStackParams, 'Register'>
 
 export type CouponQrScreenProps = StackScreenProps<IAppStackParams, 'CouponQr'>
+
+export type ForgetPasswordScreenProps = StackScreenProps<IAppStackParams, 'ForgetPassword'>
+
+export type RemoveOfferInfluencerScreenProps = StackScreenProps<IAppStackParams, 'RemoveOfferInfluencer'>
 

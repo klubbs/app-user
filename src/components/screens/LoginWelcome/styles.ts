@@ -1,14 +1,13 @@
 import styled from 'styled-components/native';
-import { Dimensions } from 'react-native'
-import COLORS from '../../../../assets/constants/colors';
-import { BEHAVIOR_KEYBOARD } from '../../../utils/behaviorUtils';
+import { Dimensions, Platform } from 'react-native'
+import { colors } from '../../../../assets/constants/colors';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 
 const { width } = Dimensions.get('window');
 
 export const Wrapper = styled.SafeAreaView`
-  background-color: ${COLORS.COLOR_SECUNDARY_BLACK};
+  background-color: ${colors.COLOR_SECUNDARY_BLACK};
   flex: 1;
 `
 
@@ -25,13 +24,13 @@ export const ContainerBottom = styled.View`
 `
 
 export const Title = styled.Text`
-  color:${COLORS.COLOR_WHITE};
+  color:${colors.COLOR_WHITE};
   font-size:20px;
   font-family:'Nunito_Bold';
 `
 
 export const Description = styled.Text`
-  color:${COLORS.COLOR_WHITE_80};
+  color:${colors.COLOR_WHITE_80};
   font-size:16px;
   font-family:'Nunito_Regular';
   text-align: center;
@@ -39,7 +38,7 @@ export const Description = styled.Text`
 
 
 export const Subtitle = styled.Text`
-  color:${COLORS.COLOR_WHITE_40};
+  color:${colors.COLOR_WHITE_40};
   font-size:14px;
   margin-top:10px;
   font-family:'Nunito_Light';
@@ -48,7 +47,7 @@ export const Subtitle = styled.Text`
 
 
 export const ExplainText = styled.Text`
-  color:${COLORS.COLOR_WHITE_80};
+  color:${colors.COLOR_WHITE_80};
   font-size:13px;
   font-family:'Nunito_Light';
   text-align: center;
@@ -60,7 +59,7 @@ export const EnterButton = styled(Button).attrs(props => ({
 }))``
 
 export const WrapperKeyboard = styled.KeyboardAvoidingView.attrs(props => ({
-  behavior: BEHAVIOR_KEYBOARD,
+  behavior: Platform.OS == 'ios' ? 'padding' : 'height',
 }))`
   flex:1
 `

@@ -1,7 +1,6 @@
-import { Dimensions, TouchableOpacity, View } from 'react-native';
+import { Dimensions, Platform, TouchableOpacity, View } from 'react-native';
 import styled from 'styled-components/native';
-import COLORS from '../../../../assets/constants/colors';
-import { BEHAVIOR_KEYBOARD } from '../../../utils/behaviorUtils';
+import { colors } from '../../../../assets/constants/colors';
 import Input from '../../components/Input';
 import { TextInputMask } from 'react-native-masked-text'
 
@@ -9,7 +8,7 @@ const WIDTH_DIMENSION = Dimensions.get('window').width
 
 
 export const Wrapper = styled.SafeAreaView`
-  background-color: ${COLORS.COLOR_SECUNDARY_BLACK};
+  background-color: ${colors.COLOR_SECUNDARY_BLACK};
   flex: 1;
 `
 
@@ -37,12 +36,12 @@ export const ContainerBottom = styled.View`
 `
 
 export const Title = styled.Text`
-  color:${COLORS.COLOR_WHITE};
+  color:${colors.COLOR_WHITE};
   font-size:20px;
   font-family:'Nunito_Bold';`
 
 export const Description = styled.Text`
-  color:${COLORS.COLOR_WHITE_80};
+  color:${colors.COLOR_WHITE_80};
   font-size:16px;
   font-family:'Nunito_Regular';
   text-align: center;
@@ -50,7 +49,7 @@ export const Description = styled.Text`
 
 
 export const SubtitlePassword = styled.Text`
-  color:${COLORS.COLOR_WHITE_80};
+  color:${colors.COLOR_WHITE_80};
   font-size:12px;
   margin-top:10px;
   font-family:'Nunito_Light';
@@ -62,7 +61,7 @@ export const Confirm = styled(TouchableOpacity).attrs(() => ({
 }))`
   width: 80px;
   height: 80px;
-  background-color: ${COLORS.COLOR_YELLOW};
+  background-color: ${colors.COLOR_YELLOW};
   border-radius: 40px;
   justify-content: center;
   align-items: center;
@@ -74,24 +73,24 @@ export const Name = styled(Input).attrs(props => ({
   contentType: "name"
 })) <{ error: any }>`
   margin-bottom: 10%;
-  border-color: ${props => props.error ? COLORS.COLOR_RED : COLORS.COLOR_WHITE_40}
+  border-color: ${props => props.error ? colors.COLOR_RED : colors.COLOR_WHITE_40}
 `
 
 //TODO:Passar para um componente essas props
 export const Phone = styled(TextInputMask).attrs(({
   type: 'cel-phone',
   placeholder: 'Telefone',
-  placeholderTextColor: COLORS.COLOR_WHITE_40,
-  selectionColor: COLORS.COLOR_YELLOW,
+  placeholderTextColor: colors.COLOR_WHITE_40,
+  selectionColor: colors.COLOR_YELLOW,
   returnKeyType: 'done'
 })) <{ error: any }>`
-  border-color: ${props => props.error ? COLORS.COLOR_RED : COLORS.COLOR_WHITE_40};
+  border-color: ${props => props.error ? colors.COLOR_RED : colors.COLOR_WHITE_40};
   height: 60px;
   width: 90%;
   border-width: 1.2px;
   border-radius: 6px;
 	font-size: 18px;
-	color: ${COLORS.COLOR_YELLOW};
+	color: ${colors.COLOR_YELLOW};
   font-family:'Nunito_Regular';
   padding-left:10px;
 `
@@ -102,7 +101,7 @@ export const Password = styled(Input).attrs(props => ({
   contentType: 'password',
   isPassword: true
 })) <{ error: any }>`
-  border-color: ${props => props.error ? COLORS.COLOR_RED : COLORS.COLOR_WHITE_40}
+  border-color: ${props => props.error ? colors.COLOR_RED : colors.COLOR_WHITE_40}
 `
 
 export const containerBackButton = {
@@ -114,7 +113,7 @@ export const containerBackButton = {
 
 
 export const WrapperKeyboard = styled.KeyboardAvoidingView.attrs(props => ({
-  behavior: BEHAVIOR_KEYBOARD,
+  behavior: Platform.OS == 'ios' ? 'padding' : 'height',
 }))`
   flex:5
 `
