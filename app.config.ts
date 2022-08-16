@@ -17,9 +17,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   updates: {
     fallbackToCacheTimeout: 0
   },
-  experiments: {
-    "turboModules": true
-  },
   version: "0.0.6",
   ios: {
     supportsTablet: false,

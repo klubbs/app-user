@@ -1,15 +1,14 @@
+import './src/utils/extensions/dateExtensions';
+import './src/utils/extensions/objectExtensions';
 import { NavigationContainer } from "@react-navigation/native";
 import { useFonts } from 'expo-font';
 import React from "react";
 import { ActivityIndicator, LogBox, StatusBar, View } from "react-native";
 import { AuthProvider } from './src/contexts/authContext';
 import AppStack from "./src/settings/navigations/appStack";
-import './src/utils/extensions/dateExtensions';
-import './src/utils/extensions/objectExtensions';
-import FlashComponent from 'flash-notify'
 import { colors } from "./assets/constants/colors";
-import { decode, encode } from "base-64";
 import { InfluencerProvider } from "./src/contexts/influencerContext";
+import FlashComponent from 'flash-notify'
 
 LogBox.ignoreLogs(['Expected style']);
 
@@ -55,13 +54,3 @@ export default function App() {
     </AuthProvider>
   );
 };
-
-(function DefaultInitializations() {
-  if (!global.btoa) {
-    global.btoa = encode;
-  }
-
-  if (!global.atob) {
-    global.atob = decode;
-  }
-})();
