@@ -26,9 +26,6 @@ export const connectionHandler = (type: 'KLUBBS_API_URL') => {
   })
 
   instance.interceptors.request.use(async (config) => {
-
-    console.log(config.baseURL)
-
     const token = await createCredentialToken()
 
     config.headers.Authorization = `Bearer ${token}`
@@ -39,8 +36,6 @@ export const connectionHandler = (type: 'KLUBBS_API_URL') => {
 
   instance.interceptors.response.use((response) => response,
     (error): Promise<IError> => {
-
-      console.log(error)
 
       if (error.response.data) {
         const statusCode = error.response.data?.statusCode

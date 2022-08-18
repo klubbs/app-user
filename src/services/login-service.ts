@@ -22,8 +22,6 @@ class LoginService {
 
     await AsyncStorageUtils.createUserInStorage(data.message);
 
-    console.log(data.message)
-
     return data.message
   }
 

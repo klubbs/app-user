@@ -14,8 +14,4 @@
     "editor.codeLens": true
   },
   "editor.guides.indentation": true,
-  "search.useIgnoreFiles": false,
-  "search.exclude": {
-    "**/node_modules": false,
-  },
 }
