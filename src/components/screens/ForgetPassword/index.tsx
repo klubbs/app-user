@@ -96,15 +96,6 @@ export const ForgetPasswordScreen: React.FC<ForgetPasswordScreenProps> = ({ rout
 							}
 							break;
 
-						case 409:
-							if (actualFieldError === 'ESTABLISHMENT') {
-								NotificationsFlash.customMessage("Esse email não faz parte do nosso cadastro",
-									"Desculpe",
-									"NEUTRAL"
-								)
-							}
-							break;
-
 						default:
 							break;
 					}

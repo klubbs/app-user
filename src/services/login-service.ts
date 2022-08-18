@@ -54,7 +54,7 @@ class LoginService {
 
   static async updatePassword(password: string, mail: string, code: string): Promise<void> {
     await connectionHandler('KLUBBS_API_URL')
-      .put('users/update/password', {}, { auth: { password: password, username: mail }, params: { code: code } })
+      .put('users/update/password', { password: password, mail: mail, code: code },)
   }
 
   static async mailAlreadyInUse(email: string): Promise<boolean> {
