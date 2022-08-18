@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Linking, View } from 'react-native';
-import { AuthContext } from '../../../contexts/authContext';
+import { AuthContext } from '../../../contexts/auth-context';
 import { MenuItem } from '../../components/MenuItem';
 
 import { Wrapper, ContainerScroll } from './styles';

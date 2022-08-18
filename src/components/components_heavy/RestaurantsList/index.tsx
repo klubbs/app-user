@@ -5,10 +5,10 @@ import { useNavigation } from '@react-navigation/native';
 import { CardEstablishment } from "../../components/CardEstablishment";
 import { IRestaurants } from './@types';
 import { LocationAccuracy, LocationObject } from 'expo-location';
-import { HomeContext } from '../../../contexts/homeContext';
+import { HomeContext } from '../../../contexts/home-context';
 import { NotFoundRestaurants } from '../../../../assets/images/notFounds/notFoundRestaurants';
 import { LocationDeniedImage } from '../../../../assets/images/notFounds/locationDenied';
-import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
+import { NotificationsFlash } from '../../../utils/flash-notifications';
 import { EmptyCard, Header, WrapperNotFound, wrapperStyle, NotFoundTitle, NotFoundSubtitle, WrapperDenied } from './styles';
 
 

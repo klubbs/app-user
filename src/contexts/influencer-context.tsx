@@ -1,6 +1,6 @@
 import React, { createContext, useState } from "react"
 import { GetAllCouponsByInfluencerResponse } from "../components/modals/CouponsInfluencer/@types"
-import { InfluencerService } from "../services/influencerService"
+import { InfluencerService } from "../services/influencer-service"
 
 
 export const InfluencerContext = createContext({} as {

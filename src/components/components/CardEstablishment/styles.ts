@@ -1,7 +1,7 @@
 import styled from 'styled-components/native'
 import { Animated, Platform } from 'react-native'
 import { colors } from '../../../../assets/constants/colors'
-import { isIphoneX, isBiggerAndroid } from '../../../utils/dimensionsHelper'
+import { isIphoneX, isBiggerAndroid } from '../../../utils/dimensions'
 import { ShopIcon } from '../../../../assets/icons/shop_icon'
 
 export const Wrapper = styled.TouchableOpacity.attrs(props => ({

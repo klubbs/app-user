@@ -2,12 +2,12 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Dimensions, PixelRatio, View } from 'react-native'
 import QRCode from 'react-native-qrcode-svg';
 import { colors } from '../../../../assets/constants/colors';
-import { CouponQrScreenProps } from '../../../settings/@types/appStackTypes';
+import { CouponQrScreenProps } from '../../../settings/@types/@app-stack';
 import { EstablishmentCardQr } from '../../components/CardEstablishmentQr';
 import { QrCouponsRules } from '../../modals/QrCouponsRules';
-import { AuthContext } from '../../../contexts/authContext';
+import { AuthContext } from '../../../contexts/auth-context';
 import { UserIcon } from '../../../../assets/icons/user_icon';
-import { IWalletCouponsResponseOfferData } from '../../../services/@types/couponServiceTypes';
+import { IWalletCouponsResponseOfferData } from '../../../services/@types/@coupon-services';
 import {
   ContainerCoupon,
   Wrapper,

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native'
-import { CouponService } from '../../../services/couponService';
+import { CouponService } from '../../../services/coupon-service';
 import { CouponsCheckoutItems } from '../../components/CouponCheckout';
 import { ICouponCheckoutItem } from '../../components/CouponCheckout/interface';
 import { CheckoutsFlatList, NothingTransactionSubtitle, SpaceSkeleton, LineSkeleton, SquareSkeleton, WrapperSkeleton } from './styles';

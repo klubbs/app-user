@@ -7,5 +7,6 @@ export type ILoginResponse = {
   name: string
   image: string
   token: string
-  influencer_id: string | null
+  refresh_token: string;
+  influencer_id?: string
 }

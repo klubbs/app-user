@@ -1,26 +1,29 @@
-import api from "../settings/services/api";
-import { NotificationsFlash } from "../utils/notificationsFlashUtils";
-import { ICouponCheckoutResponse, IWalletCouponsReponse } from './@types/couponServiceTypes';
+import { NotificationsFlash } from "../utils/flash-notifications";
+import { ICouponCheckoutResponse, IWalletCouponsReponse } from './@types/@coupon-services';
 import * as Haptic from 'expo-haptics';
-import { IResponseMessage, IError } from "../settings/@types/IResponses";
+import { IResponseMessage, IError } from "../settings/@types/@responses";
+import { connectionHandler } from "../settings/connection";
 
 export class CouponService {
 
 
   static async getCouponsCheckout(): Promise<ICouponCheckoutResponse[]> {
-    const { data } = await api.get<IResponseMessage<ICouponCheckoutResponse[]>>('checkouts/users')
+    const { data } = await connectionHandler('KLUBBS_API_URL')
+      .get<IResponseMessage<ICouponCheckoutResponse[]>>('checkouts/users')
 
     return data.message
   }
 
   static async getWalletCoupons(): Promise<IWalletCouponsReponse[]> {
-    const { data } = await api.get<IResponseMessage<IWalletCouponsReponse[]>>('users/wallets/coupons');
+    const { data } = await await connectionHandler('KLUBBS_API_URL')
+      .get<IResponseMessage<IWalletCouponsReponse[]>>('users/wallets/coupons');
 
     return data.message
   }
 
   static async saveCouponInWallet(code: string): Promise<void> {
-    await api.post('users/wallets/coupons', null, { params: { code: code } });
+    await connectionHandler('KLUBBS_API_URL')
+      .post('users/wallets/coupons', null, { params: { code: code } });
   }
 
   static catchSaveCouponInWallet(error: IError) {

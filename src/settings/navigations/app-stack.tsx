@@ -1,11 +1,11 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import { colors } from '../../../assets/constants/colors';
-import Tabs from './appTabStack';
+import Tabs from './app-tab-stack';
 import WelcomeLoginScreen from '../../components/screens/LoginWelcome';
 import Register from '../../components/screens/Register';
 import Restaurant from '../../components/screens/RestaurantsProfile';
-import { IAppStackParams } from '../@types/appStackTypes';
+import { IAppStackParams } from '../@types/@app-stack';
 import { CouponQrScreen } from '../../components/screens/CouponQr';
 import { LoginPasswordScreen } from '../../components/screens/LoginPassword';
 import { Influencer } from '../../components/screens/Influencer';

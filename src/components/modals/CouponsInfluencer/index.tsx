@@ -6,12 +6,12 @@ import {
   Wrapper, Divider, Container, Code, Copy, ContainerPressable, ContainerCouponInformation, ShopSubtitleIcon,
   ContainerShop, ShopSubtitle
 } from './styles';
-import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
+import { NotificationsFlash } from '../../../utils/flash-notifications';
 import { Pressable, Dimensions } from 'react-native';
 import { GetAllCouponsByInfluencerResponse, IModalCouponsInfluencerRef } from './@types';
 import { SpinnerLoading } from '../../components/Spinner';
 import { useNavigation } from '@react-navigation/native';
-import { InfluencerContext } from '../../../contexts/influencerContext';
+import { InfluencerContext } from '../../../contexts/influencer-context';
 
 const { height } = Dimensions.get('window');
 

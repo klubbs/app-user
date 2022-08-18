@@ -3,9 +3,9 @@ import * as Haptic from 'expo-haptics';
 import React, { useContext, useImperativeHandle, useState } from 'react';
 import { Alert, Keyboard } from 'react-native';
 import { Cursor, RenderCellOptions, useClearByFocusCell } from 'react-native-confirmation-code-field';
-import { AuthContext } from '../../../contexts/authContext';
-import { LoginService } from '../../../services/loginService';
-import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
+import { AuthContext } from '../../../contexts/auth-context';
+import { LoginService } from '../../../services/login-service';
+import { NotificationsFlash } from '../../../utils/flash-notifications';
 import { ModalComponent } from '../../components/Modal';
 import { Spinner } from '../../components/Spinner';
 import { IModalCodeProps, IModalRef } from './@types';
@@ -113,7 +113,7 @@ export const MailCodeModal = React.forwardRef<IModalRef, IModalCodeProps>((props
     } catch (error: any) {
 
       if (error?.statusCode === 412) {
-        NotificationsFlash.someoneBullshit()
+        NotificationsFlash.invalidCode()
       }
 
       if (error?.statusCode === 422) {

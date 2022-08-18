@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useContext, useRef } from 'react'
 import { CodeField, Cursor, useClearByFocusCell } from 'react-native-confirmation-code-field'
 import { useNavigation } from '@react-navigation/native';
-import { ForgetPasswordScreenProps } from '../../../settings/@types/appStackTypes'
+import { ForgetPasswordScreenProps } from '../../../settings/@types/@app-stack'
 import { Spinner } from '../../components/Spinner'
-import { LoginService } from '../../../services/loginService'
-import { IError } from '../../../settings/@types/IResponses'
-import { isAPIException } from '../../../utils/documentsUtils';
+import { LoginService } from '../../../services/login-service'
+import { IError } from '../../../settings/@types/@responses'
+import { isAPIException } from '../../../utils/document-utils';
 import { Middlewares } from '../../../utils/middlewares';
-import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
-import { IRegisterUser } from '../../../services/@types/loginServiceTypes';
+import { NotificationsFlash } from '../../../utils/flash-notifications';
+import { IRegisterUser } from '../../../services/@types/@login-services';
 import { Wrapper, ConfirmButton, Input, Subtitle, Email, Password, ContainerAnimated } from './styles'
-import { nameof } from '../../../utils/extensions/objectExtensions';
+import { nameof } from '../../../utils/extensions/object-extensions';
 
 export const ForgetPasswordScreen: React.FC<ForgetPasswordScreenProps> = ({ route }) => {
 

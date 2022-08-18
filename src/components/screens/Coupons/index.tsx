@@ -1,6 +1,6 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import React, { useContext, useRef } from 'react';
-import { AuthContext } from '../../../contexts/authContext';
+import { AuthContext } from '../../../contexts/auth-context';
 import { CouponsCheckout } from '../../components_heavy/WalletCouponsCheckoutTab';
 import { CouponsEmpty } from '../../components_heavy/LogoutCoupons';
 import { CouponsWalletTab } from '../../components_heavy/WalletCouponsTab';

@@ -3,10 +3,10 @@ import { Modal, TouchableWithoutFeedback } from 'react-native';
 import { Coupon } from '../../components/Coupon';
 import { format4TwoColumns } from '../../../utils/formatersUtils'
 import { ICouponInfluencer, ILinkCouponOffersProps, ILinkCouponOffersRef } from './@types';
-import { InfluencerService, InfluencerServiceException } from '../../../services/influencerService';
+import { InfluencerService, InfluencerServiceException } from '../../../services/influencer-service';
 import { Spinner } from '../../components/Spinner';
-import { IError } from '../../../settings/@types/IResponses';
-import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
+import { IError } from '../../../settings/@types/@responses';
+import { NotificationsFlash } from '../../../utils/flash-notifications';
 import { useNavigation } from '@react-navigation/native';
 import {
   Wrapper,

@@ -9,8 +9,8 @@ import { ShopIcon } from "../../../assets/icons/shop_icon";
 import { Coupons } from '../../components/screens/Coupons';
 import { Home } from '../../components/screens/Home';
 import Profile from '../../components/screens/Profile';
-import { isIphoneX } from "../../utils/dimensionsHelper";
-import { ITabsParamList } from "../@types/tabStackTypes";
+import { isIphoneX } from "../../utils/dimensions";
+import { ITabsParamList } from "../@types/@app-tab-stack";
 
 interface AppStackProps { }
 

@@ -3,7 +3,7 @@ import { View, Animated } from 'react-native';
 import { colors } from '../../../../assets/constants/colors';
 import { CouponIcon } from '../../../../assets/icons/coupon_icon';
 import { MarkerTimeIcon } from '../../../../assets/icons/marker-time_icon';
-import { distanceInKm } from '../../../utils/distanceUtils'
+import { distanceInKm } from '../../../utils/geolocations'
 import {
   Container,
   ContainerDescriptions,
@@ -21,7 +21,7 @@ import {
   EmptyShopIcon
 } from './styles';
 import { ICardEstablishmentProps } from './@types';
-import { HomeContext } from '../../../contexts/homeContext';
+import { HomeContext } from '../../../contexts/home-context';
 
 export const CardEstablishment: React.FC<ICardEstablishmentProps> = ({ data, onPress, userLocation }) => {
 

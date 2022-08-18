@@ -3,7 +3,7 @@ import { Platform } from 'react-native'
 import { colors } from '../../../../assets/constants/colors';
 import { ClockIcon } from '../../../../assets/icons/clockIcon';
 import { CouponIcon } from '../../../../assets/icons/coupon_icon';
-import { RestaurantScreenProps } from "../../../settings/@types/appStackTypes";
+import { RestaurantScreenProps } from "../../../settings/@types/@app-stack";
 import { RestaurantInteractions } from '../../components_heavy/RestaurantInteractions';
 import { BlocksWrapper, About, AboutSubtitle, BlocksValue, ContainerGetCoupon, ContainerImage, Container, IconsContainer, GetCouponText, RestaurantCategory, RestaurantName, Wrapper, NameContainer } from './styles';
 

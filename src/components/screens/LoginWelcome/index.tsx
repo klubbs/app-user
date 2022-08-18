@@ -3,16 +3,16 @@ import * as Haptic from 'expo-haptics';
 import React, { useEffect, useState } from 'react';
 import { Keyboard } from 'react-native';
 import { KlubbsLogo } from '../../../../assets/images/klubbsLogo';
-import { LoginService, LoginServiceExceptions } from '../../../services/loginService';
-import { IError } from '../../../settings/@types/IResponses';
-import { nameof } from '../../../utils/extensions/objectExtensions';
+import { LoginService, LoginServiceExceptions } from '../../../services/login-service';
+import { IError } from '../../../settings/@types/@responses';
+import { nameof } from '../../../utils/extensions/object-extensions';
 import { Spinner } from '../../components/Spinner';
 import {
   ContainerBottom, ContainerTop, Description, EnterButton, ExplainText, MailInput, Title, Wrapper, WrapperImage,
   WrapperKeyboard, Subtitle
 } from './styles';
-import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
-import { IRegisterUser } from '../../../services/@types/loginServiceTypes';
+import { NotificationsFlash } from '../../../utils/flash-notifications';
+import { IRegisterUser } from '../../../services/@types/@login-services';
 
 const LoginWelcome: React.FC = () => {
 

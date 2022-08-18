@@ -1,24 +1,28 @@
-import { IError, IResponseMessage } from '../settings/@types/IResponses'
-import api from '../settings/services/api'
-import { NotificationsFlash } from '../utils/notificationsFlashUtils'
-import { beValidMail, validPhone } from '../utils/documentsUtils'
-import { ICreateUserResponse, ILoginResponse } from './@types/userServiceTypes'
+import { IError, IResponseMessage } from '../settings/@types/@responses'
+import { NotificationsFlash } from '../utils/flash-notifications'
+import { beValidMail, validPhone } from '../utils/document-utils'
+import { ICreateUserResponse, ILoginResponse } from './@types/@user-services'
 import { AsyncValidator } from 'fluentvalidation-ts'
 import { ValidationErrors } from 'fluentvalidation-ts/dist/ValidationErrors'
-import { IRegisterUser } from './@types/loginServiceTypes'
-
+import { IRegisterUser } from './@types/@login-services'
+import { connectionHandler, createInstanceAuthZn } from '../settings/connection'
+import { AsyncStorageUtils } from '../utils/async-storage'
 
 class LoginService {
 
-
   static async login(mail: string, password: string): Promise<ILoginResponse> {
 
-    const { data } = await api.get<IResponseMessage<ILoginResponse>>('users/login', {
-      auth: {
-        username: mail,
-        password: password
-      }
-    })
+    const { data } = await createInstanceAuthZn
+      .get<IResponseMessage<ILoginResponse>>('auth/login/user', {
+        params: {
+          mail: mail,
+          password: password
+        }
+      })
+
+    await AsyncStorageUtils.createUserInStorage(data.message);
+
+    console.log(data.message)
 
     return data.message
   }
@@ -27,7 +31,9 @@ class LoginService {
 
     const domain = this.registerContract(user, code);
 
-    const { data } = await api.post<IResponseMessage<ICreateUserResponse>>('users', { mail: domain.mail, phone: domain.phone, password: domain.password, name: domain.name, code: domain.code })
+    const { data } = await connectionHandler('KLUBBS_API_URL')
+      .post<IResponseMessage<ICreateUserResponse>>('users',
+        { mail: domain.mail, phone: domain.phone, password: domain.password, name: domain.name, code: domain.code })
 
     return data.message
   }
@@ -39,19 +45,21 @@ class LoginService {
   }
 
   static async sendRegisterCode(mail: string): Promise<void> {
-    await api.post(`users/code/register/mail`, {}, { params: { mail: mail } })
+    await connectionHandler('KLUBBS_API_URL').post(`users/code/register/mail`, {}, { params: { mail: mail } })
   }
 
   static async sendForgetMailCode(mail: string): Promise<void> {
-    await api.post('users/code/forget/login', {}, { params: { mail: mail } })
+    await connectionHandler('KLUBBS_API_URL').post('users/code/forget/login', {}, { params: { mail: mail } })
   }
 
   static async updatePassword(password: string, mail: string, code: string): Promise<void> {
-    await api.put('users/update/password', {}, { auth: { password: password, username: mail }, params: { code: code } })
+    await connectionHandler('KLUBBS_API_URL')
+      .put('users/update/password', {}, { auth: { password: password, username: mail }, params: { code: code } })
   }
 
   static async mailAlreadyInUse(email: string): Promise<boolean> {
-    const { data } = await api.get<IResponseMessage<boolean>>(`users/infos/mail`, { params: { mail: email } })
+    const { data } = await connectionHandler('KLUBBS_API_URL')
+      .get<IResponseMessage<boolean>>(`users/infos/mail`, { params: { mail: email } })
 
     return data.message
   }
@@ -64,7 +72,8 @@ class LoginService {
 
   static async alreadyPhone(phone: string): Promise<boolean> {
 
-    const { data } = await api.get<IResponseMessage<boolean>>(`users/infos/phone`, { params: { phone: phone } })
+    const { data } = await connectionHandler('KLUBBS_API_URL')
+      .get<IResponseMessage<boolean>>(`users/infos/phone`, { params: { phone: phone } })
 
     return data.message
   }
@@ -130,13 +139,14 @@ class LoginServiceValidator extends AsyncValidator<IRegisterUser> {
       .mustAsync(async (phone: string) => {
         try {
 
-          if (!validPhone(phone))
+          if (!validPhone(phone)) {
             return false
+          }
 
-          const already = await LoginService.alreadyPhone(phone)
-
-          return !already
-        } catch (error) { return false }
+          return !(await LoginService.alreadyPhone(phone))
+        } catch {
+          return false
+        }
       })
       .withMessage('Preencha com um telefone válido.')
       .when(src => src.phone !== undefined)

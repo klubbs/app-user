@@ -1,36 +1,40 @@
 import { GetAllCouponsByInfluencerResponse } from "../components/modals/CouponsInfluencer/@types";
-import { IError, IResponseMessage } from "../settings/@types/IResponses";
-import api from "../settings/services/api";
+import { IError, IResponseMessage } from "../settings/@types/@responses";
 import * as Haptic from 'expo-haptics';
-import { NotificationsFlash } from "../utils/notificationsFlashUtils";
-import { GetAllOffersResponse } from "./@types/storeServiceTypes";
+import { NotificationsFlash } from "../utils/flash-notifications";
+import { GetAllOffersResponse } from "./@types/@store-services";
+import { connectionHandler } from "../settings/connection";
 
 export class InfluencerService {
 
   static async createNewCouponCode(code: string) {
-    await api.post('influencer/coupons', { code: code })
+    await connectionHandler('KLUBBS_API_URL').post('influencer/coupons', { code: code })
   }
 
   static async getAllCouponsByInfluencer(): Promise<GetAllCouponsByInfluencerResponse[]> {
 
-    const { data } = await api.get<IResponseMessage<GetAllCouponsByInfluencerResponse[]>>('influencer/coupons');
+    const { data } = await connectionHandler('KLUBBS_API_URL')
+      .get<IResponseMessage<GetAllCouponsByInfluencerResponse[]>>('influencer/coupons');
 
     return data.message;
   }
 
   static async getAllOffers(): Promise<GetAllOffersResponse[]> {
 
-    const { data } = await api.get<IResponseMessage<GetAllOffersResponse[]>>('stores/coupon');
+    const { data } = await connectionHandler('KLUBBS_API_URL')
+      .get<IResponseMessage<GetAllOffersResponse[]>>('stores/coupon');
 
     return data.message
   }
 
   static async linkCouponInOffers(masterCoupons: string[], couponId: string): Promise<void> {
-    await api.post('influencer/coupons/link', { master_coupons: masterCoupons, coupon_id: couponId })
+    await connectionHandler('KLUBBS_API_URL')
+      .post('influencer/coupons/link', { master_coupons: masterCoupons, coupon_id: couponId })
   }
 
   static async RemoveOffer(offerId: string, couponId: string) {
-    await api.put('influencer/coupons/offers/remove', { offers: [offerId], coupon_id: couponId })
+    await connectionHandler('KLUBBS_API_URL')
+      .put('influencer/coupons/offers/remove', { offers: [offerId], coupon_id: couponId })
   }
 
 }

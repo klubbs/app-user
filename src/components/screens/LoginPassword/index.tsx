@@ -1,10 +1,10 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useContext, useState } from 'react';
 import { Alert, Keyboard } from 'react-native';
-import { AuthContext } from '../../../contexts/authContext';
-import { LoginServiceExceptions } from '../../../services/loginService';
-import { LoginPasswordScreenProps } from '../../../settings/@types/appStackTypes';
-import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
+import { AuthContext } from '../../../contexts/auth-context';
+import { LoginServiceExceptions } from '../../../services/login-service';
+import { LoginPasswordScreenProps } from '../../../settings/@types/@app-stack';
+import { NotificationsFlash } from '../../../utils/flash-notifications';
 import { Spinner } from '../../components/Spinner';
 import {
   ContainerBottom, ContainerTop,

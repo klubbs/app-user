@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Modalize } from 'react-native-modalize'
 import { DaysOfWeek } from '../../components/DaysOfWeek';
-import { IWalletCouponsResponseOfferData } from '../../../services/@types/couponServiceTypes';
+import { IWalletCouponsResponseOfferData } from '../../../services/@types/@coupon-services';
 import {
   Wrapper,
   Name,

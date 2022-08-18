@@ -3,7 +3,7 @@ import LottieView from 'lottie-react-native';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Alert, FlatList, TouchableOpacity } from 'react-native';
 import CongratulationsCoupons from '../../../../assets/animations/congratulations_coupons.json';
-import { AuthContext } from '../../../contexts/authContext';
+import { AuthContext } from '../../../contexts/auth-context';
 import { IMenu } from './@types';
 import { MenuItem } from '../../components/MenuItem';
 import {
@@ -97,7 +97,7 @@ const Profile: React.FC = () => {
         {
           MENU_DATA.map(item => {
 
-            if (item.key === INFLUENCER_KEY && user?.influencer_id === null) {
+            if (item.key === INFLUENCER_KEY && !user?.influencer_id) {
               return <></>
             }
 

@@ -1,5 +1,5 @@
 import React, { ReactElement, useState, useEffect } from 'react';
-import { CouponService } from '../../../services/couponService';
+import { CouponService } from '../../../services/coupon-service';
 import { ICouponsItem } from './@types';
 import { Container, FlatComponent, NothingCouponsSubtitle } from './styles';
 import { useNavigation } from '@react-navigation/native';

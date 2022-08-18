@@ -3,7 +3,7 @@ import { Feather } from '@expo/vector-icons';
 
 import { MenuItemContainer, MenuText, MenuTextContainer, MenuTextDescription, MenuItemIcon, MenuItemArrow, ArrowRight } from './styles';
 import { colors } from '../../../../assets/constants/colors';
-import { AuthContext } from '../../../contexts/authContext';
+import { AuthContext } from '../../../contexts/auth-context';
 import { IMenu } from '../../screens/Profile/@types';
 
 export const MenuItem: React.FC<IMenu> = (props) => {

@@ -1,8 +1,8 @@
 import React, { useState, createContext, useMemo } from 'react';
 import { IRestaurants } from '../components/components_heavy/RestaurantsList/@types';
-import { ICategoryResponse } from '../services/@types/storeServiceTypes';
-import { StoreService } from '../services/storeServices';
-import { AsyncStorageUtils } from '../utils/asyncStorage';
+import { ICategoryResponse } from '../services/@types/@store-services';
+import { StoreService } from '../services/store-service';
+import { AsyncStorageUtils } from '../utils/async-storage';
 import { format4TwoColumns } from '../utils/formatersUtils';
 
 export const HomeContext = createContext(

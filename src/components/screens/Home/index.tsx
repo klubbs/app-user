@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native'
-import { HomeProvider } from '../../../contexts/homeContext';
+import { HomeProvider } from '../../../contexts/home-context';
 import AdvertisementsSlider from "../../components_heavy/BannerAdvertisements";
 import MainCategories from '../../components_heavy/RestaurantsCategories';
 import { RestaurantsList } from '../../components_heavy/RestaurantsList';

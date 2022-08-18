@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { LoginService } from '../services/loginService';
-import { ILoginResponse } from '../services/@types/userServiceTypes';
-import { AsyncStorageUtils } from '../utils/asyncStorage';
+import { LoginService } from '../services/login-service';
+import { ILoginResponse } from '../services/@types/@user-services';
+import { AsyncStorageUtils } from '../utils/async-storage';
 import { EventEmitter } from '../utils/emitter';
 
 
@@ -29,7 +29,7 @@ const AuthProvider: React.FC = ({ children }) => {
   }, [])
 
   const reloadUser = async (): Promise<void> => {
-    const userStorage = await AsyncStorageUtils.getUserInAsyncStorage();
+    const userStorage = await AsyncStorageUtils.getUserInStorage();
 
     setUser(userStorage)
   }
@@ -37,8 +37,6 @@ const AuthProvider: React.FC = ({ children }) => {
   async function signIn(mail: string, password: string): Promise<void> {
 
     const userData = await LoginService.login(mail, password);
-
-    await AsyncStorageUtils.createUserInStorage(userData);
 
     await reloadUser();
   }

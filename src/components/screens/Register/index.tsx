@@ -4,11 +4,11 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Alert, Keyboard, ScrollView, Dimensions } from 'react-native';
 import { colors } from '../../../../assets/constants/colors';
-import { IRegisterUser } from '../../../services/@types/loginServiceTypes';
-import { LoginService } from '../../../services/loginService';
-import { RegisterScreenProps } from '../../../settings/@types/appStackTypes';
-import { isEmpty, nameof } from '../../../utils/extensions/objectExtensions';
-import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
+import { IRegisterUser } from '../../../services/@types/@login-services';
+import { LoginService } from '../../../services/login-service';
+import { RegisterScreenProps } from '../../../settings/@types/@app-stack';
+import { isEmpty, nameof } from '../../../utils/extensions/object-extensions';
+import { NotificationsFlash } from '../../../utils/flash-notifications';
 import { MailCodeModal } from '../../modals/MailCodeModal';
 import { IModalRef } from '../../modals/MailCodeModal/@types';
 import {

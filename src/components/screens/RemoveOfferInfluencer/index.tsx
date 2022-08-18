@@ -4,12 +4,12 @@ import Swipeable from 'react-native-gesture-handler/Swipeable'
 import { FlatList } from 'react-native-gesture-handler';
 import OFF from '../../components/OFF';
 import { colors } from '../../../../assets/constants/colors';
-import { RemoveOfferInfluencerScreenProps } from '../../../settings/@types/appStackTypes';
+import { RemoveOfferInfluencerScreenProps } from '../../../settings/@types/@app-stack';
 import { Spinner } from '../../components/Spinner';
-import { InfluencerService } from '../../../services/influencerService';
-import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
+import { InfluencerService } from '../../../services/influencer-service';
+import { NotificationsFlash } from '../../../utils/flash-notifications';
 import * as Haptic from 'expo-haptics';
-import { InfluencerContext } from '../../../contexts/influencerContext';
+import { InfluencerContext } from '../../../contexts/influencer-context';
 import { GetAllCouponsByInfluencerResponse, OffersCouponInfluencerResponse } from '../../modals/CouponsInfluencer/@types';
 import {
     Wrapper,

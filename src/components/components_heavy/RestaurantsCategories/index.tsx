@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from 'react';
-import { HomeContext } from '../../../contexts/homeContext';
-import { ICategoryResponse } from '../../../services/@types/storeServiceTypes';
+import { HomeContext } from '../../../contexts/home-context';
+import { ICategoryResponse } from '../../../services/@types/@store-services';
 import { Description, Dot, FlatComponent, WrapplerTouchable, SkeletonStyled, WrapperSkeleton } from './styles';
 
 export const RestaurantsCategories: React.FC = (props) => {

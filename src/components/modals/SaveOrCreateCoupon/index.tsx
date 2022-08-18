@@ -3,11 +3,11 @@ import { Keyboard } from 'react-native'
 import { ModalComponent } from '../../components/Modal';
 import { Input, Container, Wrapper } from './styles';
 import { ButtonStorage } from '../../components/ButtonStorage';
-import { CouponService } from '../../../services/couponService';
+import { CouponService } from '../../../services/coupon-service';
 import { Spinner } from '../../components/Spinner';
-import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
-import { IError } from '../../../settings/@types/IResponses';
-import { InfluencerService, InfluencerServiceException } from '../../../services/influencerService';
+import { NotificationsFlash } from '../../../utils/flash-notifications';
+import { IError } from '../../../settings/@types/@responses';
+import { InfluencerService, InfluencerServiceException } from '../../../services/influencer-service';
 import { ISaveOrCreateCouponProps, ISaveOrCreateCouponRef } from './@types';
 import { SubtitleSaveCouponImage } from '../../../../assets/images/coupons/contributeInfluencer';
 
