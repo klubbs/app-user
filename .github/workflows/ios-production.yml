@@ -53,7 +53,8 @@ jobs:
           ENVIRONMENT_KLUBBS_AUTHZN_URL: ${{ secrets.ENVIRONMENT_KLUBBS_AUTHZN_URL }}
           ENVIRONMENT_PLACES_API: ${{ secrets.ENVIRONMENT_PLACES_API}}
         run: |
-          eas build --platform ios --profile production --non-interactive   curl -o app.ipa "$(eas build:list --json --limit=1 --platform=android | jq '.[0].artifacts.buildUrl')"
+          eas build --platform ios --profile production --non-interactive
+          curl -o app.ipa "$(eas build:list --json --limit=1 --platform=android | jq '.[0].artifacts.buildUrl')"
 
       - name: 📦 Upload do artefato
         uses: actions/upload-artifact@v2
