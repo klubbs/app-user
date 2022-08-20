@@ -3,13 +3,16 @@ import * as Haptic from 'expo-haptics';
 import React, { useEffect, useState } from 'react';
 import { Keyboard } from 'react-native';
 import { KlubbsLogo } from '../../../../assets/images/klubbsLogo';
-import { LoginService, LoginServiceExceptions } from '../../../services/loginService';
-import { IError } from '../../../settings/@types/IResponses';
+import { LoginService, LoginServiceExceptions } from '../../../services/login-service';
+import { IError } from '../../../settings/@types/@responses';
+import { nameof } from '../../../utils/extensions/object-extensions';
 import { Spinner } from '../../components/Spinner';
 import {
   ContainerBottom, ContainerTop, Description, EnterButton, ExplainText, MailInput, Title, Wrapper, WrapperImage,
   WrapperKeyboard, Subtitle
 } from './styles';
+import { NotificationsFlash } from '../../../utils/flash-notifications';
+import { IRegisterUser } from '../../../services/@types/@login-services';
 
 const LoginWelcome: React.FC = () => {
 
@@ -35,8 +38,14 @@ const LoginWelcome: React.FC = () => {
 
       setLoading(true)
 
-      //TODO: Validar email antes
-      const response = await LoginService.validateMail(mail);
+      const valid = await LoginService.validatePropertyAsync(mail, 'mail')
+
+      if ("mail" as keyof IRegisterUser in valid) {
+        NotificationsFlash.invalidMail()
+        return;
+      }
+
+      const response = await LoginService.mailAlreadyInUse(mail);
 
       navigation.navigate(response ? 'LoginPassword' : 'Register', { mail: mail });
 
@@ -67,12 +76,12 @@ const LoginWelcome: React.FC = () => {
 
           <WrapperImage>
             <KlubbsLogo />
-            <Subtitle>Sua parceria em descontos</Subtitle>
+            <Subtitle>Uma parceria com influência</Subtitle>
           </WrapperImage>
 
           <MailInput
             value={mail}
-            onChangeText={(t) => setEmail(t)}
+            onChangeText={(t) => setEmail(t.trim())}
           />
 
           <EnterButton onPress={handleConfirm} />

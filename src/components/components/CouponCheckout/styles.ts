@@ -1,6 +1,6 @@
 import { PlaceholderMedia } from "rn-placeholder";
 import styled from "styled-components/native";
-import COLORS from "../../../../assets/constants/colors";
+import { colors } from "../../../../assets/constants/colors";
 import { Skeleton } from '@motify/skeleton';
 import { MotiView } from 'moti'
 
@@ -15,14 +15,14 @@ export const Dot = styled.View`
   width: 5px;
   height: 5px;
   border-radius: 2.5px;
-  background-color: ${COLORS.COLOR_BLACK40};
+  background-color: ${colors.COLOR_BLACK40};
 `;
 
 
 export const Line = styled.View`
   width: 1px;
   height: 50%;
-  background-color: ${COLORS.COLOR_BLACK40};
+  background-color: ${colors.COLOR_BLACK40};
 `;
 
 
@@ -44,7 +44,7 @@ export const Box = styled(MotiView)`
   border-radius: 10px;
   justify-content: center;
   align-items: center;
-  background-color: ${COLORS.COLOR_WHITE};
+  background-color: ${colors.COLOR_WHITE};
 `
 
 export const ContainerText = styled.View`
@@ -52,19 +52,19 @@ export const ContainerText = styled.View`
 `
 
 export const Name = styled.Text`
-  color:${COLORS.COLOR_SECUNDARY_BLACK};
+  color:${colors.COLOR_SECUNDARY_BLACK};
   font-size:16px;
   font-family:'Nunito_Bold';
 `
 
 export const Time = styled.Text`
-  color:${COLORS.COLOR_BLACK80};
+  color:${colors.COLOR_BLACK80};
   font-size:12px;
   font-family:'Nunito_Light';
 `
 
 export const Percent = styled.Text`
-  color:${COLORS.COLOR_SECUNDARY_BLACK};
+  color:${colors.COLOR_SECUNDARY_BLACK};
   font-size:12px;
   font-family:'Nunito_Bold';
   transform: rotate(-90deg);
@@ -81,7 +81,7 @@ export const ImageEmpty = styled(Skeleton).attrs(props => ({
   width: 80,
   height: 80,
   radius: 'round',
-  colors: [COLORS.COLOR_SECUNDARY_WHITE, COLORS.COLOR_WHITE_20]
+  colors: [colors.COLOR_SECUNDARY_WHITE, colors.COLOR_WHITE_20]
 }))``
 
 export const EstablishmentImage = styled.Image`

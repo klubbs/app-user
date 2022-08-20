@@ -1,16 +1,15 @@
 import styled from 'styled-components/native'
-import COLORS from '../../../../assets/constants/colors'
+import { colors } from '../../../../assets/constants/colors'
 import { ShopIcon } from '../../../../assets/icons/shop_icon';
 
 
 export const Wrapper = styled.TouchableOpacity.attrs(({
   activeOpacity: 0.85
 }))`
-    width: 150px;
+    width: 200px;
     margin: 10px;
     height:140px;
     align-items: center;
-    top:2%;
 `
 
 export const EstablishmentImage = styled.Image`
@@ -28,11 +27,11 @@ export const EmptyImage = styled.View`
     border-radius: 10px;
     width: 100%;
     bottom:5px;
-    background-color: ${COLORS.COLOR_BLACK10};
+    background-color: ${colors.COLOR_BLACK10};
 `
 
 export const EmptyIcon = styled(ShopIcon).attrs(props => ({
-  fill: COLORS.COLOR_BLACK40,
+  fill: colors.COLOR_BLACK40,
   width: 40,
   height: 40
 }))``
@@ -40,7 +39,7 @@ export const EmptyIcon = styled(ShopIcon).attrs(props => ({
 export const ContainerToolbar = styled.View`
   flex:0.65;
   width: 100%;
-  background-color: ${COLORS.COLOR_BLACK};
+  background-color: ${colors.COLOR_BLACK};
   border-radius: 10px;
   justify-content: flex-start;
   padding-horizontal:5px;
@@ -55,7 +54,7 @@ const ToolbarBadgeDefault = styled.View`
 `
 
 export const ContainerOff = styled(ToolbarBadgeDefault)`
-  background-color: ${COLORS.COLOR_SECUNDARY_BLACK};
+  background-color: ${colors.COLOR_SECUNDARY_BLACK};
   border-radius: 10px;
   justify-content: space-evenly;
   flex-direction: row;
@@ -63,7 +62,7 @@ export const ContainerOff = styled(ToolbarBadgeDefault)`
 `
 
 export const OffCoupon = styled.Text`
-  color:${COLORS.COLOR_YELLOW};
+  color:${colors.COLOR_YELLOW};
   font-size:11px;
   font-family:'Nunito_Bold';
 `;

@@ -7,7 +7,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   owner: "klubbs",
   slug: "klubbs",
   scheme: 'klubbs',
-  icon: './assets/images/icon.png',
   orientation: "portrait",
   splash: {
     image: "./assets/images/splash.png",
@@ -17,14 +16,12 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   updates: {
     fallbackToCacheTimeout: 0
   },
-  experiments: {
-    "turboModules": true
-  },
-  version: "0.0.3",
+  version: "0.0.7",
   ios: {
     supportsTablet: false,
     bundleIdentifier: "app.klubbs.user",
-    buildNumber: "0.0.8",
+    buildNumber: "0.0.15",
+    icon: './assets/images/ios-icon.png',
     infoPlist: {
       NSLocationAlwaysAndWhenInUseUsageDescription: "Isso nos permite usar a localização para fornecer certos recursos como localização de estabelecimentos próximos.",
       NSLocationWhenInUseUsageDescription: "Isso nos permite usar a localização para fornecer certos recursos como localização de estabelecimentos próximos.",
@@ -32,11 +29,16 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
   android: {
     package: "app.klubbs.user",
-    permissions: ['CAMERA', 'ACCESS_FINE_LOCATION', 'ACCESS_BACKGROUND_LOCATION', 'ACCESS_COARSE_LOCATION'],
-    versionCode: 4
+    permissions: ['CAMERA', 'ACCESS_FINE_LOCATION', 'ACCESS_COARSE_LOCATION'],
+    versionCode: 12,
+    adaptiveIcon: {
+      foregroundImage: './assets/images/android-icon.png',
+      backgroundColor: "#1F1F1F"
+    }
   },
   extra: {
-    ENVIRONMENT_API_URL: process.env.ENVIRONMENT_API_URL
+    KLUBBS_API_URL: process.env.ENVIRONMENT_KLUBBS_API_URL,
+    KLUBBS_AUTHZN_URL: process.env.ENVIRONMENT_KLUBBS_AUTHZN_URL
   }
 });
 

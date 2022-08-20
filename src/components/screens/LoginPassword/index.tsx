@@ -1,13 +1,16 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useContext, useState } from 'react';
-import { Keyboard } from 'react-native';
-import { AuthContext } from '../../../contexts/authContext';
-import { LoginService, LoginServiceExceptions } from '../../../services/loginService';
-import { StoreService } from '../../../services/storeServices';
-import { LoginPasswordScreenProps } from '../../../settings/@types/appStackTypes';
-import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
+import { Alert, Keyboard } from 'react-native';
+import { AuthContext } from '../../../contexts/auth-context';
+import { LoginServiceExceptions } from '../../../services/login-service';
+import { LoginPasswordScreenProps } from '../../../settings/@types/@app-stack';
+import { NotificationsFlash } from '../../../utils/flash-notifications';
 import { Spinner } from '../../components/Spinner';
-import { ContainerBottom, ContainerTop, Description, EnterButton, PasswordInput, Title, Wrapper, WrapperKeyboard } from './styles';
+import {
+  ContainerBottom, ContainerTop,
+  Description, EnterButton, PasswordInput, Title, Wrapper, WrapperKeyboard, ForgotPasswordTouch,
+  ForgotPasswordSubtitle
+} from './styles';
 
 
 export const LoginPasswordScreen: React.FC<LoginPasswordScreenProps> = ({ route }) => {
@@ -19,12 +22,12 @@ export const LoginPasswordScreen: React.FC<LoginPasswordScreenProps> = ({ route 
   const navigation = useNavigation()
 
 
-  const handleLogin = async () => {
+  async function handleLogin() {
 
     Keyboard.dismiss()
 
     if (password.length < 5) {
-      NotificationsFlash.IncorrectPassword()
+      NotificationsFlash.incorrectPassword()
       return;
     }
 
@@ -43,6 +46,24 @@ export const LoginPasswordScreen: React.FC<LoginPasswordScreenProps> = ({ route 
 
   }
 
+  function handleForgetPassword() {
+    Alert.alert(
+      "Gostaria de recuperar sua senha?",
+      `Iremos enviar um código para : ${route.params.mail}`,
+      [
+        {
+          text: 'Sim',
+          onPress: () => navigation.navigate('ForgetPassword', { mail: route.params.mail })
+        },
+        {
+          text: 'Não',
+          onPress: () => { },
+          style: 'cancel'
+        }
+      ]
+    );
+  }
+
   return (
     <Wrapper>
       <Spinner loading={loading} />
@@ -58,6 +79,10 @@ export const LoginPasswordScreen: React.FC<LoginPasswordScreenProps> = ({ route 
             value={password}
             onChangeText={(t) => setPassword(t)}
           />
+
+          <ForgotPasswordTouch onPress={handleForgetPassword} >
+            <ForgotPasswordSubtitle>Esqueceu sua senha ?</ForgotPasswordSubtitle>
+          </ForgotPasswordTouch>
           <EnterButton onPress={handleLogin} />
         </ContainerBottom>
       </WrapperKeyboard>

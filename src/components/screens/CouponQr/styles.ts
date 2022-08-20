@@ -1,87 +1,78 @@
 import styled from 'styled-components/native';
-import { Dimensions } from 'react-native'
-import colors from '../../../../assets/constants/colors';
-import { QrCouponBackground } from '../../../../assets/images/backgrounds/backgroundQrCoupon';
+import { Dimensions, PixelRatio, Platform } from 'react-native'
+import { colors } from '../../../../assets/constants/colors';
 import { MotiView } from 'moti'
 
 const { width, height } = Dimensions.get('window');
 
-const IS_LOWER = height < 700;
-
 export const Wrapper = styled.SafeAreaView`
   background-color: ${colors.COLOR_YELLOW};
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   flex:1;
 `
 
-export const TopContainer = styled.View`
-  flex: 1.4;
-  width: 100%;
-  padding-top: ${IS_LOWER ? '2%' : '9%'};
-  justify-content: center;
-  align-items: center;
 
+export const ContainerCoupon = styled.View`
+ position: absolute;
+ left:0 ;
+ right:0 ;
+ bottom:${Platform.select({ ios: 0, android: PixelRatio.get() === 3 ? '2.5%' : 0 })};;;
+ top:0;
 `
 
-export const BottomContainer = styled.View`
-  flex: 1;
-  align-items: center;
-  width: 90%;
-`
-
-export const BackgroundCoupon = styled(QrCouponBackground).attrs(props => ({
-  height: height,
-  width: IS_LOWER ? width - 80 : width - 40
-}))`
-  position: absolute;
-  right: 0;
-  top:  ${IS_LOWER ? '-3.5%' : 0};
-  bottom: 0;
-  left:  ${IS_LOWER ? '10%' : '5%'};
-`
 
 export const SubtitleHelp = styled.Text`
   color:${colors.COLOR_WHITE_80};
-  position: absolute;
-  margin-top: 65%;
   font-size:14px;
   font-family:'Nunito_Bold';
+  bottom:${Platform.select({
+  ios: '0',
+  android: PixelRatio.get() === 3 ? 0 : '3%'
+})};
 `
-export const EmptyImage = styled.View`
-  position: absolute;
+export const ContainerImage = styled.View`
   align-items:center;
   justify-content: center;
-  z-index:10;
-  top:${IS_LOWER ? '4%' : '13.5%'};
-  height:50px;
-  width: 50px;
-  border-radius:25px;
-  background-color: ${colors.COLOR_SECUNDARY_WHITE};
+  height:${width * 0.15};
+  width: ${width * 0.15};
+  border-radius:${width * 0.05};
+  overflow:hidden ;
+  top: ${Platform.select({
+  ios: '10%',
+  android: PixelRatio.get() === 3 ? '2%' : '6%'
+})};
+  margin-top: ${Platform.select({
+  ios: 0,
+  android: '8%'
+})};
+background-color: ${colors.COLOR_SECUNDARY_WHITE};
 `
 
 export const ImageInfluencer = styled.Image`
-  position: absolute;
-  z-index:10;
-  top:${IS_LOWER ? '4%' : '13.5%'};
-  height:60px;
-  width: 60px;
-  border-radius:30px;
+width: 100% ;
+height: 100% ;
 `
 
 export const FlatListComponent = styled.FlatList.attrs(props => ({
   horizontal: true,
-  contenContainerStyle: {
-    alignItems: 'center',
-    justifyContent: 'center', paddingLeft: 30
-  },
   showsHorizontalScrollIndicator: false
-
-}))``
+}))`
+top:  ${Platform.select({ ios: 0, android: PixelRatio.get() === 3 ? '12%' : '3%' })};;
+margin-top: ${Platform.select({ ios: '6%', android: '9.5%' })};
+padding-horizontal: 15px;
+width: 80% ;
+flex-grow: 0;
+`
 
 export const AnimatedWrapper = styled(MotiView).attrs(props => ({
-  from: { left: 800 },
+  from: { left: 100 },
   animate: { left: 0 },
   transition: { type: 'spring', duration: 1000 }
 
 }))``
+
+
+export const ContainerQr = styled.View<{ distanceInBottom: boolean }>`
+  bottom: ${props => props.distanceInBottom ? Platform.select({ ios: '6.5%', android: PixelRatio.get() === 3 ? '10%' : '7%' }) : 0};
+`

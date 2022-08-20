@@ -1,10 +1,9 @@
 import React, { useContext, useRef } from 'react';
 import { View, Animated } from 'react-native';
-import colors from '../../../../assets/constants/colors';
+import { colors } from '../../../../assets/constants/colors';
 import { CouponIcon } from '../../../../assets/icons/coupon_icon';
 import { MarkerTimeIcon } from '../../../../assets/icons/marker-time_icon';
-import { Ratings } from '../Ratings';
-import { distanceInKm } from '../../../utils/distanceUtils'
+import { distanceInKm } from '../../../utils/geolocations'
 import {
   Container,
   ContainerDescriptions,
@@ -22,7 +21,7 @@ import {
   EmptyShopIcon
 } from './styles';
 import { ICardEstablishmentProps } from './@types';
-import { HomeContext } from '../../../contexts/homeContext';
+import { HomeContext } from '../../../contexts/home-context';
 
 export const CardEstablishment: React.FC<ICardEstablishmentProps> = ({ data, onPress, userLocation }) => {
 
@@ -47,6 +46,7 @@ export const CardEstablishment: React.FC<ICardEstablishmentProps> = ({ data, onP
     duration: 350,
     useNativeDriver: true
   }).start();
+
 
   return (
     <Wrapper disabled={!onPress} onPress={onPress}>
@@ -80,7 +80,7 @@ export const CardEstablishment: React.FC<ICardEstablishmentProps> = ({ data, onP
         <ContainerToolbar>
           <ContainerOff>
             <CouponIcon fill={colors.COLOR_WHITE_80} width={15} height={13} />
-            <OffCoupon>5%</OffCoupon>
+            <OffCoupon>%</OffCoupon>
           </ContainerOff>
 
           <ContainerDistance>

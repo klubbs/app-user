@@ -1,16 +1,17 @@
 import * as React from "react"
+import { PixelRatio } from "react-native"
 import Svg, { SvgProps, Rect, Path } from "react-native-svg"
+
+'-85 300 2500 2200'
 
 function QrCouponBackground(props: SvgProps) {
   return (
     <Svg
-      width={2325}
-      height={3847}
-      viewBox="0 0 2325 3847"
+      viewBox="-200 300 2750 2200"
       fill="none"
       {...props}
     >
-      <Rect x={4} y={3360} width={2321} height={487} rx={123} fill="#F0F0F0" />
+      <Rect x={4} y={3360} width={2320} height={487} rx={123} fill="#F0F0F0" />
       <Path
         fillRule="evenodd"
         clipRule="evenodd"

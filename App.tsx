@@ -1,14 +1,14 @@
+import './src/utils/extensions/date-extensions';
+import './src/utils/extensions/object-extensions';
 import { NavigationContainer } from "@react-navigation/native";
 import { useFonts } from 'expo-font';
 import React from "react";
 import { ActivityIndicator, LogBox, StatusBar, View } from "react-native";
-import { AuthProvider } from './src/contexts/authContext';
-import AppStack from "./src/settings/navigations/appStack";
-import "./src/utils/base64Initialization";
-import './src/utils/extensions/dateExtensions';
-import './src/utils/extensions/objectExtensions';
+import { AuthProvider } from './src/contexts/auth-context';
+import AppStack from "./src/settings/navigations/app-stack";
+import { colors } from "./assets/constants/colors";
+import { InfluencerProvider } from "./src/contexts/influencer-context";
 import FlashComponent from 'flash-notify'
-import colors from "./assets/constants/colors";
 
 LogBox.ignoreLogs(['Expected style']);
 
@@ -40,15 +40,17 @@ export default function App() {
 
   return (
     <AuthProvider>
-      <NavigationContainer>
-        <StatusBar
-          backgroundColor={colors.COLOR_SECUNDARY_WHITE}
-          animated={true}
-          barStyle={'dark-content'}
-        />
-        <AppStack />
-      </NavigationContainer >
-      <FlashComponent />
+      <InfluencerProvider>
+        <NavigationContainer>
+          <StatusBar
+            backgroundColor={colors.COLOR_SECUNDARY_WHITE}
+            animated={true}
+            barStyle={'dark-content'}
+          />
+          <AppStack />
+        </NavigationContainer >
+        <FlashComponent />
+      </InfluencerProvider>
     </AuthProvider>
   );
 };

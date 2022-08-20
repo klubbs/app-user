@@ -1,4 +1,4 @@
-# klubbs - Sua parceria em descontos
+# klubbs - Uma parceria com influência
 
 ![](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white) ![](https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 

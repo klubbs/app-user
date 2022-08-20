@@ -14,10 +14,12 @@ import {
   CouponDefaultImage
 } from './styles';
 
+const CODE_COUPONS_SIZE = 12
 export const Coupon: React.FC<ICouponProps> = (props) => {
 
   const offersQtd = props.data.master_coupons?.length
   const couponsActive = defineIsActive()
+
 
   function defineIsActive() {
 
@@ -68,7 +70,10 @@ export const Coupon: React.FC<ICouponProps> = (props) => {
             <CouponDefaultImage />
           </InfluencerEmpty>
       }
-      <CouponCode putMarginBottom={props.toggle} active={couponsActive}>{props.data.coupon_code}</CouponCode>
+      <CouponCode putMarginBottom={props.toggle} active={couponsActive}>
+        {props.data.coupon_code.substring(0, CODE_COUPONS_SIZE)}
+        {props.data.coupon_code.length > CODE_COUPONS_SIZE ? '...' : ''}
+      </CouponCode>
     </MotifiedWrapper >
   );
 }

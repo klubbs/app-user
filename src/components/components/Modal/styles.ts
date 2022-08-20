@@ -1,6 +1,6 @@
 import { Animated } from 'react-native';
 import styled from 'styled-components/native';
-import COLORS from '../../../../assets/constants/colors';
+import { colors } from '../../../../assets/constants/colors';
 import { MotiView } from 'moti'
 
 export const Wrapper = styled.View`
@@ -15,7 +15,7 @@ export const Container = styled.View`
   bottom:0;
   z-index: 10;
   elevation: 10;
-  background-color:${COLORS.COLOR_WHITE};
+  background-color:${colors.COLOR_WHITE};
 `;
 
 
@@ -25,7 +25,7 @@ export const Header = styled.View`
   flex:0.45;
   width: 100%;
   border-bottom-width: 1px;
-  border-bottom-color: ${COLORS.COLOR_BLACK10};
+  border-bottom-color: ${colors.COLOR_BLACK10};
   padding: 12px;
 `;
 
@@ -34,5 +34,5 @@ export const ContainerBlur = styled(MotiView)`
     align-items:center;
     width:100%;
     height:100%;
-    background-color: ${COLORS.COLOR_BLACK40};
+    background-color: ${colors.COLOR_BLACK40};
 `

@@ -1,12 +1,7 @@
-name: Production - IOS
+name: 🚀 PROD IOS - Build | Publish Store
 
 on:
   workflow_dispatch:
-    inputs:
-      deploy:
-        description: 'Build(B) or Pusblish(P)'
-        required: true
-        default: ''
 jobs:
   Build:
     runs-on: ubuntu-latest
@@ -16,85 +11,77 @@ jobs:
         node-version: [14.x]
 
     steps:
+      - name: 🏗 Setup repo
+        uses: actions/checkout@v2
 
-      - uses: actions/checkout@v2
-      - name: Use Node.js
-        uses: actions/setup-node@v1
+      - name: 🏗 Setup Node
+        uses: actions/setup-node@v2
         with:
-          node-version: '14.x'
+          node-version: 16.x
+          cache: yarn
 
-      - name: Configure Expo credentials
-        uses: expo/expo-github-action@v5
+      - name: 🏗 Setup Expo and EAS
+        uses: expo/expo-github-action@v7
         with:
-          expo-version: 4.x
-          expo-username: ${{ secrets.EXPO_CLI_USERNAME }}
-          expo-password: ${{ secrets.EXPO_CLI_PASSWORD }}
+          expo-version: latest
+          eas-version: latest
+          expo-token: ${{ secrets.EXPO_TOKEN }}
 
-      - name: Configure AWS credentials
+      - name: 🏗 Setup AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      - name: Download Yarn dependencies
-        run: |
-            ls
-            npm install --global yarn
-            yarn
+      - name: 📦 Install dependencies
+        run: yarn install
 
-      - if: github.event.inputs.deploy == 'P'
-        name: Publish Version
+      # - if: github.event.inputs.deploy == 'P'
+      #   name: Publish Version
+      #   env:
+      #     ENVIRONMENT_KLUBBS_API_URL: ${{secrets.ENVIRONMENT_KLUBBS_API_URL }}
+      #     ENVIRONMENT_KLUBBS_AUTHZN_URL: ${{secrets.ENVIRONMENT_KLUBBS_AUTHZN_URL }}
+      #     ENVIRONMENT_PLACES_API: ${{secrets.ENVIRONMENT_PLACES_API}}
+      #   run: |
+      #       echo "Publicar versão canal -> production-${GITHUB_REF##*/}"
+      #       expo publish --release-channel production-${GITHUB_REF##*/} --non-interactive
+
+      - name: 🚀 Build Version
         env:
-          ENVIRONMENT_API_URL: ${{ secrets.ENVIRONMENT_API_URL }}
+          ENVIRONMENT_KLUBBS_API_URL: ${{ secrets.ENVIRONMENT_KLUBBS_API_URL }}
+          ENVIRONMENT_KLUBBS_AUTHZN_URL: ${{ secrets.ENVIRONMENT_KLUBBS_AUTHZN_URL }}
+          ENVIRONMENT_PLACES_API: ${{ secrets.ENVIRONMENT_PLACES_API}}
         run: |
-            echo "Publicar versão canal -> production-${GITHUB_REF##*/}"
-            expo publish --release-channel production-${GITHUB_REF##*/} --non-interactive
+          eas build --platform ios --profile production --non-interactive --local
 
-      - if: github.event.inputs.deploy == 'B'
-        name: Build Version
-        env:
-          ENVIRONMENT_API_URL: ${{ secrets.ENVIRONMENT_API_URL }}
-        run: |
-            echo "----- BUILD -----"
-            expo build:ios --release-channel production-${GITHUB_REF##*/} --non-interactive
-            echo "----- DOWNLOAD IPA -----"
-            curl -o app.ipa "$(expo url:ipa --non-interactive)"
-
-      - if: github.event.inputs.deploy == 'B'
-        name: Upload do artefato
+      - name: 📦 Upload do artefato
         uses: actions/upload-artifact@v2
         with:
          name: appbuild
-         path: ./app.ipa
+         path: "$(find /home/runner/work/app-user/app-user/ -name '*.ipa')"
 
-  Transport_Apple_Store_Connect:
+  APPLE_STORE_TRANSPORT:
     needs: Build
     runs-on:  macos-latest
-    if: github.event.inputs.deploy == 'B'
     steps:
 
       - uses: actions/download-artifact@v2
         with:
           name: appbuild
 
-      - name: Configure AWS credentials
+      - name: 🏗 Setup AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      - name: Download S3 file to publish in Apple Store
+      - name: 📦 Download and Install Fastlane Key Apple Store
         run: |
-          aws s3 cp s3://klubbs-devops/ios/fastlane-key-ios.json fastlane-key-ios.json
+          aws s3 cp s3://klubbs-devops/ios/fastlane-key-ios.json fastlane-key-ios.json          brew install fastlane                                                             fastlane update_fastlane
 
-      - name: Fastlane - Install
-        run: |
-          brew install fastlane
-          fastlane update_fastlane
-
-      - name: Fastlane - Transport
+      - name: 🚀 Fastlane Publish Apple Store
         run: fastlane deliver --verbose --ipa "app.ipa" --skip_screenshots --skip_metadata --precheck_include_in_app_purchases false --api_key_path ./fastlane-key-ios.json
 
       - uses: geekyeggo/delete-artifact@v1

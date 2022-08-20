@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import colors from '../../../../assets/constants/colors';
+import { colors } from '../../../../assets/constants/colors';
 import { BoxIcon } from '../../../../assets/icons/box_icon';
 
 import { Wrapper } from './styles';

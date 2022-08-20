@@ -1,6 +1,6 @@
 import { Feather } from '@expo/vector-icons';
 import styled from 'styled-components/native';
-import colors from '../../../../assets/constants/colors';
+import { colors } from '../../../../assets/constants/colors';
 
 
 

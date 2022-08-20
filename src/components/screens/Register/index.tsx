@@ -3,14 +3,14 @@ import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Alert, Keyboard, ScrollView, Dimensions } from 'react-native';
-import { default as COLORS } from '../../../../assets/constants/colors';
-import { IRegisterUser } from '../../../services/@types/loginServiceTypes';
-import { LoginService } from '../../../services/loginService';
-import { RegisterScreenProps } from '../../../settings/@types/appStackTypes';
-import { isEmpty, nameof } from '../../../utils/extensions/objectExtensions';
-import { NotificationsFlash } from '../../../utils/notificationsFlashUtils';
-import { MailCodeModal } from '../../screensModals/MailCodeModal';
-import { IModalRef } from '../../screensModals/MailCodeModal/@types';
+import { colors } from '../../../../assets/constants/colors';
+import { IRegisterUser } from '../../../services/@types/@login-services';
+import { LoginService } from '../../../services/login-service';
+import { RegisterScreenProps } from '../../../settings/@types/@app-stack';
+import { isEmpty, nameof } from '../../../utils/extensions/object-extensions';
+import { NotificationsFlash } from '../../../utils/flash-notifications';
+import { MailCodeModal } from '../../modals/MailCodeModal';
+import { IModalRef } from '../../modals/MailCodeModal/@types';
 import {
   Confirm,
   containerBackButton,
@@ -104,36 +104,34 @@ const Register: React.FC<RegisterScreenProps> = ({ route }) => {
     try {
       setLoading(true)
 
-      const isValidFields = await LoginService
-        .validateRegister({
-          mail: route.params.mail,
-          password: password,
-          name: name,
-          phone: phone
-        })
+      const fieldsValidation = await LoginService.validateRegister({
+        mail: route.params.mail,
+        password: password,
+        name: name,
+        phone: phone
+      })
 
-
-      if (!isEmpty(isValidFields)) {
+      if (!isEmpty(fieldsValidation)) {
         Haptic.impactAsync(Haptic.ImpactFeedbackStyle.Medium)
 
         let errorInputTmp = errorInput
 
-        if (isValidFields.hasOwnProperty(nameof<IRegisterUser>("password"))) {
+        if ("password" as keyof IRegisterUser in fieldsValidation) {
           errorInputTmp.password = true
         }
 
-        if (isValidFields.hasOwnProperty(nameof<IRegisterUser>("phone"))) {
+        if ("phone" as keyof IRegisterUser in fieldsValidation) {
           errorInputTmp.phone = true
         }
 
-        if (isValidFields.hasOwnProperty(nameof<IRegisterUser>("name"))) {
+        if ("name" as keyof IRegisterUser in fieldsValidation) {
           errorInputTmp.name = true
         }
 
         if (errorInputTmp.phone && !errorInputTmp.password && !errorInputTmp.name) {
-          NotificationsFlash.CustomMessage('', 'Telefone já em uso ou incorreto')
+          NotificationsFlash.customMessage('', 'Telefone já em uso ou incorreto')
         } else {
-          NotificationsFlash.IncompleteRegisterInputs()
+          NotificationsFlash.incompleteRegisterInputs()
         }
 
         setErrorInput({ ...errorInput })
@@ -144,7 +142,7 @@ const Register: React.FC<RegisterScreenProps> = ({ route }) => {
       modalCodeRef.current?.openModal()
 
     } catch (error: any) {
-      NotificationsFlash.SpillCoffee()
+      NotificationsFlash.spillCoffee()
     }
     finally { setLoading(false) }
 
@@ -193,13 +191,13 @@ const Register: React.FC<RegisterScreenProps> = ({ route }) => {
             name={"chevron-left"}
             size={15}
             style={containerBackButton as any}
-            color={errorInput.name || errorInput.phone ? COLORS.COLOR_RED : COLORS.COLOR_SECUNDARY_WHITE}
+            color={errorInput.name || errorInput.phone ? colors.COLOR_RED : colors.COLOR_SECUNDARY_WHITE}
             onPress={() => onAnimatedScroll(false)}
           />
         }
 
         <Confirm onPress={handleRegister}>
-          <Feather name={"chevron-right"} size={15} color={COLORS.COLOR_WHITE} />
+          <Feather name={"chevron-right"} size={15} color={colors.COLOR_WHITE} />
         </Confirm>
       </ContainerBottom>
     )

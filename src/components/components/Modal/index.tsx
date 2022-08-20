@@ -1,7 +1,7 @@
 import { Feather } from '@expo/vector-icons';
 import React from 'react';
 import { KeyboardAvoidingView, Modal, TouchableOpacity } from 'react-native';
-import COLORS from '../../../../assets/constants/colors';
+import { colors } from '../../../../assets/constants/colors';
 import { IModalProps } from './@types';
 import { Container, ContainerBlur, Header, Wrapper } from './styles';
 
@@ -26,7 +26,7 @@ export const ModalComponent: React.FC<IModalProps> = (props) => {
               <Feather
                 name={"x"}
                 size={18}
-                color={COLORS.COLOR_BLACK50}
+                color={colors.COLOR_BLACK50}
                 style={{ width: 50 }}
               />
             </TouchableOpacity>

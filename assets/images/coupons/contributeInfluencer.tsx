@@ -8,8 +8,9 @@ const WIDTH = Dimensions.get('window').width
 function SubtitleSaveCouponImage(props: SvgProps) {
   return (
     <Svg
-      width={402}
-      height={138}
+      width={400}
+      height={140}
+      viewBox="0 0 405 140"
       fill="none"
       {...props}
     >

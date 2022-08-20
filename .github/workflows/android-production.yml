@@ -1,12 +1,7 @@
-name: Production - ANDROID
+name: 🚀 PROD Android - Build | Publish Store
 
 on:
   workflow_dispatch:
-    inputs:
-      deploy:
-        description: 'Build(B) or Pusblish(P)'
-        required: true
-        default: ''
 jobs:
   Build:
     runs-on: ubuntu-latest
@@ -17,62 +12,45 @@ jobs:
 
     steps:
 
-      - uses: actions/checkout@v2
-      - name: Use Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: '14.x'
+      - name: 🏗 Setup repo
+        uses: actions/checkout@v2
 
-      - name: Configure Expo credentials
-        uses: expo/expo-github-action@v5
+      - name: 🏗 Setup Node
+        uses: actions/setup-node@v2
         with:
-          expo-version: 4.x
-          expo-username: ${{ secrets.EXPO_CLI_USERNAME }}
-          expo-password: ${{ secrets.EXPO_CLI_PASSWORD }}
+          node-version: 16.x
+          cache: yarn
 
-      - name: Configure AWS credentials
+      - name: 🏗 Setup Expo and EAS
+        uses: expo/expo-github-action@v7
+        with:
+          expo-version: latest
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: 🏗 Setup AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      - name: Download S3 files to prepare app
-        run: |
-          aws s3 cp s3://credentials-apple/ios-google-service-info.plist ios-google-service-info.plist
+      - name: 📦 Install dependencies
+        run: yarn install
 
-      - name: Download Yarn dependencies
-        run: |
-            ls
-            npm install --global yarn
-            yarn
-
-      - if: github.event.inputs.deploy == 'P'
-        name: Publish Version
-        env:
-          ENVIRONMENT_API_URL: ${{ secrets.ENVIRONMENT_API_URL }}
-        run: |
-            echo "Publicar versão canal -> production-${GITHUB_REF##*/}"
-            expo publish --release-channel production-${GITHUB_REF##*/} --non-interactive
-
-      - name: Install FastLane
-        id: random-color-generator
-        run: sudo gem install fastlane -NV
-
-      - name: Download S3 file to publish in Apple Store
+      - name: 🏗 Download S3 File To Publish In Apple Store
         run: |
           aws s3 cp s3://klubbs-devops/android/pc-api-4645832410875810463-754-d807856b6c63.json google-key-account.json
 
-      - if: github.event.inputs.deploy == 'B'
-        name: Build Version
-        env:
-          ENVIRONMENT_API_URL: ${{ secrets.ENVIRONMENT_API_URL }}
+      - name: 🏗 Download S3 EAS Environment
         run: |
-            echo "----- BUILD -----"
-            expo build:android -t app-bundle  --release-channel production-${GITHUB_REF##*/} --non-interactive
+          aws s3 cp s3://klubbs-devops/expo/klubbs-user/eas.json eas.json
 
-            # echo "----- DOWNLOAD IPA -----"
-            # curl -o app.apk "$(expo url:apk --non-interactive)"
-
-            echo "----- PLAY STORE ----- "
-            expo upload:android --url "$(expo url:apk --non-interactive)" --type aab --key ./google-key-account.json --verbose
+      - name: 🚀 Build and Publish New Version
+        env:
+          ENVIRONMENT_KLUBBS_API_URL: ${{ secrets.ENVIRONMENT_KLUBBS_API_URL }}
+          ENVIRONMENT_KLUBBS_AUTHZN_URL: ${{ secrets.ENVIRONMENT_KLUBBS_AUTHZN_URL }}
+          ENVIRONMENT_PLACES_API: ${{ secrets.ENVIRONMENT_PLACES_API}}
+        run: |
+          eas build --platform android --profile production --non-interactive --local
+          eas submit --platform android --profile production --path "$(find /home/runner/work/app-user/app-user/ -name '*.aab')" --non-interactive
