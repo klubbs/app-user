@@ -53,3 +53,4 @@ jobs:
         run: |
           eas build --platform android --profile production --non-interactive --local
           eas submit --platform android --profile production --path "$(find /home/runner/work/app-user/app-user/ -name '*.aab')" --non-interactive
+        # How this build is local, seting environment before

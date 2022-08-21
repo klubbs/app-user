@@ -45,13 +45,10 @@ jobs:
         run: yarn install
 
       - name: 🚀 Build Version
-        env:
-          ENVIRONMENT_KLUBBS_API_URL: ${{ secrets.ENVIRONMENT_KLUBBS_API_URL }}
-          ENVIRONMENT_KLUBBS_AUTHZN_URL: ${{ secrets.ENVIRONMENT_KLUBBS_AUTHZN_URL }}
         run: |
           ENVIRONMENT_KLUBBS_API_URL=${{ secrets.ENVIRONMENT_KLUBBS_API_URL }} ENVIRONMENT_KLUBBS_AUTHZN_URL=${{ secrets.ENVIRONMENT_KLUBBS_AUTHZN_URL }} eas build --platform ios --profile production --non-interactive
           curl -o app.ipa "$(eas build:list --json --limit=1 --platform=ios | jq '.[0].artifacts.buildUrl')"
-
+        # Use in-line environment because using this mode can pass to eas server for using in build
       - name: 📦 Upload do artefato
         uses: actions/upload-artifact@v2
         with:
