@@ -25,7 +25,7 @@ jobs:
         with:
           expo-version: latest
           eas-version: latest
-          expo-token: ${{ secrets.EXPO_TOKEN }}
+          token: ${{ secrets.EXPO_TOKEN }}
 
       - name: 🏗 Setup AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -34,32 +34,26 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      - name: 📦 Install dependencies
-        run: yarn install
-
-      # - if: github.event.inputs.deploy == 'P'
-      #   name: Publish Version
-      #   env:
-      #     ENVIRONMENT_KLUBBS_API_URL: ${{secrets.ENVIRONMENT_KLUBBS_API_URL }}
-      #     ENVIRONMENT_KLUBBS_AUTHZN_URL: ${{secrets.ENVIRONMENT_KLUBBS_AUTHZN_URL }}
-      #     ENVIRONMENT_PLACES_API: ${{secrets.ENVIRONMENT_PLACES_API}}
-      #   run: |
       #       echo "Publicar versão canal -> production-${GITHUB_REF##*/}"
       #       expo publish --release-channel production-${GITHUB_REF##*/} --non-interactive
 
-      - name: 🚀 Build Version
-        env:
-          ENVIRONMENT_KLUBBS_API_URL: ${{ secrets.ENVIRONMENT_KLUBBS_API_URL }}
-          ENVIRONMENT_KLUBBS_AUTHZN_URL: ${{ secrets.ENVIRONMENT_KLUBBS_AUTHZN_URL }}
-          ENVIRONMENT_PLACES_API: ${{ secrets.ENVIRONMENT_PLACES_API}}
+      - name: 🏗 Download S3 EAS Environment
         run: |
-          eas build --platform ios --profile production --non-interactive --local
+          aws s3 cp s3://klubbs-devops/expo/klubbs-user/eas.json eas.json
 
+      - name: 📦 Install dependencies
+        run: yarn install
+
+      - name: 🚀 Build Version
+        run: |
+          ENVIRONMENT_KLUBBS_API_URL=${{ secrets.ENVIRONMENT_KLUBBS_API_URL }} ENVIRONMENT_KLUBBS_AUTHZN_URL=${{ secrets.ENVIRONMENT_KLUBBS_AUTHZN_URL }} eas build --platform ios --profile production --non-interactive
+          curl -o app.ipa "$(eas build:list --json --limit=1 --platform=ios | jq '.[0].artifacts.buildUrl')"
+        # Use in-line environment because using this mode can pass to eas server for using in build
       - name: 📦 Upload do artefato
         uses: actions/upload-artifact@v2
         with:
          name: appbuild
-         path: "$(find /home/runner/work/app-user/app-user/ -name '*.ipa')"
+         path: ./app.ipa
 
   APPLE_STORE_TRANSPORT:
     needs: Build
@@ -79,7 +73,9 @@ jobs:
 
       - name: 📦 Download and Install Fastlane Key Apple Store
         run: |
-          aws s3 cp s3://klubbs-devops/ios/fastlane-key-ios.json fastlane-key-ios.json          brew install fastlane                                                             fastlane update_fastlane
+          aws s3 cp s3://klubbs-devops/ios/fastlane-key-ios.json fastlane-key-ios.json
+          brew install fastlane
+          fastlane update_fastlane
 
       - name: 🚀 Fastlane Publish Apple Store
         run: fastlane deliver --verbose --ipa "app.ipa" --skip_screenshots --skip_metadata --precheck_include_in_app_purchases false --api_key_path ./fastlane-key-ios.json
