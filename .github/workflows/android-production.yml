@@ -38,7 +38,7 @@ jobs:
       - name: 📦 Install dependencies
         run: yarn install
 
-      - name: 🏗 Download S3 File To Publish In Apple Store
+      - name: 🏗 Download S3 File To Publish In Google Play
         run: |
           aws s3 cp s3://klubbs-devops/android/pc-api-4645832410875810463-754-d807856b6c63.json google-key-account.json
 
@@ -50,7 +50,6 @@ jobs:
         env:
           ENVIRONMENT_KLUBBS_API_URL: ${{ secrets.ENVIRONMENT_KLUBBS_API_URL }}
           ENVIRONMENT_KLUBBS_AUTHZN_URL: ${{ secrets.ENVIRONMENT_KLUBBS_AUTHZN_URL }}
-          ENVIRONMENT_PLACES_API: ${{ secrets.ENVIRONMENT_PLACES_API}}
         run: |
           eas build --platform android --profile production --non-interactive --local
           eas submit --platform android --profile production --path "$(find /home/runner/work/app-user/app-user/ -name '*.aab')" --non-interactive
