@@ -14,12 +14,17 @@ jobs:
       - name: 🏗 Setup repo
         uses: actions/checkout@v2
 
+      - name: Extract Branch Name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+
       - name: Automatic Merge Main
         uses: mtanzi/action-automerge@v1
         # if: github.ref == 'refs/heads/release'
         with:
           github_token: ${{ github.token }}
-          source: github.ref
+          source: ${{ steps.extract_branch.outputs.branch }}
           target: 'main'
           webhook_url: #if present add the Slack webhook
 
