@@ -14,14 +14,14 @@ jobs:
       - name: 🏗 Setup repo
         uses: actions/checkout@v2
 
-    - name: Automatic Merge Main
-      uses: mtanzi/action-automerge@v1
-      if: github.ref == 'refs/heads/release/**''
-      with:
-        github_token: ${{ github.token }}
-        source: ${GITHUB_REF#refs/heads/}
-        target: 'main'
-        webhook_url: #if present add the Slack webhook
+      - name: Automatic Merge Main
+        uses: mtanzi/action-automerge@v1
+        if: github.ref == 'refs/heads/release/**''
+        with:
+          github_token: ${{ github.token }}
+          source: ${GITHUB_REF#refs/heads/}
+          target: 'main'
+          webhook_url: #if present add the Slack webhook
 
       # - name: 🏗 Setup Node
       #   uses: actions/setup-node@v2
