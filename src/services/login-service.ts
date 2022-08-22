@@ -5,14 +5,14 @@ import { ICreateUserResponse, ILoginResponse } from './@types/@user-services'
 import { AsyncValidator } from 'fluentvalidation-ts'
 import { ValidationErrors } from 'fluentvalidation-ts/dist/ValidationErrors'
 import { IRegisterUser } from './@types/@login-services'
-import { connectionHandler, createInstanceAuthZn } from '../settings/connection'
+import { connectionHandler, connectionHandlerAuthZN } from '../settings/connection'
 import { AsyncStorageUtils } from '../utils/async-storage'
 
 class LoginService {
 
   static async login(mail: string, password: string): Promise<ILoginResponse> {
 
-    const { data } = await createInstanceAuthZn
+    const { data } = await connectionHandlerAuthZN
       .get<IResponseMessage<ILoginResponse>>('auth/login/user', {
         params: {
           mail: mail,

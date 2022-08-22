@@ -14,72 +14,101 @@ jobs:
       - name: 🏗 Setup repo
         uses: actions/checkout@v2
 
-      - name: 🏗 Setup Node
-        uses: actions/setup-node@v2
+      - name: Extract Branch Name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+
+      - name: Automatic Merge Main
+        uses: mtanzi/action-automerge@v1
+        # if: github.ref == 'refs/heads/release'
         with:
-          node-version: 16.x
-          cache: yarn
+          github_token: ${{ github.token }}
+          source: ${{ steps.extract_branch.outputs.branch }}
+          target: 'main'
+          webhook_url: #if present add the Slack webhook
 
-      - name: 🏗 Setup Expo and EAS
-        uses: expo/expo-github-action@v7
-        with:
-          expo-version: latest
-          eas-version: latest
-          token: ${{ secrets.EXPO_TOKEN }}
+      # - name: 🏗 Setup Node
+      #   uses: actions/setup-node@v2
+      #   with:
+      #     node-version: 16.x
+      #     cache: yarn
 
-      - name: 🏗 Setup AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+      # - name: 🏗 Setup Expo and EAS
+      #   uses: expo/expo-github-action@v7
+      #   with:
+      #     expo-version: latest
+      #     eas-version: latest
+      #     token: ${{ secrets.EXPO_TOKEN }}
 
-      #       echo "Publicar versão canal -> production-${GITHUB_REF##*/}"
-      #       expo publish --release-channel production-${GITHUB_REF##*/} --non-interactive
+      # - name: 🏗 Setup AWS Credentials
+      #   uses: aws-actions/configure-aws-credentials@v1
+      #   with:
+      #     aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #     aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #     aws-region: us-east-1
 
-      - name: 🏗 Download S3 EAS Environment
-        run: |
-          aws s3 cp s3://klubbs-devops/expo/klubbs-user/eas.json eas.json
+      # #       echo "Publicar versão canal -> production-${GITHUB_REF##*/}"
+      # #       expo publish --release-channel production-${GITHUB_REF##*/} --non-interactive
 
-      - name: 📦 Install dependencies
-        run: yarn install
+      # - name: 🏗 Download S3 EAS Environment
+      #   run: |
+      #     aws s3 cp s3://klubbs-devops/expo/klubbs-user/eas.json eas.json
 
-      - name: 🚀 Build Version
-        run: |
-          ENVIRONMENT_KLUBBS_API_URL=${{ secrets.ENVIRONMENT_KLUBBS_API_URL }} ENVIRONMENT_KLUBBS_AUTHZN_URL=${{ secrets.ENVIRONMENT_KLUBBS_AUTHZN_URL }} eas build --platform ios --profile production --non-interactive
-          curl -o app.ipa "$(eas build:list --json --limit=1 --platform=ios | jq '.[0].artifacts.buildUrl')"
-        # Use in-line environment because using this mode can pass to eas server for using in build
-      - name: 📦 Upload do artefato
-        uses: actions/upload-artifact@v2
-        with:
-         name: appbuild
-         path: ./app.ipa
+      # - name: 📦 Install dependencies
+      #   run: yarn install
 
-  APPLE_STORE_TRANSPORT:
-    needs: Build
-    runs-on:  macos-latest
-    steps:
+      # - name: 🚀 Build Version
+      #   run: |
+      #     ENVIRONMENT_KLUBBS_API_URL=${{ secrets.ENVIRONMENT_KLUBBS_API_URL }} ENVIRONMENT_KLUBBS_AUTHZN_URL=${{ secrets.ENVIRONMENT_KLUBBS_AUTHZN_URL }} eas build --platform ios --profile production --non-interactive
+      #   # Use in-line environment because using this mode can pass to eas server for using in build
 
-      - uses: actions/download-artifact@v2
-        with:
-          name: appbuild
+      # - name: 📦 Download Build IPA
+      #   run: |
+      #     sudo apt-get update
+      #     sudo apt-get install wget
+      #     wget -O app.ipa $(eas build:list --json --limit=1 --platform=ios | jq '.[0].artifacts.buildUrl' | sed 's/"//g')
 
-      - name: 🏗 Setup AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+      # - name: 📦 Upload do artefato
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #    name: appbuild
+      #    path: ./app.ipa
 
-      - name: 📦 Download and Install Fastlane Key Apple Store
-        run: |
-          aws s3 cp s3://klubbs-devops/ios/fastlane-key-ios.json fastlane-key-ios.json
-          brew install fastlane
-          fastlane update_fastlane
+  # APPLE_STORE_TRANSPORT:
+  #   needs: Build
+  #   runs-on:  macos-latest
+  #   steps:
 
-      - name: 🚀 Fastlane Publish Apple Store
-        run: fastlane deliver --verbose --ipa "app.ipa" --skip_screenshots --skip_metadata --precheck_include_in_app_purchases false --api_key_path ./fastlane-key-ios.json
+  #     - uses: actions/download-artifact@v2
+  #       with:
+  #         name: appbuild
 
-      - uses: geekyeggo/delete-artifact@v1
-        with:
-          name: appbuild
+  #     - name: 🏗 Setup AWS Credentials
+  #       uses: aws-actions/configure-aws-credentials@v1
+  #       with:
+  #         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  #         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  #         aws-region: us-east-1
+
+  #     - name: 📦 Download and Install Fastlane Key Apple Store
+  #       run: |
+  #         aws s3 cp s3://klubbs-devops/ios/fastlane-key-ios.json fastlane-key-ios.json
+  #         brew install fastlane
+  #         fastlane update_fastlane
+
+  #     - name: 🚀 Fastlane Publish Apple Store
+  #       run: fastlane deliver --verbose --ipa "app.ipa" --skip_screenshots --skip_metadata --precheck_include_in_app_purchases false --api_key_path ./fastlane-key-ios.json
+
+  #     - uses: geekyeggo/delete-artifact@v1
+  #       with:
+  #         name: appbuild
+
+  #   - name: Automatic Merge Main
+  #     uses: mtanzi/action-automerge@v1
+  #     if: github.ref == 'refs/heads/release'
+  #     with:
+  #       github_token: ${{ github.token }}
+  #       source: ${GITHUB_REF#refs/heads/}
+  #       target: 'main'
+  #       webhook_url: #if present add the Slack webhook

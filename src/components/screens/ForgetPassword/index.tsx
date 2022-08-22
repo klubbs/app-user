@@ -14,129 +14,121 @@ import { nameof } from '../../../utils/extensions/object-extensions';
 
 export const ForgetPasswordScreen: React.FC<ForgetPasswordScreenProps> = ({ route }) => {
 
-	const [loadingSpinner, setLoadingSpinner] = useState(false)
-	const [code, setCode] = useState<string>('')
-	const [password, setPassword] = useState<string>('')
-	const [activePassword, setActivePassword] = useState(false)
+  const [loadingSpinner, setLoadingSpinner] = useState(false)
+  const [code, setCode] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+  const [activePassword, setActivePassword] = useState(false)
 
-	const navigation = useNavigation();
-	const [props, getCellOnLayoutHandler] = useClearByFocusCell({
-		value: code,
-		setValue: setCode as any,
-	})
+  const navigation = useNavigation();
+  const [props, getCellOnLayoutHandler] = useClearByFocusCell({
+    value: code,
+    setValue: setCode as any,
+  })
 
-	useEffect(() => {
-		try {
-			LoginService.sendForgetMailCode(route.params.mail)
-		} finally {
+  useEffect(() => {
+    try {
+      LoginService.sendForgetMailCode(route.params.mail)
+    } finally {
 
-		}
-	}, [])
+    }
+  }, [])
 
-	function renderCell({ index, symbol, isFocused, }:
-		{ index: any, symbol: any, isFocused: any }) {
+  function renderCell({ index, symbol, isFocused, }:
+    { index: any, symbol: any, isFocused: any }) {
 
-		let textChild = null
+    let textChild = null
 
-		if (symbol) {
-			textChild = symbol
-		} else if (isFocused) {
-			textChild = <Cursor />
-		}
+    if (symbol) {
+      textChild = symbol
+    } else if (isFocused) {
+      textChild = <Cursor />
+    }
 
-		return (
-			<Input key={index} onLayout={getCellOnLayoutHandler(index)}>
-				{textChild}
-			</Input>
-		)
-	}
+    return (
+      <Input key={index} onLayout={getCellOnLayoutHandler(index)}>
+        {textChild}
+      </Input>
+    )
+  }
 
-	function handleCode() {
-		if (code.length < 5) {
-			NotificationsFlash.customMessage("Código inválido", "")
-			return
-		}
+  function handleCode() {
+    if (code.length < 5) {
+      NotificationsFlash.customMessage("Código inválido", "")
+      return
+    }
 
-		if (!activePassword) {
-			setActivePassword(true)
-		}
-	}
+    if (!activePassword) {
+      setActivePassword(true)
+    }
+  }
 
-	async function handleChangePassword() {
+  async function handleChangePassword() {
 
-		try {
+    try {
 
-			setLoadingSpinner(true)
+      setLoadingSpinner(true)
 
-			const valid = await LoginService.validatePropertyAsync(password, 'password');
+      const valid = await LoginService.validatePropertyAsync(password, 'password');
 
-			if (nameof<IRegisterUser>('password') in valid) {
-				NotificationsFlash.customMessage("Necessário ao menos 5 caracteres", 'Senha inválida', 'NEUTRAL')
-				return
-			}
+      if (nameof<IRegisterUser>('password') in valid) {
+        NotificationsFlash.customMessage("Necessário ao menos 5 caracteres", 'Senha inválida', 'NEUTRAL')
+        return
+      }
 
-			await LoginService.updatePassword(password, route.params.mail, code)
+      await LoginService.updatePassword(password, route.params.mail, code)
 
-			NotificationsFlash.customMessage("Senha alterada com sucesso", "", "SUCCESS")
+      NotificationsFlash.customMessage("Senha alterada com sucesso", "", "SUCCESS")
 
-			navigation.goBack()
+      navigation.goBack()
 
-		} catch (error) {
+    } catch (error) {
 
-			Middlewares.middlewareError(() => {
-				if (isAPIException(error)) {
-					const actual = error as IError
-					const actualFieldError = actual.error[0].field.toUpperCase()
+      if (isAPIException(error)) {
+        const errorTyped = error as IError
 
-					switch (actual.statusCode) {
-						case 412:
-							if (actualFieldError === 'DENIED') {
-								NotificationsFlash.invalidCode()
-								setActivePassword(false)
-							}
-							break;
+        if (errorTyped.statusCode === 412 && errorTyped.error[0].field.toUpperCase() === 'DENIED') {
+          NotificationsFlash.invalidCode()
+          setActivePassword(false)
+        }
+      }
 
-						default:
-							break;
-					}
-				}
-			}, error)
-
-		} finally { setLoadingSpinner(false) }
-	}
+    } finally {
+      setLoadingSpinner(false)
+    }
+  }
 
 
-	return (
-		<Wrapper>
-			<Spinner loading={loadingSpinner} />
-			<Subtitle>Enviamos um código de 5 dígitos para</Subtitle>
-			<Email>{route.params.mail}</Email>
+  return (
+    <Wrapper>
+      <Spinner loading={loadingSpinner} />
+      <Subtitle>Enviamos um código de 5 dígitos para</Subtitle>
+      <Email>{route.params.mail}</Email>
 
 
-			{!activePassword && <ContainerAnimated>
-				<CodeField
-					value={code}
-					onChangeText={(e: any) => setCode(e.trim())}
-					cellCount={5}
-					keyboardType="default"
-					textContentType="oneTimeCode"
-					renderCell={renderCell}
-					autoFocus={true}
-					{...props}
-				/>
-			</ContainerAnimated>
-			}
+      {!activePassword && <ContainerAnimated>
+        <CodeField
+          value={code}
+          onChangeText={(e: any) => setCode(e.trim())}
+          cellCount={5}
+          keyboardType="default"
+          textContentType="oneTimeCode"
+          renderCell={renderCell}
+          autoFocus={true}
+          {...props}
+        />
+      </ContainerAnimated>
+      }
 
-			{activePassword && <ContainerAnimated>
-				<Password
-					value={password}
-					onChangeText={(e: string) => setPassword(e.trim())}
-				/>
-			</ContainerAnimated>
-			}
-			<ConfirmButton
-				text={activePassword ? 'Validar' : 'Próximo'}
-				onPress={() => activePassword ? handleChangePassword() : handleCode()} />
-		</Wrapper>
-	)
+      {activePassword && <ContainerAnimated>
+        <Password
+          value={password}
+          onChangeText={(e: string) => setPassword(e.trim())}
+        />
+      </ContainerAnimated>
+      }
+      <ConfirmButton
+        text={activePassword ? 'Validar' : 'Próximo'}
+        onPress={() => activePassword ? handleChangePassword() : handleCode()} />
+    </Wrapper>
+  )
 }

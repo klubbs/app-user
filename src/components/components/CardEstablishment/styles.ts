@@ -28,7 +28,7 @@ export const OpenIndicator = Animated.createAnimatedComponent(styled.View<{ open
   width: 15px;
   height: 15px;
   border-radius: 7.5px;
-  z-index:10;
+  z-index:10px;
   top:5%;
   right:-48%;
   border-width: 1px;

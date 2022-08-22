@@ -13,17 +13,23 @@ const URL = {
   'KLUBBS_API_URL': Constants.manifest?.extra?.KLUBBS_API_URL
 }
 
-export const createInstanceAuthZn = axios.create({
+const connectionHandlerAuthZN = axios.create({
   baseURL: URL['KLUBBS_AUTHZN_URL'],
   timeout: 20000
 })
 
-export const connectionHandler = (type: 'KLUBBS_API_URL') => {
+connectionHandlerAuthZN.interceptors.response.use(
+  (response) => response,
+  (error): Promise<IError> => errorInterceptor(error)
+);
+
+const connectionHandler = (type: 'KLUBBS_API_URL') => {
 
   const instance = axios.create({
     baseURL: URL[type],
     timeout: 20000
   })
+
 
   instance.interceptors.request.use(async (config) => {
     const token = await createCredentialToken()
@@ -34,33 +40,37 @@ export const connectionHandler = (type: 'KLUBBS_API_URL') => {
   })
 
 
-  instance.interceptors.response.use((response) => response,
-    (error): Promise<IError> => {
-
-      if (error.response.data) {
-        const statusCode = error.response.data?.statusCode
-
-        const validationError = error.response.data?.error
-        const message = error.response.data?.message
-
-        if (statusCode === 401) {
-          EventEmitter.emit('LOGOUT_USER', {})
-        }
-
-        if (statusCode === 500) {
-          NotificationsFlash.someoneBullshit()
-        }
-
-        return Promise.reject({ message, error: validationError, statusCode: Number(statusCode) });
-      }
-
-      return Promise.reject(error);
-    });
+  instance.interceptors.response.use(
+    (response) => response,
+    (error): Promise<IError> => errorInterceptor(error)
+  );
 
 
   return instance
 }
 
+function errorInterceptor(error: any) {
+
+  if (error.response.data) {
+    const statusCode = error.response.data?.statusCode
+
+    if (statusCode == 403) {
+      EventEmitter.emit('LOGOUT_USER', {})
+    }
+
+    if (statusCode == 500) {
+      NotificationsFlash.someoneBullshit()
+    }
+
+    return Promise.reject({
+      message: error.response.data?.message,
+      error: error.response.data?.error,
+      statusCode: Number(statusCode)
+    });
+  }
+
+  return Promise.reject(error);
+}
 
 async function createCredentialToken() {
 
@@ -86,3 +96,5 @@ async function createCredentialToken() {
 
   return await AuthService.refresh(token, refresh)
 }
+
+export { connectionHandlerAuthZN, connectionHandler }
