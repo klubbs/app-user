@@ -30,7 +30,7 @@ export const UserImage = styled.Image.attrs({
 })`
   width: 70px;
   height: 70px;
-  z-index: 10;
+  z-index: 10px;
 `;
 
 export const ContainerImage = styled.View`

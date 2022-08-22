@@ -6,7 +6,7 @@ export const SpinnerLoading = styled.ActivityIndicator.attrs({
   size: "large",
   animating: true,
 })`
-    z-index:10;
+    z-index:10px;
 `;
 
 export const Container = styled.View`
@@ -17,5 +17,5 @@ export const Container = styled.View`
     left:0;
     top:0;
     right:0;
-    z-index:100;
+    z-index:100px;
 `

@@ -13,7 +13,7 @@ export const Container = styled.View`
   width: 100%;
   border-radius:5px;
   bottom:0;
-  z-index: 10;
+  z-index: 10px;
   elevation: 10;
   background-color:${colors.COLOR_WHITE};
 `;

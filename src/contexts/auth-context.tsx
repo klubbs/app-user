@@ -36,7 +36,7 @@ const AuthProvider: React.FC = ({ children }) => {
 
   async function signIn(mail: string, password: string): Promise<void> {
 
-    const userData = await LoginService.login(mail, password);
+    await LoginService.login(mail, password);
 
     await reloadUser();
   }
