@@ -16,7 +16,7 @@ jobs:
 
       - name: Automatic Merge Main
         uses: mtanzi/action-automerge@v1
-        if: github.ref == 'refs/heads/release/**'
+        if: github.ref == 'refs/heads/release'
         with:
           github_token: ${{ github.token }}
           source: ${GITHUB_REF#refs/heads/}
