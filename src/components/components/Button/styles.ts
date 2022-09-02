@@ -9,7 +9,8 @@ export const Wrapper = styled.TouchableOpacity.attrs(() => ({
   height: 60px;
   background-color: ${colors.COLOR_YELLOW};
   border-radius: 6px;
-  justify-content: center;
+  flex-direction:row ;
+  justify-content: space-evenly;
   align-items: center;
 `
 

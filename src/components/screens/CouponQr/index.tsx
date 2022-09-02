@@ -16,7 +16,8 @@ import {
   ImageInfluencer,
   ContainerImage,
   ContainerQr,
-  QRCodeCoupon
+  QRCodeCoupon,
+  PreCheckoutButton
 } from './styles';
 
 let key = 0;
@@ -71,7 +72,8 @@ export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
           )
         }}
       />
-      <SubtitleHelp>Atente o estabelecimento de validar seu cupom</SubtitleHelp>
+      <SubtitleHelp>Atente o estabelecimento de concluir o checkout</SubtitleHelp>
+      <PreCheckoutButton onPress={() => { }} />
       <RenderModalIfEnable />
     </Wrapper>
   );

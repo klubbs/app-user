@@ -3,6 +3,7 @@ import { Dimensions, PixelRatio, Platform } from 'react-native'
 import { colors } from '../../../../assets/constants/colors';
 import { MotiView } from 'moti'
 import QRCode from 'react-native-qrcode-svg';
+import Button from '../../components/Button';
 
 const { width, height } = Dimensions.get('window');
 
@@ -36,7 +37,7 @@ export const SubtitleHelp = styled.Text`
   font-size:14px;
   font-family:'Nunito_Bold';
   bottom:${Platform.select({
-  ios: '0',
+  ios: '11%',
   android: PixelRatio.get() === 3 ? 0 : '3%'
 })};
 `
@@ -85,3 +86,15 @@ export const AnimatedWrapper = styled(MotiView).attrs(props => ({
 export const ContainerQr = styled.View<{ distanceInBottom: boolean }>`
   bottom: ${props => props.distanceInBottom ? Platform.select({ ios: '6.5%', android: PixelRatio.get() === 3 ? '10%' : '7%' }) : 0};
 `
+
+export const PreCheckoutButton = styled(Button).attrs(({
+  text: 'PRÉ-CHECKOUT',
+  featherIcon: 'clipboard',
+  textColor: colors.COLOR_WHITE,
+  styleContainer: {
+    backgroundColor: colors.COLOR_BLACK,
+    width: '60%',
+    position: 'absolute',
+    bottom: '6%'
+  }
+}))``

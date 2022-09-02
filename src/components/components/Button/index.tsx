@@ -1,5 +1,7 @@
 import React from 'react';
 import { Title, Wrapper } from './styles';
+import { Feather } from '@expo/vector-icons';
+import { colors } from '../../../../assets/constants/colors';
 
 
 export type IButtonProps = {
@@ -7,12 +9,14 @@ export type IButtonProps = {
   onPress: () => void
   styleContainer?: any
   textColor?: any
+  featherIcon?: any
 }
 
-const Button: React.FC<IButtonProps> = ({ text, onPress, styleContainer, textColor }) => {
+const Button: React.FC<IButtonProps> = ({ text, onPress, styleContainer, textColor, featherIcon }) => {
   return (
     <Wrapper onPress={onPress} style={{ ...styleContainer }} >
       <Title color={textColor}>{text}</Title>
+      {featherIcon && <Feather name={featherIcon} size={16} color={textColor ?? colors.COLOR_WHITE} />}
     </Wrapper>
   );
 }
