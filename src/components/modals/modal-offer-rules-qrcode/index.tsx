@@ -15,11 +15,10 @@ import {
   Off
 } from './styles';
 
-export const QrCouponsRules: React.FC<{ data: IWalletCouponsResponseOfferData | null, onClose: any }> =
+export const ModalOfferRulesQrCode: React.FC<{ data: IWalletCouponsResponseOfferData | null, onClose: any }> =
   (props) => {
 
     const modalizeRef = useRef<Modalize>()
-
 
     useEffect(() => {
 
@@ -36,18 +35,18 @@ export const QrCouponsRules: React.FC<{ data: IWalletCouponsResponseOfferData | 
         ref={modalizeRef}
       >
         <Wrapper>
-          <Name>{props?.data?.establishment_name}</Name>
+          <Name>{props?.data?.store_name}</Name>
           <ExpireIn>Esta oferta expira em: {props
-            .data?.master_coupon_valid_at
+            .data?.offer_valid_at
             .ToDateFormat()
             .toCustomLocaleDateString()}</ExpireIn>
           <Divider />
-          <DaysOfWeek hasSelector={false} initSelectedDays={props.data?.master_coupon_working_days} />
+          <DaysOfWeek hasSelector={false} initSelectedDays={props.data?.offer_working_days} />
 
           <WrapperTicket>
             <MinimumTicketSubtitle>• Desconto </MinimumTicketSubtitle>
             <WrapperOff>
-              <Off>{props.data?.master_coupon_off_percentual}%</Off>
+              <Off>{props.data?.offer_percentage}%</Off>
             </WrapperOff>
           </WrapperTicket>
 
@@ -56,13 +55,13 @@ export const QrCouponsRules: React.FC<{ data: IWalletCouponsResponseOfferData | 
             <MinimumTicket>
               {
                 props
-                  .data?.master_coupon_minimum_ticket
+                  .data?.offer_ticket
                   .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
               }
             </MinimumTicket>
           </WrapperTicket>
 
-          <Description>{props?.data?.master_coupon_description}</Description>
+          <Description>{props?.data?.offer_description}</Description>
         </Wrapper>
 
       </Modalize>

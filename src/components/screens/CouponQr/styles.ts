@@ -2,8 +2,17 @@ import styled from 'styled-components/native';
 import { Dimensions, PixelRatio, Platform } from 'react-native'
 import { colors } from '../../../../assets/constants/colors';
 import { MotiView } from 'moti'
+import QRCode from 'react-native-qrcode-svg';
 
 const { width, height } = Dimensions.get('window');
+
+
+export const QRCodeCoupon = styled(QRCode).attrs(({
+  backgroundColor: 'transparent',
+  logo: require('../../../../assets/images/klubbsLogoCircle.png'),
+  size: Dimensions.get('window').width * 0.45,
+  color: colors.COLOR_SECUNDARY_BLACK
+}))``
 
 export const Wrapper = styled.SafeAreaView`
   background-color: ${colors.COLOR_YELLOW};

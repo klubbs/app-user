@@ -15,7 +15,7 @@ export const Wrapper = styled.TouchableOpacity.attrs(({
 export const EstablishmentImage = styled.Image`
     align-items: flex-start;
     flex:2;
-    border-radius: 10px;
+    border-radius: 5px;
     width: 100%;
     bottom:5px;
 `
@@ -24,7 +24,7 @@ export const EmptyImage = styled.View`
     align-items:center;
     justify-content:center;
     flex:2;
-    border-radius: 10px;
+    border-radius: 5px;
     width: 100%;
     bottom:5px;
     background-color: ${colors.COLOR_BLACK10};
@@ -40,7 +40,7 @@ export const ContainerToolbar = styled.View`
   flex:0.65;
   width: 100%;
   background-color: ${colors.COLOR_BLACK};
-  border-radius: 10px;
+  border-radius: 5px;
   justify-content: flex-start;
   padding-horizontal:5px;
   align-items: center;
@@ -55,7 +55,7 @@ const ToolbarBadgeDefault = styled.View`
 
 export const ContainerOff = styled(ToolbarBadgeDefault)`
   background-color: ${colors.COLOR_SECUNDARY_BLACK};
-  border-radius: 10px;
+  border-radius: 8px;
   justify-content: space-evenly;
   flex-direction: row;
   align-items: center;

@@ -11,16 +11,18 @@ export interface IWalletCouponsReponse {
   wallet_id: string
   coupon_code: string
   coupon_id: string
-  master_coupons: IWalletCouponsResponseOfferData[]
+  partner_image: string
+  offers: IWalletCouponsResponseOfferData[]
 }
 
 
 export interface IWalletCouponsResponseOfferData {
-  master_coupon_off_percentual: number,
-  master_coupon_description: string,
-  master_coupon_valid_at: number,
-  master_coupon_working_days: number[],
-  master_coupon_minimum_ticket: number,
-  establishment_name: string,
-  establishment_image: string
+  offer_id: string,
+  offer_percentage: number,
+  offer_description: string,
+  offer_valid_at: number,
+  offer_working_days: number[],
+  offer_ticket: number,
+  store_name: string,
+  store_image: string
 }

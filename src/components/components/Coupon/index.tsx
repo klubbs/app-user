@@ -15,16 +15,18 @@ import {
 } from './styles';
 
 const CODE_COUPONS_SIZE = 12
+
 export const Coupon: React.FC<ICouponProps> = (props) => {
 
-  const offersQtd = props.data.master_coupons?.length
-  const couponsActive = defineIsActive()
+  const offersCount = props.data.offers?.length
 
+  function formattedCouponCode() {
+    return `${props.data.coupon_code.substring(0, CODE_COUPONS_SIZE)}${props.data.coupon_code.length > CODE_COUPONS_SIZE ? '...' : ''}`
+  }
 
-  function defineIsActive() {
-
+  function isActiveCoupon() {
     if (!props.toggle) {
-      if (offersQtd >= 1) {
+      if (offersCount >= 1) {
         return true
       }
 
@@ -35,16 +37,21 @@ export const Coupon: React.FC<ICouponProps> = (props) => {
       else
         return false
     }
-
   }
 
-  useEffect(() => {
+  function RenderInfluencerImage() {
 
-    if (offersQtd >= 1) {
-      const offValues = props.data.master_coupons.map(item => item.master_coupon_off_percentual);
+    if (props.data.partner_image) {
+      return <Influencer source={{ uri: props.data.partner_image }} />
     }
 
-  }, [props.data])
+    return (
+      <InfluencerEmpty>
+        <CouponDefaultImage />
+      </InfluencerEmpty>
+    )
+
+  }
 
   return (
     <MotifiedWrapper
@@ -56,23 +63,16 @@ export const Coupon: React.FC<ICouponProps> = (props) => {
       onPressOut={props.onPressOut}
       onPressIn={props.onPressIn}
     >
-      <BackgroundCoupon active={couponsActive} />
+      <BackgroundCoupon active={isActiveCoupon()} />
       <Container>
         <CouponContainer>
-          <CountCoupons>{offersQtd}</CountCoupons>
+          <CountCoupons>{offersCount}</CountCoupons>
           <ShopSubtitleIcon />
         </CouponContainer>
       </Container>
-      {
-        props.data.influencer_image
-          ? <Influencer source={{ uri: props.data.influencer_image }} />
-          : <InfluencerEmpty>
-            <CouponDefaultImage />
-          </InfluencerEmpty>
-      }
-      <CouponCode putMarginBottom={props.toggle} active={couponsActive}>
-        {props.data.coupon_code.substring(0, CODE_COUPONS_SIZE)}
-        {props.data.coupon_code.length > CODE_COUPONS_SIZE ? '...' : ''}
+      <RenderInfluencerImage />
+      <CouponCode putMarginBottom={props.toggle} active={isActiveCoupon()}>
+        {formattedCouponCode()}
       </CouponCode>
     </MotifiedWrapper >
   );

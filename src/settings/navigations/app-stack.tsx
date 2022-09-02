@@ -43,7 +43,9 @@ const App: React.FC<{}> = () => {
         component={RemoveOfferInfluencerScreen}
         options={{ headerTintColor: colors.COLOR_WHITE }}
       />
-      <AppStack.Screen name='CouponQr' component={CouponQrScreen}
+      <AppStack.Screen
+        name='CouponQr'
+        component={CouponQrScreen}
         options={({ route }) => ({
           headerTintColor: colors.COLOR_WHITE,
           headerTitle: route.params.coupon_code,

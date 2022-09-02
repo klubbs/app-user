@@ -15,7 +15,7 @@ export class CouponService {
   }
 
   static async getWalletCoupons(): Promise<IWalletCouponsReponse[]> {
-    const { data } = await await connectionHandler('KLUBBS_API_URL')
+    const { data } = await connectionHandler('KLUBBS_API_URL')
       .get<IResponseMessage<IWalletCouponsReponse[]>>('users/wallets/coupons');
 
     return data.message

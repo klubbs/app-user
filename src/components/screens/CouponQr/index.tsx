@@ -1,13 +1,12 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { Dimensions, PixelRatio, View } from 'react-native'
-import QRCode from 'react-native-qrcode-svg';
+import React, { useState, useContext } from 'react';
 import { colors } from '../../../../assets/constants/colors';
 import { CouponQrScreenProps } from '../../../settings/@types/@app-stack';
-import { EstablishmentCardQr } from '../../components/CardEstablishmentQr';
-import { QrCouponsRules } from '../../modals/QrCouponsRules';
+import { StoreCardInQrCode } from '../../components/store-card-in-qr-code';
+import { ModalOfferRulesQrCode } from '../../modals/modal-offer-rules-qrcode';
 import { AuthContext } from '../../../contexts/auth-context';
 import { UserIcon } from '../../../../assets/icons/user_icon';
 import { IWalletCouponsResponseOfferData } from '../../../services/@types/@coupon-services';
+import { QrCouponBackground } from '../../../../assets/images/backgrounds/backgroundQrCoupon';
 import {
   ContainerCoupon,
   Wrapper,
@@ -16,21 +15,20 @@ import {
   SubtitleHelp,
   ImageInfluencer,
   ContainerImage,
-  ContainerQr
+  ContainerQr,
+  QRCodeCoupon
 } from './styles';
-import { QrCouponBackground } from '../../../../assets/images/backgrounds/backgroundQrCoupon';
 
 let key = 0;
 
 export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
 
   const { user } = useContext(AuthContext)
-
   const [activeOffer, setActiveOffer] = useState<IWalletCouponsResponseOfferData | null>(null)
 
   function RenderInfluencerImage(): JSX.Element {
 
-    if (!route.params.influencer_image) {
+    if (!route.params.partner_image) {
       return (
         <ContainerImage>
           <UserIcon width={25} height={25} fill={colors.COLOR_BLACK40} />
@@ -39,9 +37,17 @@ export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
 
     return (
       <ContainerImage>
-        <ImageInfluencer source={{ uri: `https://yt3.ggpht.com/ytc/AKedOLTMo7dXbNtXLZb8ZfFANHMN8ukajWJIF-duv904Fw=s900-c-k-c0x00ffffff-no-rj` }} />
+        <ImageInfluencer source={{ uri: route.params.partner_image }} />
       </ContainerImage>
     )
+  }
+
+  function RenderModalIfEnable() {
+    if (activeOffer) {
+      return <ModalOfferRulesQrCode data={activeOffer} onClose={() => setActiveOffer(null)} />
+    }
+
+    return <></>
   }
 
   return (
@@ -51,38 +57,22 @@ export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
       </ContainerCoupon>
 
       <RenderInfluencerImage />
-      <ContainerQr distanceInBottom={route.params?.master_coupons?.length <= 0}>
-        <QRCode
-          value={`${route?.params?.coupon_id}|${user?.id}`}
-          backgroundColor='transparent'
-          logo={require('../../../../assets/images/klubbsLogoCircle.png')}
-          size={Dimensions.get('window').width * 0.45}
-          color={colors.COLOR_SECUNDARY_BLACK}
-        />
+      <ContainerQr distanceInBottom={route.params?.offers?.length <= 0}>
+        <QRCodeCoupon value={`${route?.params?.coupon_id}|${user?.id}`} />
       </ContainerQr>
       <FlatListComponent
-        data={route.params?.master_coupons}
-        keyExtractor={item => `${++key}`}
-        renderItem={({ item, index }: { item: IWalletCouponsResponseOfferData, index: number }) => {
+        data={route.params?.offers}
+        keyExtractor={({ }): any => `${++key}`}
+        renderItem={({ item }: { item: IWalletCouponsResponseOfferData }) => {
           return (
             <AnimatedWrapper key={key}>
-              <EstablishmentCardQr
-                onPress={() => setActiveOffer(item)}
-                off={item.master_coupon_off_percentual}
-                image={item.establishment_image}
-              />
+              <StoreCardInQrCode {...item} onPress={() => setActiveOffer(item)} />
             </AnimatedWrapper>
           )
         }}
       />
       <SubtitleHelp>Atente o estabelecimento de validar seu cupom</SubtitleHelp>
-      {
-        activeOffer &&
-        <QrCouponsRules
-          data={activeOffer}
-          onClose={() => setActiveOffer(null)}
-        />
-      }
+      <RenderModalIfEnable />
     </Wrapper>
   );
 }
