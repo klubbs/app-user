@@ -6,7 +6,7 @@ import { KlubbsLogo } from '../../../../assets/images/klubbsLogo';
 import { LoginService, LoginServiceExceptions } from '../../../services/login-service';
 import { IError } from '../../../settings/@types/@responses';
 import { nameof } from '../../../utils/extensions/object-extensions';
-import { Spinner } from '../../components/Spinner';
+import { Spinner } from '../../components/spinner';
 import {
   ContainerBottom, ContainerTop, Description, EnterButton, ExplainText, MailInput, Title, Wrapper, WrapperImage,
   WrapperKeyboard, Subtitle

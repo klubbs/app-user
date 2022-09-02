@@ -16,6 +16,6 @@ export type OffersCouponInfluencerResponse = {
 }
 
 
-export type IModalCouponsInfluencerRef = {
+export type IModalCouponsPartnersRef = {
   openModal: () => void
 }

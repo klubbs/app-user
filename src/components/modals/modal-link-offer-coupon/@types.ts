@@ -1,10 +1,10 @@
-import { GetAllCouponsByInfluencerResponse } from "../CouponsInfluencer/@types"
+import { GetAllCouponsByInfluencerResponse } from "../modal-coupons-partners/@types"
 
-export type ILinkCouponOffersProps = {
+export type IModalLinkCouponOffersProps = {
   masterCoupons: { masterCouponId: string, establishmentId: string }[]
 }
 
-export type ILinkCouponOffersRef = {
+export type IModalLinkCouponOffersRef = {
   showModal: () => void
 }
 

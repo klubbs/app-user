@@ -7,10 +7,10 @@ import { colors } from '../../../../assets/constants/colors';
 import { IRegisterUser } from '../../../services/@types/@login-services';
 import { LoginService } from '../../../services/login-service';
 import { RegisterScreenProps } from '../../../settings/@types/@app-stack';
-import { isEmpty, nameof } from '../../../utils/extensions/object-extensions';
+import { isEmpty } from '../../../utils/extensions/object-extensions';
 import { NotificationsFlash } from '../../../utils/flash-notifications';
-import { MailCodeModal } from '../../modals/MailCodeModal';
-import { IModalRef } from '../../modals/MailCodeModal/@types';
+import { ModalCodeMail } from '../../modals/modal-code-mail';
+import { IModalCodeMailRef } from '../../modals/modal-code-mail/@types';
 import {
   Confirm,
   containerBackButton,
@@ -27,7 +27,7 @@ import {
   WrapperKeyboard,
   SubtitlePassword
 } from './styles';
-import { Spinner } from '../../components/Spinner';
+import { Spinner } from '../../components/spinner';
 
 
 const SCROOL_INDEX = { FIRST: 0, LAST: 1 };
@@ -44,7 +44,7 @@ const Register: React.FC<RegisterScreenProps> = ({ route }) => {
   const [loading, setLoading] = useState(false)
 
   const scroolRef = useRef<ScrollView>(null)
-  const modalCodeRef = useRef<IModalRef>(null)
+  const modalCodeRef = useRef<IModalCodeMailRef>(null)
 
   const navigation = useNavigation()
 
@@ -225,7 +225,7 @@ const Register: React.FC<RegisterScreenProps> = ({ route }) => {
         <RenderButtons />
 
       </WrapperKeyboard>
-      <MailCodeModal
+      <ModalCodeMail
         ref={modalCodeRef}
         action={'REGISTER'}
         registerParams={{ mail: route.params.mail, phone, password, name }} />

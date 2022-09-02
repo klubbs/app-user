@@ -1,4 +1,4 @@
-import { GetAllCouponsByInfluencerResponse } from "../components/modals/CouponsInfluencer/@types";
+import { GetAllCouponsByInfluencerResponse } from "../components/modals/modal-coupons-partners/@types";
 import { IError, IResponseMessage } from "../settings/@types/@responses";
 import * as Haptic from 'expo-haptics';
 import { NotificationsFlash } from "../utils/flash-notifications";

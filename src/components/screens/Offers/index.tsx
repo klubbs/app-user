@@ -8,9 +8,9 @@ import { NotificationsFlash } from '../../../utils/flash-notifications';
 import { BagTab } from '../../components/BagTab';
 import { CardOffers } from '../../components_heavy/CardOffers';
 import { ICardOffersProps } from '../../components_heavy/CardOffers/@types';
-import { LinkCouponOffers } from '../../modals/LinkCouponOffers';
+import { ModalLinkOfferCoupon } from '../../modals/modal-link-offer-coupon';
 import { NotFoundRestaurants } from '../../../../assets/images/notFounds/notFoundRestaurants';
-import { ILinkCouponOffersRef } from '../../modals/LinkCouponOffers/@types';
+import { IModalLinkCouponOffersRef } from '../../modals/modal-link-offer-coupon/@types';
 import {
   Wrapper,
   Header,
@@ -25,7 +25,7 @@ import {
 
 export const Offers: React.FC = () => {
 
-  const couponOffersRef = useRef<ILinkCouponOffersRef>(null)
+  const couponOffersRef = useRef<IModalLinkCouponOffersRef>(null)
 
   const [offers, setOffers] = useState<ICardOffersProps[]>([])
   const [selectedOffers, setSelectedOffer] = useState<{ masterCouponId: string, establishmentId: string }[]>([])
@@ -131,7 +131,7 @@ export const Offers: React.FC = () => {
             onPress={(isSelected: boolean) => handleOfferSelect(isSelected, item.master_coupon_id, item.establishment_id)} />
         }
       />
-      <LinkCouponOffers masterCoupons={selectedOffers} ref={couponOffersRef} />
+      <ModalLinkOfferCoupon masterCoupons={selectedOffers} ref={couponOffersRef} />
       <OffersBagTab />
     </Wrapper >
   );

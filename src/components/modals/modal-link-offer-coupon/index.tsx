@@ -2,9 +2,9 @@ import React, { useEffect, ReactElement, useState, useImperativeHandle } from 'r
 import { Modal, TouchableWithoutFeedback } from 'react-native';
 import { Coupon } from '../../components/Coupon';
 import { format4TwoColumns } from '../../../utils/formatersUtils'
-import { ICouponInfluencer, ILinkCouponOffersProps, ILinkCouponOffersRef } from './@types';
+import { ICouponInfluencer, IModalLinkCouponOffersRef, IModalLinkCouponOffersProps } from './@types';
 import { InfluencerService, InfluencerServiceException } from '../../../services/influencer-service';
-import { Spinner } from '../../components/Spinner';
+import { Spinner } from '../../components/spinner';
 import { IError } from '../../../settings/@types/@responses';
 import { NotificationsFlash } from '../../../utils/flash-notifications';
 import { useNavigation } from '@react-navigation/native';
@@ -24,7 +24,7 @@ import {
 } from './styles';
 
 
-export const LinkCouponOffers = React.forwardRef<ILinkCouponOffersRef, ILinkCouponOffersProps>((props, ref) => {
+export const ModalLinkOfferCoupon = React.forwardRef<IModalLinkCouponOffersRef, IModalLinkCouponOffersProps>((props, ref) => {
 
   const navigation = useNavigation();
 
@@ -115,8 +115,8 @@ export const LinkCouponOffers = React.forwardRef<ILinkCouponOffersRef, ILinkCoup
                 {
                   coupon_id: item.coupon_id,
                   coupon_code: item.coupon_code,
-                  influencer_image: '', //TODO Adicionar imagem do influencer aqui
-                  master_coupons: item.master_coupons
+                  partner_image: '', //TODO Adicionar imagem do influencer aqui
+                  offers: item.master_coupons
                 }
               }
             />
@@ -142,7 +142,7 @@ export const LinkCouponOffers = React.forwardRef<ILinkCouponOffersRef, ILinkCoup
         <FlatItems
           data={format4TwoColumns(coupons, 2)}
           keyExtractor={(item: any, index: number) => item.coupon_id}
-          renderItem={({ item, index }) => RenderCoupon({ item: item as ICouponInfluencer, index: index })}
+          renderItem={({ item, index }: any) => RenderCoupon({ item: item as ICouponInfluencer, index: index })}
         />
 
         <BottomTab disabled={disableSave}>

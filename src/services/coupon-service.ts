@@ -1,5 +1,5 @@
 import { NotificationsFlash } from "../utils/flash-notifications";
-import { ICouponCheckoutResponse, IWalletCouponsReponse } from './@types/@coupon-services';
+import { IUserCheckoutsReponse, IWalletCouponsReponse } from './@types/@coupon-services';
 import * as Haptic from 'expo-haptics';
 import { IResponseMessage, IError } from "../settings/@types/@responses";
 import { connectionHandler } from "../settings/connection";
@@ -7,9 +7,9 @@ import { connectionHandler } from "../settings/connection";
 export class CouponService {
 
 
-  static async getCouponsCheckout(): Promise<ICouponCheckoutResponse[]> {
+  static async getCouponsCheckout(): Promise<IUserCheckoutsReponse[]> {
     const { data } = await connectionHandler('KLUBBS_API_URL')
-      .get<IResponseMessage<ICouponCheckoutResponse[]>>('checkouts/users')
+      .get<IResponseMessage<IUserCheckoutsReponse[]>>('checkouts/users')
 
     return data.message
   }

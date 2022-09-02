@@ -4,14 +4,14 @@ import { ModalComponent } from '../../components/Modal';
 import { Input, Container, Wrapper } from './styles';
 import { ButtonStorage } from '../../components/ButtonStorage';
 import { CouponService } from '../../../services/coupon-service';
-import { Spinner } from '../../components/Spinner';
+import { Spinner } from '../../components/spinner';
 import { NotificationsFlash } from '../../../utils/flash-notifications';
 import { IError } from '../../../settings/@types/@responses';
 import { InfluencerService, InfluencerServiceException } from '../../../services/influencer-service';
-import { ISaveOrCreateCouponProps, ISaveOrCreateCouponRef } from './@types';
+import { IModalAddCouponProps, IModalAddCouponRef } from './@types';
 import { SubtitleSaveCouponImage } from '../../../../assets/images/coupons/contributeInfluencer';
 
-export const SaveOrCreateCoupon = React.forwardRef<ISaveOrCreateCouponRef, ISaveOrCreateCouponProps>((props, ref) => {
+export const ModalAddCoupon = React.forwardRef<IModalAddCouponRef, IModalAddCouponProps>((props, ref) => {
 
   const [visibleModal, setVisibleModal] = useState(false);
   const [value, setValue] = useState("")

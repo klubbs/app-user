@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Modalize } from 'react-native-modalize'
-import { DaysOfWeek } from '../../components/DaysOfWeek';
+import { SelectorDaysWeek } from '../../components/selector-days-week';
 import { IWalletCouponsResponseOfferData } from '../../../services/@types/@coupon-services';
 import {
   Wrapper,
@@ -41,7 +41,7 @@ export const ModalOfferRulesQrCode: React.FC<{ data: IWalletCouponsResponseOffer
             .ToDateFormat()
             .toCustomLocaleDateString()}</ExpireIn>
           <Divider />
-          <DaysOfWeek hasSelector={false} initSelectedDays={props.data?.offer_working_days} />
+          <SelectorDaysWeek hasSelector={false} initSelectedDays={props.data?.offer_working_days} />
 
           <WrapperTicket>
             <MinimumTicketSubtitle>• Desconto </MinimumTicketSubtitle>

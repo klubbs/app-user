@@ -10,8 +10,8 @@ import {
   MinimumTicketSubtitle,
   MinimumTicket
 } from './styles';
-import { Selector } from '../../components/Selector';
-import { DaysOfWeek } from '../../components/DaysOfWeek';
+import { Selector } from '../../components/selector';
+import { SelectorDaysWeek } from '../../components/selector-days-week';
 
 export const CardOffers: React.FC<ICardOffersProps> = (props) => {
 
@@ -37,7 +37,7 @@ export const CardOffers: React.FC<ICardOffersProps> = (props) => {
 
         </FinancesInformationWrapper>
         <SeeMore>Dias da semana</SeeMore>
-        <DaysOfWeek
+        <SelectorDaysWeek
           hasSelector={false}
           initSelectedDays={props.working_days ?? []}
         />

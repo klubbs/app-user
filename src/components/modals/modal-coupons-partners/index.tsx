@@ -8,14 +8,14 @@ import {
 } from './styles';
 import { NotificationsFlash } from '../../../utils/flash-notifications';
 import { Pressable, Dimensions } from 'react-native';
-import { GetAllCouponsByInfluencerResponse, IModalCouponsInfluencerRef } from './@types';
-import { SpinnerLoading } from '../../components/Spinner';
+import { GetAllCouponsByInfluencerResponse, IModalCouponsPartnersRef } from './@types';
+import { SpinnerLoading } from '../../components/spinner';
 import { useNavigation } from '@react-navigation/native';
 import { InfluencerContext } from '../../../contexts/influencer-context';
 
 const { height } = Dimensions.get('window');
 
-export const CouponsInfluencerModal = React.forwardRef<IModalCouponsInfluencerRef, {}>((props, ref) => {
+export const ModalCouponsPartners = React.forwardRef<IModalCouponsPartnersRef, {}>((props, ref) => {
 
   const { coupons, getAllCoupons } = useContext(InfluencerContext)
 

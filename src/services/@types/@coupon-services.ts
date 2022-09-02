@@ -1,9 +1,14 @@
-export interface ICouponCheckoutResponse {
+export interface IUserCheckoutsReponse {
   checkout_id: string
-  establishment_name: string
-  created_at: number,
-  off: number,
-  image: string
+  checkouted_at: number
+  pre_checkouted_at: number
+  minimun_ticket: number
+  coupon_code: string
+  amount: number
+  user_informed_amount: number
+  store_name: string
+  store_image: string
+  discount: number
 }
 
 

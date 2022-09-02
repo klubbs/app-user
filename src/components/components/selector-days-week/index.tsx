@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Selector } from '../Selector';
+import { Selector } from '../selector';
 
 import { Wrapper, Container, Text, WrapperSelector } from './styles';
 
-export const DaysOfWeek: React.FC<{ cb?: (day: number) => void, hasSelector?: boolean, initSelectedDays?: number[] }> =
+export const SelectorDaysWeek: React.FC<{ cb?: (day: number) => void, hasSelector?: boolean, initSelectedDays?: number[] }> =
   ({ cb, hasSelector = true, initSelectedDays = [] }) => {
 
     const [days, setDays] = useState([

@@ -1,5 +1,5 @@
 import React, { createContext, useState } from "react"
-import { GetAllCouponsByInfluencerResponse } from "../components/modals/CouponsInfluencer/@types"
+import { GetAllCouponsByInfluencerResponse } from "../components/modals/modal-coupons-partners/@types"
 import { InfluencerService } from "../services/influencer-service"
 
 

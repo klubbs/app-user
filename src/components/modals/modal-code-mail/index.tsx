@@ -7,8 +7,8 @@ import { AuthContext } from '../../../contexts/auth-context';
 import { LoginService } from '../../../services/login-service';
 import { NotificationsFlash } from '../../../utils/flash-notifications';
 import { ModalComponent } from '../../components/Modal';
-import { Spinner } from '../../components/Spinner';
-import { IModalCodeProps, IModalRef } from './@types';
+import { Spinner } from '../../components/spinner';
+import { IModalCodeMailRef, IModalCodeMailProps } from './@types';
 import {
   ButtonConfirm,
   CodeBoxes,
@@ -20,7 +20,7 @@ import {
 } from './styles';
 
 
-export const MailCodeModal = React.forwardRef<IModalRef, IModalCodeProps>((propsComp, ref) => {
+export const ModalCodeMail = React.forwardRef<IModalCodeMailRef, IModalCodeMailProps>((propsComp, ref) => {
 
   const navigation = useNavigation()
 

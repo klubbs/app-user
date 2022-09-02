@@ -6,14 +6,14 @@ import { CouponsEmpty } from '../../components_heavy/LogoutCoupons';
 import { CouponsWalletTab } from '../../components_heavy/WalletCouponsTab';
 import { SafeArea, tabStyle, HeaderContainer } from './styles';
 import { ButtonCreateCoupon } from '../../components/ButtonCoupon';
-import { SaveOrCreateCoupon } from '../../modals/SaveOrCreateCoupon';
-import { ISaveOrCreateCouponRef } from '../../modals/SaveOrCreateCoupon/@types';
+import { ModalAddCoupon } from '../../modals/modal-add-coupon';
+import { IModalAddCouponRef } from '../../modals/modal-add-coupon/@types';
 
 const Tab = createMaterialTopTabNavigator();
 
 export const Coupons: React.FC = () => {
 
-  const modalRef = useRef<ISaveOrCreateCouponRef>(null)
+  const modalRef = useRef<IModalAddCouponRef>(null)
   const { user } = useContext(AuthContext)
 
 
@@ -31,7 +31,7 @@ export const Coupons: React.FC = () => {
         <Tab.Screen name="Carteira" children={() => <CouponsWalletTab />} />
         <Tab.Screen name="Utilizados" children={() => <CouponsCheckout />} />
       </Tab.Navigator>
-      <SaveOrCreateCoupon ref={modalRef} isInfluencer={false} />
+      <ModalAddCoupon ref={modalRef} isInfluencer={false} />
     </SafeArea>
   );
 }

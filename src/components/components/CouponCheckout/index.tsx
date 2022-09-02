@@ -1,5 +1,5 @@
 import React from 'react';
-import { ICouponCheckoutItem } from './interface';
+import { IUserCheckoutsReponse } from '../../../services/@types/@coupon-services';
 import {
   Box,
   ContainerLeft,
@@ -16,26 +16,26 @@ import {
 
 
 
-export const CouponsCheckoutItems: React.FC<{ data: ICouponCheckoutItem }> = (props) => {
+export const CouponsCheckoutItems: React.FC<{ data: IUserCheckoutsReponse }> = (props) => {
 
   return (
     <Wrapper >
       <ContainerLeft >
-        <Percent>{props.data.off} %</Percent>
+        <Percent>{props.data.discount} %</Percent>
         <Dot />
         <Line />
       </ContainerLeft>
       <RightContainer >
         <Box>
-          <ImageEmpty show={props.data?.image?.trim() === '' || props.data?.image === null}>
-            <EstablishmentImage source={{ uri: `https://klubbs-establishment.s3.amazonaws.com/${props.data.image}` }} />
+          <ImageEmpty show={props.data?.store_image?.trim() === '' || props.data?.store_image === null}>
+            <EstablishmentImage source={{ uri: `https://klubbs-establishment.s3.amazonaws.com/${props.data.store_image}` }} />
           </ImageEmpty>
         </Box>
         <ContainerText>
-          <Name>{props.data.establishment_name}</Name>
+          <Name>{props.data.store_name}</Name>
           <Time>{props
             .data
-            .created_at?.ToDateFormat()
+            .checkouted_at?.ToDateFormat()
             .toLocaleTimeString("pt-br",
               {
                 formatMatcher: "best fit",
