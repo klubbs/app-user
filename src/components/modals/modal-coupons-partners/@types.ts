@@ -1,18 +1,19 @@
-export type GetAllCouponsByInfluencerResponse = {
+export type CouponAndOffersByInfluencerResponse = {
   coupon_id: string,
   coupon_code: string,
-  influencer_id: string,
-  master_coupons: OffersCouponInfluencerResponse[]
+  partner_id: string,
+  offers: OffersCouponInfluencerResponse[]
 }
 
+
 export type OffersCouponInfluencerResponse = {
-  master_coupon_id: string,
-  master_coupon_off_percentual: number,
-  master_coupon_description: string,
-  master_coupon_valid_at: number,
-  establishment_name: string,
-  establishment_image: string,
-  establishment_id: string
+  offer_id: string,
+  offer_discount: number,
+  offer_description: string,
+  offer_valid_at: number,
+  store_name: string,
+  store_image: string,
+  store_id: string
 }
 
 
