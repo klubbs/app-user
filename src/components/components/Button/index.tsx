@@ -10,13 +10,26 @@ export type IButtonProps = {
   styleContainer?: any
   textColor?: any
   featherIcon?: any
+  disabled?: boolean
 }
 
-const Button: React.FC<IButtonProps> = ({ text, onPress, styleContainer, textColor, featherIcon }) => {
+const Button: React.FC<IButtonProps> = ({ text, onPress, styleContainer, textColor, featherIcon, disabled }) => {
   return (
-    <Wrapper onPress={onPress} style={{ ...styleContainer }} >
-      <Title color={textColor}>{text}</Title>
-      {featherIcon && <Feather name={featherIcon} size={16} color={textColor ?? colors.COLOR_WHITE} />}
+    <Wrapper
+      disabled={disabled}
+      onPress={onPress}
+      style={{ ...styleContainer }}
+    >
+      <Title disabled={disabled} color={textColor}>{text}</Title>
+      {
+        featherIcon &&
+        <Feather
+          name={featherIcon}
+          size={16}
+          color={textColor ?? colors.COLOR_WHITE}
+          style={{ left: 10 }}
+        />
+      }
     </Wrapper>
   );
 }

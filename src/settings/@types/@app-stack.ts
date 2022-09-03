@@ -15,6 +15,7 @@ export type IAppStackParams = {
   Help: undefined;
   ForgetPassword: { mail: string };
   RemoveOfferInfluencer: { couponId: string },
+  CreateCheckin: IWalletCouponsReponse
 };
 
 
@@ -29,4 +30,6 @@ export type CouponQrScreenProps = StackScreenProps<IAppStackParams, 'CouponQr'>
 export type ForgetPasswordScreenProps = StackScreenProps<IAppStackParams, 'ForgetPassword'>
 
 export type RemoveOfferInfluencerScreenProps = StackScreenProps<IAppStackParams, 'RemoveOfferInfluencer'>
+
+export type CreateCheckinScreenProps = StackScreenProps<IAppStackParams, 'CreateCheckin'>
 

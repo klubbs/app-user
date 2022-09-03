@@ -15,14 +15,18 @@ import { SelectorDaysWeek } from '../../components/selector-days-week';
 
 export const CardOffers: React.FC<ICardOffersProps> = (props) => {
 
+  function handleSelector(isSelected: boolean) {
+    if (props.onPress) {
+      props.onPress(isSelected)
+    }
+  }
+
   return (
     <WrapperCard key={props.master_coupon_id}>
       <TopContainer>
         <ShopIcon width={15} height={15} fill={colors.COLOR_YELLOW} />
         <Name>{props?.establishment_name}</Name>
-        <Selector
-          onPress={(isSelected: boolean) => props.onPress ? props.onPress(isSelected) : null}
-        />
+        <Selector onPress={handleSelector} />
       </TopContainer>
 
       <BottomContainer>

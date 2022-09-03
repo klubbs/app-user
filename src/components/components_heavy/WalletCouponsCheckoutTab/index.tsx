@@ -3,7 +3,14 @@ import { View } from 'react-native'
 import { IUserCheckoutsReponse } from '../../../services/@types/@coupon-services';
 import { CouponService } from '../../../services/coupon-service';
 import { CouponsCheckoutItems } from '../../components/CouponCheckout';
-import { CheckoutsFlatList, NothingTransactionSubtitle, SpaceSkeleton, LineSkeleton, SquareSkeleton, WrapperSkeleton } from './styles';
+import {
+  CheckoutsFlatList,
+  NothingTransactionSubtitle,
+  SpaceSkeleton,
+  LineSkeleton,
+  SquareSkeleton,
+  WrapperSkeleton
+} from './styles';
 
 export const CouponsCheckout: React.FC = () => {
 
@@ -51,8 +58,8 @@ export const CouponsCheckout: React.FC = () => {
   return (
     <CheckoutsFlatList
       data={checkouts}
-      onRefresh={() => onRefreshCheckouts()}
       refreshing={refresh}
+      onRefresh={onRefreshCheckouts}
       keyExtractor={(item: IUserCheckoutsReponse, index: number) => item.checkout_id}
       ListEmptyComponent={({ item }: { item: IUserCheckoutsReponse }) => <NothingTransactionSubtitle>Nenhuma transação ainda</NothingTransactionSubtitle>}
       renderItem={({ item }: { item: IUserCheckoutsReponse }) =>

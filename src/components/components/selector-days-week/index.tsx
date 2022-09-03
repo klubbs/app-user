@@ -1,10 +1,17 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Selector } from '../selector';
 
 import { Wrapper, Container, Text, WrapperSelector } from './styles';
 
-export const SelectorDaysWeek: React.FC<{ cb?: (day: number) => void, hasSelector?: boolean, initSelectedDays?: number[] }> =
-  ({ cb, hasSelector = true, initSelectedDays = [] }) => {
+export const SelectorDaysWeek: React.FC<{
+  cbSelectDay?: (day: number) => void,
+  hasSelector?: boolean,
+  initSelectedDays?: number[]
+}> = ({
+  cbSelectDay,
+  hasSelector = true,
+  initSelectedDays = []
+}) => {
 
     const [days, setDays] = useState([
       { txt: 'SEG', selected: false, value: 1 },
@@ -19,22 +26,32 @@ export const SelectorDaysWeek: React.FC<{ cb?: (day: number) => void, hasSelecto
     useEffect(() => {
 
       if (initSelectedDays.length > 0) {
-        const temp = days.map(item => {
-          const match = initSelectedDays.find(i => i === item.value)
+        setDays(
+          days.map(item => {
+            const match = initSelectedDays.find(i => i === item.value)
 
-          if (match !== undefined) {
-            item.selected = true
-          }
+            if (match !== undefined) {
+              item.selected = true
+            }
 
-          return item;
-        })
-
-        setDays(temp)
-
+            return item;
+          })
+        )
       }
 
     }, [])
 
+    function handleSelect(item: { txt: string, selected: boolean, value: number }, index: number) {
+      if (cbSelectDay) {
+        cbSelectDay(item.value)
+      }
+
+      let newState = [...days];
+
+      newState[index].selected = !item.selected;
+
+      setDays(newState)
+    }
 
     return (
       <Wrapper autoSpacing={initSelectedDays.length > 0}>
@@ -46,18 +63,7 @@ export const SelectorDaysWeek: React.FC<{ cb?: (day: number) => void, hasSelecto
                   <Text>{item.txt}</Text>
                 </Container>
 
-                {hasSelector &&
-                  <Selector onPress={() => {
-                    if (cb) {
-                      cb(item.value)
-                    }
-                    let newState = [...days];
-
-                    newState[index].selected = !item.selected;
-
-                    setDays(newState)
-                  }} />
-                }
+                {hasSelector && <Selector onPress={() => handleSelect(item, index)} />}
               </WrapperSelector>
             )
 
@@ -67,23 +73,12 @@ export const SelectorDaysWeek: React.FC<{ cb?: (day: number) => void, hasSelecto
           initSelectedDays.length > 0 && days.map((item, index) => {
             if (item.selected) {
               return (
-                <WrapperSelector key={index} autoSpacing={true}>
+                <WrapperSelector key={index} autoSpacing={true} >
                   <Container active={item.selected}>
                     <Text>{item.txt}</Text>
                   </Container>
 
-                  {hasSelector &&
-                    <Selector onPress={() => {
-                      if (cb) {
-                        cb(item.value)
-                      }
-                      let newState = [...days];
-
-                      newState[index].selected = !item.selected;
-
-                      setDays(newState)
-                    }} />
-                  }
+                  {hasSelector && <Selector onPress={() => handleSelect(item, index)} />}
                 </WrapperSelector>
               )
             }

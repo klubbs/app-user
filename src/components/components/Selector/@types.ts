@@ -3,5 +3,3 @@ export type ISelectorProps = {
   style?: any,
   toggle?: boolean
 }
-
-export type ISelectorRefs = { disabledSelect(): void }

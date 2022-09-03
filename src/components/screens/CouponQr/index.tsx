@@ -7,6 +7,7 @@ import { AuthContext } from '../../../contexts/auth-context';
 import { UserIcon } from '../../../../assets/icons/user_icon';
 import { IWalletCouponsResponseOfferData } from '../../../services/@types/@coupon-services';
 import { QrCouponBackground } from '../../../../assets/images/backgrounds/backgroundQrCoupon';
+import { useNavigation } from '@react-navigation/native';
 import {
   ContainerCoupon,
   Wrapper,
@@ -24,6 +25,7 @@ let key = 0;
 
 export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
 
+  const navigation = useNavigation()
   const { user } = useContext(AuthContext)
   const [activeOffer, setActiveOffer] = useState<IWalletCouponsResponseOfferData | null>(null)
 
@@ -51,6 +53,10 @@ export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
     return <></>
   }
 
+  function handleNavigateCheckin() {
+    navigation.navigate('CreateCheckin', route.params)
+  }
+
   return (
     <Wrapper>
       <ContainerCoupon>
@@ -73,7 +79,7 @@ export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
         }}
       />
       <SubtitleHelp>Atente o estabelecimento de concluir o checkout</SubtitleHelp>
-      <PreCheckoutButton onPress={() => { }} />
+      <PreCheckoutButton onPress={handleNavigateCheckin} />
       <RenderModalIfEnable />
     </Wrapper>
   );

@@ -84,7 +84,7 @@ export const ModalAddCoupon = React.forwardRef<IModalAddCouponRef, IModalAddCoup
           <Input
             autoCorrect={false}
             value={value}
-            onChangeText={(e) => setValue(e.toUpperCase().trim())}
+            onChangeText={(e: string) => setValue(e.toUpperCase().trim())}
           />
           <ButtonStorage onPress={() => props.isInfluencer ? onCreateNewCoupon() : onSaveCoupon()} size={25} />
         </Container>

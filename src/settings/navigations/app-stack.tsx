@@ -14,6 +14,7 @@ import { SettingsScreen } from '../../components/screens/Settings';
 import { HelpScreen } from '../../components/screens/Help';
 import { ForgetPasswordScreen } from '../../components/screens/ForgetPassword';
 import { RemoveOfferInfluencerScreen } from '../../components/screens/RemoveOfferInfluencer';
+import { CreateCheckin } from '../../components/screens/create-checkin';
 
 
 
@@ -23,8 +24,10 @@ const DEFAULT_OPTIONS = {
   headerTransparent: true,
   headerBackTitleVisible: false,
   headerTintColor: colors.COLOR_YELLOW,
-  headerTitleStyle: { color: 'transparent', width: 0 }
+  headerTitleStyle: { color: 'transparent', width: 0 },
 }
+
+const STYLE_OPTIONS = { color: colors.COLOR_SECUNDARY_BLACK, fontFamily: 'Nunito_SemiBold' }
 
 const App: React.FC<{}> = () => {
   return (
@@ -39,7 +42,16 @@ const App: React.FC<{}> = () => {
       <AppStack.Screen name='Help' component={HelpScreen} />
       <AppStack.Screen name='ForgetPassword' component={ForgetPasswordScreen} />
       <AppStack.Screen name='Influencer' component={Influencer} />
-      <AppStack.Screen name='RemoveOfferInfluencer'
+      <AppStack.Screen
+        name='CreateCheckin'
+        component={CreateCheckin}
+        options={{
+          headerTitle: 'Criar check-in',
+          headerTitleStyle: STYLE_OPTIONS
+        }}
+      />
+      <AppStack.Screen
+        name='RemoveOfferInfluencer'
         component={RemoveOfferInfluencerScreen}
         options={{ headerTintColor: colors.COLOR_WHITE }}
       />

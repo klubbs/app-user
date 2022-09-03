@@ -88,12 +88,13 @@ export const ContainerQr = styled.View<{ distanceInBottom: boolean }>`
 `
 
 export const PreCheckoutButton = styled(Button).attrs(({
-  text: 'PRÉ-CHECKOUT',
+  text: 'CHECK-IN',
   featherIcon: 'clipboard',
   textColor: colors.COLOR_WHITE,
+  activeOpacity: 0.5,
   styleContainer: {
     backgroundColor: colors.COLOR_BLACK,
-    width: '60%',
+    width: '40%',
     position: 'absolute',
     bottom: '6%'
   }
