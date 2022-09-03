@@ -106,7 +106,7 @@ export const ModalLinkOfferCoupon = React.forwardRef<IModalLinkCouponOffersRef, 
         {
           !item?.empty &&
           <Container>
-            <SelectorCoupon toggle={isToggleSelected} onPress={() => handleSelectCoupon(item)} />
+            <SelectorCoupon toggle={isToggleSelected} onPress={(_val) => handleSelectCoupon(item)} />
             <Coupon
               toggle={true}
               isActiveByToggle={isToggleSelected}
