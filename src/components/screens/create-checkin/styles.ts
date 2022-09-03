@@ -65,7 +65,9 @@ export const UserAmount = styled(TextInputMask).attrs(({
   font-family:'Nunito_Bold';
 `
 
-export const WrapperOffer = styled.View`
+export const WrapperOffer = styled.TouchableOpacity.attrs(({
+  activeOpacity: 0.9
+}))`
   width: ${Dimensions.get('window').width * 0.95};
   height: 70px;
   flex-direction: row;

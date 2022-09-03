@@ -8,7 +8,7 @@ import {
 } from './styles';
 import { NotificationsFlash } from '../../../utils/flash-notifications';
 import { Pressable, Dimensions } from 'react-native';
-import { GetAllCouponsByInfluencerResponse, IModalCouponsPartnersRef } from './@types';
+import { CouponAndOffersByInfluencerResponse, IModalCouponsPartnersRef } from './@types';
 import { SpinnerLoading } from '../../components/spinner';
 import { useNavigation } from '@react-navigation/native';
 import { InfluencerContext } from '../../../contexts/influencer-context';
@@ -69,28 +69,26 @@ export const ModalCouponsPartners = React.forwardRef<IModalCouponsPartnersRef, {
     setTimeout(() => setActiveCopy({ ...activeCopy, [id]: false }), 1000)
   }
 
-  function ItemRender(item: GetAllCouponsByInfluencerResponse): JSX.Element {
-
-    const couponId = item.coupon_id
+  function ItemRender(item: CouponAndOffersByInfluencerResponse): JSX.Element {
 
     return (
       <Container
-        key={couponId}
-        onPress={() => navigation.navigate('RemoveOfferInfluencer', { couponId: couponId })}
+        key={item.coupon_id}
+        onPress={() => navigation.navigate('RemoveOfferInfluencer', { couponId: item.coupon_id })}
       >
         <ContainerCouponInformation>
           <Code>{item.coupon_code}</Code>
         </ContainerCouponInformation>
         <ContainerShop>
-          <ShopSubtitle>{item.master_coupons.length}</ShopSubtitle>
+          <ShopSubtitle>{item.offers.length}</ShopSubtitle>
           <ShopSubtitleIcon />
         </ContainerShop>
         <ContainerPressable>
-          <Pressable onPress={() => onHandleCopy(item.coupon_code, couponId)}>
+          <Pressable onPress={() => onHandleCopy(item.coupon_code, item.coupon_id)}>
             {
-              !activeCopy[couponId]
+              !activeCopy[item.coupon_id]
                 ? <Copy />
-                : <MotiView key={couponId} state={animationState}
+                : <MotiView key={item.coupon_id} state={animationState}
                   onDidAnimate={() => animationState.transitionTo('from')}
                   transition={{ duration: 150, type: 'timing' }}
                 >

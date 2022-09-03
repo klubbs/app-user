@@ -1,17 +1,17 @@
 import React, { createContext, useState } from "react"
-import { GetAllCouponsByInfluencerResponse } from "../components/modals/modal-coupons-partners/@types"
+import { CouponAndOffersByInfluencerResponse } from "../components/modals/modal-coupons-partners/@types"
 import { InfluencerService } from "../services/influencer-service"
 
 
 export const InfluencerContext = createContext({} as {
-    coupons: GetAllCouponsByInfluencerResponse[],
+    coupons: CouponAndOffersByInfluencerResponse[],
     removeOffer: (couponId: string, offerId: string) => void,
     getAllCoupons: () => Promise<void>
 })
 
 const InfluencerProvider: React.FC = ({ children }) => {
 
-    const [coupons, setCoupons] = useState<GetAllCouponsByInfluencerResponse[]>([])
+    const [coupons, setCoupons] = useState<CouponAndOffersByInfluencerResponse[]>([])
 
 
     async function getAllCoupons() {
@@ -34,9 +34,9 @@ const InfluencerProvider: React.FC = ({ children }) => {
 
         const coupon = coupons[index]
 
-        const offerIndex = coupon.master_coupons.findIndex(i => i.master_coupon_id === offerId)
+        const offerIndex = coupon.offers.findIndex(i => i.offer_id === offerId)
 
-        coupon.master_coupons.splice(offerIndex, 1)
+        coupon.offers.splice(offerIndex, 1)
 
         setCoupons(coupons)
     }

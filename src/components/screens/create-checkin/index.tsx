@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import * as Location from 'expo-location';
+import { LocationAccuracy, LocationObject } from 'expo-location';
 import { Platform } from 'react-native';
 import { IWalletCouponsResponseOfferData } from '../../../services/@types/@coupon-services';
+import { CheckoutExceptions, CheckoutService } from '../../../services/checkout-service';
 import { CreateCheckinScreenProps } from '../../../settings/@types/@app-stack';
 import Button from '../../components/Button';
 import OFF from '../../components/OFF';
 import { Selector } from '../../components/selector';
+import { Spinner } from '../../components/spinner';
 import {
     Subtitle,
     Wrapper,
@@ -20,25 +24,51 @@ import {
     StoreName,
     StoreTicket
 } from './styles';
+import { Middlewares } from '../../../utils/middlewares';
+import { IError } from '../../../settings/@types/@responses';
 
 export const CreateCheckin: React.FC<CreateCheckinScreenProps> = ({ route }) => {
 
     const [selectedOfferId, setSelectedOfferId] = useState<string>('')
     const [userAmount, setUserAmount] = useState<string>('')
 
-    const disabledButton = userAmount.trim() === '' || userAmount.trim() === '0' ? true : false;
+    const [loading, setLoading] = useState(false)
+
+    const disabledButton = userAmount.trim() === '' || selectedOfferId === '';
+
+    async function handleCheckin() {
+
+        if (userAmount.trim() === '' || selectedOfferId === '') {
+            return;
+        }
+
+        try {
+            setLoading(true)
+
+            const location = await Location.getCurrentPositionAsync({ accuracy: LocationAccuracy.Balanced });
+
+            const checkinId = await CheckoutService.createCheckin(
+                Number(userAmount),
+                selectedOfferId,
+                route.params.coupon_id,
+                location.coords.latitude,
+                location.coords.longitude
+            );
+        }
+        catch (error) {
+            CheckoutExceptions.handleCreateCheckin(error as IError)
+        }
+        finally {
+            setLoading(false)
+        }
+
+    }
 
     function RenderOffer({ item }: { item: IWalletCouponsResponseOfferData }) {
 
-        function handleSelect(active: boolean) {
-
-            console.log('SERA QUE FOI')
-        }
-
-
         return (
-            <WrapperOffer>
-                <Selector toggle={selectedOfferId == item.offer_id} onPress={() => { }} />
+            <WrapperOffer onPress={() => setSelectedOfferId(item.offer_id)}>
+                <Selector toggle={selectedOfferId == item.offer_id} />
                 <StoreImage />
                 <WrapperOfferContainer>
                     <StoreName>{item.store_name}</StoreName>
@@ -60,6 +90,7 @@ export const CreateCheckin: React.FC<CreateCheckinScreenProps> = ({ route }) => 
 
     return (
         <Wrapper>
+            <Spinner loading={loading} />
             <Subtitle>Informe o valor total do pedido e a oferta</Subtitle>
 
             <ContainerTop>
@@ -81,7 +112,7 @@ export const CreateCheckin: React.FC<CreateCheckinScreenProps> = ({ route }) => 
                 <Button
                     disabled={disabledButton}
                     text='Concluir'
-                    onPress={() => { }}
+                    onPress={handleCheckin}
                 />
 
             </ContainerBottom>

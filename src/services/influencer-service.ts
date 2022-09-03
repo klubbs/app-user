@@ -1,4 +1,4 @@
-import { GetAllCouponsByInfluencerResponse } from "../components/modals/modal-coupons-partners/@types";
+import { CouponAndOffersByInfluencerResponse } from "../components/modals/modal-coupons-partners/@types";
 import { IError, IResponseMessage } from "../settings/@types/@responses";
 import * as Haptic from 'expo-haptics';
 import { NotificationsFlash } from "../utils/flash-notifications";
@@ -11,10 +11,10 @@ export class InfluencerService {
     await connectionHandler('KLUBBS_API_URL').post('influencer/coupons', { code: code })
   }
 
-  static async getAllCouponsByInfluencer(): Promise<GetAllCouponsByInfluencerResponse[]> {
+  static async getAllCouponsByInfluencer(): Promise<CouponAndOffersByInfluencerResponse[]> {
 
     const { data } = await connectionHandler('KLUBBS_API_URL')
-      .get<IResponseMessage<GetAllCouponsByInfluencerResponse[]>>('influencer/coupons');
+      .get<IResponseMessage<CouponAndOffersByInfluencerResponse[]>>('influencer/coupons');
 
     return data.message;
   }

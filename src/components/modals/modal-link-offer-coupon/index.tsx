@@ -22,6 +22,7 @@ import {
   Cancel,
   HeaderContainer
 } from './styles';
+import { IWalletCouponsReponse, IWalletCouponsResponseOfferData } from '../../../services/@types/@coupon-services';
 
 
 export const ModalLinkOfferCoupon = React.forwardRef<IModalLinkCouponOffersRef, IModalLinkCouponOffersProps>((props, ref) => {
@@ -80,15 +81,10 @@ export const ModalLinkOfferCoupon = React.forwardRef<IModalLinkCouponOffersRef, 
     setSelectedCoupon(coupon.coupon_id)
     setDisableSave(false)
 
-    coupon.master_coupons.forEach(element => {
+    coupon.offers.forEach(element => {
 
       props.masterCoupons.forEach(subElement => {
-
-        if (element.establishment_id === subElement.establishmentId) {
-          setDisableSave(true)
-          return;
-        }
-
+        setDisableSave(element.store_id === subElement.establishmentId)
       })
 
     });
@@ -106,17 +102,18 @@ export const ModalLinkOfferCoupon = React.forwardRef<IModalLinkCouponOffersRef, 
         {
           !item?.empty &&
           <Container>
-            <SelectorCoupon toggle={isToggleSelected} onPress={(_val) => handleSelectCoupon(item)} />
+            <SelectorCoupon toggle={isToggleSelected} />
             <Coupon
               toggle={true}
               isActiveByToggle={isToggleSelected}
               onPress={() => handleSelectCoupon(item)}
               data={
                 {
+                  wallet_id: '',
                   coupon_id: item.coupon_id,
                   coupon_code: item.coupon_code,
                   partner_image: '', //TODO Adicionar imagem do influencer aqui
-                  offers: item.master_coupons
+                  offers: item.offers as unknown as IWalletCouponsResponseOfferData[]
                 }
               }
             />

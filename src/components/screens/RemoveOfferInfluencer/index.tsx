@@ -10,7 +10,7 @@ import { InfluencerService } from '../../../services/influencer-service';
 import { NotificationsFlash } from '../../../utils/flash-notifications';
 import * as Haptic from 'expo-haptics';
 import { InfluencerContext } from '../../../contexts/influencer-context';
-import { GetAllCouponsByInfluencerResponse, OffersCouponInfluencerResponse } from '../../modals/modal-coupons-partners/@types';
+import { CouponAndOffersByInfluencerResponse, OffersCouponInfluencerResponse } from '../../modals/modal-coupons-partners/@types';
 import {
     Wrapper,
     ContainerBottom,
@@ -27,7 +27,7 @@ export const RemoveOfferInfluencerScreen: React.FC<RemoveOfferInfluencerScreenPr
 
     const { coupons, removeOffer } = useContext(InfluencerContext)
 
-    const [selectedCoupon, setSelectedCoupon] = useState<GetAllCouponsByInfluencerResponse | null>(null)
+    const [selectedCoupon, setSelectedCoupon] = useState<CouponAndOffersByInfluencerResponse | null>(null)
     const [loading, setLoading] = useState(false)
 
 
@@ -45,18 +45,18 @@ export const RemoveOfferInfluencerScreen: React.FC<RemoveOfferInfluencerScreenPr
 
         function RemoveAction() {
             return (
-                <DisableActionContainer onPress={() => handleRemoveOffer(item.master_coupon_id)}>
+                <DisableActionContainer onPress={() => handleRemoveOffer(item.offer_id)}>
                     <Feather name='trash-2' size={20} color={colors.COLOR_BLACK80} />
                 </DisableActionContainer >
             )
         }
 
         function HandleImage() {
-            if (item.establishment_image) {
+            if (item.store_image) {
                 return (
                     <ContainerStoreImage>
                         <StoreImage
-                            source={{ uri: `https://klubbs-establishment.s3.amazonaws.com/${item.establishment_image}` }}
+                            source={{ uri: `https://klubbs-establishment.s3.amazonaws.com/${item.store_image}` }}
                         />
                     </ContainerStoreImage>
                 )
@@ -71,20 +71,20 @@ export const RemoveOfferInfluencerScreen: React.FC<RemoveOfferInfluencerScreenPr
         }
 
         return (
-            <Swipeable key={item.master_coupon_id} renderRightActions={() => { return (<RemoveAction />) }}>
+            <Swipeable key={item.offer_id} renderRightActions={() => { return (<RemoveAction />) }}>
                 <ItemContainer >
                     <ContainerStoreOffers>
                         <HandleImage />
                         <Store>
-                            {item.establishment_name.substring(0, STORE_SIZE_CHARACTERS)}
-                            {item.establishment_name.length > STORE_SIZE_CHARACTERS ? '...' : ''}
+                            {item.store_name.substring(0, STORE_SIZE_CHARACTERS)}
+                            {item.store_name.length > STORE_SIZE_CHARACTERS ? '...' : ''}
                         </Store>
                     </ContainerStoreOffers>
                     <ContainerSubtitleOffers>
-                        <OFF off={item.master_coupon_off_percentual} />
-                        <ValidAt isValid={new Date().ToUnixEpoch() < item.master_coupon_valid_at}>{
+                        <OFF off={item.offer_discount} />
+                        <ValidAt isValid={new Date().ToUnixEpoch() < item.offer_valid_at}>{
                             item
-                                .master_coupon_valid_at
+                                .offer_valid_at
                                 .ToDateFormat()
                                 .toCustomLocaleDateString()}
                         </ValidAt>
@@ -106,6 +106,7 @@ export const RemoveOfferInfluencerScreen: React.FC<RemoveOfferInfluencerScreenPr
             removeOffer(props.route.params.couponId, id)
 
         } catch (error) {
+            console.log(error)
             NotificationsFlash.disconnectedWire()
         } finally {
             setLoading(false)
@@ -122,7 +123,7 @@ export const RemoveOfferInfluencerScreen: React.FC<RemoveOfferInfluencerScreenPr
             <ContainerBottom>
 
                 <FlatList
-                    data={selectedCoupon?.master_coupons}
+                    data={selectedCoupon?.offers}
                     ItemSeparatorComponent={() => <SeparatorComponet />}
                     ListEmptyComponent={() => <EmptyText>Nenhuma oferta associada ainda</EmptyText>}
                     renderItem={({ item }: { item: OffersCouponInfluencerResponse }) => { return <ItemList item={item} /> }}
