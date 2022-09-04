@@ -4,6 +4,7 @@ import { colors } from "../../../../assets/constants/colors";
 import { Skeleton } from '@motify/skeleton';
 import { MotiView } from 'moti'
 import { Dimensions } from "react-native";
+import { CouponIcon } from "../../../../assets/icons/coupon_icon";
 
 
 export const Wrapper = styled.View`
@@ -29,14 +30,15 @@ export const Line = styled.View`
 
 export const RightContainer = styled.View`
   flex: 1;
-  flex-direction: row;
-  align-items: center;
-  align-content: flex-start;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+  right:10%;
 `;
 
 
 export const ContainerLeft = styled.View`
-  flex: 0.2;
+  flex: 0.15;
   justify-content: flex-end;
   align-items: center;
 `;
@@ -94,12 +96,12 @@ export const EstablishmentImage = styled.Image`
 export const WrapperOffer = styled.TouchableOpacity.attrs(({
   activeOpacity: 0.9
 }))`
-  width: ${Dimensions.get('window').width * 0.95};
+/* ${Dimensions.get('window').width} */
+  background-color:white ;
+  width: 95%;
   height: 70px;
   flex-direction: row;
-  justify-content: center;
   align-items:center;
-  margin-bottom: 10px ;
   border-radius:5px;
   padding:2px;
 `
@@ -109,20 +111,22 @@ export const StoreImage = styled.Image.attrs(({
 }))`
   flex:0.2;
   height:100%;
-  margin-left: 10px;
   border-top-left-radius:5px ;
   border-bottom-left-radius:5px ;
 `
 
-export const WrapperOfferContainer = styled.View`
+export const WrapperOfferContainer = styled.View<{ color: 'GREEN' | 'YELLOW' }>`
   flex:0.8;
   height:100%;
-  border-top-right-radius:5px ;
-  border-bottom-right-radius:5px ;
-  background-color: ${colors.COLOR_BLACK10};
-  align-items:center ;
-  justify-content:space-evenly ;
-  flex-direction:row;
+  background-color: ${colors.COLOR_BLACK5};
+  border-top-right-radius:2px ;
+  border-bottom-right-radius:2px ;
+  padding-left:2%;
+  padding-right:2%;
+  align-items:flex-start;
+  justify-content:center;
+  border-right-width:5px ;
+  border-right-color:  ${props => props.color == 'GREEN' ? colors.COLOR_GREEN : colors.COLOR_YELLOW};
 `
 
 export const StoreName = styled.Text.attrs(({ numberOfLines: 3 }))`
@@ -132,8 +136,44 @@ export const StoreName = styled.Text.attrs(({ numberOfLines: 3 }))`
   max-width: 90;
 `
 
-export const StoreTicket = styled.Text`
-  color:${colors.COLOR_BLACK50};
+export const BoldText = styled.Text<{ typeGreen?: boolean }>`
+  color: ${colors.COLOR_BLACK40};
   font-size:12px;
-  font-family:'Nunito_Bold';
+  font-family:'Nunito_ExtraBold';
 `
+
+export const ContaineOfferTop = styled.View`
+  flex:0.5
+  justify-content:flex-end;
+`
+
+export const ContaineOfferBottom = styled.View`
+  flex:1
+  width:100%;
+  flex-direction:row;
+  align-items:center;
+  justify-content:space-between;
+`
+
+export const TextBoxContainer = styled.View<{ type: 'GREEN' | 'YELLOW' }>`
+  height: 24px;
+  padding-left:5px;
+  padding-right:5px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  flex-direction:row ;
+  background-color: ${props => props.type == 'GREEN' ? colors.COLOR_GREEN : colors.COLOR_YELLOW};
+`
+export const TextBox = styled.Text<{ type: 'GREEN' | 'YELLOW' }>`
+  color:${props => props.type == 'GREEN' ? colors.COLOR_SECOND_GREEN : colors.COLOR_YELLOW_BUTTON_TEXT};
+  font-size:13px;
+  font-family:'Nunito_ExtraBold';
+`
+
+
+export const CouponStyled = styled(CouponIcon).attrs<{ type: 'GREEN' | 'YELLOW' }>(props => ({
+  fill: props.type == 'GREEN' ? colors.COLOR_SECOND_GREEN : colors.COLOR_YELLOW_BUTTON_TEXT,
+  width: 20,
+  height: 12
+}))``
