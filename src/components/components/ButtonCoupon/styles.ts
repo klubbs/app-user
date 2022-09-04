@@ -8,8 +8,8 @@ export const Wrapper = styled.TouchableOpacity.attrs(() => ({
     background-color: ${colors.COLOR_YELLOW};
     align-items: center;
     justify-content: center;
-    border-radius: 8px;
+    border-radius: 5px;
     z-index:10px;
-    width: ${props => props.size ? `${props.size * 2}px` : '45px'};
+    width: ${props => props.size ? `${props.size * 2}px` : '55px'};
     height: ${props => props.size ? `${props.size * 2}px` : '45px'};
 `

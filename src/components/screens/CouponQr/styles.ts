@@ -87,15 +87,15 @@ export const ContainerQr = styled.View<{ distanceInBottom: boolean }>`
   bottom: ${props => props.distanceInBottom ? Platform.select({ ios: '6.5%', android: PixelRatio.get() === 3 ? '10%' : '7%' }) : 0};
 `
 
-export const PreCheckoutButton = styled(Button).attrs(({
-  text: 'CHECK-IN',
-  featherIcon: 'clipboard',
+export const CheckoutButton = styled(Button).attrs<{ disableCheckin: boolean }>(({ disableCheckin }) => ({
+  text: disableCheckin ? 'CHECKIN EM ANDAMENTO' : 'CHECK-IN',
+  featherIcon: disableCheckin ? 'refresh-ccw' : 'clipboard',
   textColor: colors.COLOR_WHITE,
   activeOpacity: 0.5,
   styleContainer: {
-    backgroundColor: colors.COLOR_BLACK,
-    width: '40%',
+    backgroundColor: disableCheckin ? colors.COLOR_YELLOW_RATING : colors.COLOR_BLACK,
+    width: disableCheckin ? '70%' : '40%',
     position: 'absolute',
     bottom: '6%'
   }
-}))``
+})) <{ disableCheckin: boolean }>``

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import * as Location from 'expo-location';
 import { LocationAccuracy, LocationObject } from 'expo-location';
 import { Platform } from 'react-native';
@@ -24,14 +24,19 @@ import {
     StoreName,
     StoreTicket
 } from './styles';
-import { Middlewares } from '../../../utils/middlewares';
 import { IError } from '../../../settings/@types/@responses';
+import { CheckoutContext } from '../../../contexts/checkout-context';
+import { NotificationsFlash } from '../../../utils/flash-notifications';
+import { useNavigation } from '@react-navigation/native';
 
 export const CreateCheckin: React.FC<CreateCheckinScreenProps> = ({ route }) => {
 
+    const navigation = useNavigation();
+
+    const { handleCheckoutStatus } = useContext(CheckoutContext)
+
     const [selectedOfferId, setSelectedOfferId] = useState<string>('')
     const [userAmount, setUserAmount] = useState<string>('')
-
     const [loading, setLoading] = useState(false)
 
     const disabledButton = userAmount.trim() === '' || selectedOfferId === '';
@@ -54,8 +59,15 @@ export const CreateCheckin: React.FC<CreateCheckinScreenProps> = ({ route }) => 
                 location.coords.latitude,
                 location.coords.longitude
             );
+
+            handleCheckoutStatus({ checkoutId: checkinId, isCheckin: true })
+
+            NotificationsFlash.customMessage('Checkin concluído', 'Agora é só apresentar o QR Code ', 'SUCCESS')
+
+            navigation.goBack();
         }
         catch (error) {
+            console.log(error)
             CheckoutExceptions.handleCreateCheckin(error as IError)
         }
         finally {

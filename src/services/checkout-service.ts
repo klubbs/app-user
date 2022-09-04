@@ -6,7 +6,7 @@ export class CheckoutService {
 
     static async createCheckin(amount: number, offerId: string, couponId: string, lat: number, long: number): Promise<string> {
         const { data } = await connectionHandler('KLUBBS_API_URL')
-            .post<IResponseMessage<string>>('checkouts/checkin',
+            .post<IResponseMessage<{ checkin_id: string }>>('checkouts/checkin',
                 {
                     offer_id: offerId,
                     coupon_id: couponId,
@@ -15,6 +15,13 @@ export class CheckoutService {
                     longitude: long
                 }
             )
+
+        return data.message.checkin_id
+    }
+
+    static async getCheckoutStatus(checkoutId: string) {
+        const { data } = await connectionHandler('KLUBBS_API_URL')
+            .get<IResponseMessage<{ checkout_id: string, is_checkin: boolean }>>('checkouts/status', { params: { checkout: checkoutId } })
 
         return data.message
     }
@@ -25,6 +32,8 @@ export class CheckoutExceptions {
     static handleCreateCheckin(errors: IError) {
 
         const actualError = errors.error[0].field.toLowerCase();
+
+        console.log(actualError, errors.statusCode)
 
         switch (errors.statusCode) {
             case 412:
@@ -39,7 +48,7 @@ export class CheckoutExceptions {
 
                     case 'offer disabled':
                         NotificationsFlash.customMessage(
-                            "Oferta desabilitada",
+                            "Oferta desabilitada 😭",
                             "Esta oferta não é mais válida pelo estabelecimento",
                             'NEUTRAL'
                         )
@@ -47,8 +56,8 @@ export class CheckoutExceptions {
 
                     case 'offer weekday':
                         NotificationsFlash.customMessage(
-                            "Oferta inválida hoje",
-                            "Esta oferta não é válida para hoje",
+                            "Oferta inválida hoje 😢",
+                            "Esta oferta não é válida para esse dia da semana",
                             'NEUTRAL'
                         )
                         break;
@@ -56,13 +65,12 @@ export class CheckoutExceptions {
                     case 'user amount':
                         NotificationsFlash.customMessage(
                             "Valor mínimo",
-                            "Valor total não é um valor mínimo para essa oferta",
+                            "O valor total não é um valor mínimo para essa oferta",
                             'NEUTRAL'
                         )
                         break;
 
                     default:
-                        NotificationsFlash.someoneBullshit()
                         break;
                 }
 
@@ -93,12 +101,10 @@ export class CheckoutExceptions {
                         break;
 
                     default:
-                        NotificationsFlash.someoneBullshit()
                         break;
                 }
 
                 break;
-
 
             default:
 

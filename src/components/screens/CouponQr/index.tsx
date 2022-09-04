@@ -18,16 +18,25 @@ import {
   ContainerImage,
   ContainerQr,
   QRCodeCoupon,
-  PreCheckoutButton
+  CheckoutButton
 } from './styles';
+import { CheckoutContext } from '../../../contexts/checkout-context';
+import { CheckoutService } from '../../../services/checkout-service';
+import { NotificationsFlash } from '../../../utils/flash-notifications';
+import { Spinner } from '../../components/spinner';
 
 let key = 0;
 
 export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
 
   const navigation = useNavigation()
+
   const { user } = useContext(AuthContext)
-  const [activeOffer, setActiveOffer] = useState<IWalletCouponsResponseOfferData | null>(null)
+  const { checkinID, handleCheckoutStatus } = useContext(CheckoutContext)
+
+  const [enableDescriptionOffer, setEnableDescriptionOffer] = useState<IWalletCouponsResponseOfferData | null>(null)
+  const [loading, setLoading] = useState(false)
+  const inLiveCheckin = checkinID !== null;
 
   function RenderInfluencerImage(): JSX.Element {
 
@@ -46,26 +55,60 @@ export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
   }
 
   function RenderModalIfEnable() {
-    if (activeOffer) {
-      return <ModalOfferRulesQrCode data={activeOffer} onClose={() => setActiveOffer(null)} />
+    if (enableDescriptionOffer) {
+      return <ModalOfferRulesQrCode data={enableDescriptionOffer} onClose={() => setEnableDescriptionOffer(null)} />
     }
 
     return <></>
   }
 
-  function handleNavigateCheckin() {
-    navigation.navigate('CreateCheckin', route.params)
+  async function handleGetCheckoutStatus() {
+    try {
+
+      if (!checkinID) {
+        return;
+      }
+
+      setLoading(true)
+
+      const checkoutStatus = await CheckoutService.getCheckoutStatus(checkinID);
+
+      handleCheckoutStatus({ checkoutId: checkoutStatus.checkout_id, isCheckin: checkoutStatus.is_checkin })
+
+      if (checkoutStatus.is_checkin) {
+        NotificationsFlash.customMessage('Checkout em andamento', 'O estabelecimento ainda não finalizou o checkout', 'NEUTRAL')
+      } else {
+        NotificationsFlash.customMessage('Checkout finalizado', 'O estabelecimento finalizou o checkout', 'SUCCESS')
+      }
+
+    } catch (error) {
+      NotificationsFlash.spillCoffee()
+    } finally {
+
+      setLoading(false)
+    }
   }
+
+  async function handleCheckout() {
+
+    if (inLiveCheckin) {
+      await handleGetCheckoutStatus();
+    } else {
+      navigation.navigate('CreateCheckin', route.params)
+    }
+  }
+
 
   return (
     <Wrapper>
+      <Spinner loading={loading} />
       <ContainerCoupon>
         <QrCouponBackground />
       </ContainerCoupon>
 
       <RenderInfluencerImage />
       <ContainerQr distanceInBottom={route.params?.offers?.length <= 0}>
-        <QRCodeCoupon value={`${route?.params?.coupon_id}|${user?.id}`} />
+        <QRCodeCoupon value={`${user?.id}|${checkinID}|${route.params.coupon_id}`} />
       </ContainerQr>
       <FlatListComponent
         data={route.params?.offers}
@@ -73,13 +116,13 @@ export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
         renderItem={({ item }: { item: IWalletCouponsResponseOfferData }) => {
           return (
             <AnimatedWrapper key={key}>
-              <StoreCardInQrCode {...item} onPress={() => setActiveOffer(item)} />
+              <StoreCardInQrCode {...item} onPress={() => setEnableDescriptionOffer(item)} />
             </AnimatedWrapper>
           )
         }}
       />
       <SubtitleHelp>Atente o estabelecimento de concluir o checkout</SubtitleHelp>
-      <PreCheckoutButton onPress={handleNavigateCheckin} />
+      <CheckoutButton onPress={handleCheckout} disableCheckin={inLiveCheckin} />
       <RenderModalIfEnable />
     </Wrapper>
   );

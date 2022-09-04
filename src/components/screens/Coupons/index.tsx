@@ -28,8 +28,8 @@ export const Coupons: React.FC = () => {
       </HeaderContainer>
 
       <Tab.Navigator tabBarOptions={tabStyle} >
-        <Tab.Screen name="Carteira" children={() => <CouponsWalletTab />} />
-        <Tab.Screen name="Utilizados" children={() => <CouponsCheckout />} />
+        <Tab.Screen name="Carteira de Cupons" children={() => <CouponsWalletTab />} />
+        <Tab.Screen name="Checkouts" children={() => <CouponsCheckout />} />
       </Tab.Navigator>
       <ModalAddCoupon ref={modalRef} isInfluencer={false} />
     </SafeArea>

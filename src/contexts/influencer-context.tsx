@@ -1,6 +1,7 @@
 import React, { createContext, useState } from "react"
 import { CouponAndOffersByInfluencerResponse } from "../components/modals/modal-coupons-partners/@types"
 import { InfluencerService } from "../services/influencer-service"
+import { NotificationsFlash } from "../utils/flash-notifications"
 
 
 export const InfluencerContext = createContext({} as {
@@ -22,7 +23,7 @@ const InfluencerProvider: React.FC = ({ children }) => {
             setCoupons(response)
 
         } catch (error) {
-
+            NotificationsFlash.spillCoffee();
         }
     }
 

@@ -6,7 +6,7 @@ class NotificationsFlash {
     showFlash({ type: 'WARNING', title: 'Acho que alguém fez besteira', desc: 'Já estamos resolvendo este problema, desculpe.' })
 
   static spillCoffee = () =>
-    showFlash({ type: 'DANGER', title: 'Caiu café aqui', desc: 'Desculpe, já estamos limpando a bagunça.' })
+    showFlash({ type: 'DANGER', title: 'Caiu café no teclado', desc: 'Desculpe, já estamos limpando a bagunça.' })
 
   static disconnectedWire = () =>
     showFlash({ type: 'NEUTRAL', title: 'Um fio desconectou', desc: 'Tente novamente mais tarde.' })

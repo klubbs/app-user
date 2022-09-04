@@ -9,6 +9,7 @@ import AppStack from "./src/settings/navigations/app-stack";
 import { colors } from "./assets/constants/colors";
 import { InfluencerProvider } from "./src/contexts/influencer-context";
 import FlashComponent from 'flash-notify'
+import { CheckoutProvider } from './src/contexts/checkout-context';
 
 LogBox.ignoreLogs(['Expected style']);
 
@@ -41,15 +42,17 @@ export default function App() {
   return (
     <AuthProvider>
       <InfluencerProvider>
-        <NavigationContainer>
-          <StatusBar
-            backgroundColor={colors.COLOR_SECUNDARY_WHITE}
-            animated={true}
-            barStyle={'dark-content'}
-          />
-          <AppStack />
-        </NavigationContainer >
-        <FlashComponent />
+        <CheckoutProvider>
+          <NavigationContainer>
+            <StatusBar
+              backgroundColor={colors.COLOR_SECUNDARY_WHITE}
+              animated={true}
+              barStyle={'dark-content'}
+            />
+            <AppStack />
+          </NavigationContainer >
+          <FlashComponent />
+        </CheckoutProvider>
       </InfluencerProvider>
     </AuthProvider>
   );
