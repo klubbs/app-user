@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View } from 'react-native'
 import { IUserCheckoutsReponse } from '../../../services/@types/@coupon-services';
 import { CouponService } from '../../../services/coupon-service';
-import { CouponsCheckoutItems } from '../../components/CouponCheckout';
+import { CardCheckoutOffer } from '../../components/card-checkout-offer';
 import {
   CheckoutsFlatList,
   NothingTransactionSubtitle,
@@ -63,7 +63,7 @@ export const CouponsCheckout: React.FC = () => {
       keyExtractor={(item: IUserCheckoutsReponse, index: number) => item.checkout_id}
       ListEmptyComponent={({ item }: { item: IUserCheckoutsReponse }) => <NothingTransactionSubtitle>Nenhuma transação ainda</NothingTransactionSubtitle>}
       renderItem={({ item }: { item: IUserCheckoutsReponse }) =>
-        <CouponsCheckoutItems data={item} />
+        <CardCheckoutOffer data={item} />
       }
     />
   );

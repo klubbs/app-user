@@ -3,6 +3,7 @@ import styled from "styled-components/native";
 import { colors } from "../../../../assets/constants/colors";
 import { Skeleton } from '@motify/skeleton';
 import { MotiView } from 'moti'
+import { Dimensions } from "react-native";
 
 
 export const Wrapper = styled.View`
@@ -90,3 +91,49 @@ export const EstablishmentImage = styled.Image`
   border-radius:40px;
 `
 
+export const WrapperOffer = styled.TouchableOpacity.attrs(({
+  activeOpacity: 0.9
+}))`
+  width: ${Dimensions.get('window').width * 0.95};
+  height: 70px;
+  flex-direction: row;
+  justify-content: center;
+  align-items:center;
+  margin-bottom: 10px ;
+  border-radius:5px;
+  padding:2px;
+`
+
+export const StoreImage = styled.Image.attrs(({
+  source: { uri: 'https://lh5.googleusercontent.com/p/AF1QipM1diGCOLMQgMYDZFQGn8F2mHWzeU4u5p9UAaJS=w480-h520-p-k-no' }
+}))`
+  flex:0.2;
+  height:100%;
+  margin-left: 10px;
+  border-top-left-radius:5px ;
+  border-bottom-left-radius:5px ;
+`
+
+export const WrapperOfferContainer = styled.View`
+  flex:0.8;
+  height:100%;
+  border-top-right-radius:5px ;
+  border-bottom-right-radius:5px ;
+  background-color: ${colors.COLOR_BLACK10};
+  align-items:center ;
+  justify-content:space-evenly ;
+  flex-direction:row;
+`
+
+export const StoreName = styled.Text.attrs(({ numberOfLines: 3 }))`
+  color:${colors.COLOR_SECUNDARY_BLACK};
+  font-size:14px;
+  font-family:'Nunito_Bold';
+  max-width: 90;
+`
+
+export const StoreTicket = styled.Text`
+  color:${colors.COLOR_BLACK50};
+  font-size:12px;
+  font-family:'Nunito_Bold';
+`
