@@ -13,18 +13,18 @@ export const Wrapper = styled.View`
   flex-direction: row;
 `;
 
-export const Dot = styled.View`
+export const Dot = styled.View<{ type: 'GREEN' | 'YELLOW' }>`
   width: 5px;
   height: 5px;
   border-radius: 2.5px;
-  background-color: ${colors.COLOR_BLACK40};
+  background-color:${props => props.type == 'GREEN' ? colors.COLOR_GREEN : colors.COLOR_YELLOW};;
 `;
 
 
-export const Line = styled.View`
+export const Line = styled.View<{ type: 'GREEN' | 'YELLOW' }>`
   width: 1px;
-  height: 50%;
-  background-color: ${colors.COLOR_BLACK40};
+  height: 80%;
+  background-color: ${props => props.type == 'GREEN' ? colors.COLOR_GREEN : colors.COLOR_YELLOW};;
 `;
 
 
@@ -98,7 +98,7 @@ export const WrapperOffer = styled.TouchableOpacity.attrs(({
 }))`
 /* ${Dimensions.get('window').width} */
   background-color:white ;
-  width: 95%;
+  width: 100%;
   height: 70px;
   flex-direction: row;
   align-items:center;
@@ -115,7 +115,7 @@ export const StoreImage = styled.Image.attrs(({
   border-bottom-left-radius:5px ;
 `
 
-export const WrapperOfferContainer = styled.View<{ color: 'GREEN' | 'YELLOW' }>`
+export const WrapperOfferContainer = styled.View<{ type: 'GREEN' | 'YELLOW' }>`
   flex:0.8;
   height:100%;
   background-color: ${colors.COLOR_BLACK5};
@@ -126,14 +126,14 @@ export const WrapperOfferContainer = styled.View<{ color: 'GREEN' | 'YELLOW' }>`
   align-items:flex-start;
   justify-content:center;
   border-right-width:5px ;
-  border-right-color:  ${props => props.color == 'GREEN' ? colors.COLOR_GREEN : colors.COLOR_YELLOW};
+  border-right-color:  ${props => props.type == 'GREEN' ? colors.COLOR_GREEN : colors.COLOR_YELLOW};
 `
 
-export const StoreName = styled.Text.attrs(({ numberOfLines: 3 }))`
+export const StoreName = styled.Text.attrs(({ numberOfLines: 1 }))`
   color:${colors.COLOR_SECUNDARY_BLACK};
   font-size:14px;
   font-family:'Nunito_Bold';
-  max-width: 90;
+  max-width: 100%;
 `
 
 export const BoldText = styled.Text<{ typeGreen?: boolean }>`
@@ -176,4 +176,4 @@ export const CouponStyled = styled(CouponIcon).attrs<{ type: 'GREEN' | 'YELLOW' 
   fill: props.type == 'GREEN' ? colors.COLOR_SECOND_GREEN : colors.COLOR_YELLOW_BUTTON_TEXT,
   width: 20,
   height: 12
-}))``
+})) <{ type: 'GREEN' | 'YELLOW' }>``

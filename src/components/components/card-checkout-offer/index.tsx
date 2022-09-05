@@ -36,8 +36,8 @@ type CardCheckoutOfferProps = {
 
 export const CardCheckoutOffer: React.FC<CardCheckoutOfferProps> = (props) => {
 
-  // !props.data.checkouted_at
-  const IS_CHECKIN = true
+  const IS_CHECKIN = !props.data.checkouted_at
+  const COLOR_TYPE = IS_CHECKIN ? 'YELLOW' : 'GREEN'
 
   function howDateShow() {
 
@@ -77,15 +77,13 @@ export const CardCheckoutOffer: React.FC<CardCheckoutOfferProps> = (props) => {
 
   function RenderTextBox(isCoupon: boolean) {
 
-    const colorType = IS_CHECKIN ? 'YELLOW' : 'GREEN'
-
     return (
-      <TextBoxContainer type={colorType}>
+      <TextBoxContainer type={COLOR_TYPE}>
         {
           isCoupon &&
-          <CouponStyled type={colorType} />
+          <CouponStyled type={COLOR_TYPE} />
         }
-        <TextBox type={colorType}>
+        <TextBox type={COLOR_TYPE}>
           {isCoupon
             ? props.data.coupon_code
             : IS_CHECKIN
@@ -99,16 +97,16 @@ export const CardCheckoutOffer: React.FC<CardCheckoutOfferProps> = (props) => {
   return (
     <Wrapper >
       <ContainerLeft >
-        <Percent>{props.data.discount} %</Percent>
-        <Dot />
-        <Line />
+        {/* <Percent>{props.data.discount} %</Percent> */}
+        <Dot type={COLOR_TYPE} />
+        <Line type={COLOR_TYPE} />
       </ContainerLeft>
       <RightContainer >
         {RenderTextBox(true)}
         <WrapperOffer onPress={() => { }}>
           {props.withSelector && <Selector toggle={true} />}
           <StoreImage />
-          <WrapperOfferContainer>
+          <WrapperOfferContainer type={COLOR_TYPE}>
             <ContaineOfferTop>
               <StoreName>{props.data.store_name}</StoreName>
             </ContaineOfferTop>
