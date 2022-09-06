@@ -60,7 +60,7 @@ export const CreateCheckin: React.FC<CreateCheckinScreenProps> = ({ route }) => 
                 location.coords.longitude
             );
 
-            handleCheckoutStatus({ checkoutId: checkinId, isCheckin: true })
+            handleCheckoutStatus({ checkoutId: checkinId, isCheckinStatus: true })
 
             NotificationsFlash.customMessage('Checkin concluído', 'Agora é só apresentar o QR Code ', 'SUCCESS')
 

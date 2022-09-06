@@ -109,7 +109,7 @@ export const ModalLinkOfferCoupon = React.forwardRef<IModalLinkCouponOffersRef, 
               onPress={() => handleSelectCoupon(item)}
               data={
                 {
-                  wallet_id: '',
+                  wallet_id: '##NULL##',
                   coupon_id: item.coupon_id,
                   coupon_code: item.coupon_code,
                   partner_image: '', //TODO Adicionar imagem do influencer aqui

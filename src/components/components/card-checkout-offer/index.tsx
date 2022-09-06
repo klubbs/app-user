@@ -1,20 +1,16 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Platform, View } from 'react-native';
 import { IUserCheckoutsReponse } from '../../../services/@types/@coupon-services';
 import OFF from '../OFF';
 import { Selector } from '../selector';
-import { CouponIcon } from '../../../../assets/icons/coupon_icon';
+import { Skeleton } from '@motify/skeleton';
 import {
-  Box,
   ContainerLeft,
-  ContainerText, Dot,
+  Dot,
   Line,
-  Name,
-  Percent, Time,
   RightContainer,
   Wrapper,
   ImageEmpty,
-  EstablishmentImage,
   WrapperOffer,
   StoreImage,
   WrapperOfferContainer,
@@ -26,15 +22,15 @@ import {
   TextBoxContainer,
   CouponStyled
 } from './styles';
-import { colors } from '../../../../assets/constants/colors';
 
 
 type CardCheckoutOfferProps = {
   data: IUserCheckoutsReponse;
-  withSelector: boolean
+  withSelector: boolean;
+  onPress: () => void
 }
 
-export const CardCheckoutOffer: React.FC<CardCheckoutOfferProps> = (props) => {
+const MemoiZedCardCheckout = memo((props: CardCheckoutOfferProps) => {
 
   const IS_CHECKIN = !props.data.checkouted_at
   const COLOR_TYPE = IS_CHECKIN ? 'YELLOW' : 'GREEN'
@@ -94,18 +90,25 @@ export const CardCheckoutOffer: React.FC<CardCheckoutOfferProps> = (props) => {
     )
   }
 
+  function RenderImage() {
+    return (
+      <ImageEmpty >
+        {!!props.data.store_image ? <StoreImage sourceImage={props.data.store_image} /> : undefined}
+      </ImageEmpty>
+    )
+  }
+
   return (
     <Wrapper >
       <ContainerLeft >
-        {/* <Percent>{props.data.discount} %</Percent> */}
         <Dot type={COLOR_TYPE} />
         <Line type={COLOR_TYPE} />
       </ContainerLeft>
       <RightContainer >
         {RenderTextBox(true)}
-        <WrapperOffer onPress={() => { }}>
+        <WrapperOffer onPress={props.onPress}>
           {props.withSelector && <Selector toggle={true} />}
-          <StoreImage />
+          <RenderImage />
           <WrapperOfferContainer type={COLOR_TYPE}>
             <ContaineOfferTop>
               <StoreName>{props.data.store_name}</StoreName>
@@ -118,9 +121,9 @@ export const CardCheckoutOffer: React.FC<CardCheckoutOfferProps> = (props) => {
             </ContaineOfferBottom>
           </WrapperOfferContainer>
         </WrapperOffer>
-        {/* <EstablishmentImage source={{ uri: `https://klubbs-establishment.s3.amazonaws.com/${props.data.store_image}` }} /> */}
-
       </RightContainer>
     </Wrapper>
   )
-}
+})
+
+export { MemoiZedCardCheckout }

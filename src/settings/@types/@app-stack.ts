@@ -8,7 +8,7 @@ export type IAppStackParams = {
   LoginPassword: { mail: string };
   Register: { mail: string };
   Restaurant: IRestaurants;
-  CouponQr: IWalletCouponsReponse;
+  CouponQr: IWalletCouponsReponse & { checkoutId?: string };
   Influencer: undefined;
   Offers: undefined;
   Settings: undefined;

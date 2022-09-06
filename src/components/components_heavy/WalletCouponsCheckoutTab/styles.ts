@@ -91,31 +91,31 @@ export const CheckoutsFlatList = styled.FlatList.attrs(({
   background-color: ${colors.COLOR_WHITE};
 `
 
-export const SquareSkeleton = styled(Skeleton).attrs(props => ({
-  width: 40,
-  height: 40,
-  colors: [colors.COLOR_WHITE_40, colors.COLOR_BLACK20]
-}))``
+// export const SquareSkeleton = styled(Skeleton).attrs(props => ({
+//   width: 40,
+//   height: 40,
+//   colors: [colors.COLOR_WHITE_40, colors.COLOR_BLACK20]
+// }))``
 
-export const LineSkeleton = styled(Skeleton).attrs((props) => ({
-  width: props.top ? '90%' : '40%',
-  height: 15,
-  radius: 4,
-  colors: [colors.COLOR_WHITE_40, colors.COLOR_BLACK20]
-})) <{ top?: boolean }>``
+// export const LineSkeleton = styled(Skeleton).attrs((props) => ({
+//   width: props.top ? '90%' : '40%',
+//   height: 15,
+//   radius: 4,
+//   colors: [colors.COLOR_WHITE_40, colors.COLOR_BLACK20]
+// })) <{ top?: boolean }>``
 
-export const SpaceSkeleton = styled.View`
-  height:5px;
-  width:5px;
-`
+// export const SpaceSkeleton = styled.View`
+//   height:5px;
+//   width:5px;
+// `
 
 
-export const WrapperSkeleton = styled(MotiView)`
-  top:5%;
-  padding-left: 5%;
-  /* left:2%; */
-  height: 40px;
-  width:100%;
-  flex-direction: row;
-  align-items: center;
-`
+// export const WrapperSkeleton = styled(MotiView)`
+//   top:5%;
+//   padding-left: 5%;
+//   /* left:2%; */
+//   height: 40px;
+//   width:100%;
+//   flex-direction: row;
+//   align-items: center;
+// `

@@ -1,8 +1,6 @@
-import { PlaceholderMedia } from "rn-placeholder";
 import styled from "styled-components/native";
 import { colors } from "../../../../assets/constants/colors";
 import { Skeleton } from '@motify/skeleton';
-import { MotiView } from 'moti'
 import { Dimensions } from "react-native";
 import { CouponIcon } from "../../../../assets/icons/coupon_icon";
 
@@ -43,36 +41,6 @@ export const ContainerLeft = styled.View`
   align-items: center;
 `;
 
-export const Box = styled(MotiView)`
-  border-radius: 10px;
-  justify-content: center;
-  align-items: center;
-  background-color: ${colors.COLOR_WHITE};
-`
-
-export const ContainerText = styled.View`
-  margin-left: 5%;
-`
-
-export const Name = styled.Text`
-  color:${colors.COLOR_SECUNDARY_BLACK};
-  font-size:16px;
-  font-family:'Nunito_Bold';
-`
-
-export const Time = styled.Text`
-  color:${colors.COLOR_BLACK80};
-  font-size:12px;
-  font-family:'Nunito_Light';
-`
-
-export const Percent = styled.Text`
-  color:${colors.COLOR_SECUNDARY_BLACK};
-  font-size:12px;
-  font-family:'Nunito_Bold';
-  transform: rotate(-90deg);
-  margin-bottom: 35%;
-`
 
 export const CouponImage = styled.Image`
   width: 80px;
@@ -81,16 +49,11 @@ export const CouponImage = styled.Image`
 `
 
 export const ImageEmpty = styled(Skeleton).attrs(props => ({
-  width: 80,
-  height: 80,
-  radius: 'round',
-  colors: [colors.COLOR_SECUNDARY_WHITE, colors.COLOR_WHITE_20]
-}))``
-
-export const EstablishmentImage = styled.Image`
-  width:80px;
-  height:80px;
-  border-radius:40px;
+  width: 75,
+  height: '100%',
+  radius: '2',
+  colors: [colors.COLOR_WHITE_GRAY, colors.COLOR_WHITE, colors.COLOR_SECUNDARY_WHITE]
+}))`
 `
 
 export const WrapperOffer = styled.TouchableOpacity.attrs(({
@@ -99,24 +62,23 @@ export const WrapperOffer = styled.TouchableOpacity.attrs(({
 /* ${Dimensions.get('window').width} */
   background-color:white ;
   width: 100%;
-  height: 70px;
+  height: 80px;
   flex-direction: row;
   align-items:center;
   border-radius:5px;
   padding:2px;
 `
 
-export const StoreImage = styled.Image.attrs(({
-  source: { uri: 'https://lh5.googleusercontent.com/p/AF1QipM1diGCOLMQgMYDZFQGn8F2mHWzeU4u5p9UAaJS=w480-h520-p-k-no' }
-}))`
-  flex:0.2;
+export const StoreImage = styled.Image.attrs<{ sourceImage: string }>(props => ({
+  source: { uri: `https://klubbs-establishment.s3.amazonaws.com/${props.sourceImage}` }
+})) <{ sourceImage: string }>`
   height:100%;
   border-top-left-radius:5px ;
   border-bottom-left-radius:5px ;
 `
 
 export const WrapperOfferContainer = styled.View<{ type: 'GREEN' | 'YELLOW' }>`
-  flex:0.8;
+  flex:1;
   height:100%;
   background-color: ${colors.COLOR_BLACK5};
   border-top-right-radius:2px ;

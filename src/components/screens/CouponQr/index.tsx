@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { colors } from '../../../../assets/constants/colors';
 import { CouponQrScreenProps } from '../../../settings/@types/@app-stack';
 import { StoreCardInQrCode } from '../../components/store-card-in-qr-code';
@@ -32,11 +32,21 @@ export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
   const navigation = useNavigation()
 
   const { user } = useContext(AuthContext)
-  const { checkinID, handleCheckoutStatus } = useContext(CheckoutContext)
+  const { checkinID, handleCheckoutStatus, clearCheckinId } = useContext(CheckoutContext)
 
   const [enableDescriptionOffer, setEnableDescriptionOffer] = useState<IWalletCouponsResponseOfferData | null>(null)
   const [loading, setLoading] = useState(false)
   const inLiveCheckin = checkinID !== null;
+
+  //TODO use effect
+
+  useEffect(() => {
+
+    return function cleanUp() {
+      clearCheckinId()
+    }
+
+  }, [])
 
   function RenderInfluencerImage(): JSX.Element {
 
@@ -73,7 +83,7 @@ export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
 
       const checkoutStatus = await CheckoutService.getCheckoutStatus(checkinID);
 
-      handleCheckoutStatus({ checkoutId: checkoutStatus.checkout_id, isCheckin: checkoutStatus.is_checkin })
+      handleCheckoutStatus({ checkoutId: checkoutStatus.checkout_id, isCheckinStatus: checkoutStatus.is_checkin })
 
       if (checkoutStatus.is_checkin) {
         NotificationsFlash.customMessage('Checkout em andamento', 'O estabelecimento ainda não finalizou o checkout', 'NEUTRAL')
@@ -90,7 +100,6 @@ export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
   }
 
   async function handleCheckout() {
-
     if (inLiveCheckin) {
       await handleGetCheckoutStatus();
     } else {
@@ -108,7 +117,7 @@ export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
 
       <RenderInfluencerImage />
       <ContainerQr distanceInBottom={route.params?.offers?.length <= 0}>
-        <QRCodeCoupon value={`${user?.id}|${checkinID}|${route.params.coupon_id}`} />
+        <QRCodeCoupon value={`${user?.id}|${checkinID}|${route.params.wallet_id}`} />
       </ContainerQr>
       <FlatListComponent
         data={route.params?.offers}

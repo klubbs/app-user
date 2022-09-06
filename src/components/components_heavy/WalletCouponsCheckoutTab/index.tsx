@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { View } from 'react-native'
-import { IUserCheckoutsReponse } from '../../../services/@types/@coupon-services';
+import React, { useEffect, useState, useContext } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { IUserCheckoutsReponse, IWalletCouponsReponse } from '../../../services/@types/@coupon-services';
 import { CouponService } from '../../../services/coupon-service';
-import { CardCheckoutOffer } from '../../components/card-checkout-offer';
+import { MemoiZedCardCheckout } from '../../components/card-checkout-offer';
 import {
   CheckoutsFlatList,
-  NothingTransactionSubtitle,
-  SpaceSkeleton,
-  LineSkeleton,
-  SquareSkeleton,
-  WrapperSkeleton
+  NothingTransactionSubtitle
 } from './styles';
+import { CheckoutContext } from '../../../contexts/checkout-context';
 
 export const CouponsCheckout: React.FC = () => {
 
+  const navigation = useNavigation();
 
-  const [checkouts, setCheckouts] = useState<IUserCheckoutsReponse[] | null>(null)
+  const { handleCheckoutStatus } = useContext(CheckoutContext)
+
+  const [checkouts, setCheckouts] = useState<IUserCheckoutsReponse[]>([])
   const [refresh, setRefresh] = useState(false)
 
   useEffect(() => {
@@ -25,45 +25,42 @@ export const CouponsCheckout: React.FC = () => {
   async function getCouponsCheckout() {
     try {
 
+      setRefresh(true)
+
       const response = await CouponService.getCouponsCheckout();
 
-      setCheckouts(response);
+      setCheckouts(response ?? []);
 
     } catch (error) { }
+    finally {
+      setRefresh(false)
+    }
   }
 
-  async function onRefreshCheckouts() {
-    setRefresh(true)
+  function handleCardCheckoutPress(data: IUserCheckoutsReponse) {
 
-    await getCouponsCheckout();
+    handleCheckoutStatus({ checkoutId: data.checkout_id, isCheckinStatus: true })
 
-    setRefresh(false)
-  }
-
-  if (checkouts === null) {
-    return (
-      <WrapperSkeleton>
-        <SquareSkeleton />
-        <SpaceSkeleton />
-        <View>
-          <LineSkeleton top={true} />
-          <SpaceSkeleton />
-          <LineSkeleton />
-        </View>
-      </WrapperSkeleton>
+    navigation.navigate('CouponQr',
+      {
+        wallet_id: '##NULL##',
+        coupon_code: data.coupon_code,
+        coupon_id: data.coupon_id,
+        partner_image: '',//TODO: Adicionar image do influencer
+        offers: []
+      } as IWalletCouponsReponse
     )
   }
-
 
   return (
     <CheckoutsFlatList
       data={checkouts}
       refreshing={refresh}
-      onRefresh={onRefreshCheckouts}
+      onRefresh={getCouponsCheckout}
       keyExtractor={(item: IUserCheckoutsReponse, index: number) => item.checkout_id}
       ListEmptyComponent={({ item }: { item: IUserCheckoutsReponse }) => <NothingTransactionSubtitle>Nenhuma transação ainda</NothingTransactionSubtitle>}
       renderItem={({ item }: { item: IUserCheckoutsReponse }) =>
-        <CardCheckoutOffer data={item} />
+        <MemoiZedCardCheckout data={item} withSelector={false} onPress={() => { handleCardCheckoutPress(item) }} />
       }
     />
   );

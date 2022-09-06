@@ -4,6 +4,7 @@ export interface IUserCheckoutsReponse {
   pre_checkouted_at: number
   minimun_ticket: number
   coupon_code: string
+  coupon_id: string
   amount: number
   user_informed_amount: number
   store_name: string
