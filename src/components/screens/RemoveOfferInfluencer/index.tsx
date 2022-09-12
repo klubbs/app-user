@@ -106,7 +106,6 @@ export const RemoveOfferInfluencerScreen: React.FC<RemoveOfferInfluencerScreenPr
             removeOffer(props.route.params.couponId, id)
 
         } catch (error) {
-            console.log(error)
             NotificationsFlash.disconnectedWire()
         } finally {
             setLoading(false)

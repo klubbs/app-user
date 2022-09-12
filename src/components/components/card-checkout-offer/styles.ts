@@ -48,7 +48,7 @@ export const CouponImage = styled.Image`
   border-radius: 40px;
 `
 
-export const ImageEmpty = styled(Skeleton).attrs(props => ({
+export const ImageEmpty = styled(Skeleton).attrs(({
   width: 75,
   height: '100%',
   radius: '2',

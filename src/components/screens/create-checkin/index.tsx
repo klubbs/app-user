@@ -33,7 +33,7 @@ export const CreateCheckin: React.FC<CreateCheckinScreenProps> = ({ route }) => 
 
     const navigation = useNavigation();
 
-    const { handleCheckoutStatus } = useContext(CheckoutContext)
+    const { setCheckoutStatus } = useContext(CheckoutContext)
 
     const [selectedOfferId, setSelectedOfferId] = useState<string>('')
     const [userAmount, setUserAmount] = useState<string>('')
@@ -60,14 +60,13 @@ export const CreateCheckin: React.FC<CreateCheckinScreenProps> = ({ route }) => 
                 location.coords.longitude
             );
 
-            handleCheckoutStatus({ checkoutId: checkinId, isCheckinStatus: true })
+            setCheckoutStatus({ checkoutId: checkinId, isCheckinStatus: true })
 
             NotificationsFlash.customMessage('Checkin concluído', 'Agora é só apresentar o QR Code ', 'SUCCESS')
 
             navigation.goBack();
         }
         catch (error) {
-            console.log(error)
             CheckoutExceptions.handleCreateCheckin(error as IError)
         }
         finally {

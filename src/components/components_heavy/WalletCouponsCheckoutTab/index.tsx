@@ -8,12 +8,13 @@ import {
   NothingTransactionSubtitle
 } from './styles';
 import { CheckoutContext } from '../../../contexts/checkout-context';
+import { NotificationsFlash } from '../../../utils/flash-notifications';
 
 export const CouponsCheckout: React.FC = () => {
 
   const navigation = useNavigation();
 
-  const { handleCheckoutStatus } = useContext(CheckoutContext)
+  const { setCheckoutStatus, checkinStatus } = useContext(CheckoutContext)
 
   const [checkouts, setCheckouts] = useState<IUserCheckoutsReponse[]>([])
   const [refresh, setRefresh] = useState(false)
@@ -39,7 +40,12 @@ export const CouponsCheckout: React.FC = () => {
 
   function handleCardCheckoutPress(data: IUserCheckoutsReponse) {
 
-    handleCheckoutStatus({ checkoutId: data.checkout_id, isCheckinStatus: true })
+    if (data.checkouted_at) {
+      NotificationsFlash.customMessage('Checkout já finalizado', '', 'SUCCESS')
+      return
+    }
+
+    setCheckoutStatus({ checkoutId: data.checkout_id, isCheckinStatus: !data.checkouted_at })
 
     navigation.navigate('CouponQr',
       {

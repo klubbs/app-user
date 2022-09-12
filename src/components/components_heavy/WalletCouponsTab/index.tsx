@@ -16,7 +16,7 @@ export const CouponsWalletTab: React.FC = () => {
   const [walletCoupom, setWalletCoupon] = useState<(IWalletCouponsReponse & { empty: boolean })[]>([])
 
   useEffect(() => {
-    setTimeout(() => { handleGetWalletCoupons() }, 2000)
+    handleGetWalletCoupons()
   }, [])
 
   async function handleGetWalletCoupons() {

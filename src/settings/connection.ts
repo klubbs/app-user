@@ -23,7 +23,7 @@ connectionHandlerAuthZN.interceptors.response.use(
   (error): Promise<IError> => errorInterceptor(error)
 );
 
-const connectionHandler = (type: 'KLUBBS_API_URL') => {
+function connectionHandler(type: 'KLUBBS_API_URL') {
 
   const instance = axios.create({
     baseURL: URL[type],

@@ -8,7 +8,7 @@ export type IAppStackParams = {
   LoginPassword: { mail: string };
   Register: { mail: string };
   Restaurant: IRestaurants;
-  CouponQr: IWalletCouponsReponse & { checkoutId?: string };
+  CouponQr: CouponQrParams;
   Influencer: undefined;
   Offers: undefined;
   Settings: undefined;
@@ -32,4 +32,9 @@ export type ForgetPasswordScreenProps = StackScreenProps<IAppStackParams, 'Forge
 export type RemoveOfferInfluencerScreenProps = StackScreenProps<IAppStackParams, 'RemoveOfferInfluencer'>
 
 export type CreateCheckinScreenProps = StackScreenProps<IAppStackParams, 'CreateCheckin'>
+
+// shared params
+
+export type CouponQrParams = IWalletCouponsReponse & { checkoutId?: string }
+
 

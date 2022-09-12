@@ -1,31 +1,74 @@
 import React, { createContext, useState } from "react"
+import { NotificationsFlash } from "../utils/flash-notifications";
+import { CheckoutService } from "../services/checkout-service";
+import { Spinner } from "../components/components/spinner";
 
+
+type CheckinStatusState = {
+    id: string,
+    status: 'EMPTY_CHECKIN_ID' | 'CHECKIN' | 'CHECKOUT'
+}
 
 export const CheckoutContext = createContext({} as {
-    checkinID: string | null
-    handleCheckoutStatus: ({ checkoutId, isCheckinStatus }: { checkoutId: string, isCheckinStatus: boolean }) => void
+    checkinStatus: CheckinStatusState
+    handleCheckoutStatus: () => Promise<void>
     clearCheckinId: () => void
+    setCheckoutStatus: ({ checkoutId, isCheckinStatus }: { checkoutId: string, isCheckinStatus: boolean }) => void
 })
 
 const CheckoutProvider: React.FC = ({ children }) => {
 
-    const [checkinID, setCheckinID] = useState<string | null>(null)
+    const [checkinStatus, setCheckinStatus] = useState<CheckinStatusState>({ id: '', status: 'EMPTY_CHECKIN_ID' })
+    const [loading, setLoading] = useState(false)
 
 
     function clearCheckinId() {
-        setCheckinID(null)
+        setCheckinStatus({ id: '', status: 'EMPTY_CHECKIN_ID' })
     }
 
-    function handleCheckoutStatus({ checkoutId, isCheckinStatus }: { checkoutId: string, isCheckinStatus: boolean }) {
+    function setCheckoutStatus({ checkoutId, isCheckinStatus }: { checkoutId: string, isCheckinStatus: boolean }) {
+        if (!checkoutId) {
+            throw new Error("checkout is required");
+        }
+
         if (isCheckinStatus) {
-            setCheckinID(checkoutId);
+            setCheckinStatus({ id: checkoutId, status: 'CHECKIN' })
         } else {
-            clearCheckinId()
+            setCheckinStatus({ id: checkoutId, status: 'CHECKOUT' })
+        }
+    }
+
+    async function handleCheckoutStatus() {
+
+        try {
+
+            if (checkinStatus.status === ('CHECKOUT' || 'EMPTY_CHECKIN_ID')) {
+                return
+            }
+
+            setLoading(true)
+
+            const checkoutStatus = await CheckoutService.getCheckoutStatus(checkinStatus.id);
+
+            setCheckoutStatus({ checkoutId: checkoutStatus.checkout_id, isCheckinStatus: checkoutStatus.is_checkin })
+
+            if (checkoutStatus.is_checkin) {
+                NotificationsFlash.customMessage('Checkout em andamento', 'O estabelecimento ainda não finalizou o checkout', 'NEUTRAL')
+            } else {
+                NotificationsFlash.customMessage('Checkout finalizado', 'O estabelecimento finalizou o checkout', 'SUCCESS')
+            }
+
+        } catch (error) {
+            NotificationsFlash.spillCoffee()
+        } finally {
+
+            setLoading(false)
         }
     }
 
     return (
-        <CheckoutContext.Provider value={{ checkinID, handleCheckoutStatus, clearCheckinId }}>
+        <CheckoutContext.Provider value={{ checkinStatus, handleCheckoutStatus, clearCheckinId, setCheckoutStatus }}>
+            <Spinner loading={loading} />
             {children}
         </CheckoutContext.Provider>
     );

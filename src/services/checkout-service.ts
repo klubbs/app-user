@@ -33,8 +33,6 @@ export class CheckoutExceptions {
 
         const actualError = errors.error[0].field.toLowerCase();
 
-        console.log(actualError, errors.statusCode)
-
         switch (errors.statusCode) {
             case 412:
                 switch (actualError) {

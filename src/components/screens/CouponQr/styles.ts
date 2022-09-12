@@ -1,7 +1,6 @@
 import styled from 'styled-components/native';
 import { Dimensions, PixelRatio, Platform } from 'react-native'
 import { colors } from '../../../../assets/constants/colors';
-import { MotiView } from 'moti'
 import QRCode from 'react-native-qrcode-svg';
 import Button from '../../components/Button';
 
@@ -36,11 +35,10 @@ export const SubtitleHelp = styled.Text`
   color:${colors.COLOR_WHITE_80};
   font-size:14px;
   font-family:'Nunito_Bold';
-  bottom:${Platform.select({
-  ios: '11%',
-  android: PixelRatio.get() === 3 ? 0 : '3%'
-})};
+  position:absolute;
+  bottom: 16%;
 `
+
 export const ContainerImage = styled.View`
   align-items:center;
   justify-content: center;
@@ -54,7 +52,7 @@ export const ContainerImage = styled.View`
 })};
   margin-top: ${Platform.select({
   ios: 0,
-  android: '8%'
+  android: '8%' as any
 })};
 background-color: ${colors.COLOR_SECUNDARY_WHITE};
 `
@@ -68,34 +66,43 @@ export const FlatListComponent = styled.FlatList.attrs(props => ({
   horizontal: true,
   showsHorizontalScrollIndicator: false
 }))`
-top:  ${Platform.select({ ios: 0, android: PixelRatio.get() === 3 ? '12%' : '3%' })};;
-margin-top: ${Platform.select({ ios: '6%', android: '9.5%' })};
-padding-horizontal: 15px;
-width: 80% ;
-flex-grow: 0;
+  position:absolute ;
+  bottom: 22%;
+  padding-horizontal: 15px;
+  width: 80% ;
+  flex-grow: 0;
 `
-
-export const AnimatedWrapper = styled(MotiView).attrs(props => ({
-  from: { left: 100 },
-  animate: { left: 0 },
-  transition: { type: 'spring', duration: 1000 }
-
-}))``
-
 
 export const ContainerQr = styled.View<{ distanceInBottom: boolean }>`
-  bottom: ${props => props.distanceInBottom ? Platform.select({ ios: '6.5%', android: PixelRatio.get() === 3 ? '10%' : '7%' }) : 0};
+  position:absolute;
+  top: 28.5%;
 `
 
-export const CheckoutButton = styled(Button).attrs<{ disableCheckin: boolean }>(({ disableCheckin }) => ({
-  text: disableCheckin ? 'CHECKIN EM ANDAMENTO' : 'CHECK-IN',
-  featherIcon: disableCheckin ? 'refresh-ccw' : 'clipboard',
+
+const BaseCheckoutButton = styled(Button).attrs(({
   textColor: colors.COLOR_WHITE,
   activeOpacity: 0.5,
   styleContainer: {
-    backgroundColor: disableCheckin ? colors.COLOR_YELLOW_RATING : colors.COLOR_BLACK,
-    width: disableCheckin ? '70%' : '40%',
-    position: 'absolute',
+    position: 'absolute'
+  }
+}))``
+
+export const CheckinButton = styled(BaseCheckoutButton).attrs(({
+  text: 'CHECK-IN',
+  featherIcon: 'clipboard',
+  styleContainer: {
+    backgroundColor: colors.COLOR_BLACK,
+    width: '40%',
+    bottom: '122%'
+  }
+}))``
+
+export const CheckinProgressButton = styled(BaseCheckoutButton).attrs(({
+  text: 'CHECKIN EM ANDAMENTO',
+  featherIcon: 'refresh-ccw',
+  styleContainer: {
+    backgroundColor: colors.COLOR_YELLOW_RATING,
+    width: '70%',
     bottom: '6%'
   }
-})) <{ disableCheckin: boolean }>``
+}))``
