@@ -36,7 +36,7 @@ export const SubtitleHelp = styled.Text`
   font-size:14px;
   font-family:'Nunito_Bold';
   position:absolute;
-  bottom: 16%;
+  bottom: ${Platform.select({ ios: '16%', android: '4%' })}
 `
 
 export const ContainerImage = styled.View`
@@ -67,7 +67,7 @@ export const FlatListComponent = styled.FlatList.attrs(props => ({
   showsHorizontalScrollIndicator: false
 }))`
   position:absolute ;
-  bottom: 22%;
+  bottom: ${Platform.select({ ios: '22%', android: '12%' })};
   padding-horizontal: 15px;
   width: 80% ;
   flex-grow: 0;
@@ -75,7 +75,8 @@ export const FlatListComponent = styled.FlatList.attrs(props => ({
 
 export const ContainerQr = styled.View<{ distanceInBottom: boolean }>`
   position:absolute;
-  top: 28.5%;
+  top: ${Platform.select({ ios: '28.5%%', android: '24%' })};
+  
 `
 
 
@@ -93,7 +94,7 @@ export const CheckinButton = styled(BaseCheckoutButton).attrs(({
   styleContainer: {
     backgroundColor: colors.COLOR_BLACK,
     width: '40%',
-    bottom: '122%'
+    bottom: Platform.select({ ios: '122%', android: '110%' })
   }
 }))``
 
@@ -103,6 +104,6 @@ export const CheckinProgressButton = styled(BaseCheckoutButton).attrs(({
   styleContainer: {
     backgroundColor: colors.COLOR_YELLOW_RATING,
     width: '70%',
-    bottom: '6%'
+    bottom: Platform.select({ ios: '6%', android: '32%' })
   }
 }))``

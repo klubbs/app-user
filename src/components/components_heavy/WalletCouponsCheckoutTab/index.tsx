@@ -15,16 +15,18 @@ export const CouponsCheckout: React.FC = () => {
 
   const navigation = useNavigation();
 
-  const { setCheckoutStatus, checkinStatus } = useContext(CheckoutContext)
+  const { setCheckoutStatus } = useContext(CheckoutContext)
 
   const [checkouts, setCheckouts] = useState<IUserCheckoutsReponse[]>([])
   const [refresh, setRefresh] = useState(false)
 
   useEffect(() => {
-    getCouponsCheckout()
-  }, [])
+    const unsubscribe = navigation.addListener('focus', () => refreshCheckouts())
 
-  async function getCouponsCheckout() {
+    return unsubscribe;
+  }, [navigation])
+
+  async function refreshCheckouts() {
     try {
 
       setRefresh(true)
@@ -65,7 +67,7 @@ export const CouponsCheckout: React.FC = () => {
     <CheckoutsFlatList
       data={checkouts}
       refreshing={refresh}
-      onRefresh={getCouponsCheckout}
+      onRefresh={refreshCheckouts}
       keyExtractor={(item: IUserCheckoutsReponse, index: number) => item.checkout_id}
       ListEmptyComponent={({ item }: { item: IUserCheckoutsReponse }) => <NothingTransactionSubtitle>Nenhuma transação ainda</NothingTransactionSubtitle>}
       renderItem={({ item }: { item: IUserCheckoutsReponse }) =>

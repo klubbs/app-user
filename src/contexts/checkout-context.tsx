@@ -2,6 +2,7 @@ import React, { createContext, useState } from "react"
 import { NotificationsFlash } from "../utils/flash-notifications";
 import { CheckoutService } from "../services/checkout-service";
 import { Spinner } from "../components/components/spinner";
+import { useNavigation } from "@react-navigation/native";
 
 
 type CheckinStatusState = {
@@ -11,7 +12,7 @@ type CheckinStatusState = {
 
 export const CheckoutContext = createContext({} as {
     checkinStatus: CheckinStatusState
-    handleCheckoutStatus: () => Promise<void>
+    handleCheckoutStatus: () => Promise<'SUCCESS' | undefined>
     clearCheckinId: () => void
     setCheckoutStatus: ({ checkoutId, isCheckinStatus }: { checkoutId: string, isCheckinStatus: boolean }) => void
 })
@@ -20,7 +21,6 @@ const CheckoutProvider: React.FC = ({ children }) => {
 
     const [checkinStatus, setCheckinStatus] = useState<CheckinStatusState>({ id: '', status: 'EMPTY_CHECKIN_ID' })
     const [loading, setLoading] = useState(false)
-
 
     function clearCheckinId() {
         setCheckinStatus({ id: '', status: 'EMPTY_CHECKIN_ID' })
@@ -38,7 +38,7 @@ const CheckoutProvider: React.FC = ({ children }) => {
         }
     }
 
-    async function handleCheckoutStatus() {
+    async function handleCheckoutStatus(): Promise<'SUCCESS' | undefined> {
 
         try {
 
@@ -56,6 +56,8 @@ const CheckoutProvider: React.FC = ({ children }) => {
                 NotificationsFlash.customMessage('Checkout em andamento', 'O estabelecimento ainda não finalizou o checkout', 'NEUTRAL')
             } else {
                 NotificationsFlash.customMessage('Checkout finalizado', 'O estabelecimento finalizou o checkout', 'SUCCESS')
+
+                return 'SUCCESS'
             }
 
         } catch (error) {

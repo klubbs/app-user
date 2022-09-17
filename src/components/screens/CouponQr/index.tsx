@@ -46,7 +46,12 @@ export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
       return;
     }
 
-    await handleCheckoutStatus()
+    const isSuccess = await handleCheckoutStatus()
+
+    if (isSuccess == 'SUCCESS') {
+      navigation.goBack()
+    }
+
   }
 
   function RenderInfluencerImage(): JSX.Element {
