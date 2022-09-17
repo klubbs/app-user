@@ -9,6 +9,7 @@ import {
 } from './styles';
 import { CheckoutContext } from '../../../contexts/checkout-context';
 import { NotificationsFlash } from '../../../utils/flash-notifications';
+import * as Haptic from 'expo-haptics';
 
 export const CouponsCheckout: React.FC = () => {
 
@@ -41,8 +42,10 @@ export const CouponsCheckout: React.FC = () => {
   function handleCardCheckoutPress(data: IUserCheckoutsReponse) {
 
     if (data.checkouted_at) {
+      Haptic.impactAsync(Haptic.ImpactFeedbackStyle.Light)
       NotificationsFlash.customMessage('Checkout já finalizado', '', 'SUCCESS')
-      return
+
+      return;
     }
 
     setCheckoutStatus({ checkoutId: data.checkout_id, isCheckinStatus: !data.checkouted_at })

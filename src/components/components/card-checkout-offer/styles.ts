@@ -51,7 +51,7 @@ export const CouponImage = styled.Image`
 export const ImageEmpty = styled(Skeleton).attrs(({
   width: 75,
   height: '100%',
-  radius: '2',
+  // radius: '2',
   colors: [colors.COLOR_WHITE_GRAY, colors.COLOR_WHITE, colors.COLOR_SECUNDARY_WHITE]
 }))`
 `

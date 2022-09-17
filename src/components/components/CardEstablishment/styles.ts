@@ -21,7 +21,7 @@ export const Image = Animated.createAnimatedComponent(styled.Image.attrs(props =
     ios: '100%',
     android: isBiggerAndroid() ? '190px' : '160px'
   })};
-  border-radius: 10;
+  border-radius: 10px;
   `
 )
 export const OpenIndicator = Animated.createAnimatedComponent(styled.View<{ open: boolean }>`

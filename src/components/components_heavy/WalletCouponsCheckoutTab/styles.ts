@@ -1,5 +1,3 @@
-import { MotiView } from '@motify/components';
-import { Skeleton } from '@motify/skeleton';
 import styled from "styled-components/native";
 import { colors } from '../../../../assets/constants/colors';
 
