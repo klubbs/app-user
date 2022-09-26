@@ -89,9 +89,9 @@ export const WrapperOfferContainer = styled.View`
   flex-direction:row;
 `
 
-export const StoreImage = styled.Image.attrs(({
-  source: { uri: 'https://lh5.googleusercontent.com/p/AF1QipM1diGCOLMQgMYDZFQGn8F2mHWzeU4u5p9UAaJS=w480-h520-p-k-no' }
-}))`
+export const StoreImage = styled.Image.attrs<{ imageUri: string }>(({ imageUri }) => ({
+  source: { uri: `https://klubbs-establishment.s3.amazonaws.com/${imageUri}` }
+})) <{ imageUri: string }>`
   flex:0.2;
   height:100%;
   margin-left: 10px;

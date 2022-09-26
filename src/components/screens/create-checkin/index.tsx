@@ -80,7 +80,7 @@ export const CreateCheckin: React.FC<CreateCheckinScreenProps> = ({ route }) => 
         return (
             <WrapperOffer onPress={() => setSelectedOfferId(item.offer_id)}>
                 <Selector toggle={selectedOfferId == item.offer_id} />
-                <StoreImage />
+                <StoreImage imageUri={item.store_image} />
                 <WrapperOfferContainer>
                     <StoreName>{item.store_name}</StoreName>
                     <OFF off={item.offer_percentage} />
