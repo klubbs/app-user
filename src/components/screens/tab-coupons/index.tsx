@@ -11,7 +11,7 @@ import { IModalAddCouponRef } from '../../modals/modal-add-coupon/@types';
 
 const Tab = createMaterialTopTabNavigator();
 
-export const Coupons: React.FC = () => {
+export const TabCoupons: React.FC = () => {
 
   const modalRef = useRef<IModalAddCouponRef>(null)
   const { user } = useContext(AuthContext)

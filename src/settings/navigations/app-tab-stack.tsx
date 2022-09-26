@@ -6,9 +6,9 @@ import Svg, { Path } from 'react-native-svg';
 import { colors } from '../../../assets/constants/colors';
 import { CouponIcon } from "../../../assets/icons/coupon_icon";
 import { ShopIcon } from "../../../assets/icons/shop_icon";
-import { Coupons } from '../../components/screens/Coupons';
+import { TabCoupons } from '../../components/screens/tab-coupons';
 import { Home } from '../../components/screens/Home';
-import Profile from '../../components/screens/Profile';
+import { UserProfile } from '../../components/screens/user-profile';
 import { isIphoneX } from "../../utils/dimensions";
 import { ITabsParamList } from "../@types/@app-tab-stack";
 
@@ -106,7 +106,7 @@ const Tabs: React.FC<AppStackProps> = () => {
 
       <Tab.Screen
         name="Coupon"
-        component={Coupons}
+        component={TabCoupons}
         options={{
           tabBarIcon: ({ focused }) => <CouponIcon fill={focused ? colors.COLOR_YELLOW : colors.COLOR_SECUNDARY_WHITE} width={18} height={18} />,
           tabBarButton: (props) => (<TabBarCustomButton {...props} />)
@@ -115,7 +115,7 @@ const Tabs: React.FC<AppStackProps> = () => {
 
       <Tab.Screen
         name="Options"
-        component={Profile}
+        component={UserProfile}
         options={{
           tabBarIcon: ({ focused }) => <IconTab focused={focused} icon="more-vertical" />,
           tabBarButton: (props) => (<TabBarCustomButton {...props} />)

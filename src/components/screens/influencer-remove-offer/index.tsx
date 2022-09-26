@@ -4,7 +4,7 @@ import Swipeable from 'react-native-gesture-handler/Swipeable'
 import { FlatList } from 'react-native-gesture-handler';
 import OFF from '../../components/OFF';
 import { colors } from '../../../../assets/constants/colors';
-import { RemoveOfferInfluencerScreenProps } from '../../../settings/@types/@app-stack';
+import { InfluencerRemoverOfferScreenProps } from '../../../settings/@types/@app-stack';
 import { Spinner } from '../../components/spinner';
 import { InfluencerService } from '../../../services/influencer-service';
 import { NotificationsFlash } from '../../../utils/flash-notifications';
@@ -23,7 +23,7 @@ import {
 
 const STORE_SIZE_CHARACTERS = 20
 
-export const RemoveOfferInfluencerScreen: React.FC<RemoveOfferInfluencerScreenProps> = (props) => {
+export const InfluencerRemoveOffer: React.FC<InfluencerRemoverOfferScreenProps> = (props) => {
 
     const { coupons, removeOffer } = useContext(InfluencerContext)
 

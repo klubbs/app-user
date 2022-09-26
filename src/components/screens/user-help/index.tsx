@@ -5,7 +5,7 @@ import { MenuItem } from '../../components/MenuItem';
 
 import { Wrapper, ContainerScroll } from './styles';
 
-export const HelpScreen: React.FC = () => {
+export const UserHelp: React.FC = () => {
 
   return (
     <Wrapper>

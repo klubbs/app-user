@@ -4,7 +4,7 @@ import { MenuItem } from '../../components/MenuItem';
 
 import { Wrapper, ContainerScroll } from './styles';
 
-export const SettingsScreen: React.FC = () => {
+export const UserSettings: React.FC = () => {
   return (
     <Wrapper>
       <ContainerScroll>

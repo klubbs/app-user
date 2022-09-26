@@ -14,7 +14,7 @@ const DATE_FORMAT: any = {
   minute: '2-digit'
 }
 
-const Restaurant: React.FC<RestaurantScreenProps> = ({ route }) => {
+const StoreProfile: React.FC<RestaurantScreenProps> = ({ route }) => {
 
 
 
@@ -98,4 +98,4 @@ const Restaurant: React.FC<RestaurantScreenProps> = ({ route }) => {
   )
 }
 
-export default Restaurant;
+export { StoreProfile };

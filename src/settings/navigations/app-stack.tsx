@@ -2,18 +2,18 @@ import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import { colors } from '../../../assets/constants/colors';
 import Tabs from './app-tab-stack';
-import WelcomeLoginScreen from '../../components/screens/LoginWelcome';
+import WelcomeLoginScreen from '../../components/screens/login-welcome';
 import Register from '../../components/screens/Register';
-import Restaurant from '../../components/screens/RestaurantsProfile';
+import { StoreProfile } from '../../components/screens/store-profile';
 import { IAppStackParams } from '../@types/@app-stack';
-import { CouponQrScreen } from '../../components/screens/CouponQr';
-import { LoginPasswordScreen } from '../../components/screens/LoginPassword';
-import { Influencer } from '../../components/screens/Influencer';
+import { CouponQrScreen } from '../../components/screens/coupon-qr';
+import { LoginPasswordScreen } from '../../components/screens/login-password';
+import { InfluencerProfile } from '../../components/screens/influencer-profile';
 import { Offers } from '../../components/screens/Offers';
-import { SettingsScreen } from '../../components/screens/Settings';
-import { HelpScreen } from '../../components/screens/Help';
-import { ForgetPasswordScreen } from '../../components/screens/ForgetPassword';
-import { RemoveOfferInfluencerScreen } from '../../components/screens/RemoveOfferInfluencer';
+import { UserSettings } from '../../components/screens/user-settings';
+import { UserHelp } from '../../components/screens/user-help';
+import { ForgetPasswordScreen } from '../../components/screens/forget-password';
+import { InfluencerRemoveOffer } from '../../components/screens/influencer-remove-offer';
 import { CreateCheckin } from '../../components/screens/create-checkin';
 
 
@@ -36,12 +36,12 @@ const App: React.FC<{}> = () => {
       <AppStack.Screen name='LoginWelcome' component={WelcomeLoginScreen} />
       <AppStack.Screen name='LoginPassword' component={LoginPasswordScreen} />
       <AppStack.Screen name='Register' component={Register} options={{ headerShown: true }} />
-      <AppStack.Screen name='Restaurant' component={Restaurant} />
+      <AppStack.Screen name='Restaurant' component={StoreProfile} />
       <AppStack.Screen name='Offers' component={Offers} />
-      <AppStack.Screen name='Settings' component={SettingsScreen} />
-      <AppStack.Screen name='Help' component={HelpScreen} />
+      <AppStack.Screen name='Settings' component={UserSettings} />
+      <AppStack.Screen name='Help' component={UserHelp} />
       <AppStack.Screen name='ForgetPassword' component={ForgetPasswordScreen} />
-      <AppStack.Screen name='Influencer' component={Influencer} />
+      <AppStack.Screen name='Influencer' component={InfluencerProfile} />
       <AppStack.Screen
         name='CreateCheckin'
         component={CreateCheckin}
@@ -52,7 +52,7 @@ const App: React.FC<{}> = () => {
       />
       <AppStack.Screen
         name='RemoveOfferInfluencer'
-        component={RemoveOfferInfluencerScreen}
+        component={InfluencerRemoveOffer}
         options={{ headerTintColor: colors.COLOR_WHITE }}
       />
       <AppStack.Screen

@@ -23,7 +23,7 @@ import {
 
 const INFLUENCER_KEY = "999";
 
-const Profile: React.FC = () => {
+export const UserProfile: React.FC = () => {
 
   const MENU_DATA: IMenu[] = [
     { key: "2", text: "Configurações", description: "Controle suas configurações", icon: "settings", logged: false, cb: () => navigation.navigate('Settings') },
@@ -118,5 +118,3 @@ const Profile: React.FC = () => {
     </SafeArea >
   );
 }
-
-export default Profile;

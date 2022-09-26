@@ -7,7 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import { IModalAddCouponRef } from '../../modals/modal-add-coupon/@types';
 import { IModalCouponsPartnersRef } from '../../modals/modal-coupons-partners/@types';
 
-export const Influencer: React.FC = () => {
+export const InfluencerProfile: React.FC = () => {
 
   const navigation = useNavigation()
 
