@@ -1,7 +1,8 @@
 import React, { useEffect, useContext } from 'react';
 import { HomeContext } from '../../../contexts/home-context';
 import { ICategoryResponse } from '../../../services/@types/@store-services';
-import { Description, Dot, FlatComponent, WrapplerTouchable, SkeletonStyled, WrapperSkeleton } from './styles';
+import { Description, FlatComponent, WrapplerTouchable, SkeletonStyled, WrapperSkeleton } from './styles';
+import * as Haptic from 'expo-haptics';
 
 export const RestaurantsCategories: React.FC = (props) => {
 
@@ -11,14 +12,18 @@ export const RestaurantsCategories: React.FC = (props) => {
     (getCategories)()
   }, [])
 
+  function onSelect(id: string) {
+    setSelectedCategory(id)
+    Haptic.impactAsync(Haptic.ImpactFeedbackStyle.Light)
+  }
+
   function ItemRender({ item }: { item: ICategoryResponse }): JSX.Element {
 
     const isSelected = selectedCategory === item.id
 
     return (
-      <WrapplerTouchable onPress={() => setSelectedCategory(item.id)}>
-        <Dot active={isSelected} />
-        <Description active={isSelected} >{item.description}</Description>
+      <WrapplerTouchable onPress={() => onSelect(item.id)} selected={isSelected}>
+        <Description selected={isSelected} >{item.description}</Description>
       </WrapplerTouchable>
     )
   }
@@ -34,7 +39,7 @@ export const RestaurantsCategories: React.FC = (props) => {
   return (
     <FlatComponent
       data={categories}
-      keyExtractor={(item: ICategoryResponse, index: number) => `${item.id}`}
+      keyExtractor={(item: ICategoryResponse, _: number) => `${item.id}`}
       renderItem={ItemRender as any}
     />
   );

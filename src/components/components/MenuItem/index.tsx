@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
 import { Feather } from '@expo/vector-icons';
 
-import { MenuItemContainer, MenuText, MenuTextContainer, MenuTextDescription, MenuItemIcon, MenuItemArrow, ArrowRight } from './styles';
+import { MenuItemContainer, MenuText, MenuTextContainer, MenuTextDescription, MenuItemIcon } from './styles';
 import { colors } from '../../../../assets/constants/colors';
 import { AuthContext } from '../../../contexts/auth-context';
 import { IMenu } from '../../screens/user-profile/@types';
+import { ChevronRight } from '../ChevronRight';
 
 export const MenuItem: React.FC<IMenu> = (props) => {
 
@@ -23,9 +24,7 @@ export const MenuItem: React.FC<IMenu> = (props) => {
               <MenuText>{props.text}</MenuText>
               <MenuTextDescription>{props.description}</MenuTextDescription>
             </MenuTextContainer>
-            <MenuItemArrow >
-              <ArrowRight />
-            </MenuItemArrow>
+            <ChevronRight />
           </MenuItemContainer>
           : <></>
       }

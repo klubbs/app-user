@@ -4,6 +4,8 @@ import { colors } from '../../../../assets/constants/colors'
 import { isIphoneX, isBiggerAndroid } from '../../../utils/dimensions'
 import { ShopIcon } from '../../../../assets/icons/shop_icon'
 
+const BORDER_SPACING = '5px';
+
 export const Wrapper = styled.TouchableOpacity.attrs(props => ({
   activeOpacity: 0.95
 }
@@ -21,20 +23,8 @@ export const Image = Animated.createAnimatedComponent(styled.Image.attrs(props =
     ios: '100%',
     android: isBiggerAndroid() ? '190px' : '160px'
   })};
-  border-radius: 10px;
+  border-radius: ${BORDER_SPACING};
   `
-)
-export const OpenIndicator = Animated.createAnimatedComponent(styled.View<{ open: boolean }>`
-  width: 15px;
-  height: 15px;
-  border-radius: 7.5px;
-  z-index:10px;
-  top:5%;
-  right:-48%;
-  border-width: 1px;
-  border-color: ${colors.COLOR_WHITE};
-  background-color: ${props => props.open ? colors.COLOR_GREEN : colors.COLOR_RED};
-`
 )
 
 export const EmptyImage = styled.View`
@@ -45,7 +35,7 @@ export const EmptyImage = styled.View`
 })};
   justify-content:center;
   align-items:center;
-  border-radius: 10px;
+  border-radius: ${BORDER_SPACING};
   background-color:${colors.COLOR_BLACK10}
 `
 export const EmptyShopIcon = styled(ShopIcon).attrs(props => ({
@@ -57,12 +47,12 @@ export const EmptyShopIcon = styled(ShopIcon).attrs(props => ({
 
 export const Container = styled.View`
     align-items: flex-start;
-    height: 120px;
+    height: 100px;
     width: 100%;
 `
 
 export const ContainerDescriptions = styled.View`
-  flex:4;
+  flex:3;
   padding-top: 2%;
   align-items: flex-start;
   justify-content: flex-start;
@@ -85,7 +75,7 @@ export const ContainerToolbar = styled.View`
   flex:2;
   width: 100%;
   background-color: ${colors.COLOR_BLACK};
-  border-radius: 10px;
+  border-radius:  ${BORDER_SPACING};
   justify-content: flex-start;
   padding-horizontal:5px;
   align-items: center;
@@ -100,7 +90,7 @@ const ToolbarBadgeDefault = styled.View`
 
 export const ContainerOff = styled(ToolbarBadgeDefault)`
   background-color: ${colors.COLOR_SECUNDARY_BLACK};
-  border-radius: 10px;
+  border-radius:  ${BORDER_SPACING};
   justify-content: space-evenly;
   flex-direction: row;
   align-items: center;

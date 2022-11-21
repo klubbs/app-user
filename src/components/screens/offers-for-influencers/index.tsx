@@ -23,7 +23,7 @@ import {
 } from './styles';
 
 
-export const Offers: React.FC = () => {
+export const OffersForInfluencers: React.FC = () => {
 
   const couponOffersRef = useRef<IModalLinkCouponOffersRef>(null)
 

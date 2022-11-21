@@ -16,7 +16,7 @@ export const AuthContext = createContext(
   }
 );
 
-const AuthProvider: React.FC = ({ children }) => {
+const AuthProvider: React.FC = ({ children }: any) => {
 
   const [user, setUser] = useState<ILoginResponse | null>(null)
   const [isRegister, setIsRegister] = useState(false)

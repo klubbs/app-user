@@ -50,14 +50,16 @@ export const CardEstablishment: React.FC<ICardEstablishmentProps> = ({ data, onP
 
   return (
     <Wrapper disabled={!onPress} onPress={onPress}>
-      <OpenIndicator open={isOpen()} style={{ opacity: opacityAnim }} />
 
       {
         data.image &&
         <Image
           key={'content'}
           style={{ opacity: opacityAnim }}
-          source={{ uri: `https://klubbs-establishment.s3.amazonaws.com/${data.image}` }}
+          source={{
+            uri: 'https://media-cdn.tripadvisor.com/media/photo-s/08/72/16/04/fachada.jpg'
+            // uri: `https://klubbs-establishment.s3.amazonaws.com/${data.image}`
+          }}
         />
       }
       {

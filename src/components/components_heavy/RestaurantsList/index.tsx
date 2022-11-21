@@ -1,6 +1,6 @@
 import * as Location from 'expo-location';
 import React, { useEffect, useState, useContext } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { CardEstablishment } from "../../components/CardEstablishment";
 import { IRestaurants } from './@types';

@@ -1,10 +1,10 @@
 import React from 'react';
-import { View } from 'react-native'
 import { HomeProvider } from '../../../contexts/home-context';
-import AdvertisementsSlider from "../../components_heavy/BannerAdvertisements";
 import MainCategories from '../../components_heavy/RestaurantsCategories';
 import { RestaurantsList } from '../../components_heavy/RestaurantsList';
-import { Container, ContainerBottom, Wrapper } from './styles';
+import { ContainerBottom, Wrapper, ContainerCategories, ContainerDiscountPool, ContainerLocation } from './styles';
+import { DiscountPoolSlider } from '../../components_heavy/DiscountPoolSlider'
+import { LocationSelector } from '../../components/LocationSelector';
 
 export const Home: React.FC = () => {
 
@@ -12,18 +12,18 @@ export const Home: React.FC = () => {
   return (
     <HomeProvider>
       <Wrapper>
-
-        {/* <Container>
-          <AdvertisementsSlider />
-        </Container> */}
-        {/* <ContainerBottom> */}
-        <View style={{ flex: 1 }}>
+        <ContainerLocation>
+          <LocationSelector />
+        </ContainerLocation>
+        <ContainerDiscountPool >
+          <DiscountPoolSlider />
+        </ContainerDiscountPool>
+        <ContainerCategories>
           <MainCategories />
-        </View>
-        <View style={{ flex: 5, paddingLeft: '2%', paddingRight: '2%' }}>
+        </ContainerCategories>
+        <ContainerBottom>
           <RestaurantsList />
-        </View>
-        {/* </ContainerBottom> */}
+        </ContainerBottom>
       </Wrapper>
     </HomeProvider>
   );

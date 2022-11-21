@@ -3,29 +3,25 @@ import styled from 'styled-components/native';
 import { colors } from '../../../../assets/constants/colors';
 import { MotiView } from 'moti'
 
-export const Description = styled.Text<{ active: boolean }>`
-  color:${({ active }) => active ? colors.COLOR_SECUNDARY_BLACK : colors.COLOR_BLACK80};
+export const Description = styled.Text<{ selected: boolean }>`
+  color:${({ selected }) => selected ? colors.COLOR_WHITE : colors.COLOR_BLACK80};
   font-size:13px;
-  font-family:${({ active }) => active ? 'Nunito_Bold' : 'Nunito_Regular'};;
+  font-family:${({ selected }) => selected ? 'Nunito_Bold' : 'Nunito_Regular'};;
 `;
 
 
-export const Dot = styled.View<{ active: boolean }>`
-  width: 6px;
-  height: 6px;
-  border-radius: 3px;
-  margin-right: 5px;
-  background-color: ${({ active }) => active ? colors.COLOR_YELLOW : 'transparent'};
-`
 
-export const WrapplerTouchable = styled.TouchableOpacity`
+export const WrapplerTouchable = styled.TouchableOpacity<{ selected: boolean }>`
   margin-left: 10px;
-  width:100px;
-  padding: 1px;
+  width:90px;
+  height:30px;
+  background-color: ${({ selected }) => selected ? colors.COLOR_YELLOW : 'transparent'}
   border-radius:5px;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  border-width:1px;
+  border-color:${({ selected }) => selected ? 'transparent' : colors.COLOR_BLACK10}
 `;
 
 

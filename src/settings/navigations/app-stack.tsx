@@ -9,12 +9,13 @@ import { IAppStackParams } from '../@types/@app-stack';
 import { CouponQrScreen } from '../../components/screens/coupon-qr';
 import { LoginPasswordScreen } from '../../components/screens/login-password';
 import { InfluencerProfile } from '../../components/screens/influencer-profile';
-import { Offers } from '../../components/screens/Offers';
+import { OffersForInfluencers } from '../../components/screens/offers-for-influencers';
 import { UserSettings } from '../../components/screens/user-settings';
 import { UserHelp } from '../../components/screens/user-help';
 import { ForgetPasswordScreen } from '../../components/screens/forget-password';
 import { InfluencerRemoveOffer } from '../../components/screens/influencer-remove-offer';
 import { CreateCheckin } from '../../components/screens/create-checkin';
+import { OfferPools } from '../../components/screens/offer-pools';
 
 
 
@@ -37,7 +38,7 @@ const App: React.FC<{}> = () => {
       <AppStack.Screen name='LoginPassword' component={LoginPasswordScreen} />
       <AppStack.Screen name='Register' component={Register} options={{ headerShown: true }} />
       <AppStack.Screen name='Restaurant' component={StoreProfile} />
-      <AppStack.Screen name='Offers' component={Offers} />
+      <AppStack.Screen name='OffersForInfluencers' component={OffersForInfluencers} />
       <AppStack.Screen name='Settings' component={UserSettings} />
       <AppStack.Screen name='Help' component={UserHelp} />
       <AppStack.Screen name='ForgetPassword' component={ForgetPasswordScreen} />
@@ -65,6 +66,7 @@ const App: React.FC<{}> = () => {
           headerTitleStyle: { color: colors.COLOR_WHITE_80, fontFamily: 'Nunito_Regular', fontSize: 15 }
         })}
       />
+      <AppStack.Screen name='OfferPools' component={OfferPools} />
     </AppStack.Navigator >
   );
 };

@@ -10,12 +10,13 @@ export type IAppStackParams = {
   Restaurant: IRestaurants;
   CouponQr: CouponQrParams;
   Influencer: undefined;
-  Offers: undefined;
+  OffersForInfluencers: undefined;
   Settings: undefined;
   Help: undefined;
   ForgetPassword: { mail: string };
   InfluencerRemoverOffer: { couponId: string },
-  CreateCheckin: IWalletCouponsReponse
+  CreateCheckin: IWalletCouponsReponse,
+  OfferPools: { type: 'HIGH' | 'MEDIUM' | 'LOW' }
 };
 
 
@@ -32,6 +33,8 @@ export type ForgetPasswordScreenProps = StackScreenProps<IAppStackParams, 'Forge
 export type InfluencerRemoverOfferScreenProps = StackScreenProps<IAppStackParams, 'InfluencerRemoverOffer'>
 
 export type CreateCheckinScreenProps = StackScreenProps<IAppStackParams, 'CreateCheckin'>
+
+export type OfferPoolsScreenProps = StackScreenProps<IAppStackParams, 'OfferPools'>
 
 // shared params
 

@@ -25,7 +25,7 @@ export const InfluencerProfile: React.FC = () => {
       <Container>
         <MenuItem key={'1'} icon={'plus'} text={'Novo cupom'} description={'Crie um código só seu'} cb={() => createCouponRef.current?.show()} />
         <MenuItem key={'2'} icon={'archive'} text={'Meus cupons'} description={'Cupons criados por você'} cb={() => couponsInfluencerRef.current?.openModal()} />
-        <MenuItem key={'3'} icon={'divide'} text={'Ofertas disponíveis'} description={'Associe seus cupons'} cb={() => navigation.navigate('Offers')} />
+        <MenuItem key={'3'} icon={'divide'} text={'Ofertas disponíveis'} description={'Associe seus cupons'} cb={() => navigation.navigate('OffersForInfluencers')} />
       </Container>
       <ModalCouponsPartners ref={couponsInfluencerRef} />
       <ModalAddCoupon ref={createCouponRef} isInfluencer={true} />
