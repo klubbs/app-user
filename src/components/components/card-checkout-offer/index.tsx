@@ -1,9 +1,8 @@
 import React, { memo } from 'react';
-import { Platform, View } from 'react-native';
 import { IUserCheckoutsReponse } from '../../../services/@types/@coupon-services';
+import { formatCurrency } from '../../../utils/formatersUtils';
 import OFF from '../OFF';
 import { Selector } from '../selector';
-import { Skeleton } from '@motify/skeleton';
 import {
   ContainerLeft,
   Dot,
@@ -20,91 +19,65 @@ import {
   ContaineOfferBottom,
   TextBox,
   TextBoxContainer,
-  CouponStyled
+  CouponStyled,
 } from './styles';
-
 
 type CardCheckoutOfferProps = {
   data: IUserCheckoutsReponse;
   withSelector: boolean;
-  onPress: () => void
-}
+  onPress: () => void;
+};
 
 const MemoiZedCardCheckout = memo((props: CardCheckoutOfferProps) => {
-
-  const IS_CHECKIN = !props.data.checkouted_at
-  const COLOR_TYPE = IS_CHECKIN ? 'YELLOW' : 'GREEN'
+  const IS_CHECKIN = !props.data.checkouted_at;
+  const COLOR_TYPE = IS_CHECKIN ? 'YELLOW' : 'GREEN';
 
   function howDateShow() {
+    const date = props.data.checkouted_at ?? props.data.pre_checkouted_at;
 
-    const date = props.data.checkouted_at ?? props.data.pre_checkouted_at
-
-    return date.ToDateFormat()
-      .toLocaleTimeString("pt-br",
-        {
-          formatMatcher: "best fit",
-          day: 'numeric',
-          month: 'numeric',
-          hour: '2-digit',
-          minute: '2-digit'
-        }
-      )
+    return date.ToDateFormat().toLocaleTimeString('pt-br', {
+      formatMatcher: 'best fit',
+      day: 'numeric',
+      month: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
   }
 
   function howAmount() {
-
     if (props.data.amount) {
-      return Platform.select({
-        ios: props.data
-          .amount
-          .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }),
-        android: `R$ ${props.data.amount}`
-      })
+      return formatCurrency(props.data.amount);
     } else {
-      return Platform.select({
-        ios: props.data
-          .user_informed_amount
-          .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }),
-        android: `R$ ${props.data.user_informed_amount}`
-      })
+      return formatCurrency(props.data.user_informed_amount);
     }
-
   }
 
   function RenderTextBox(isCoupon: boolean) {
-
     return (
       <TextBoxContainer type={COLOR_TYPE}>
-        {
-          isCoupon &&
-          <CouponStyled type={COLOR_TYPE} />
-        }
+        {isCoupon && <CouponStyled type={COLOR_TYPE} />}
         <TextBox type={COLOR_TYPE}>
-          {isCoupon
-            ? props.data.coupon_code
-            : IS_CHECKIN
-              ? 'CHECKIN'
-              : 'CHECKOUT'}
+          {isCoupon ? props.data.coupon_code : IS_CHECKIN ? 'CHECKIN' : 'CHECKOUT'}
         </TextBox>
       </TextBoxContainer>
-    )
+    );
   }
 
   function RenderImage() {
     return (
-      <ImageEmpty >
-        {!!props.data.store_image ? <StoreImage sourceImage={props.data.store_image} /> : undefined}
+      <ImageEmpty>
+        {props.data.store_image ? <StoreImage sourceImage={props.data.store_image} /> : undefined}
       </ImageEmpty>
-    )
+    );
   }
 
   return (
-    <Wrapper >
-      <ContainerLeft >
+    <Wrapper>
+      <ContainerLeft>
         <Dot type={COLOR_TYPE} />
         <Line type={COLOR_TYPE} />
       </ContainerLeft>
-      <RightContainer >
+      <RightContainer>
         {RenderTextBox(true)}
         <WrapperOffer onPress={props.onPress}>
           {props.withSelector && <Selector toggle={true} />}
@@ -123,7 +96,7 @@ const MemoiZedCardCheckout = memo((props: CardCheckoutOfferProps) => {
         </WrapperOffer>
       </RightContainer>
     </Wrapper>
-  )
-})
+  );
+});
 
-export { MemoiZedCardCheckout }
+export { MemoiZedCardCheckout };

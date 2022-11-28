@@ -1,54 +1,48 @@
-import React, { createContext, useState } from "react"
-import { CouponAndOffersByInfluencerResponse } from "../components/modals/modal-coupons-partners/@types"
-import { InfluencerService } from "../services/influencer-service"
-import { NotificationsFlash } from "../utils/flash-notifications"
+import React, { createContext, useState } from 'react';
+import { CouponAndOffersByInfluencerResponse } from '../components/modals/modal-coupons-partners/@types';
+import { InfluencerService } from '../services/influencer-service';
+import { NotificationsFlash } from '../utils/flash-notifications';
 
-
-export const InfluencerContext = createContext({} as {
-    coupons: CouponAndOffersByInfluencerResponse[],
-    removeOffer: (couponId: string, offerId: string) => void,
-    getAllCoupons: () => Promise<void>
-})
+export const InfluencerContext = createContext(
+  {} as {
+    coupons: CouponAndOffersByInfluencerResponse[];
+    removeOffer: (couponId: string, offerId: string) => void;
+    getAllCoupons: () => Promise<void>;
+  },
+);
 
 const InfluencerProvider: React.FC = ({ children }) => {
+  const [coupons, setCoupons] = useState<CouponAndOffersByInfluencerResponse[]>([]);
 
-    const [coupons, setCoupons] = useState<CouponAndOffersByInfluencerResponse[]>([])
+  async function getAllCoupons() {
+    try {
+      const response = await InfluencerService.getAllCouponsByInfluencer();
 
-
-    async function getAllCoupons() {
-        try {
-
-            const response = await InfluencerService.getAllCouponsByInfluencer()
-
-            setCoupons(response)
-
-        } catch (error) {
-            NotificationsFlash.spillCoffee();
-        }
+      setCoupons(response);
+    } catch (error) {
+      NotificationsFlash.spillCoffee();
     }
+  }
 
-    function removeOffer(couponId: string, offerId: string) {
+  function removeOffer(couponId: string, offerId: string) {
+    getAllCoupons();
 
-        getAllCoupons()
+    const index = coupons.findIndex((i) => i.coupon_id === couponId);
 
-        const index = coupons.findIndex(i => i.coupon_id === couponId);
+    const coupon = coupons[index];
 
-        const coupon = coupons[index]
+    const offerIndex = coupon.offers.findIndex((i) => i.offer_id === offerId);
 
-        const offerIndex = coupon.offers.findIndex(i => i.offer_id === offerId)
+    coupon.offers.splice(offerIndex, 1);
 
-        coupon.offers.splice(offerIndex, 1)
+    setCoupons(coupons);
+  }
 
-        setCoupons(coupons)
-    }
+  return (
+    <InfluencerContext.Provider value={{ coupons, removeOffer, getAllCoupons }}>
+      {children}
+    </InfluencerContext.Provider>
+  );
+};
 
-    return (
-        <InfluencerContext.Provider value={{ coupons, removeOffer, getAllCoupons }}>
-            {children}
-        </InfluencerContext.Provider>
-    );
-
-}
-
-
-export { InfluencerProvider }
+export { InfluencerProvider };

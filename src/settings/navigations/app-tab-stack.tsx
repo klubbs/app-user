@@ -85,11 +85,7 @@ const Tab = createBottomTabNavigator<ITabsParamList>();
 const Tabs: React.FC = () => {
   const IconTab = ({ focused, icon }: { focused: boolean; icon: any }) => {
     return (
-      <Feather
-        name={icon}
-        size={20}
-        color={focused ? colors.COLOR_YELLOW : colors.COLOR_SECUNDARY_WHITE}
-      />
+      <Feather name={icon} size={20} color={focused ? colors.COLOR_YELLOW : colors.COLOR_WHITE} />
     );
   };
 
@@ -115,7 +111,7 @@ const Tabs: React.FC = () => {
         options={{
           tabBarIcon: ({ focused }) => (
             <ShopIcon
-              fill={focused ? colors.COLOR_YELLOW : colors.COLOR_SECUNDARY_WHITE}
+              fill={focused ? colors.COLOR_YELLOW : colors.COLOR_WHITE}
               width={18}
               height={18}
             />
@@ -130,7 +126,7 @@ const Tabs: React.FC = () => {
         options={{
           tabBarIcon: ({ focused }) => (
             <CouponIcon
-              fill={focused ? colors.COLOR_YELLOW : colors.COLOR_SECUNDARY_WHITE}
+              fill={focused ? colors.COLOR_YELLOW : colors.COLOR_WHITE}
               width={18}
               height={18}
             />

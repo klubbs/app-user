@@ -1,15 +1,16 @@
 export type IStoresResponse = {
   id: string;
   name: string;
-  description: string;
+  // description: string;
   cnpj: number;
   image: string;
-  phone: number;
+  // phone: number;
   openedAt: number;
   closedAt: number;
   business_category_id: string;
   latitude: number;
   longitude: number;
+  offers: { id: string; off: number; minimumTicket: number }[];
 };
 
 export type ICategoryResponse = {

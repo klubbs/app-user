@@ -1,6 +1,6 @@
 import * as Location from 'expo-location';
 import React, { useEffect, useState, useContext } from 'react';
-import { FlatList, View } from 'react-native';
+import { FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { CardEstablishment } from '../../components/CardEstablishment';
 import { IRestaurants } from './@types';
@@ -21,7 +21,7 @@ import {
 
 let userLocation: LocationObject | undefined = undefined;
 
-export const RestaurantsList: React.FC = (props) => {
+export const RestaurantsList: React.FC = () => {
   const navigation = useNavigation();
 
   const { categorizedRestaurants, getCategoriesDescription, getRestaurants } =
@@ -71,7 +71,7 @@ export const RestaurantsList: React.FC = (props) => {
           data={item}
           userLocation={userLocation}
           onPress={() =>
-            navigation.navigate('Restaurant', {
+            navigation.navigate('StoreProfile', {
               ...item,
               business_category_id: getCategoriesDescription(item.business_category_id),
             })

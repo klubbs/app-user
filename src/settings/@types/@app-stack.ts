@@ -7,7 +7,7 @@ export type IAppStackParams = {
   LoginWelcome: undefined;
   LoginPassword: { mail: string };
   Register: { mail: string };
-  Restaurant: IRestaurants;
+  StoreProfile: IRestaurants;
   CouponQr: CouponQrParams;
   Influencer: undefined;
   OffersForInfluencers: undefined;
@@ -19,7 +19,7 @@ export type IAppStackParams = {
   OfferPools: { type: 'HIGH' | 'MEDIUM' | 'LOW' };
 };
 
-export type RestaurantScreenProps = StackScreenProps<IAppStackParams, 'Restaurant'>;
+export type StoreScreenProps = StackScreenProps<IAppStackParams, 'StoreProfile'>;
 
 export type LoginPasswordScreenProps = StackScreenProps<IAppStackParams, 'LoginPassword'>;
 

@@ -1,10 +1,18 @@
 import React, { useContext, useEffect, useImperativeHandle, useRef, useState } from 'react';
-import { Modalize } from 'react-native-modalize'
+import { Modalize } from 'react-native-modalize';
 import * as Clipboard from 'expo-clipboard';
-import { useAnimationState, MotiView } from 'moti'
+import { useAnimationState, MotiView } from 'moti';
 import {
-  Wrapper, Divider, Container, Code, Copy, ContainerPressable, ContainerCouponInformation, ShopSubtitleIcon,
-  ContainerShop, ShopSubtitle
+  Wrapper,
+  Divider,
+  Container,
+  Code,
+  Copy,
+  ContainerPressable,
+  ContainerCouponInformation,
+  ShopSubtitleIcon,
+  ContainerShop,
+  ShopSubtitle,
 } from './styles';
 import { NotificationsFlash } from '../../../utils/flash-notifications';
 import { Pressable, Dimensions } from 'react-native';
@@ -16,65 +24,58 @@ import { InfluencerContext } from '../../../contexts/influencer-context';
 const { height } = Dimensions.get('window');
 
 export const ModalCouponsPartners = React.forwardRef<IModalCouponsPartnersRef, {}>((props, ref) => {
+  const { coupons, getAllCoupons } = useContext(InfluencerContext);
 
-  const { coupons, getAllCoupons } = useContext(InfluencerContext)
+  const [activeCopy, setActiveCopy] = useState<any>({});
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const [activeCopy, setActiveCopy] = useState<any>({})
-  const [loading, setLoading] = useState<boolean>(false)
-
-  const navigation = useNavigation()
-  const modalizeRef = useRef<Modalize>()
+  const navigation = useNavigation();
+  const modalizeRef = useRef<Modalize>();
 
   useImperativeHandle(ref, () => ({ openModal }));
-
 
   const animationState = useAnimationState({
     from: { opacity: 1, scale: 1 },
     animate: { scale: 1.2, opacity: 0 },
-  })
+  });
 
   async function openModal() {
-
     try {
-
       modalizeRef.current?.open();
 
-      setLoading(true)
+      setLoading(true);
 
-      await getAllCoupons()
+      await getAllCoupons();
 
-      let tmp: any = {}
+      const tmp: any = {};
 
-      coupons.forEach(element => {
-        tmp[element.coupon_id] = false
+      coupons.forEach((element) => {
+        tmp[element.coupon_id] = false;
       });
 
-      setActiveCopy(tmp)
+      setActiveCopy(tmp);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-
   }
 
   function onHandleCopy(code: string, id: string) {
+    setActiveCopy({ ...activeCopy, [id]: true });
 
-    setActiveCopy({ ...activeCopy, [id]: true })
+    animationState.transitionTo('animate');
 
-    animationState.transitionTo('animate')
+    NotificationsFlash.customMessage('', 'Cupom copiado para área de transferência', 'NEUTRAL');
 
-    NotificationsFlash.customMessage('', 'Cupom copiado para área de transferência', 'NEUTRAL')
+    Clipboard.setString(code);
 
-    Clipboard.setString(code)
-
-    setTimeout(() => setActiveCopy({ ...activeCopy, [id]: false }), 1000)
+    setTimeout(() => setActiveCopy({ ...activeCopy, [id]: false }), 1000);
   }
 
   function ItemRender(item: CouponAndOffersByInfluencerResponse): JSX.Element {
-
     return (
       <Container
         key={item.coupon_id}
-        onPress={() => navigation.navigate('RemoveOfferInfluencer', { couponId: item.coupon_id })}
+        onPress={() => navigation.navigate('InfluencerRemoverOffer', { couponId: item.coupon_id })}
       >
         <ContainerCouponInformation>
           <Code>{item.coupon_code}</Code>
@@ -85,20 +86,22 @@ export const ModalCouponsPartners = React.forwardRef<IModalCouponsPartnersRef, {
         </ContainerShop>
         <ContainerPressable>
           <Pressable onPress={() => onHandleCopy(item.coupon_code, item.coupon_id)}>
-            {
-              !activeCopy[item.coupon_id]
-                ? <Copy />
-                : <MotiView key={item.coupon_id} state={animationState}
-                  onDidAnimate={() => animationState.transitionTo('from')}
-                  transition={{ duration: 150, type: 'timing' }}
-                >
-                  <Copy />
-                </MotiView>
-            }
+            {!activeCopy[item.coupon_id] ? (
+              <Copy />
+            ) : (
+              <MotiView
+                key={item.coupon_id}
+                state={animationState}
+                onDidAnimate={() => animationState.transitionTo('from')}
+                transition={{ duration: 150, type: 'timing' }}
+              >
+                <Copy />
+              </MotiView>
+            )}
           </Pressable>
         </ContainerPressable>
       </Container>
-    )
+    );
   }
 
   return (
@@ -112,7 +115,6 @@ export const ModalCouponsPartners = React.forwardRef<IModalCouponsPartnersRef, {
         {loading && <SpinnerLoading />}
         {coupons.map(ItemRender)}
       </Wrapper>
-
     </Modalize>
   );
-})
+});

@@ -35,7 +35,11 @@ const App: React.FC = () => {
       <AppStack.Screen name="LoginWelcome" component={WelcomeLoginScreen} />
       <AppStack.Screen name="LoginPassword" component={LoginPasswordScreen} />
       <AppStack.Screen name="Register" component={Register} options={{ headerShown: true }} />
-      <AppStack.Screen name="Restaurant" component={StoreProfile} />
+      <AppStack.Screen
+        name="StoreProfile"
+        component={StoreProfile}
+        options={{ headerLeft: () => undefined }}
+      />
       <AppStack.Screen name="OffersForInfluencers" component={OffersForInfluencers} />
       <AppStack.Screen name="Settings" component={UserSettings} />
       <AppStack.Screen name="Help" component={UserHelp} />

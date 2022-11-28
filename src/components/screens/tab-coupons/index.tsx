@@ -12,14 +12,10 @@ import { IModalAddCouponRef } from '../../modals/modal-add-coupon/@types';
 const Tab = createMaterialTopTabNavigator();
 
 export const TabCoupons: React.FC = () => {
+  const modalRef = useRef<IModalAddCouponRef>(null);
+  const { user } = useContext(AuthContext);
 
-  const modalRef = useRef<IModalAddCouponRef>(null)
-  const { user } = useContext(AuthContext)
-
-
-  if (!user)
-    return <CouponsEmpty />
-
+  if (!user) return <CouponsEmpty />;
 
   return (
     <SafeArea>
@@ -27,11 +23,11 @@ export const TabCoupons: React.FC = () => {
         <ButtonCreateCoupon onPress={() => modalRef.current?.show()} />
       </HeaderContainer>
 
-      <Tab.Navigator tabBarOptions={tabStyle} >
+      <Tab.Navigator tabBarOptions={tabStyle}>
         <Tab.Screen name="Carteira de Cupons" children={() => <CouponsWalletTab />} />
         <Tab.Screen name="Checkouts" children={() => <CouponsCheckout />} />
       </Tab.Navigator>
       <ModalAddCoupon ref={modalRef} isInfluencer={false} />
     </SafeArea>
   );
-}
+};

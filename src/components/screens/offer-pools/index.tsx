@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FlatList } from 'react-native-gesture-handler';
-import { ChevronRight } from '../../components/ChevronRight';
+import { ChevronIcon } from '../../components/ChevronRight';
 import {
   ItemWrapper,
   ScreenContainer,
@@ -35,7 +35,7 @@ export const OfferPools: React.FC = () => {
   ]);
 
   function handlePress(item: OfferType) {
-    navigation.navigate('Restaurant');
+    navigation.navigate('StoreProfile');
   }
 
   return (
@@ -63,7 +63,7 @@ export const OfferPools: React.FC = () => {
                 <StoreName>{item.store}</StoreName>
                 <Subtitle>{item.off}% desconto</Subtitle>
               </ContainerDescriptions>
-              <ChevronRight />
+              <ChevronIcon />
             </ItemWrapper>
           );
         }}

@@ -1,10 +1,13 @@
 import React from 'react';
 import { Container, Icon } from './styles';
 
-export const ChevronRight: React.FC = () => {
+export const ChevronIcon: React.FC<{ right?: boolean; light?: boolean }> = ({
+  right = true,
+  light,
+}) => {
   return (
     <Container>
-      <Icon />
+      <Icon right={right} light={light} />
     </Container>
   );
-}
+};
