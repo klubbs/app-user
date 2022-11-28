@@ -2,72 +2,86 @@ import * as Location from 'expo-location';
 import React, { useEffect, useState, useContext } from 'react';
 import { FlatList, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { CardEstablishment } from "../../components/CardEstablishment";
+import { CardEstablishment } from '../../components/CardEstablishment';
 import { IRestaurants } from './@types';
 import { LocationAccuracy, LocationObject } from 'expo-location';
 import { HomeContext } from '../../../contexts/home-context';
 import { NotFoundRestaurants } from '../../../../assets/images/notFounds/notFoundRestaurants';
 import { LocationDeniedImage } from '../../../../assets/images/notFounds/locationDenied';
 import { NotificationsFlash } from '../../../utils/flash-notifications';
-import { EmptyCard, Header, WrapperNotFound, wrapperStyle, NotFoundTitle, NotFoundSubtitle, WrapperDenied } from './styles';
-
+import {
+  EmptyCard,
+  Header,
+  WrapperNotFound,
+  wrapperStyle,
+  NotFoundTitle,
+  NotFoundSubtitle,
+  WrapperDenied,
+} from './styles';
 
 let userLocation: LocationObject | undefined = undefined;
 
 export const RestaurantsList: React.FC = (props) => {
-
   const navigation = useNavigation();
 
-  const { categorizedRestaurants, getCategoriesDescription, getRestaurants } = useContext(HomeContext)
+  const { categorizedRestaurants, getCategoriesDescription, getRestaurants } =
+    useContext(HomeContext);
 
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
-  const [locationDenied, setLocationDenied] = useState<boolean>(false)
+  const [locationDenied, setLocationDenied] = useState<boolean>(false);
 
   useEffect(() => {
-    loadAllRestaurants()
-  }, [])
+    loadAllRestaurants();
+  }, []);
 
   async function loadAllRestaurants() {
     try {
+      setLoading(true);
 
-      setLoading(true)
-
-      let { status } = await Location.requestForegroundPermissionsAsync();
+      const { status } = await Location.requestForegroundPermissionsAsync();
 
       if (status !== 'granted') {
-        setLocationDenied(true)
+        setLocationDenied(true);
         return;
       }
 
-      const location = await Location.getCurrentPositionAsync({ accuracy: LocationAccuracy.Balanced });
+      const location = await Location.getCurrentPositionAsync({
+        accuracy: LocationAccuracy.Balanced,
+      });
 
-      userLocation = location
+      userLocation = location;
 
       await getRestaurants(location.coords.latitude, location.coords.longitude);
-
     } catch (error) {
-      NotificationsFlash.customMessage('Nos desculpe', 'Ocorreu um erro ao recuperar os restaurantes', 'NEUTRAL')
-    } finally { setLoading(false) }
+      NotificationsFlash.customMessage(
+        'Nos desculpe',
+        'Ocorreu um erro ao recuperar os restaurantes',
+        'NEUTRAL',
+      );
+    } finally {
+      setLoading(false);
+    }
   }
 
   const HowItemRender = ({ item }: { item: IRestaurants }) => {
-
     if (!item.empty) {
       return (
         <CardEstablishment
           data={item}
           userLocation={userLocation}
-          onPress={() => navigation.navigate("Restaurant", {
-            ...item,
-            business_category_id: getCategoriesDescription(item.business_category_id)
-          })}
+          onPress={() =>
+            navigation.navigate('Restaurant', {
+              ...item,
+              business_category_id: getCategoriesDescription(item.business_category_id),
+            })
+          }
         />
-      )
+      );
     }
 
-    return <EmptyCard />
-  }
+    return <EmptyCard />;
+  };
 
   function NotFound(): JSX.Element {
     return (
@@ -76,7 +90,7 @@ export const RestaurantsList: React.FC = (props) => {
         <NotFoundTitle>Nos desculpe</NotFoundTitle>
         <NotFoundSubtitle>Infelizmente não temos nada por aqui ainda</NotFoundSubtitle>
       </WrapperNotFound>
-    )
+    );
   }
 
   if (locationDenied) {
@@ -86,7 +100,7 @@ export const RestaurantsList: React.FC = (props) => {
         <NotFoundTitle>Habilite sua localização</NotFoundTitle>
         <NotFoundSubtitle>Para indicarmos estabelecimentos próximos</NotFoundSubtitle>
       </WrapperDenied>
-    )
+    );
   }
 
   return (
@@ -104,4 +118,4 @@ export const RestaurantsList: React.FC = (props) => {
       renderItem={HowItemRender}
     />
   );
-}
+};

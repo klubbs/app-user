@@ -1,42 +1,73 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { ChevronRight } from '../../components/ChevronRight';
-import { ItemWrapper, ScreenContainer, StoreImage, ContainerDescriptions, StoreName, Subtitle } from './styles';
+import {
+  ItemWrapper,
+  ScreenContainer,
+  StoreImage,
+  ContainerDescriptions,
+  StoreName,
+  Subtitle,
+  EmptyShopContainer,
+  EmptyShopIcon,
+} from './styles';
+import { useNavigation } from '@react-navigation/native';
 
-//TODO: Melhorar a tela
+type OfferType = {
+  storeId: string;
+  store: string;
+  id: string;
+  off: number;
+  image?: string;
+};
+
 export const OfferPools: React.FC = () => {
-  const [offers, setOffers] = useState<{ id: string, store: string, off: number, image: string }[]>([{
-    store: 'Ragazzo',
-    id: '12345',
-    off: 45,
-    image: ''
-  }])
+  const navigation = useNavigation();
 
+  const [offers, setOffers] = useState<OfferType[]>([
+    {
+      storeId: 'ASD2134',
+      store: 'Ragazzo',
+      id: '12345',
+      off: 45,
+      image: undefined,
+    },
+  ]);
+
+  function handlePress(item: OfferType) {
+    navigation.navigate('Restaurant');
+  }
 
   return (
     <ScreenContainer>
       <FlatList
         data={offers}
-        keyExtractor={(item, index: number) => item.id}
+        keyExtractor={(item, _: number) => item.id}
         contentContainerStyle={{ paddingTop: 80 }}
-        renderItem={({ item }: { item: any }) => {
-
+        renderItem={({ item }: { item: OfferType }) => {
           return (
-            <ItemWrapper>
-              <StoreImage source={{
-                uri: 'https://media-cdn.tripadvisor.com/media/photo-s/08/72/16/04/fachada.jpg'
-              }} />
+            <ItemWrapper onPress={() => handlePress(item)}>
+              {item.image && (
+                <StoreImage
+                  source={{
+                    uri: 'https://media-cdn.tripadvisor.com/media/photo-s/08/72/16/04/fachada.jpg',
+                  }}
+                />
+              )}
+              {!item.image && (
+                <EmptyShopContainer>
+                  <EmptyShopIcon />
+                </EmptyShopContainer>
+              )}
               <ContainerDescriptions>
                 <StoreName>{item.store}</StoreName>
                 <Subtitle>{item.off}% desconto</Subtitle>
               </ContainerDescriptions>
               <ChevronRight />
             </ItemWrapper>
-          )
-
+          );
         }}
       />
     </ScreenContainer>
   );
-}
+};

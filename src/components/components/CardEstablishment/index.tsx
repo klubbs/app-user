@@ -3,7 +3,7 @@ import { View, Animated } from 'react-native';
 import { colors } from '../../../../assets/constants/colors';
 import { CouponIcon } from '../../../../assets/icons/coupon_icon';
 import { MarkerTimeIcon } from '../../../../assets/icons/marker-time_icon';
-import { distanceInKm } from '../../../utils/geolocations'
+import { distanceInKm } from '../../../utils/geolocations';
 import {
   Container,
   ContainerDescriptions,
@@ -11,73 +11,76 @@ import {
   ContainerOff,
   ContainerToolbar,
   DistanceLocation,
-  OpenIndicator,
   OffCoupon,
   Image,
   StablishmentCategory,
   EstablishmentName,
   Wrapper,
   EmptyImage,
-  EmptyShopIcon
+  EmptyShopIcon,
 } from './styles';
 import { ICardEstablishmentProps } from './@types';
 import { HomeContext } from '../../../contexts/home-context';
 
-export const CardEstablishment: React.FC<ICardEstablishmentProps> = ({ data, onPress, userLocation }) => {
-
+export const CardEstablishment: React.FC<ICardEstablishmentProps> = ({
+  data,
+  onPress,
+  userLocation,
+}) => {
   const opacityAnim = useRef(new Animated.Value(0)).current;
 
-  const { getCategoriesDescription } = useContext(HomeContext)
+  const { getCategoriesDescription } = useContext(HomeContext);
 
+  // function isOpen(): boolean {
+  //   const actualHour = new Date().getHours();
 
-  function isOpen(): boolean {
+  //   const closedHour = data.closedAt.ToDateFormat().getHours();
 
-    const actualHour = new Date().getHours();
+  //   const openHour = data.openedAt.ToDateFormat().getHours();
 
-    const closedHour = data.closedAt.ToDateFormat().getHours();
-
-    const openHour = data.openedAt.ToDateFormat().getHours();
-
-    return openHour < actualHour && actualHour < closedHour
-  }
+  //   return openHour < actualHour && actualHour < closedHour;
+  // }
 
   Animated.timing(opacityAnim, {
     toValue: 1,
     duration: 350,
-    useNativeDriver: true
+    useNativeDriver: true,
   }).start();
-
 
   return (
     <Wrapper disabled={!onPress} onPress={onPress}>
-
-      {
-        data.image &&
+      {data.image && (
         <Image
           key={'content'}
           style={{ opacity: opacityAnim }}
           source={{
-            uri: 'https://media-cdn.tripadvisor.com/media/photo-s/08/72/16/04/fachada.jpg'
+            uri: 'https://media-cdn.tripadvisor.com/media/photo-s/08/72/16/04/fachada.jpg',
             // uri: `https://klubbs-establishment.s3.amazonaws.com/${data.image}`
           }}
         />
-      }
-      {
-        !data.image &&
+      )}
+      {!data.image && (
         <EmptyImage key={'empty'}>
           <EmptyShopIcon />
         </EmptyImage>
-
-      }
+      )}
 
       <Container>
         <ContainerDescriptions>
           <EstablishmentName>{data?.name}</EstablishmentName>
-          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-            <StablishmentCategory>{getCategoriesDescription(data.business_category_id)}</StablishmentCategory>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              width: '100%',
+            }}
+          >
+            <StablishmentCategory>
+              {getCategoriesDescription(data.business_category_id)}
+            </StablishmentCategory>
             {/* <Ratings rating={3} /> */}
           </View>
-
         </ContainerDescriptions>
         <ContainerToolbar>
           <ContainerOff>
@@ -87,18 +90,20 @@ export const CardEstablishment: React.FC<ICardEstablishmentProps> = ({ data, onP
 
           <ContainerDistance>
             <MarkerTimeIcon fill={colors.COLOR_WHITE_80} width={15} height={14} />
-            <DistanceLocation>{
-              distanceInKm(
+            <DistanceLocation>
+              {distanceInKm(
                 data.latitude ?? 0,
                 data.longitude ?? 0,
                 userLocation?.coords.latitude ?? 0,
-                userLocation?.coords.longitude ?? 0)
-                .toString().slice(0, 4)} km
+                userLocation?.coords.longitude ?? 0,
+              )
+                .toString()
+                .slice(0, 4)}{' '}
+              km
             </DistanceLocation>
           </ContainerDistance>
-
         </ContainerToolbar>
       </Container>
-    </Wrapper >
+    </Wrapper>
   );
-}
+};
