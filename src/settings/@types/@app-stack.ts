@@ -15,7 +15,7 @@ export type IAppStackParams = {
   Help: undefined;
   ForgetPassword: { mail: string };
   InfluencerRemoverOffer: { couponId: string };
-  CreateCheckin: IWalletCouponsReponse;
+  CreateCheckin: Omit<IWalletCouponsReponse, 'wallet_id'>;
   OfferPools: { type: 'HIGH' | 'MEDIUM' | 'LOW' };
 };
 

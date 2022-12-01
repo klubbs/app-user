@@ -10,7 +10,17 @@ export type IStoresResponse = {
   business_category_id: string;
   latitude: number;
   longitude: number;
-  offers: { id: string; off: number; minimumTicket: number }[];
+  offers: {
+    id: string;
+    off: number;
+    min_ticket: number;
+    coupon_id: string;
+    coupon_code: string;
+    partner_iamge: string;
+    working_days: number[];
+    store_name: string;
+    store_image: string;
+  }[];
 };
 
 export type ICategoryResponse = {

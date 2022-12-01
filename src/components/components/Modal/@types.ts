@@ -1,4 +1,4 @@
 export type IModalProps = {
-  visible: boolean
-  onClose: any
-}
+  visible: boolean;
+  onClose: any;
+};

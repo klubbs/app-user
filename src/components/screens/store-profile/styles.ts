@@ -105,7 +105,9 @@ export const BlocksValue = styled.Text`
   font-family: 'Nunito_Bold';
 `;
 
-export const WrapperOffer = styled.View`
+export const WrapperOffer = styled.TouchableOpacity.attrs({
+  activeOpacity: 0.8,
+})`
   flex-direction: row;
   justify-content: space-evenly;
   width: 100%;
@@ -164,4 +166,9 @@ export const InteractionsWrapper = styled.View`
   border-top-width: 1px;
   border-top-color: ${colors.COLOR_BLACK10};
   padding-top: 10px;
+`;
+
+export const ContainerModal = styled.View`
+  padding-horizontal: 10px;
+  padding-vertical: 5px;
 `;
