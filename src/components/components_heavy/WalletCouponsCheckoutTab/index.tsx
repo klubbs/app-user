@@ -1,66 +1,59 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { IUserCheckoutsReponse, IWalletCouponsReponse } from '../../../services/@types/@coupon-services';
+import {
+  IUserCheckoutsReponse,
+  IWalletCouponsReponse,
+} from '../../../services/@types/@coupon-services';
 import { CouponService } from '../../../services/coupon-service';
 import { MemoiZedCardCheckout } from '../../components/card-checkout-offer';
-import {
-  CheckoutsFlatList,
-  NothingTransactionSubtitle
-} from './styles';
+import { CheckoutsFlatList, NothingTransactionSubtitle } from './styles';
 import { CheckoutContext } from '../../../contexts/checkout-context';
 import { NotificationsFlash } from '../../../utils/flash-notifications';
 import * as Haptic from 'expo-haptics';
 
 export const CouponsCheckout: React.FC = () => {
-
   const navigation = useNavigation();
 
-  const { setCheckoutStatus } = useContext(CheckoutContext)
+  const { setCheckoutStatus } = useContext(CheckoutContext);
 
-  const [checkouts, setCheckouts] = useState<IUserCheckoutsReponse[]>([])
-  const [refresh, setRefresh] = useState(false)
+  const [checkouts, setCheckouts] = useState<IUserCheckoutsReponse[]>([]);
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
-    const unsubscribe = navigation.addListener('focus', () => refreshCheckouts())
+    const unsubscribe = navigation.addListener('focus', () => refreshCheckouts());
 
     return unsubscribe;
-  }, [navigation])
+  }, [navigation]);
 
   async function refreshCheckouts() {
     try {
-
-      setRefresh(true)
+      setRefresh(true);
 
       const response = await CouponService.getCouponsCheckout();
 
       setCheckouts(response ?? []);
-
-    } catch (error) { }
-    finally {
-      setRefresh(false)
+    } finally {
+      setRefresh(false);
     }
   }
 
   function handleCardCheckoutPress(data: IUserCheckoutsReponse) {
-
     if (data.checkouted_at) {
-      Haptic.impactAsync(Haptic.ImpactFeedbackStyle.Light)
-      NotificationsFlash.customMessage('Checkout já finalizado', '', 'SUCCESS')
+      Haptic.impactAsync(Haptic.ImpactFeedbackStyle.Light);
+      NotificationsFlash.customMessage('Checkout já finalizado', '', 'SUCCESS');
 
       return;
     }
 
-    setCheckoutStatus({ checkoutId: data.checkout_id, isCheckinStatus: !data.checkouted_at })
+    setCheckoutStatus({ checkoutId: data.checkout_id, isCheckinStatus: !data.checkouted_at });
 
-    navigation.navigate('CouponQr',
-      {
-        wallet_id: '##NULL##',
-        coupon_code: data.coupon_code,
-        coupon_id: data.coupon_id,
-        partner_image: '',//TODO: Adicionar image do influencer
-        offers: []
-      } as IWalletCouponsReponse
-    )
+    navigation.navigate('CouponQr', {
+      wallet_id: '##NULL##',
+      coupon_code: data.coupon_code,
+      coupon_id: data.coupon_id,
+      partner_image: '', //TODO: Adicionar image do influencer
+      offers: [],
+    } as IWalletCouponsReponse);
   }
 
   return (
@@ -69,10 +62,18 @@ export const CouponsCheckout: React.FC = () => {
       refreshing={refresh}
       onRefresh={refreshCheckouts}
       keyExtractor={(item: IUserCheckoutsReponse, index: number) => item.checkout_id}
-      ListEmptyComponent={({ item }: { item: IUserCheckoutsReponse }) => <NothingTransactionSubtitle>Nenhuma transação ainda</NothingTransactionSubtitle>}
-      renderItem={({ item }: { item: IUserCheckoutsReponse }) =>
-        <MemoiZedCardCheckout data={item} withSelector={false} onPress={() => { handleCardCheckoutPress(item) }} />
-      }
+      ListEmptyComponent={({ item }: { item: IUserCheckoutsReponse }) => (
+        <NothingTransactionSubtitle>Nenhuma transação ainda</NothingTransactionSubtitle>
+      )}
+      renderItem={({ item }: { item: IUserCheckoutsReponse }) => (
+        <MemoiZedCardCheckout
+          data={item}
+          withSelector={false}
+          onPress={() => {
+            handleCardCheckoutPress(item);
+          }}
+        />
+      )}
     />
   );
-}
+};

@@ -53,7 +53,7 @@ export const CreateCheckin: React.FC<CreateCheckinScreenProps> = ({ route }) => 
       });
 
       const checkinId = await CheckoutService.createCheckin(
-        Number(userAmount),
+        Number(userAmount.replaceAll('.', '').replaceAll(',', '')),
         selectedOfferId,
         route.params.coupon_id,
         location.coords.latitude,
@@ -68,6 +68,7 @@ export const CreateCheckin: React.FC<CreateCheckinScreenProps> = ({ route }) => 
         'SUCCESS',
       );
 
+      //Fazer retornar para a tela de cupom para todos os casos
       navigation.goBack();
     } catch (error) {
       CheckoutExceptions.handleCreateCheckin(error as IError);

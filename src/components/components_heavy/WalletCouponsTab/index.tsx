@@ -2,58 +2,63 @@ import React, { ReactElement, useState, useEffect } from 'react';
 import { CouponService } from '../../../services/coupon-service';
 import { Container, FlatComponent, NothingCouponsSubtitle } from './styles';
 import { useNavigation } from '@react-navigation/native';
-import { Coupon } from '../../components/Coupon'
+import { Coupon } from '../../components/Coupon';
 import { format4TwoColumns } from '../../../utils/formatersUtils';
 import { IWalletCouponsReponse } from '../../../services/@types/@coupon-services';
 
-const NUM_COLUMNS = 2
+const NUM_COLUMNS = 2;
 
 export const CouponsWalletTab: React.FC = () => {
+  const navigation = useNavigation();
 
-  const navigation = useNavigation()
-
-  const [refresh, setRefresh] = useState(false)
-  const [walletCoupom, setWalletCoupon] = useState<(IWalletCouponsReponse & { empty: boolean })[]>([])
+  const [refresh, setRefresh] = useState(false);
+  const [walletCoupom, setWalletCoupon] = useState<(IWalletCouponsReponse & { empty: boolean })[]>(
+    [],
+  );
 
   useEffect(() => {
-    handleGetWalletCoupons()
-  }, [])
+    handleGetWalletCoupons();
+  }, []);
 
   async function handleGetWalletCoupons() {
     try {
-      setRefresh(true)
+      setRefresh(true);
 
       const couponsResponse = await CouponService.getWalletCoupons();
 
-      const mapped = couponsResponse.map(item => {
-        return { ...item, empty: false } as (IWalletCouponsReponse & { empty: boolean })
-      })
+      const mapped = couponsResponse.map((item) => {
+        return { ...item, empty: false } as IWalletCouponsReponse & { empty: boolean };
+      });
 
-      setWalletCoupon(mapped)
+      setWalletCoupon(mapped);
+    } catch (error) {}
 
-    } catch (error) { }
-
-    setRefresh(false)
+    setRefresh(false);
   }
 
-  function RenderCoupon(item: (IWalletCouponsReponse & { empty: boolean })): ReactElement {
-
+  function RenderCoupon(item: IWalletCouponsReponse & { empty: boolean }): ReactElement {
     if (item.empty) {
-      return (<Container empty={item.empty} />)
+      return <Container empty={item.empty} />;
     }
 
-    return <Coupon data={item} onPress={() => navigation.navigate('CouponQr', item)} />
+    return <Coupon data={item} onPress={() => navigation.navigate('CouponQr', item)} />;
   }
 
   return (
     <FlatComponent
       onRefresh={handleGetWalletCoupons}
       refreshing={refresh}
-      data={format4TwoColumns<(IWalletCouponsReponse & { empty: boolean })>(walletCoupom, 2)}
+      data={format4TwoColumns<IWalletCouponsReponse & { empty: boolean }>(walletCoupom, 2)}
       numColumns={NUM_COLUMNS}
-      keyExtractor={({ item, _ }: any) => { return `${item?.wallet_id}` }}
-      ListEmptyComponent={() => <NothingCouponsSubtitle>Nenhum cupom adicionado ainda</NothingCouponsSubtitle>}
-      renderItem={({ item }: { item: (IWalletCouponsReponse & { empty: boolean }) }) => RenderCoupon(item)}
+      keyExtractor={({ item, _ }: any) => {
+        return `${item?.wallet_id}`;
+      }}
+      ListEmptyComponent={() => (
+        <NothingCouponsSubtitle>Nenhum cupom adicionado ainda</NothingCouponsSubtitle>
+      )}
+      renderItem={({ item }: { item: IWalletCouponsReponse & { empty: boolean } }) =>
+        RenderCoupon(item)
+      }
     />
   );
-}
+};

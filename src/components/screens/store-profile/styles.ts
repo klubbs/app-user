@@ -160,6 +160,10 @@ export const HeaderOffer = styled.Text`
   font-family: 'Nunito_ExtraBold';
 `;
 
+export const HeaderContainer = styled.View`
+  align-items: flex-start;
+`;
+
 export const InteractionsWrapper = styled.View`
   flex: 3;
   width: 100%;

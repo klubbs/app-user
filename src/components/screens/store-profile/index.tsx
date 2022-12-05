@@ -29,12 +29,12 @@ import {
   YellowContainer,
   ImageContainer,
   ContainerModal,
+  HeaderContainer,
 } from './styles';
 import { formatCurrency, formatHour } from '../../../utils/formatersUtils';
 import { MenuItem } from '../../components/MenuItem';
 import { Spinner } from '../../components/spinner';
 import { NotificationsFlash } from '../../../utils/flash-notifications';
-import { CouponCode } from '../../components/Coupon/styles';
 
 const StoreProfile: React.FC<StoreScreenProps> = ({ route }) => {
   const navigation = useNavigation();
@@ -88,9 +88,9 @@ const StoreProfile: React.FC<StoreScreenProps> = ({ route }) => {
       offers: [
         {
           offer_id: checkinData.offer.id,
-          store_name: checkinData.offer.store_name,
-          store_image: checkinData.offer.store_image,
-          offer_ticket: checkinData.offer.min_ticket,
+          store_name: checkinData.offer.storeName,
+          store_image: checkinData.offer.storeImage,
+          offer_ticket: checkinData.offer.minTicket,
           offer_percentage: checkinData.offer.off,
         },
       ],
@@ -128,18 +128,23 @@ const StoreProfile: React.FC<StoreScreenProps> = ({ route }) => {
         </StoreNameWrapper>
 
         <FlatList
-          data={route.params.offers}
+          data={
+            route.params.offers ?? [
+              { min_ticket: 0, off: 5 },
+              { min_ticket: 120, off: 10 },
+            ]
+          }
           keyExtractor={(item) => item.id}
           contentContainerStyle={{ width: '100%', marginTop: 20 }}
           ListHeaderComponent={() => {
             return (
-              <>
+              <HeaderContainer>
                 {/* <HeaderTitle>Sem ofertas no momento</HeaderTitle>
               <HeaderSubtitle>Esse estabelecimento ainda não liberou nenhuma oferta</HeaderSubtitle> */}
 
                 <HeaderTitle>Todas as ofertas</HeaderTitle>
                 <HeaderSubtitle>Válidas para utilizar hoje</HeaderSubtitle>
-              </>
+              </HeaderContainer>
             );
           }}
           renderItem={({ item }) => {
@@ -158,7 +163,9 @@ const StoreProfile: React.FC<StoreScreenProps> = ({ route }) => {
                 </OfferContainer>
                 <ModalComponent
                   visible={enableFluxOfferModal}
-                  onClose={() => setEnableFluxOfferModal(!enableFluxOfferModal)}
+                  onClose={() => {
+                    setEnableFluxOfferModal(!enableFluxOfferModal);
+                  }}
                 >
                   <ContainerModal>
                     <MenuItem

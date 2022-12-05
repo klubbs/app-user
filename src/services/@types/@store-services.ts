@@ -4,7 +4,7 @@ export type IStoresResponse = {
   // description: string;
   cnpj: number;
   image: string;
-  // phone: number;
+  phone: number;
   openedAt: number;
   closedAt: number;
   business_category_id: string;
@@ -16,10 +16,8 @@ export type IStoresResponse = {
     min_ticket: number;
     coupon_id: string;
     coupon_code: string;
-    partner_iamge: string;
+    partner_image: string;
     working_days: number[];
-    store_name: string;
-    store_image: string;
   }[];
 };
 
