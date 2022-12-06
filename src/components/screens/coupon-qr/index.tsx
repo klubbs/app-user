@@ -40,7 +40,7 @@ export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
 
   async function onCallCheckoutStatus() {
     if (checkinStatus.status === 'EMPTY_CHECKIN_ID') {
-      navigation.navigate('CreateCheckin', route.params);
+      navigation.navigate('CreateCheckin', { ...route.params, flux: 'NORMAL_FLUX' });
       return;
     }
 
@@ -88,7 +88,9 @@ export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
     if (checkinStatus.status === 'CHECKIN') {
       return (
         <ContainerQr distanceInBottom={route.params?.offers?.length <= 0}>
-          <QRCodeCoupon value={`${user?.id}|${checkinStatus.id}|${route.params.wallet_id}`} />
+          <QRCodeCoupon
+            value={`${user?.id}|${checkinStatus.id}|${route.params?.wallet_id ?? '#NULL#'}`}
+          />
         </ContainerQr>
       );
     }
@@ -121,7 +123,7 @@ export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
 
       <FlatListComponent
         data={route.params?.offers}
-        keyExtractor={({}): any => `${++key}`}
+        keyExtractor={(_): any => `${++key}`}
         renderItem={({ item }: { item: IWalletCouponsResponseOfferData }) => {
           return <StoreCardInQrCode {...item} onPress={() => setEnableDescriptionOffer(item)} />;
         }}

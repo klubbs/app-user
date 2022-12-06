@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { Dimensions, PixelRatio, Platform } from 'react-native';
+import { Dimensions, FlatList, PixelRatio, Platform } from 'react-native';
 import { colors } from '../../../../assets/constants/colors';
 import QRCode from 'react-native-qrcode-svg';
 import Button from '../../components/Button';
@@ -68,7 +68,7 @@ export const FlatListComponent = styled.FlatList.attrs((props) => ({
   padding-horizontal: 15px;
   width: 80%;
   flex-grow: 0;
-`;
+` as unknown as typeof FlatList;
 
 export const ContainerQr = styled.View<{ distanceInBottom: boolean }>`
   position: absolute;

@@ -35,6 +35,7 @@ import { formatCurrency, formatHour } from '../../../utils/formatersUtils';
 import { MenuItem } from '../../components/MenuItem';
 import { Spinner } from '../../components/spinner';
 import { NotificationsFlash } from '../../../utils/flash-notifications';
+import { CouponService } from '../../../services/coupon-service';
 
 const StoreProfile: React.FC<StoreScreenProps> = ({ route }) => {
   const navigation = useNavigation();
@@ -42,11 +43,11 @@ const StoreProfile: React.FC<StoreScreenProps> = ({ route }) => {
   const [loading, setLoading] = useState(false);
   const [enableFluxOfferModal, setEnableFluxOfferModal] = useState(false);
 
-  async function handleSaveInWallet() {
+  async function handleSaveInWallet(couponCode: string) {
     try {
       setLoading(true);
 
-      //TODO: Chamar API aqui para salvar na carteira do usuário
+      await CouponService.saveCouponInWallet(couponCode);
 
       setEnableFluxOfferModal(!enableFluxOfferModal);
 
@@ -82,6 +83,7 @@ const StoreProfile: React.FC<StoreScreenProps> = ({ route }) => {
     setEnableFluxOfferModal(!enableFluxOfferModal);
 
     navigation.navigate('CreateCheckin', {
+      flux: 'KLUBBS_FLUX',
       coupon_code: checkinData.couponCode,
       coupon_id: checkinData.couponId,
       partner_image: checkinData.partnerImage,
@@ -106,10 +108,10 @@ const StoreProfile: React.FC<StoreScreenProps> = ({ route }) => {
             <ChevronIcon right={false} light />
           </TouchableOpacity>
         </YellowContainer>
+        {/* Sem imagem */}
         <ImageStore
           source={{
-            uri: 'https://i0.wp.com/sarapateando.com.br/wp-content/uploads/2021/05/47b15ddd-6b2b-4926-a3b7-57bb9e08abda.jpg?fit=1280%2C960&ssl=1',
-            // uri: `https://klubbs-establishment.s3.amazonaws.com/${route?.params?.image}`
+            uri: `https://klubbs-establishment.s3.amazonaws.com/${route?.params?.image}`,
           }}
         />
       </ImageContainer>
@@ -128,20 +130,12 @@ const StoreProfile: React.FC<StoreScreenProps> = ({ route }) => {
         </StoreNameWrapper>
 
         <FlatList
-          data={
-            route.params.offers ?? [
-              { min_ticket: 0, off: 5 },
-              { min_ticket: 120, off: 10 },
-            ]
-          }
+          data={route.params.offers}
           keyExtractor={(item) => item.id}
           contentContainerStyle={{ width: '100%', marginTop: 20 }}
           ListHeaderComponent={() => {
             return (
               <HeaderContainer>
-                {/* <HeaderTitle>Sem ofertas no momento</HeaderTitle>
-              <HeaderSubtitle>Esse estabelecimento ainda não liberou nenhuma oferta</HeaderSubtitle> */}
-
                 <HeaderTitle>Todas as ofertas</HeaderTitle>
                 <HeaderSubtitle>Válidas para utilizar hoje</HeaderSubtitle>
               </HeaderContainer>
@@ -177,13 +171,13 @@ const StoreProfile: React.FC<StoreScreenProps> = ({ route }) => {
                         handleStartCheckin({
                           couponId: item.coupon_id,
                           couponCode: item.coupon_code,
-                          partnerImage: item.partner_iamge,
+                          partnerImage: item.partner_image,
                           offer: {
                             id: item.id,
                             minTicket: item.min_ticket,
                             off: item.off,
-                            storeImage: item.store_image,
-                            storeName: item.store_name,
+                            storeImage: route.params.image,
+                            storeName: route.params.name,
                             workingDays: item.working_days,
                           },
                         })
@@ -194,7 +188,7 @@ const StoreProfile: React.FC<StoreScreenProps> = ({ route }) => {
                       text={'Quero salvar na minha carteira'}
                       description={'Talvez eu vá usar depois'}
                       icon={'tag'}
-                      cb={handleSaveInWallet}
+                      cb={() => handleSaveInWallet(item.coupon_code)}
                     />
                   </ContainerModal>
                 </ModalComponent>

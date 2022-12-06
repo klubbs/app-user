@@ -1,9 +1,11 @@
-import React, { useState, createContext, useMemo } from 'react';
+import React, { useState, createContext, useMemo, useEffect } from 'react';
 import { IRestaurants } from '../components/components_heavy/RestaurantsList/@types';
 import { ICategoryResponse } from '../services/@types/@store-services';
 import { StoreService } from '../services/store-service';
 import { AsyncStorageUtils } from '../utils/async-storage';
 import { format4TwoColumns } from '../utils/formatersUtils';
+import * as Location from 'expo-location';
+import { LocationAccuracy } from 'expo-location';
 
 export const HomeContext = createContext(
   {} as {
@@ -14,6 +16,7 @@ export const HomeContext = createContext(
     categorizedRestaurants: IRestaurants[];
     getCategories: () => Promise<void>;
     getRestaurants: (latitude: number, longitude: number) => Promise<void>;
+    location: { city: string; lat: number | null; long: number | null };
   },
 );
 
@@ -21,6 +24,33 @@ const HomeProvider: React.FC = ({ children }) => {
   const [categories, setCategories] = useState<ICategoryResponse[]>([]);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [restaurants, setRestaurants] = useState<IRestaurants[]>([]);
+  const [location, setLocation] = useState<{
+    city: string;
+    lat: number | null;
+    long: number | null;
+  }>({
+    city: 'Estamos te localizando...',
+    lat: null,
+    long: null,
+  });
+
+  useEffect(() => {
+    getLocationAsync();
+  }, []);
+
+  async function getLocationAsync() {
+    const location = await Location.getCurrentPositionAsync({
+      accuracy: LocationAccuracy.Balanced,
+    });
+
+    const address = await Location.reverseGeocodeAsync(location.coords);
+
+    setLocation({
+      city: address[0].city || 'Não localizamos você :/',
+      lat: location.coords.latitude,
+      long: location.coords.longitude,
+    });
+  }
 
   async function getCategories() {
     const storedCategories = await AsyncStorageUtils.getCategoriesInStorage();
@@ -89,6 +119,7 @@ const HomeProvider: React.FC = ({ children }) => {
         getCategoriesDescription,
         categorizedRestaurants,
         getRestaurants,
+        location,
       }}
     >
       {children}

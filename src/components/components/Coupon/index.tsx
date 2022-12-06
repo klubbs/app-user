@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { ICouponProps } from './@types';
 import {
   MotifiedWrapper,
@@ -6,51 +6,49 @@ import {
   CouponCode,
   CountCoupons,
   Container,
-  OffCoupons,
   CouponContainer,
   Influencer,
   InfluencerEmpty,
   ShopSubtitleIcon,
-  CouponDefaultImage
+  CouponDefaultImage,
 } from './styles';
 
-const CODE_COUPONS_SIZE = 12
+const CODE_COUPONS_SIZE = 12;
 
 export const Coupon: React.FC<ICouponProps> = (props) => {
-
-  const offersCount = props.data.offers?.length
+  const offersCount = props.data.offers?.length;
 
   function formattedCouponCode() {
-    return `${props.data.coupon_code.substring(0, CODE_COUPONS_SIZE)}${props.data.coupon_code.length > CODE_COUPONS_SIZE ? '...' : ''}`
+    console.log(props.data);
+
+    return `${props.data.coupon_code.substring(0, CODE_COUPONS_SIZE)}${
+      props.data.coupon_code.length > CODE_COUPONS_SIZE ? '...' : ''
+    }`;
   }
 
   function isActiveCoupon() {
     if (!props.toggle) {
       if (offersCount >= 1) {
-        return true
+        return true;
       }
 
-      return false
+      return false;
     } else {
-      if (props.isActiveByToggle)
-        return true
-      else
-        return false
+      if (props.isActiveByToggle) return true;
+      else return false;
     }
   }
 
   function RenderInfluencerImage() {
-
     if (props.data.partner_image) {
-      return <Influencer source={{ uri: props.data.partner_image }} />
+      return <Influencer source={{ uri: props.data.partner_image }} />;
     }
 
     return (
       <InfluencerEmpty>
         <CouponDefaultImage />
       </InfluencerEmpty>
-    )
-
+    );
   }
 
   return (
@@ -74,6 +72,6 @@ export const Coupon: React.FC<ICouponProps> = (props) => {
       <CouponCode putMarginBottom={props.toggle} active={isActiveCoupon()}>
         {formattedCouponCode()}
       </CouponCode>
-    </MotifiedWrapper >
+    </MotifiedWrapper>
   );
-}
+};

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import * as Location from 'expo-location';
 import { LocationAccuracy } from 'expo-location';
 import { IWalletCouponsResponseOfferData } from '../../../services/@types/@coupon-services';
@@ -38,7 +38,17 @@ export const CreateCheckin: React.FC<CreateCheckinScreenProps> = ({ route }) => 
   const [userAmount, setUserAmount] = useState<string>('');
   const [loading, setLoading] = useState(false);
 
-  const disabledButton = userAmount.trim() === '' || selectedOfferId === '';
+  const disabledButton =
+    userAmount.trim() === '' ||
+    selectedOfferId === '' ||
+    Number(userAmount) <
+      route.params.offers.find((i) => i.offer_id === selectedOfferId).offer_ticket;
+
+  useEffect(() => {
+    if (route.params.offers?.length === 1) {
+      setSelectedOfferId(route.params.offers[0].offer_id);
+    }
+  }, []);
 
   async function handleCheckin() {
     if (userAmount.trim() === '' || selectedOfferId === '') {
@@ -68,7 +78,14 @@ export const CreateCheckin: React.FC<CreateCheckinScreenProps> = ({ route }) => 
         'SUCCESS',
       );
 
-      //Fazer retornar para a tela de cupom para todos os casos
+      if (route.params.flux === 'KLUBBS_FLUX') {
+        navigation.navigate('CouponQr', {
+          partner_image: route.params.partner_image,
+          coupon_code: route.params.coupon_code,
+        });
+        return;
+      }
+
       navigation.goBack();
     } catch (error) {
       CheckoutExceptions.handleCreateCheckin(error as IError);
@@ -95,7 +112,11 @@ export const CreateCheckin: React.FC<CreateCheckinScreenProps> = ({ route }) => 
             return (
               <WrapperOffer onPress={() => setSelectedOfferId(item.offer_id)}>
                 <Selector toggle={selectedOfferId == item.offer_id} />
-                <StoreImage imageUri={item.store_image} />
+                <StoreImage
+                  source={{
+                    uri: `https://klubbs-establishment.s3.amazonaws.com/${item.store_image}`,
+                  }}
+                />
                 <WrapperOfferContainer>
                   <StoreName>{item.store_name}</StoreName>
                   <OFF off={item.offer_percentage} />

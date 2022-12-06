@@ -31,9 +31,9 @@ export const CouponsWalletTab: React.FC = () => {
       });
 
       setWalletCoupon(mapped);
-    } catch (error) {}
-
-    setRefresh(false);
+    } finally {
+      setRefresh(false);
+    }
   }
 
   function RenderCoupon(item: IWalletCouponsReponse & { empty: boolean }): ReactElement {
@@ -41,7 +41,17 @@ export const CouponsWalletTab: React.FC = () => {
       return <Container empty={item.empty} />;
     }
 
-    return <Coupon data={item} onPress={() => navigation.navigate('CouponQr', item)} />;
+    const transformedContract = {
+      ...item,
+      coupon_code: item.coupon_code.includes('KLUBBSUSER_') ? 'MEU CUPOM' : item.coupon_code,
+    };
+
+    return (
+      <Coupon
+        data={transformedContract}
+        onPress={() => navigation.navigate('CouponQr', transformedContract)}
+      />
+    );
   }
 
   return (

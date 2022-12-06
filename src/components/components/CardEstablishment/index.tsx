@@ -31,16 +31,6 @@ export const CardEstablishment: React.FC<ICardEstablishmentProps> = ({
 
   const { getCategoriesDescription } = useContext(HomeContext);
 
-  // function isOpen(): boolean {
-  //   const actualHour = new Date().getHours();
-
-  //   const closedHour = data.closedAt.ToDateFormat().getHours();
-
-  //   const openHour = data.openedAt.ToDateFormat().getHours();
-
-  //   return openHour < actualHour && actualHour < closedHour;
-  // }
-
   Animated.timing(opacityAnim, {
     toValue: 1,
     duration: 350,
@@ -54,8 +44,7 @@ export const CardEstablishment: React.FC<ICardEstablishmentProps> = ({
           key={'content'}
           style={{ opacity: opacityAnim }}
           source={{
-            uri: 'https://media-cdn.tripadvisor.com/media/photo-s/08/72/16/04/fachada.jpg',
-            // uri: `https://klubbs-establishment.s3.amazonaws.com/${data.image}`
+            uri: `https://klubbs-establishment.s3.amazonaws.com/${data.image}`,
           }}
         />
       )}
@@ -79,13 +68,15 @@ export const CardEstablishment: React.FC<ICardEstablishmentProps> = ({
             <StablishmentCategory>
               {getCategoriesDescription(data.business_category_id)}
             </StablishmentCategory>
-            {/* <Ratings rating={3} /> */}
           </View>
         </ContainerDescriptions>
         <ContainerToolbar>
           <ContainerOff>
             <CouponIcon fill={colors.COLOR_WHITE_80} width={15} height={13} />
-            <OffCoupon>%</OffCoupon>
+            <OffCoupon>
+              {Math.max.apply(null, data?.offers.length > 0 ? data?.offers.map((i) => i.off) : [0])}
+              %
+            </OffCoupon>
           </ContainerOff>
 
           <ContainerDistance>

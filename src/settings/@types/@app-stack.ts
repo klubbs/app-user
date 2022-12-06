@@ -8,14 +8,16 @@ export type IAppStackParams = {
   LoginPassword: { mail: string };
   Register: { mail: string };
   StoreProfile: IRestaurants;
-  CouponQr: CouponQrParams;
+  CouponQr: IWalletCouponsReponse & { checkoutId?: string };
   Influencer: undefined;
   OffersForInfluencers: undefined;
   Settings: undefined;
   Help: undefined;
   ForgetPassword: { mail: string };
   InfluencerRemoverOffer: { couponId: string };
-  CreateCheckin: Omit<IWalletCouponsReponse, 'wallet_id'>;
+  CreateCheckin: Omit<IWalletCouponsReponse, 'wallet_id'> & {
+    flux: 'KLUBBS_FLUX' | 'NORMAL_FLUX';
+  };
   OfferPools: { type: 'HIGH' | 'MEDIUM' | 'LOW' };
 };
 
@@ -29,15 +31,11 @@ export type CouponQrScreenProps = StackScreenProps<IAppStackParams, 'CouponQr'>;
 
 export type ForgetPasswordScreenProps = StackScreenProps<IAppStackParams, 'ForgetPassword'>;
 
-export type InfluencerRemoverOfferScreenProps = StackScreenProps<
-  IAppStackParams,
-  'InfluencerRemoverOffer'
->;
-
 export type CreateCheckinScreenProps = StackScreenProps<IAppStackParams, 'CreateCheckin'>;
 
 export type OfferPoolsScreenProps = StackScreenProps<IAppStackParams, 'OfferPools'>;
 
-// shared params
-
-export type CouponQrParams = IWalletCouponsReponse & { checkoutId?: string };
+export type InfluencerRemoverOfferScreenProps = StackScreenProps<
+  IAppStackParams,
+  'InfluencerRemoverOffer'
+>;

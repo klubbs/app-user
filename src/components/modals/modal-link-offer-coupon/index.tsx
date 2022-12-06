@@ -1,9 +1,16 @@
 import React, { useEffect, ReactElement, useState, useImperativeHandle } from 'react';
 import { Modal, TouchableWithoutFeedback } from 'react-native';
 import { Coupon } from '../../components/Coupon';
-import { format4TwoColumns } from '../../../utils/formatersUtils'
-import { ICouponInfluencer, IModalLinkCouponOffersRef, IModalLinkCouponOffersProps } from './@types';
-import { InfluencerService, InfluencerServiceException } from '../../../services/influencer-service';
+import { format4TwoColumns } from '../../../utils/formatersUtils';
+import {
+  ICouponInfluencer,
+  IModalLinkCouponOffersRef,
+  IModalLinkCouponOffersProps,
+} from './@types';
+import {
+  InfluencerService,
+  InfluencerServiceException,
+} from '../../../services/influencer-service';
 import { Spinner } from '../../components/spinner';
 import { IError } from '../../../settings/@types/@responses';
 import { NotificationsFlash } from '../../../utils/flash-notifications';
@@ -17,118 +24,98 @@ import {
   SelectorCoupon,
   ConfirmButton,
   FlatItems,
-  HeaderDisabled,
-  SubtitleDisabled,
   Cancel,
-  HeaderContainer
+  HeaderContainer,
 } from './styles';
-import { IWalletCouponsReponse, IWalletCouponsResponseOfferData } from '../../../services/@types/@coupon-services';
+import { IWalletCouponsResponseOfferData } from '../../../services/@types/@coupon-services';
 
-
-export const ModalLinkOfferCoupon = React.forwardRef<IModalLinkCouponOffersRef, IModalLinkCouponOffersProps>((props, ref) => {
-
+export const ModalLinkOfferCoupon = React.forwardRef<
+  IModalLinkCouponOffersRef,
+  IModalLinkCouponOffersProps
+>((props, ref) => {
   const navigation = useNavigation();
 
-  const [visible, setVisible] = useState(false)
-  const [coupons, setCoupons] = useState<ICouponInfluencer[]>([])
-  const [selectedCoupon, setSelectedCoupon] = useState('')
-  const [disableSave, setDisableSave] = useState(false)
-  const [loading, setLoading] = useState(false)
+  const [visible, setVisible] = useState(false);
+  const [coupons, setCoupons] = useState<ICouponInfluencer[]>([]);
+  const [selectedCoupon, setSelectedCoupon] = useState('');
+  const [loading, setLoading] = useState(false);
 
   useImperativeHandle(ref, () => ({ showModal: () => setVisible(true) }));
 
   useEffect(() => {
-
     (async function getAllInfluencerCoupons() {
       try {
-        const response = await InfluencerService.getAllCouponsByInfluencer()
+        const response = await InfluencerService.getAllCouponsByInfluencer();
 
-        setCoupons(response)
-
-      } catch (error) { NotificationsFlash.spillCoffee() }
-    })()
-
-  }, [])
-
+        setCoupons(response);
+      } catch (error) {
+        NotificationsFlash.spillCoffee();
+      }
+    })();
+  }, []);
 
   async function handleCouponLink() {
-
     if (props.masterCoupons?.length <= 0) {
-      return
+      return;
     }
 
     try {
+      setLoading(true);
 
-      setLoading(true)
+      await InfluencerService.linkCouponInOffers(
+        props.masterCoupons.map((i) => i.masterCouponId),
+        selectedCoupon,
+      );
 
-      await InfluencerService.linkCouponInOffers(props.masterCoupons.map(i => i.masterCouponId), selectedCoupon);
+      NotificationsFlash.customMessage(
+        'Adicionado',
+        'Oferta dos estabelecimentos adicionado ao cupom',
+        'SUCCESS',
+      );
 
-      NotificationsFlash.customMessage('Adicionado', 'Oferta dos estabelecimentos adicionado ao cupom', 'SUCCESS')
+      setVisible(false);
 
-      setVisible(false)
-
-      navigation.goBack()
-
+      navigation.goBack();
     } catch (error) {
-      InfluencerServiceException.catchLinkCoupon(error as IError)
+      InfluencerServiceException.catchLinkCoupon(error as IError);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }
 
   function handleSelectCoupon(coupon: ICouponInfluencer) {
-
-    setSelectedCoupon(coupon.coupon_id)
-    setDisableSave(false)
-
-    coupon.offers.forEach(element => {
-
-      props.masterCoupons.forEach(subElement => {
-        setDisableSave(element.store_id === subElement.establishmentId)
-      })
-
-    });
-
-
+    setSelectedCoupon(coupon.coupon_id);
   }
 
-  function RenderCoupon({ item, index }: { item: ICouponInfluencer, index: number }): ReactElement {
-
+  function RenderCoupon({ item, _ }: { item: ICouponInfluencer; index: number }): ReactElement {
     const isToggleSelected = selectedCoupon === item.coupon_id;
 
     return (
       <>
         {item?.empty && <Empty />}
-        {
-          !item?.empty &&
+        {!item?.empty && (
           <Container>
             <SelectorCoupon toggle={isToggleSelected} />
             <Coupon
               toggle={true}
               isActiveByToggle={isToggleSelected}
               onPress={() => handleSelectCoupon(item)}
-              data={
-                {
-                  wallet_id: '##NULL##',
-                  coupon_id: item.coupon_id,
-                  coupon_code: item.coupon_code,
-                  partner_image: '', //TODO Adicionar imagem do influencer aqui
-                  offers: item.offers as unknown as IWalletCouponsResponseOfferData[]
-                }
-              }
+              data={{
+                wallet_id: '##NULL##',
+                coupon_id: item.coupon_id,
+                coupon_code: item.coupon_code,
+                partner_image: '', //TODO Adicionar imagem do influencer aqui
+                offers: item.offers as unknown as IWalletCouponsResponseOfferData[],
+              }}
             />
           </Container>
-        }
+        )}
       </>
-    )
+    );
   }
 
   return (
-    <Modal
-      animationType={'slide'}
-      presentationStyle={'formSheet'}
-      visible={visible}
-    >
+    <Modal animationType={'slide'} presentationStyle={'formSheet'} visible={visible}>
       <Wrapper>
         <HeaderContainer>
           <TouchableWithoutFeedback onPress={() => setVisible(false)}>
@@ -138,21 +125,17 @@ export const ModalLinkOfferCoupon = React.forwardRef<IModalLinkCouponOffersRef, 
         </HeaderContainer>
         <FlatItems
           data={format4TwoColumns(coupons, 2)}
-          keyExtractor={(item: any, index: number) => item.coupon_id}
-          renderItem={({ item, index }: any) => RenderCoupon({ item: item as ICouponInfluencer, index: index })}
+          keyExtractor={(item: any) => item.coupon_id}
+          renderItem={({ item, index }: any) =>
+            RenderCoupon({ item: item as ICouponInfluencer, index: index })
+          }
         />
 
-        <BottomTab disabled={disableSave}>
-
-          {disableSave && <HeaderDisabled>Indisponível para associar</HeaderDisabled>}
-          {disableSave && <SubtitleDisabled>Cada cupom só pode ser associado a uma oferta por estabelecimento</SubtitleDisabled>}
-
-          {!disableSave && selectedCoupon !== '' && <ConfirmButton onPress={handleCouponLink} />}
+        <BottomTab disabled={selectedCoupon === ''}>
+          {selectedCoupon !== '' && <ConfirmButton onPress={handleCouponLink} />}
         </BottomTab>
-
       </Wrapper>
       <Spinner loading={loading} />
-    </Modal >
+    </Modal>
   );
-})
-
+});
