@@ -45,7 +45,7 @@ function connectionHandler(type: 'KLUBBS_API_URL') {
 }
 
 function errorInterceptor(error: any) {
-  console.log(error);
+  console.error(error);
 
   if (error.response.data) {
     const statusCode = error.response.data?.statusCode;

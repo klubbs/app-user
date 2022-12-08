@@ -1,22 +1,20 @@
 import './src/utils/extensions/date-extensions';
 import './src/utils/extensions/object-extensions';
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
-import React from "react";
-import { ActivityIndicator, LogBox, StatusBar, View } from "react-native";
+import React from 'react';
+import { ActivityIndicator, LogBox, StatusBar, View } from 'react-native';
 import { AuthProvider } from './src/contexts/auth-context';
-import AppStack from "./src/settings/navigations/app-stack";
-import { colors } from "./assets/constants/colors";
-import { InfluencerProvider } from "./src/contexts/influencer-context";
-import FlashComponent from 'flash-notify'
+import AppStack from './src/settings/navigations/app-stack';
+import { colors } from './assets/constants/colors';
+import { InfluencerProvider } from './src/contexts/influencer-context';
+import FlashComponent from 'flash-notify';
 import { CheckoutProvider } from './src/contexts/checkout-context';
 
-LogBox.ignoreLogs(['Expected style']);
+LogBox.ignoreLogs(['Expected style', 'Require cycles are allowed']);
 
 export default function App() {
-
-
-  let [fontsLoaded] = useFonts({
+  const [fontsLoaded] = useFonts({
     Nunito_ExtraLight: require('./assets/fonts/Nunito_200ExtraLight.ttf'),
     Nunito_ExtraLight_Italic: require('./assets/fonts/Nunito_200ExtraLight_Italic.ttf'),
     Nunito_Light: require('./assets/fonts/Nunito_300Light.ttf'),
@@ -28,12 +26,12 @@ export default function App() {
     Nunito_Bold: require('./assets/fonts/Nunito_700Bold.ttf'),
     Nunito_Bold_Italic: require('./assets/fonts/Nunito_700Bold_Italic.ttf'),
     Nunito_ExtraBold: require('./assets/fonts/Nunito_800ExtraBold.ttf'),
-    Nunito_ExtraBold_Italic: require('./assets/fonts/Nunito_800ExtraBold_Italic.ttf')
+    Nunito_ExtraBold_Italic: require('./assets/fonts/Nunito_800ExtraBold_Italic.ttf'),
   });
 
   if (!fontsLoaded) {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <ActivityIndicator color="black" />
       </View>
     );
@@ -50,10 +48,10 @@ export default function App() {
               barStyle={'dark-content'}
             />
             <AppStack />
-          </NavigationContainer >
+          </NavigationContainer>
           <FlashComponent />
         </CheckoutProvider>
       </InfluencerProvider>
     </AuthProvider>
   );
-};
+}

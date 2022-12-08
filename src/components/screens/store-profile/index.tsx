@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { ModalComponent } from '../../components/Modal';
@@ -37,23 +37,39 @@ import { Spinner } from '../../components/spinner';
 import { NotificationsFlash } from '../../../utils/flash-notifications';
 import { CouponService } from '../../../services/coupon-service';
 
+type TOfferSelected = {
+  id: string;
+  off: number;
+  min_ticket: number;
+  coupon_id: string;
+  coupon_code: string;
+  partner_image: string;
+  working_days: number[];
+};
+
 const StoreProfile: React.FC<StoreScreenProps> = ({ route }) => {
   const navigation = useNavigation();
 
   const [loading, setLoading] = useState(false);
   const [enableFluxOfferModal, setEnableFluxOfferModal] = useState(false);
+  const [offer, setOffer] = useState<TOfferSelected>({} as any);
 
-  async function handleSaveInWallet(couponCode: string) {
+  function handleSelectOffer(offer: TOfferSelected) {
+    setOffer(offer);
+    setEnableFluxOfferModal(!enableFluxOfferModal);
+  }
+
+  async function handleSaveInWallet(offerId: string) {
     try {
-      setLoading(true);
-
-      await CouponService.saveCouponInWallet(couponCode);
+      setLoading(!loading);
 
       setEnableFluxOfferModal(!enableFluxOfferModal);
 
+      await CouponService.putOfferInOwnCoupon(offerId);
+
       NotificationsFlash.customMessage(
         'Proonto, ta lá !',
-        'Salvamos essa oferta na sua carteira, dentro do seu cupom',
+        'Atualizamos o seu cupom, la na sua carteira',
         'SUCCESS',
       );
     } catch (error) {
@@ -80,6 +96,8 @@ const StoreProfile: React.FC<StoreScreenProps> = ({ route }) => {
       storeImage: string;
     };
   }) {
+    console.log(checkinData);
+
     setEnableFluxOfferModal(!enableFluxOfferModal);
 
     navigation.navigate('CreateCheckin', {
@@ -99,9 +117,52 @@ const StoreProfile: React.FC<StoreScreenProps> = ({ route }) => {
     });
   }
 
+  const ModalFlux = () => {
+    return (
+      <ModalComponent
+        visible={enableFluxOfferModal}
+        onClose={() => {
+          setEnableFluxOfferModal(!enableFluxOfferModal);
+        }}
+      >
+        <Spinner loading={loading} />
+        <ContainerModal>
+          <MenuItem
+            key={'checkin'}
+            text={'Iniciar checkin agora'}
+            description={'To preparado(a) para usar'}
+            icon={'circle'}
+            cb={() => {
+              handleStartCheckin({
+                couponId: offer.coupon_id,
+                couponCode: offer.coupon_code,
+                partnerImage: offer.partner_image,
+                offer: {
+                  id: offer.id,
+                  minTicket: offer.min_ticket,
+                  off: offer.off,
+                  storeImage: route.params.image,
+                  storeName: route.params.name,
+                  workingDays: offer.working_days,
+                },
+              });
+            }}
+          />
+          <MenuItem
+            key={'wallet'}
+            text={'Guardar no meu cupom'}
+            description={'Talvez eu vá usar depois'}
+            icon={'tag'}
+            cb={() => handleSaveInWallet(offer.id)}
+          />
+        </ContainerModal>
+      </ModalComponent>
+    );
+  };
+
   return (
     <Wrapper>
-      <Spinner loading={loading} />
+      {/* <Spinner loading={loading} /> */}
       <ImageContainer>
         <YellowContainer>
           <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.goBack()}>
@@ -143,7 +204,7 @@ const StoreProfile: React.FC<StoreScreenProps> = ({ route }) => {
           }}
           renderItem={({ item }) => {
             return (
-              <WrapperOffer onPress={() => setEnableFluxOfferModal(!enableFluxOfferModal)}>
+              <WrapperOffer onPress={() => handleSelectOffer(item)}>
                 <OfferDescription>
                   <UseThisOffer>Ativar oferta</UseThisOffer>
                   <TicketMinimum>
@@ -155,43 +216,6 @@ const StoreProfile: React.FC<StoreScreenProps> = ({ route }) => {
                 <OfferContainer>
                   <OfferOff>{item?.off}%</OfferOff>
                 </OfferContainer>
-                <ModalComponent
-                  visible={enableFluxOfferModal}
-                  onClose={() => {
-                    setEnableFluxOfferModal(!enableFluxOfferModal);
-                  }}
-                >
-                  <ContainerModal>
-                    <MenuItem
-                      key={'checkin'}
-                      text={'Iniciar checkin agora'}
-                      description={'To preparado(a) para usar'}
-                      icon={'circle'}
-                      cb={() =>
-                        handleStartCheckin({
-                          couponId: item.coupon_id,
-                          couponCode: item.coupon_code,
-                          partnerImage: item.partner_image,
-                          offer: {
-                            id: item.id,
-                            minTicket: item.min_ticket,
-                            off: item.off,
-                            storeImage: route.params.image,
-                            storeName: route.params.name,
-                            workingDays: item.working_days,
-                          },
-                        })
-                      }
-                    />
-                    <MenuItem
-                      key={'wallet'}
-                      text={'Quero salvar na minha carteira'}
-                      description={'Talvez eu vá usar depois'}
-                      icon={'tag'}
-                      cb={() => handleSaveInWallet(item.coupon_code)}
-                    />
-                  </ContainerModal>
-                </ModalComponent>
               </WrapperOffer>
             );
           }}
@@ -205,6 +229,7 @@ const StoreProfile: React.FC<StoreScreenProps> = ({ route }) => {
             }}
           />
         </InteractionsWrapper>
+        <ModalFlux />
       </Container>
     </Wrapper>
   );

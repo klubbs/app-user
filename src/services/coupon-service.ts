@@ -27,6 +27,12 @@ export class CouponService {
     });
   }
 
+  static async putOfferInOwnCoupon(offerId: string): Promise<void> {
+    await connectionHandler('KLUBBS_API_URL').put('users/wallets/coupons/offer', null, {
+      params: { offerId: offerId },
+    });
+  }
+
   static catchSaveCouponInWallet(error: IError) {
     if (error.statusCode === 412) {
       const actual = error.error[0].field.toUpperCase();
