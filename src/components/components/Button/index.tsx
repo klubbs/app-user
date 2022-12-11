@@ -10,7 +10,6 @@ export type IButtonProps = {
   textColor?: any;
   featherIcon?: any;
   disabled?: boolean;
-  asdkjh;
 };
 
 const Button: React.FC<IButtonProps> = ({
