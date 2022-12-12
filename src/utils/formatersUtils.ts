@@ -43,3 +43,7 @@ export function formatHour(hour: number) {
         .slice(0, -3))(),
   });
 }
+
+export function formatUserCouponCode(code: string) {
+  return code.includes('KLUBBSUSER_') ? 'MEU CUPOM' : code;
+}

@@ -96,8 +96,6 @@ const StoreProfile: React.FC<StoreScreenProps> = ({ route }) => {
       storeImage: string;
     };
   }) {
-    console.log(checkinData);
-
     setEnableFluxOfferModal(!enableFluxOfferModal);
 
     navigation.navigate('CreateCheckin', {

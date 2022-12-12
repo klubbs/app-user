@@ -19,68 +19,67 @@ import {
   CouponWrapper,
   ItemsSubtitle,
   ContainerNotFound,
-  EmptyTitle, EmptySubtitle
+  EmptyTitle,
+  EmptySubtitle,
 } from './styles';
 
-
 export const OffersForInfluencers: React.FC = () => {
+  const couponOffersRef = useRef<IModalLinkCouponOffersRef>(null);
 
-  const couponOffersRef = useRef<IModalLinkCouponOffersRef>(null)
-
-  const [offers, setOffers] = useState<ICardOffersProps[]>([])
-  const [selectedOffers, setSelectedOffer] = useState<{ masterCouponId: string, establishmentId: string }[]>([])
-  const [loading, setLoading] = useState(false)
+  const [offers, setOffers] = useState<ICardOffersProps[]>([]);
+  const [selectedOffers, setSelectedOffer] = useState<
+    { masterCouponId: string; establishmentId: string }[]
+  >([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    getOffers()
-  }, [])
+    getOffers();
+  }, []);
 
   async function getOffers() {
-
     try {
-      setLoading(true)
+      setLoading(true);
 
-      var response = await InfluencerService.getAllOffers();
+      const response = await InfluencerService.getAllOffers();
 
       setOffers(response);
     } catch (error) {
       NotificationsFlash.spillCoffee();
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }
 
   function handleOfferSelect(isSelected: boolean, masteCouponId: string, establishmentId: string) {
     isSelected
-      ? setSelectedOffer([...selectedOffers, { masterCouponId: masteCouponId, establishmentId: establishmentId }])
-      : setSelectedOffer(selectedOffers.filter(item => item.masterCouponId !== masteCouponId));
+      ? setSelectedOffer([
+          ...selectedOffers,
+          { masterCouponId: masteCouponId, establishmentId: establishmentId },
+        ])
+      : setSelectedOffer(selectedOffers.filter((item) => item.masterCouponId !== masteCouponId));
   }
 
   function handleOpenBagTab() {
-    const uniqueEstablishmentsId = [...new Set(selectedOffers.map(a => a.establishmentId))];
+    const uniqueEstablishmentsId = [...new Set(selectedOffers.map((a) => a.establishmentId))];
 
-    let errors: any[] = []
+    const errors: any[] = [];
 
-    uniqueEstablishmentsId.forEach(element => {
-
-      let matchs = selectedOffers.filter(item => item.establishmentId === element)
+    uniqueEstablishmentsId.forEach((element) => {
+      const matchs = selectedOffers.filter((item) => item.establishmentId === element);
 
       if (matchs.length > 1) {
-        errors.push(matchs)
+        errors.push(matchs);
         return;
       }
-
     });
 
-
     if (errors.length >= 1) {
-
-      Haptic.notificationAsync(Haptic.NotificationFeedbackType.Warning)
+      Haptic.notificationAsync(Haptic.NotificationFeedbackType.Warning);
 
       NotificationsFlash.customMessage(
-        "Ofertas do mesmo estabelecimento",
-        "Cada cupom seu só pode ser associado a 1 oferta do mesmo estabelecimento"
-      )
+        'Ofertas do mesmo estabelecimento',
+        'Cada cupom seu só pode ser associado a 1 oferta do mesmo estabelecimento',
+      );
 
       return;
     }
@@ -89,18 +88,22 @@ export const OffersForInfluencers: React.FC = () => {
   }
 
   function OffersBagTab(): JSX.Element {
-
     return (
       <BagTab show={selectedOffers.length > 0} onPress={handleOpenBagTab}>
         <ContainerItems>
           <ItemsSubtitle>Definir meu cupom</ItemsSubtitle>
           <CouponWrapper>
-            <CouponIcon width={15} height={15} fill={colors.COLOR_WHITE} style={{ marginRight: 5 }} />
+            <CouponIcon
+              width={15}
+              height={15}
+              fill={colors.COLOR_WHITE}
+              style={{ marginRight: 5 }}
+            />
             <Items>{selectedOffers.length}</Items>
           </CouponWrapper>
         </ContainerItems>
-      </BagTab >
-    )
+      </BagTab>
+    );
   }
 
   function LoadingOrEmptyRender() {
@@ -110,9 +113,8 @@ export const OffersForInfluencers: React.FC = () => {
         <EmptyTitle>Eita</EmptyTitle>
         <EmptySubtitle>Nenhum estabelecimento liberou oferta ainda</EmptySubtitle>
       </ContainerNotFound>
-    )
+    );
   }
-
 
   return (
     <Wrapper>
@@ -125,15 +127,17 @@ export const OffersForInfluencers: React.FC = () => {
         keyExtractor={(item, index) => item.master_coupon_id}
         ListHeaderComponent={() => <Header>Disponíveis</Header>}
         ListEmptyComponent={LoadingOrEmptyRender}
-        renderItem={({ item }) =>
+        renderItem={({ item }) => (
           <CardOffers
             {...item}
-            onPress={(isSelected: boolean) => handleOfferSelect(isSelected, item.master_coupon_id, item.establishment_id)} />
-        }
+            onPress={(isSelected: boolean) =>
+              handleOfferSelect(isSelected, item.master_coupon_id, item.establishment_id)
+            }
+          />
+        )}
       />
       <ModalLinkOfferCoupon masterCoupons={selectedOffers} ref={couponOffersRef} />
       <OffersBagTab />
-    </Wrapper >
+    </Wrapper>
   );
-}
-
+};

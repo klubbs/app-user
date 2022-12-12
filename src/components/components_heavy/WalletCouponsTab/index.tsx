@@ -3,7 +3,7 @@ import { CouponService } from '../../../services/coupon-service';
 import { Container, FlatComponent, NothingCouponsSubtitle } from './styles';
 import { useNavigation } from '@react-navigation/native';
 import { Coupon } from '../../components/Coupon';
-import { format4TwoColumns } from '../../../utils/formatersUtils';
+import { format4TwoColumns, formatUserCouponCode } from '../../../utils/formatersUtils';
 import { IWalletCouponsReponse } from '../../../services/@types/@coupon-services';
 
 const NUM_COLUMNS = 2;
@@ -43,7 +43,7 @@ export const CouponsWalletTab: React.FC = () => {
 
     const transformedContract = {
       ...item,
-      coupon_code: item.coupon_code.includes('KLUBBSUSER_') ? 'MEU CUPOM' : item.coupon_code,
+      coupon_code: formatUserCouponCode(item.coupon_code),
     };
 
     return (

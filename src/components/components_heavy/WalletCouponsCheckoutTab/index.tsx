@@ -10,6 +10,7 @@ import { CheckoutsFlatList, NothingTransactionSubtitle } from './styles';
 import { CheckoutContext } from '../../../contexts/checkout-context';
 import { NotificationsFlash } from '../../../utils/flash-notifications';
 import * as Haptic from 'expo-haptics';
+import { formatUserCouponCode } from '../../../utils/formatersUtils';
 
 export const CouponsCheckout: React.FC = () => {
   const navigation = useNavigation();
@@ -31,7 +32,14 @@ export const CouponsCheckout: React.FC = () => {
 
       const response = await CouponService.getCouponsCheckout();
 
-      setCheckouts(response ?? []);
+      setCheckouts(
+        response.map((i) => {
+          return {
+            ...i,
+            coupon_code: formatUserCouponCode(i.coupon_code),
+          };
+        }) ?? [],
+      );
     } finally {
       setRefresh(false);
     }
@@ -62,7 +70,7 @@ export const CouponsCheckout: React.FC = () => {
       refreshing={refresh}
       onRefresh={refreshCheckouts}
       keyExtractor={(item: IUserCheckoutsReponse, index: number) => item.checkout_id}
-      ListEmptyComponent={({ item }: { item: IUserCheckoutsReponse }) => (
+      ListEmptyComponent={(_) => (
         <NothingTransactionSubtitle>Nenhuma transação ainda</NothingTransactionSubtitle>
       )}
       renderItem={({ item }: { item: IUserCheckoutsReponse }) => (
