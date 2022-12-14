@@ -34,10 +34,9 @@ const LoginWelcome: React.FC = () => {
     Keyboard.addListener('keyboardWillShow', () => setkeyboardOpen(true));
     Keyboard.addListener('keyboardWillHide', () => setkeyboardOpen(false));
 
-    return () => {
-      //TODO: Testar fluxo
-      Keyboard.removeListener('keyboardWillShow', () => undefined);
-      Keyboard.removeListener('keyboardWillHide', () => undefined);
+    return function cleanUp() {
+      Keyboard.removeAllListeners('keyboardWillShow');
+      Keyboard.removeAllListeners('keyboardWillHide');
     };
   }, []);
 

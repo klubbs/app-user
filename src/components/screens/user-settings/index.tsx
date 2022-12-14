@@ -10,24 +10,26 @@ export const UserSettings: React.FC = () => {
       <ContainerScroll>
         <MenuItem
           key={'0'}
-          text='Permissões'
-          description='Conceda permissões ao app'
-          icon='toggle-right'
+          text="Permissões"
+          description="Conceda permissões ao app"
+          icon="toggle-right"
           cb={() => Linking.openSettings()}
         />
         <MenuItem
           key={'1'}
-          text='Acesso de influenciador'
-          description='Solicite acesso como influenciador'
-          icon='thumbs-up'
-          cb={() => Linking
-            .openURL(
+          text="Acesso de influenciador"
+          description="Solicite acesso como influenciador"
+          icon="thumbs-up"
+          cb={() =>
+            Linking.openURL(
               `mailto:marketing@klubbs.com.br
               ?subject=Solicitar acesso de influenciador
               &body=Conta um pouquinho sobre você . Ah , diz também as suas redes sociais de trabalho para gente ;)                                     
-          `)}
+          `,
+            )
+          }
         />
       </ContainerScroll>
     </Wrapper>
   );
-}
+};

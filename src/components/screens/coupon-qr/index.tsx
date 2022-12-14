@@ -21,6 +21,7 @@ import {
 } from './styles';
 import { CheckoutContext } from '../../../contexts/checkout-context';
 import { useNavigation } from '@react-navigation/native';
+import { NotificationsFlash } from '../../../utils/flash-notifications';
 
 let key = 0;
 
@@ -40,6 +41,14 @@ export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
 
   async function onCallCheckoutStatus() {
     if (checkinStatus.status === 'EMPTY_CHECKIN_ID') {
+      if (route.params.offers.length < 1) {
+        NotificationsFlash.customMessage(
+          'Nenhuma oferta ainda',
+          'Armazene ofertas no seu cupom para fazer check-ins',
+        );
+        return;
+      }
+
       navigation.navigate('CreateCheckin', { ...route.params, flux: 'NORMAL_FLUX' });
       return;
     }

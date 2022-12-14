@@ -17,104 +17,117 @@ import {
   SafeArea,
   UserImage,
   WrapperTop,
-  ContainerScroll
+  ContainerScroll,
 } from './styles';
 
-
-const INFLUENCER_KEY = "999";
+const INFLUENCER_KEY = '999';
 
 export const UserProfile: React.FC = () => {
-
   const MENU_DATA: IMenu[] = [
-    { key: "2", text: "Configurações", description: "Controle suas configurações", icon: "settings", logged: false, cb: () => navigation.navigate('Settings') },
-    { key: "3", text: "Dúvidas", description: "Precisa de alguma ajuda", icon: "help-circle", logged: false, cb: () => navigation.navigate('Help') },
-    { key: INFLUENCER_KEY, text: "Influenciador", description: 'Gerencie sua influência', icon: "thumbs-up", logged: true, cb: () => navigation.navigate('Influencer') }
-  ]
+    {
+      key: '1',
+      text: 'Configurações',
+      description: 'Controle suas configurações',
+      icon: 'settings',
+      logged: false,
+      cb: () => navigation.navigate('Settings'),
+    },
+    {
+      key: '2',
+      text: 'Dúvidas',
+      description: 'Precisa de alguma ajuda',
+      icon: 'help-circle',
+      logged: false,
+      cb: () => navigation.navigate('Help'),
+    },
+    {
+      key: INFLUENCER_KEY,
+      text: 'Influenciador',
+      description: 'Gerencie sua influência',
+      icon: 'thumbs-up',
+      logged: true,
+      cb: () => navigation.navigate('Influencer'),
+    },
+  ];
 
-  const { user, isRegister, logout } = useContext(AuthContext)
+  const { user, isRegister, logout } = useContext(AuthContext);
 
-  const animRef = useRef<LottieView>(null)
+  const animRef = useRef<LottieView>(null);
 
   const navigation = useNavigation();
 
   useEffect(() => {
-    if (isRegister)
-      animRef.current?.play()
-
-  }, [isRegister])
-
+    if (isRegister) animRef.current?.play();
+  }, [isRegister]);
 
   const handlelogout = async () => {
-
     Alert.alert('Quer sair ?', 'Mas volte logo, por favor !', [
       {
         text: 'Não',
         style: 'cancel',
-        onPress: () => { }
+        onPress: () => {},
       },
       {
         text: 'Sair',
         style: 'destructive',
-        onPress: () => logout()
-      }
-    ])
-
-  }
+        onPress: () => logout(),
+      },
+    ]);
+  };
 
   function RenderPoints(): JSX.Element {
-
     return (
-      <ContainerPoints >
-        {
-          user
-            ?
-            <>
-              <Point>Pontos</Point>
-              <PointValues>Em breve</PointValues>
-            </>
-            :
-            <TouchableOpacity onPress={() => navigation.navigate("LoginWelcome")}>
-              <Point>Entrar ou {'\n'}Cadastrar-se</Point>
-            </TouchableOpacity>
-        }
+      <ContainerPoints>
+        {user ? (
+          <>
+            <Point>Pontos</Point>
+            <PointValues>Em breve</PointValues>
+          </>
+        ) : (
+          <TouchableOpacity onPress={() => navigation.navigate('LoginWelcome')}>
+            <Point>Entrar ou {'\n'}Cadastrar-se</Point>
+          </TouchableOpacity>
+        )}
       </ContainerPoints>
-    )
+    );
   }
 
   return (
     <SafeArea>
       {isRegister && <LottieView source={CongratulationsCoupons} loop={false} ref={animRef} />}
-      <WrapperTop >
-        <ContainerImage >
-          {
-            user && <UserImage source={require('../../../../assets/images/characters/character.png')} />
-          }
+      <WrapperTop>
+        <ContainerImage>
+          {user && (
+            <UserImage source={require('../../../../assets/images/characters/character.png')} />
+          )}
         </ContainerImage>
         <RenderPoints />
       </WrapperTop>
 
       <ContainerScroll>
-        {
-          MENU_DATA.map(item => {
+        {MENU_DATA.map((item) => {
+          if (item.key === INFLUENCER_KEY && !user?.influencer_id) {
+            return null;
+          }
 
-            if (item.key === INFLUENCER_KEY && !user?.influencer_id) {
-              return <></>
-            }
-
-            return (
-              <MenuItem key={item.key} icon={item.icon} description={item.description} text={item.text} cb={item.cb} logged={item.logged} />
-            )
-          })
-        }
-        {
-          user &&
+          return (
+            <MenuItem
+              key={item.key}
+              icon={item.icon}
+              description={item.description}
+              text={item.text}
+              cb={item.cb}
+              logged={item.logged}
+            />
+          );
+        })}
+        {user && (
           <MenuLogoutContainer>
             <IconLogout onPress={handlelogout} />
             <MenuTextLogout>Sair</MenuTextLogout>
           </MenuLogoutContainer>
-        }
+        )}
       </ContainerScroll>
-
-    </SafeArea >
+    </SafeArea>
   );
-}
+};
