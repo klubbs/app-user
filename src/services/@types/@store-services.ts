@@ -38,3 +38,15 @@ export type GetAllOffersResponse = {
   working_days: number[];
   minimum_ticket: number;
 };
+
+export type GetSelectedKlubbsOffersResponse = {
+  store_id: string;
+  store_name: string;
+  store_image: string;
+  offer_id: string;
+  off: number;
+  min_ticket: number;
+  coupon_id: string;
+  coupon_code: string;
+  working_days: number[];
+};

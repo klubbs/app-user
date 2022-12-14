@@ -1,31 +1,36 @@
 import React, { useEffect, useContext } from 'react';
 import { HomeContext } from '../../../contexts/home-context';
 import { ICategoryResponse } from '../../../services/@types/@store-services';
-import { Description, FlatComponent, WrapplerTouchable, SkeletonStyled, WrapperSkeleton } from './styles';
+import {
+  Description,
+  FlatComponent,
+  WrapplerTouchable,
+  SkeletonStyled,
+  WrapperSkeleton,
+} from './styles';
 import * as Haptic from 'expo-haptics';
 
 export const RestaurantsCategories: React.FC = (props) => {
-
-  const { getCategories, selectedCategory, setSelectedCategory, categories } = useContext(HomeContext)
+  const { getCategories, selectedCategory, setSelectedCategory, categories } =
+    useContext(HomeContext);
 
   useEffect(() => {
-    (getCategories)()
-  }, [])
+    getCategories();
+  }, []);
 
   function onSelect(id: string) {
-    setSelectedCategory(id)
-    Haptic.impactAsync(Haptic.ImpactFeedbackStyle.Light)
+    setSelectedCategory(id);
+    Haptic.impactAsync(Haptic.ImpactFeedbackStyle.Light);
   }
 
   function ItemRender({ item }: { item: ICategoryResponse }): JSX.Element {
-
-    const isSelected = selectedCategory === item.id
+    const isSelected = selectedCategory === item.id;
 
     return (
       <WrapplerTouchable onPress={() => onSelect(item.id)} selected={isSelected}>
-        <Description selected={isSelected} >{item.description}</Description>
+        <Description selected={isSelected}>{item.description}</Description>
       </WrapplerTouchable>
-    )
+    );
   }
 
   if (categories.length <= 0) {
@@ -33,7 +38,7 @@ export const RestaurantsCategories: React.FC = (props) => {
       <WrapperSkeleton>
         <SkeletonStyled />
       </WrapperSkeleton>
-    )
+    );
   }
 
   return (
@@ -43,6 +48,6 @@ export const RestaurantsCategories: React.FC = (props) => {
       renderItem={ItemRender as any}
     />
   );
-}
+};
 
 export default RestaurantsCategories;

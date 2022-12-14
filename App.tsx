@@ -10,8 +10,9 @@ import { colors } from './assets/constants/colors';
 import { InfluencerProvider } from './src/contexts/influencer-context';
 import FlashComponent from 'flash-notify';
 import { CheckoutProvider } from './src/contexts/checkout-context';
+import { HomeProvider } from './src/contexts/home-context';
 
-LogBox.ignoreLogs(['Expected style', 'Require cycles are allowed']);
+LogBox.ignoreAllLogs(['to contain units', 'Require cycles are allowed']);
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -41,15 +42,17 @@ export default function App() {
     <AuthProvider>
       <InfluencerProvider>
         <CheckoutProvider>
-          <NavigationContainer>
-            <StatusBar
-              backgroundColor={colors.COLOR_SECUNDARY_WHITE}
-              animated={true}
-              barStyle={'dark-content'}
-            />
-            <AppStack />
-          </NavigationContainer>
-          <FlashComponent />
+          <HomeProvider>
+            <NavigationContainer>
+              <StatusBar
+                backgroundColor={colors.COLOR_SECUNDARY_WHITE}
+                animated={true}
+                barStyle={'dark-content'}
+              />
+              <AppStack />
+            </NavigationContainer>
+            <FlashComponent />
+          </HomeProvider>
         </CheckoutProvider>
       </InfluencerProvider>
     </AuthProvider>

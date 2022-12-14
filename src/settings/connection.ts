@@ -3,9 +3,9 @@ import axios from 'axios';
 import Constants from 'expo-constants';
 import { AsyncStorageUtils } from '../utils/async-storage';
 import { NotificationsFlash } from '../utils/flash-notifications';
-import { IError } from './@types/@responses';
-import { AuthService } from '../services/auth-service';
+import { IError, IResponseMessage } from './@types/@responses';
 import jwt_decode, { JwtPayload } from 'jwt-decode';
+import { RefreshTokenResponse } from '../services/@types/@auth-services';
 
 const URL = {
   KLUBBS_AUTHZN_URL: Constants.manifest?.extra?.KLUBBS_AUTHZN_URL,
@@ -90,6 +90,34 @@ async function createCredentialToken() {
   const refresh = (await AsyncStorageUtils.getRefreshTokenInStorage()) || '';
 
   return await AuthService.refresh(token, refresh);
+}
+
+class AuthService {
+  static async generateAppCredential() {
+    const { data } = await connectionHandlerAuthZN.get<IResponseMessage<{ token: string }>>(
+      'auth/credentials/application',
+    );
+
+    await AsyncStorageUtils.refreshTokensInStorage(data.message.token);
+
+    return data.message.token;
+  }
+
+  static async refresh(currentToken: string, refresh: string): Promise<string> {
+    const { data } = await connectionHandlerAuthZN.get<IResponseMessage<RefreshTokenResponse>>(
+      'auth/refresh',
+      {
+        params: {
+          token: currentToken,
+          refresh_token: refresh,
+        },
+      },
+    );
+
+    await AsyncStorageUtils.refreshTokensInStorage(data.message.token, data.message.refresh_token);
+
+    return data.message.token;
+  }
 }
 
 export { connectionHandlerAuthZN, connectionHandler };

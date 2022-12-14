@@ -14,21 +14,19 @@ import { LocationSelector } from '../../components/LocationSelector';
 
 export const Home: React.FC = () => {
   return (
-    <HomeProvider>
-      <Wrapper>
-        <ContainerLocation>
-          <LocationSelector />
-        </ContainerLocation>
-        <ContainerDiscountPool>
-          <DiscountPoolSlider />
-        </ContainerDiscountPool>
-        <ContainerCategories>
-          <MainCategories />
-        </ContainerCategories>
-        <ContainerBottom>
-          <RestaurantsList />
-        </ContainerBottom>
-      </Wrapper>
-    </HomeProvider>
+    <Wrapper>
+      <ContainerLocation>
+        <LocationSelector />
+      </ContainerLocation>
+      <ContainerDiscountPool>
+        <DiscountPoolSlider />
+      </ContainerDiscountPool>
+      <ContainerCategories>
+        <MainCategories />
+      </ContainerCategories>
+      <ContainerBottom>
+        <RestaurantsList />
+      </ContainerBottom>
+    </Wrapper>
   );
 };

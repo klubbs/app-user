@@ -1,6 +1,10 @@
 import { IResponseMessage } from '../settings/@types/@responses';
 import { connectionHandler } from '../settings/connection';
-import { ICategoryResponse, IStoresResponse } from './@types/@store-services';
+import {
+  GetSelectedKlubbsOffersResponse,
+  ICategoryResponse,
+  IStoresResponse,
+} from './@types/@store-services';
 
 class StoreService {
   static async getCategories(): Promise<ICategoryResponse[]> {
@@ -15,6 +19,14 @@ class StoreService {
     const { data } = await connectionHandler('KLUBBS_API_URL').get<
       IResponseMessage<IStoresResponse[]>
     >('stores/all', { params: { latitude, longitude } });
+
+    return data.message;
+  }
+
+  static async getSelectedKlubbsOffers() {
+    const { data } = await connectionHandler('KLUBBS_API_URL').get<
+      IResponseMessage<GetSelectedKlubbsOffersResponse[]>
+    >('stores/offers/selecteds/klubbs');
 
     return data.message;
   }

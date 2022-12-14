@@ -19,8 +19,6 @@ export const Coupon: React.FC<ICouponProps> = (props) => {
   const offersCount = props.data.offers?.length;
 
   function formattedCouponCode() {
-    console.log(props.data);
-
     return `${props.data.coupon_code.substring(0, CODE_COUPONS_SIZE)}${
       props.data.coupon_code.length > CODE_COUPONS_SIZE ? '...' : ''
     }`;

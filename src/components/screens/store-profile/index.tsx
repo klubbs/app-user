@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { FlatList, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { ModalComponent } from '../../components/Modal';
@@ -36,6 +36,7 @@ import { MenuItem } from '../../components/MenuItem';
 import { Spinner } from '../../components/spinner';
 import { NotificationsFlash } from '../../../utils/flash-notifications';
 import { CouponService } from '../../../services/coupon-service';
+import { HomeContext } from '../../../contexts/home-context';
 
 type TOfferSelected = {
   id: string;

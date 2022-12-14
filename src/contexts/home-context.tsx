@@ -6,6 +6,7 @@ import { AsyncStorageUtils } from '../utils/async-storage';
 import { format4TwoColumns } from '../utils/formatersUtils';
 import * as Location from 'expo-location';
 import { LocationAccuracy } from 'expo-location';
+import { TSelectedOffers } from '../components/screens/offer-pools';
 
 export const HomeContext = createContext(
   {} as {
@@ -17,22 +18,28 @@ export const HomeContext = createContext(
     getCategories: () => Promise<void>;
     getRestaurants: (latitude: number, longitude: number) => Promise<void>;
     location: { city: string; lat: number | null; long: number | null };
+    klubbsOffers: TSelectedOffers[];
+    getKlubbsOffersAsync: () => Promise<void>;
   },
 );
 
-const HomeProvider: React.FC = ({ children }) => {
+const START_LOCATION_STATE = {
+  city: 'Estamos te localizando...',
+  lat: null,
+  long: null,
+};
+
+const HomeProvider: React.FC = ({ children }: any) => {
   const [categories, setCategories] = useState<ICategoryResponse[]>([]);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [restaurants, setRestaurants] = useState<IRestaurants[]>([]);
+  const [klubbsOffers, setKlubbsOffers] = useState<TSelectedOffers[]>([]);
+
   const [location, setLocation] = useState<{
     city: string;
     lat: number | null;
     long: number | null;
-  }>({
-    city: 'Estamos te localizando...',
-    lat: null,
-    long: null,
-  });
+  }>(START_LOCATION_STATE);
 
   useEffect(() => {
     getLocationAsync();
@@ -105,6 +112,30 @@ const HomeProvider: React.FC = ({ children }) => {
     return format4TwoColumns(tmp, 2);
   }, [selectedCategory, restaurants]);
 
+  async function getKlubbsOffersAsync() {
+    const response = await StoreService.getSelectedKlubbsOffers();
+
+    if (response.length < 1) {
+      setKlubbsOffers([]);
+    }
+
+    const mapped = response.map((i) => {
+      return {
+        id: i.offer_id,
+        off: i.off,
+        store: i.store_name,
+        storeId: i.store_id,
+        image: i.store_image,
+        couponCode: i.coupon_code,
+        couponId: i.coupon_id,
+        minTicket: i.min_ticket,
+        storeImage: i.store_image,
+        storeName: i.store_name,
+      } as TSelectedOffers;
+    });
+    setKlubbsOffers(mapped);
+  }
+
   function getCategoriesDescription(id: string): string | undefined {
     return categories.find((item) => item.id === id)?.description;
   }
@@ -120,6 +151,8 @@ const HomeProvider: React.FC = ({ children }) => {
         categorizedRestaurants,
         getRestaurants,
         location,
+        getKlubbsOffersAsync,
+        klubbsOffers,
       }}
     >
       {children}
