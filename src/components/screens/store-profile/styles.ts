@@ -171,8 +171,3 @@ export const InteractionsWrapper = styled.View`
   border-top-color: ${colors.COLOR_BLACK10};
   padding-top: 10px;
 `;
-
-export const ContainerModal = styled.View`
-  padding-horizontal: 10px;
-  padding-vertical: 5px;
-`;

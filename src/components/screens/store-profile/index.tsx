@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { FlatList, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { ModalComponent } from '../../components/Modal';
 import { colors } from '../../../../assets/constants/colors';
 import { ClockIcon } from '../../../../assets/icons/clockIcon';
 import { StoreScreenProps } from '../../../settings/@types/@app-stack';
@@ -28,30 +27,17 @@ import {
   InteractionsWrapper,
   YellowContainer,
   ImageContainer,
-  ContainerModal,
   HeaderContainer,
 } from './styles';
 import { formatCurrency, formatHour } from '../../../utils/formatersUtils';
-import { MenuItem } from '../../components/MenuItem';
-import { Spinner } from '../../components/spinner';
 import { NotificationsFlash } from '../../../utils/flash-notifications';
 import { CouponService } from '../../../services/coupon-service';
-import { HomeContext } from '../../../contexts/home-context';
-
-type TOfferSelected = {
-  id: string;
-  off: number;
-  min_ticket: number;
-  coupon_id: string;
-  coupon_code: string;
-  partner_image: string;
-  working_days: number[];
-};
+import ModalFluxOffer from '../../modals/modal-flux-offer';
+import { TOfferSelected } from '../../modals/modal-offer-rules-qrcode';
 
 const StoreProfile: React.FC<StoreScreenProps> = ({ route }) => {
   const navigation = useNavigation();
 
-  const [loading, setLoading] = useState(false);
   const [enableFluxOfferModal, setEnableFluxOfferModal] = useState(false);
   const [offer, setOffer] = useState<TOfferSelected>({} as any);
 
@@ -60,13 +46,9 @@ const StoreProfile: React.FC<StoreScreenProps> = ({ route }) => {
     setEnableFluxOfferModal(!enableFluxOfferModal);
   }
 
-  async function handleSaveInWallet(offerId: string) {
+  async function handleSaveInWallet() {
     try {
-      setLoading(!loading);
-
-      setEnableFluxOfferModal(!enableFluxOfferModal);
-
-      await CouponService.putOfferInOwnCoupon(offerId);
+      await CouponService.putOfferInOwnCoupon(offer.id);
 
       NotificationsFlash.customMessage(
         'Proonto, ta lá !',
@@ -80,88 +62,32 @@ const StoreProfile: React.FC<StoreScreenProps> = ({ route }) => {
         'WARNING',
       );
     } finally {
-      setLoading(false);
+      setEnableFluxOfferModal(!enableFluxOfferModal);
     }
   }
 
-  function handleStartCheckin(checkinData: {
-    couponId: string;
-    couponCode: string;
-    partnerImage: string;
-    offer: {
-      id: string;
-      off: number;
-      minTicket: number;
-      workingDays: number[];
-      storeName: string;
-      storeImage: string;
-    };
-  }) {
+  function handleStartCheckin() {
     setEnableFluxOfferModal(!enableFluxOfferModal);
 
     navigation.navigate('CreateCheckin', {
       flux: 'KLUBBS_FLUX',
-      coupon_code: checkinData.couponCode,
-      coupon_id: checkinData.couponId,
-      partner_image: checkinData.partnerImage,
+      coupon_code: offer.coupon_code,
+      coupon_id: offer.coupon_id,
+      partner_image: offer.partner_image,
       offers: [
         {
-          offer_id: checkinData.offer.id,
-          store_name: checkinData.offer.storeName,
-          store_image: checkinData.offer.storeImage,
-          offer_ticket: checkinData.offer.minTicket,
-          offer_percentage: checkinData.offer.off,
+          offer_id: offer.id,
+          store_image: route.params.image,
+          store_name: route.params.name,
+          offer_ticket: offer.min_ticket,
+          offer_percentage: offer.off,
         },
       ],
     });
   }
 
-  const ModalFlux = () => {
-    return (
-      <ModalComponent
-        visible={enableFluxOfferModal}
-        onClose={() => {
-          setEnableFluxOfferModal(!enableFluxOfferModal);
-        }}
-      >
-        <Spinner loading={loading} />
-        <ContainerModal>
-          <MenuItem
-            key={'checkin'}
-            text={'Iniciar checkin agora'}
-            description={'To preparado(a) para usar'}
-            icon={'circle'}
-            cb={() => {
-              handleStartCheckin({
-                couponId: offer.coupon_id,
-                couponCode: offer.coupon_code,
-                partnerImage: offer.partner_image,
-                offer: {
-                  id: offer.id,
-                  minTicket: offer.min_ticket,
-                  off: offer.off,
-                  storeImage: route.params.image,
-                  storeName: route.params.name,
-                  workingDays: offer.working_days,
-                },
-              });
-            }}
-          />
-          <MenuItem
-            key={'wallet'}
-            text={'Guardar no meu cupom'}
-            description={'Talvez eu vá usar depois'}
-            icon={'tag'}
-            cb={() => handleSaveInWallet(offer.id)}
-          />
-        </ContainerModal>
-      </ModalComponent>
-    );
-  };
-
   return (
     <Wrapper>
-      {/* <Spinner loading={loading} /> */}
       <ImageContainer>
         <YellowContainer>
           <TouchableOpacity activeOpacity={0.8} onPress={() => navigation.goBack()}>
@@ -228,7 +154,12 @@ const StoreProfile: React.FC<StoreScreenProps> = ({ route }) => {
             }}
           />
         </InteractionsWrapper>
-        <ModalFlux />
+        <ModalFluxOffer
+          enable={enableFluxOfferModal}
+          onClose={() => setEnableFluxOfferModal(!enableFluxOfferModal)}
+          walletCb={handleSaveInWallet}
+          checkinCb={handleStartCheckin}
+        />
       </Container>
     </Wrapper>
   );
