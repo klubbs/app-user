@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Modalize } from 'react-native-modalize'
+import { Modalize } from 'react-native-modalize';
 import { SelectorDaysWeek } from '../../components/selector-days-week';
 import { IWalletCouponsResponseOfferData } from '../../../services/@types/@coupon-services';
 import {
@@ -12,59 +12,61 @@ import {
   WrapperTicket,
   ExpireIn,
   WrapperOff,
-  Off
+  Off,
 } from './styles';
 
-export const ModalOfferRulesQrCode: React.FC<{ data: IWalletCouponsResponseOfferData | null, onClose: any }> =
-  (props) => {
+export type TOfferSelected = {
+  id: string;
+  off: number;
+  min_ticket: number;
+  coupon_id: string;
+  coupon_code: string;
+  partner_image: string;
+  // working_days: number[];
+};
 
-    const modalizeRef = useRef<Modalize>()
+export const ModalOfferRulesQrCode: React.FC<{
+  data: IWalletCouponsResponseOfferData | null;
+  onClose: any;
+}> = (props) => {
+  const modalizeRef = useRef<Modalize>();
 
-    useEffect(() => {
+  useEffect(() => {
+    if (props.data !== null) {
+      modalizeRef.current?.open();
+    }
+  }, [props]);
 
-      if (props.data !== null) {
-        modalizeRef.current?.open();
-      }
+  return (
+    <Modalize onClose={props.onClose} modalHeight={500} ref={modalizeRef}>
+      <Wrapper>
+        <Name>{props?.data?.store_name}</Name>
+        <ExpireIn>
+          Esta oferta expira em:{' '}
+          {props.data?.offer_valid_at.ToDateFormat().toCustomLocaleDateString()}
+        </ExpireIn>
+        <Divider />
+        <SelectorDaysWeek hasSelector={false} initSelectedDays={props.data?.offer_working_days} />
 
-    }, [props])
+        <WrapperTicket>
+          <MinimumTicketSubtitle>• Desconto </MinimumTicketSubtitle>
+          <WrapperOff>
+            <Off>{props.data?.offer_percentage}%</Off>
+          </WrapperOff>
+        </WrapperTicket>
 
-    return (
-      <Modalize
-        onClose={props.onClose}
-        modalHeight={500}
-        ref={modalizeRef}
-      >
-        <Wrapper>
-          <Name>{props?.data?.store_name}</Name>
-          <ExpireIn>Esta oferta expira em: {props
-            .data?.offer_valid_at
-            .ToDateFormat()
-            .toCustomLocaleDateString()}</ExpireIn>
-          <Divider />
-          <SelectorDaysWeek hasSelector={false} initSelectedDays={props.data?.offer_working_days} />
+        <WrapperTicket>
+          <MinimumTicketSubtitle>• valor mínimo </MinimumTicketSubtitle>
+          <MinimumTicket>
+            {props.data?.offer_ticket.toLocaleString('pt-br', {
+              style: 'currency',
+              currency: 'BRL',
+            })}
+          </MinimumTicket>
+        </WrapperTicket>
 
-          <WrapperTicket>
-            <MinimumTicketSubtitle>• Desconto </MinimumTicketSubtitle>
-            <WrapperOff>
-              <Off>{props.data?.offer_percentage}%</Off>
-            </WrapperOff>
-          </WrapperTicket>
-
-          <WrapperTicket>
-            <MinimumTicketSubtitle>• valor mínimo </MinimumTicketSubtitle>
-            <MinimumTicket>
-              {
-                props
-                  .data?.offer_ticket
-                  .toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
-              }
-            </MinimumTicket>
-          </WrapperTicket>
-
-          <Description>{props?.data?.offer_description}</Description>
-        </Wrapper>
-
-      </Modalize>
-    );
-  }
-
+        <Description>{props?.data?.offer_description}</Description>
+      </Wrapper>
+    </Modalize>
+  );
+};

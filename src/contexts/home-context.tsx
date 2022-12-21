@@ -6,7 +6,7 @@ import { AsyncStorageUtils } from '../utils/async-storage';
 import { format4TwoColumns } from '../utils/formatersUtils';
 import * as Location from 'expo-location';
 import { LocationAccuracy } from 'expo-location';
-import { TSelectedOffers } from '../components/screens/offer-pools';
+import { TPoolOffer } from '../components/screens/offer-pools';
 
 export const HomeContext = createContext(
   {} as {
@@ -18,7 +18,7 @@ export const HomeContext = createContext(
     getCategories: () => Promise<void>;
     getRestaurants: (latitude: number, longitude: number) => Promise<void>;
     location: { city: string; lat: number | null; long: number | null };
-    klubbsOffers: TSelectedOffers[];
+    klubbsOffers: TPoolOffer[];
     getKlubbsOffersAsync: () => Promise<void>;
   },
 );
@@ -33,7 +33,7 @@ const HomeProvider: React.FC = ({ children }: any) => {
   const [categories, setCategories] = useState<ICategoryResponse[]>([]);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [restaurants, setRestaurants] = useState<IRestaurants[]>([]);
-  const [klubbsOffers, setKlubbsOffers] = useState<TSelectedOffers[]>([]);
+  const [klubbsOffers, setKlubbsOffers] = useState<TPoolOffer[]>([]);
 
   const [location, setLocation] = useState<{
     city: string;
@@ -131,7 +131,7 @@ const HomeProvider: React.FC = ({ children }: any) => {
         minTicket: i.min_ticket,
         storeImage: i.store_image,
         storeName: i.store_name,
-      } as TSelectedOffers;
+      } as TPoolOffer;
     });
     setKlubbsOffers(mapped);
   }
