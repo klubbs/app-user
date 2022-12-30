@@ -1,99 +1,113 @@
 import React, { useState, useImperativeHandle } from 'react';
-import { Keyboard } from 'react-native'
+import { Keyboard } from 'react-native';
 import { ModalComponent } from '../../components/Modal';
 import { Input, Container, Wrapper } from './styles';
 import { ButtonStorage } from '../../components/ButtonStorage';
 import { CouponService } from '../../../services/coupon-service';
-import { Spinner } from '../../components/spinner';
+import { Spinner } from '../../components/Spinner';
 import { NotificationsFlash } from '../../../utils/flash-notifications';
 import { IError } from '../../../settings/@types/@responses';
-import { InfluencerService, InfluencerServiceException } from '../../../services/influencer-service';
+import {
+  InfluencerService,
+  InfluencerServiceException,
+} from '../../../services/influencer-service';
 import { IModalAddCouponProps, IModalAddCouponRef } from './@types';
 import { SubtitleSaveCouponImage } from '../../../../assets/images/coupons/contributeInfluencer';
 
-export const ModalAddCoupon = React.forwardRef<IModalAddCouponRef, IModalAddCouponProps>((props, ref) => {
+export const ModalAddCoupon = React.forwardRef<IModalAddCouponRef, IModalAddCouponProps>(
+  (props, ref) => {
+    const [visibleModal, setVisibleModal] = useState(false);
+    const [value, setValue] = useState('');
+    const [loading, setLoading] = useState(false);
 
-  const [visibleModal, setVisibleModal] = useState(false);
-  const [value, setValue] = useState("")
-  const [loading, setLoading] = useState(false)
+    useImperativeHandle(ref, () => ({
+      hide: () => setVisibleModal(false),
+      show: () => setVisibleModal(true),
+    }));
 
-  useImperativeHandle(ref, () => ({ hide: () => setVisibleModal(false), show: () => setVisibleModal(true) }));
+    async function onSaveCoupon() {
+      try {
+        setLoading(true);
 
-  async function onSaveCoupon() {
-    try {
-      setLoading(true)
+        Keyboard.dismiss();
 
-      Keyboard.dismiss();
+        if (value.trim().length < 5) {
+          NotificationsFlash.customMessage('', '🚫 Cupom Inválido.', 'DANGER');
+          return;
+        }
 
-      if (value.trim().length < 5) {
-        NotificationsFlash.customMessage('', '🚫 Cupom Inválido.', 'DANGER')
-        return;
+        await CouponService.saveCouponInWallet(value);
+
+        NotificationsFlash.customMessage(
+          'Você já pode economizar',
+          'Adicionamos o cupom a sua carteira',
+          'SUCCESS',
+        );
+
+        onCloseHandler();
+      } catch (error) {
+        CouponService.catchSaveCouponInWallet(error as IError);
+      } finally {
+        setLoading(false);
       }
-
-      await CouponService.saveCouponInWallet(value)
-
-      NotificationsFlash.customMessage('Você já pode economizar', 'Adicionamos o cupom a sua carteira', 'SUCCESS')
-
-      onCloseHandler()
-
-    } catch (error) {
-      CouponService.catchSaveCouponInWallet(error as IError)
-    } finally {
-      setLoading(false)
     }
-  }
 
-  async function onCreateNewCoupon() {
+    async function onCreateNewCoupon() {
+      try {
+        Keyboard.dismiss();
 
-    try {
+        if (value.trim().length < 5) {
+          NotificationsFlash.customMessage(
+            'Cupom inválido',
+            'Seu cupom precisa ter 5 ou mais caracteres',
+            'NEUTRAL',
+          );
+          return;
+        }
 
-      Keyboard.dismiss();
+        setLoading(true);
 
-      if (value.trim().length < 5) {
-        NotificationsFlash.customMessage('Cupom inválido', 'Seu cupom precisa ter 5 ou mais caracteres', 'NEUTRAL')
-        return;
+        await InfluencerService.createNewCouponCode(value);
+
+        NotificationsFlash.customMessage(
+          'Cupom criado',
+          'Só divulgar para seus seguidores',
+          'SUCCESS',
+        );
+
+        onCloseHandler();
+      } catch (error) {
+        InfluencerServiceException.catchCreateNewCoupon(error as IError);
+      } finally {
+        setLoading(false);
       }
-
-      setLoading(true)
-
-      await InfluencerService.createNewCouponCode(value)
-
-      NotificationsFlash.customMessage('Cupom criado', 'Só divulgar para seus seguidores', 'SUCCESS')
-
-      onCloseHandler();
-    } catch (error) {
-
-      InfluencerServiceException.catchCreateNewCoupon(error as IError)
-
-    } finally {
-      setLoading(false)
     }
-  }
 
-  function onCloseHandler() {
-    setValue('')
-    setVisibleModal(false)
-  }
+    function onCloseHandler() {
+      setValue('');
+      setVisibleModal(false);
+    }
 
-  return (
-
-    <ModalComponent visible={visibleModal} onClose={onCloseHandler}>
-      <Spinner loading={loading} />
-      <Wrapper>
-        <Container>
-          <Input
-            autoCorrect={false}
-            value={value}
-            onChangeText={(e: string) => setValue(e.toUpperCase().trim())}
-          />
-          <ButtonStorage onPress={() => props.isInfluencer ? onCreateNewCoupon() : onSaveCoupon()} size={25} />
-        </Container>
-        <Container>
-
-          <SubtitleSaveCouponImage />
-        </Container>
-
-      </Wrapper>
-    </ModalComponent >
-  );
-})
+    return (
+      <ModalComponent visible={visibleModal} onClose={onCloseHandler}>
+        <Spinner loading={loading} />
+        <Wrapper>
+          <Container>
+            <Input
+              autoCorrect={false}
+              value={value}
+              onChangeText={(e: string) => setValue(e.toUpperCase().trim())}
+            />
+            <ButtonStorage
+              onPress={() => (props.isInfluencer ? onCreateNewCoupon() : onSaveCoupon())}
+              size={25}
+            />
+          </Container>
+          <Container>
+            <SubtitleSaveCouponImage />
+          </Container>
+        </Wrapper>
+      </ModalComponent>
+    );
+  },
+);

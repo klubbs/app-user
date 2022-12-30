@@ -3,6 +3,7 @@ import { Dimensions, FlatList, PixelRatio, Platform } from 'react-native';
 import { colors } from '../../../../assets/constants/colors';
 import QRCode from 'react-native-qrcode-svg';
 import Button from '../../components/Button';
+import { isIphoneX } from '../../../utils/dimensions';
 
 const { width, height } = Dimensions.get('window');
 
@@ -33,7 +34,7 @@ export const SubtitleHelp = styled.Text`
   font-size: 14px;
   font-family: 'Nunito_Bold';
   position: absolute;
-  bottom: ${Platform.select({ ios: '16%', android: '4%' })};
+  bottom: ${Platform.select({ ios: isIphoneX() ? '16%' : '2%', android: '4%' })};
 `;
 
 export const ContainerImage = styled.View`
@@ -64,7 +65,7 @@ export const FlatListComponent = styled.FlatList.attrs((props) => ({
   showsHorizontalScrollIndicator: false,
 }))`
   position: absolute;
-  bottom: ${Platform.select({ ios: '22%', android: '12%' })};
+  bottom: ${Platform.select({ ios: isIphoneX() ? '22%' : '10%', android: '12%' })};
   padding-horizontal: 15px;
   width: 80%;
   flex-grow: 0;
@@ -72,7 +73,7 @@ export const FlatListComponent = styled.FlatList.attrs((props) => ({
 
 export const ContainerQr = styled.View<{ distanceInBottom: boolean }>`
   position: absolute;
-  top: ${Platform.select({ ios: '28.5%%', android: '24%' })};
+  top: ${Platform.select({ ios: isIphoneX() ? '28.5%' : '24%', android: '24%' })};
 `;
 
 const BaseCheckoutButton = styled(Button).attrs({
@@ -89,7 +90,7 @@ export const CheckinButton = styled(BaseCheckoutButton).attrs({
   styleContainer: {
     backgroundColor: colors.COLOR_BLACK,
     width: '40%',
-    bottom: Platform.select({ ios: '122%', android: '110%' }),
+    bottom: Platform.select({ ios: isIphoneX() ? '122%' : '110%', android: '110%' }),
   },
 })``;
 
@@ -99,6 +100,6 @@ export const CheckinProgressButton = styled(BaseCheckoutButton).attrs({
   styleContainer: {
     backgroundColor: colors.COLOR_YELLOW_RATING,
     width: '70%',
-    bottom: Platform.select({ ios: '6%', android: '32%' }),
+    bottom: Platform.select({ ios: isIphoneX() ? '6%' : '25%', android: '32%' }),
   },
 })``;

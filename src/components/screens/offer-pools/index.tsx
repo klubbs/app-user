@@ -79,7 +79,7 @@ export const OfferPools: React.FC<OfferPoolsScreenProps> = ({ route }) => {
   function LoadingOrEmptyRender() {
     return (
       <ContainerNotFound>
-        <NotFoundRestaurants height={160} />
+        <NotFoundRestaurants height={150} />
         <EmptySubtitle>Ainda não liberamos nada por aqui</EmptySubtitle>
       </ContainerNotFound>
     );

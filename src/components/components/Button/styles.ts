@@ -15,6 +15,6 @@ export const Wrapper = styled.TouchableOpacity.attrs<{ disabled: boolean | undef
 
 export const Title = styled.Text<{ color: string; disabled: boolean | undefined }>`
   color: ${(props) => (props.disabled ? colors.COLOR_BLACK20 : props.color ?? colors.COLOR_WHITE)};
-  font-size: 18px;
+  font-size: 16px;
   font-family: 'Nunito_Bold';
 `;

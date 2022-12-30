@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { colors } from '../../../../assets/constants/colors';
 import { CouponQrScreenProps } from '../../../settings/@types/@app-stack';
-import { StoreCardInQrCode } from '../../components/store-card-in-qr-code';
+import { StoreCardInQrCode } from '../../components/Store-card-in-qr-code';
 import { ModalOfferRulesQrCode } from '../../modals/modal-offer-rules-qrcode';
 import { AuthContext } from '../../../contexts/auth-context';
 import { UserIcon } from '../../../../assets/icons/user_icon';
@@ -134,6 +134,10 @@ export const CouponQrScreen: React.FC<CouponQrScreenProps> = ({ route }) => {
         data={route.params?.offers}
         keyExtractor={(_): any => `${++key}`}
         renderItem={({ item }: { item: IWalletCouponsResponseOfferData }) => {
+          if (checkinStatus.status === 'CHECKIN') {
+            return null;
+          }
+
           return <StoreCardInQrCode {...item} onPress={() => setEnableDescriptionOffer(item)} />;
         }}
       />

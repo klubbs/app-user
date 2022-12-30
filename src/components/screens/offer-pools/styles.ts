@@ -82,7 +82,7 @@ export const BadgeText = styled.Text`
 export const ContainerNotFound = styled.View`
   justify-content: center;
   align-items: center;
-  width: 400px;
+  width: 100%;
   height: 150px;
 `;
 

@@ -6,8 +6,8 @@ import { CheckoutExceptions, CheckoutService } from '../../../services/checkout-
 import { CreateCheckinScreenProps } from '../../../settings/@types/@app-stack';
 import Button from '../../components/Button';
 import OFF from '../../components/OFF';
-import { Selector } from '../../components/selector';
-import { Spinner } from '../../components/spinner';
+import { Selector } from '../../components/Selector';
+import { Spinner } from '../../components/Spinner';
 import {
   Subtitle,
   Wrapper,

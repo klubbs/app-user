@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { IUserCheckoutsReponse } from '../../../services/@types/@coupon-services';
 import { formatCurrency } from '../../../utils/formatersUtils';
 import OFF from '../OFF';
-import { Selector } from '../selector';
+import { Selector } from '../Selector';
 import {
   ContainerLeft,
   Dot,
@@ -85,12 +85,12 @@ const MemoiZedCardCheckout = memo((props: CardCheckoutOfferProps) => {
           <WrapperOfferContainer type={COLOR_TYPE}>
             <ContaineOfferTop>
               <StoreName>{props.data.store_name}</StoreName>
+              <BoldText style={{ alignSelf: 'flex-end' }}>{howDateShow()}</BoldText>
             </ContaineOfferTop>
             <ContaineOfferBottom>
               <OFF off={props.data.discount} />
               {RenderTextBox(false)}
               <BoldText> {howAmount()}</BoldText>
-              <BoldText>{howDateShow()}</BoldText>
             </ContaineOfferBottom>
           </WrapperOfferContainer>
         </WrapperOffer>

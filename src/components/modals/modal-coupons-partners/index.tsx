@@ -17,7 +17,7 @@ import {
 import { NotificationsFlash } from '../../../utils/flash-notifications';
 import { Pressable, Dimensions } from 'react-native';
 import { CouponAndOffersByInfluencerResponse, IModalCouponsPartnersRef } from './@types';
-import { SpinnerLoading } from '../../components/spinner';
+import { SpinnerLoading } from '../../components/Spinner';
 import { useNavigation } from '@react-navigation/native';
 import { InfluencerContext } from '../../../contexts/influencer-context';
 
