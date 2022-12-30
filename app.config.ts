@@ -41,5 +41,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   extra: {
     KLUBBS_API_URL: process.env.ENVIRONMENT_KLUBBS_API_URL,
     KLUBBS_AUTHZN_URL: process.env.ENVIRONMENT_KLUBBS_AUTHZN_URL,
+    eas: {
+      projectId: process.env.ENVIRONMENT_PROJECT_EAS_ID,
+    },
   },
 });

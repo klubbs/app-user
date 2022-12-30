@@ -46,7 +46,7 @@ jobs:
 
       - name: 🚀 Build Version
         run: |
-          ENVIRONMENT_KLUBBS_API_URL=${{ secrets.ENVIRONMENT_KLUBBS_API_URL }} ENVIRONMENT_KLUBBS_AUTHZN_URL=${{ secrets.ENVIRONMENT_KLUBBS_AUTHZN_URL }} eas build --platform ios --profile production --non-interactive
+          ENVIRONMENT_KLUBBS_API_URL=${{ secrets.ENVIRONMENT_KLUBBS_API_URL }} ENVIRONMENT_KLUBBS_AUTHZN_URL=${{ secrets.ENVIRONMENT_KLUBBS_AUTHZN_URL }} ENVIRONMENT_PROJECT_EAS_ID=${{ secrets.ENVIRONMENT_PROJECT_EAS_ID }} eas build --platform ios --profile production --non-interactive
         # Use in-line environment because using this mode can pass to eas server for using in build
 
       - name: 📦 Download Build IPA
@@ -58,14 +58,13 @@ jobs:
       - name: 📦 Upload do artefato
         uses: actions/upload-artifact@v2
         with:
-         name: appbuild
-         path: ./app.ipa
+          name: appbuild
+          path: ./app.ipa
 
   APPLE_STORE_TRANSPORT:
     needs: Build
-    runs-on:  macos-latest
+    runs-on: macos-latest
     steps:
-
       - uses: actions/download-artifact@v2
         with:
           name: appbuild
