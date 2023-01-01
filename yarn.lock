@@ -3970,10 +3970,10 @@ expo-keep-awake@~11.0.1:
   resolved "https://registry.yarnpkg.com/expo-keep-awake/-/expo-keep-awake-11.0.1.tgz#ee354465892a94040ffe09901b85b469e7d54fb3"
   integrity sha512-44ZjgLE4lnce2d40Pv8xsjMVc6R5GvgHOwZfkLYtGmgYG9TYrEJeEj5UfSeweXPL3pBFhXKfFU8xpGYMaHdP0A==
 
-expo-linear-gradient@^11.4.0:
-  version "11.4.0"
-  resolved "https://registry.yarnpkg.com/expo-linear-gradient/-/expo-linear-gradient-11.4.0.tgz#20ecad4d11e66e35b31600e5389ec9c4067f7312"
-  integrity sha512-qtIfsLs7NOpfxYrFSJL5uLtNHIkBHQFuQ3f7++XpoJTSm4eQVFxjjkCGWiLIrkpVjKzmgp3DLuIVsadsGX21lA==
+expo-linear-gradient@^12.0.1:
+  version "12.0.1"
+  resolved "https://registry.yarnpkg.com/expo-linear-gradient/-/expo-linear-gradient-12.0.1.tgz#452f793b0463ddf313aad431552f23acc85f5d64"
+  integrity sha512-TMl/wBTVQOliL4S3DS5Aa3UFfVySr0mdJEHLG6kfBdMCLkr+tfLI2rGyJ+scS7xgMsvhTIaurhf1+Z0sL3aLCg==
 
 expo-linking@~3.2.3:
   version "3.2.3"
@@ -4281,12 +4281,12 @@ find-yarn-workspace-root@~2.0.0:
   dependencies:
     micromatch "^4.0.2"
 
-flash-notify@^1.1.6:
-  version "1.1.6"
-  resolved "https://registry.yarnpkg.com/flash-notify/-/flash-notify-1.1.6.tgz#caa8848f02156a7b7a3ae0b7390b8297e698871d"
-  integrity sha512-ZWVmvbF5Indj/Kk1sMYkEKuRjYTkoNLGqnGzZfLvzOCtGacDdclRNOqaGHo5EVUcOOHuXlTo6qYu7CFp/um2gw==
+flash-notify@^1.1.8:
+  version "1.1.8"
+  resolved "https://registry.yarnpkg.com/flash-notify/-/flash-notify-1.1.8.tgz#a8c32f589c7c0b09c366dee04a556853599ae245"
+  integrity sha512-IHeItWetLEfcACBY0X9p/a6b+meAy6KTdMwbUWOSqh3YW6i8xiayNVqyfzMsvflFGVwmj1j/rKUGchJ9OpQjIA==
   dependencies:
-    expo-linear-gradient "^11.4.0"
+    expo-linear-gradient "^12.0.1"
 
 flat-cache@^3.0.4:
   version "3.0.4"
