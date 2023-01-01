@@ -3,7 +3,7 @@ import styled from 'styled-components/native'
 import { colors } from '../../../../assets/constants/colors'
 import { isIphoneX } from '../../../utils/dimensions'
 
-export const wrapperStyle = { justifyContent: 'space-around', flex: 5 }
+export const wrapperStyle = { justifyContent: 'space-around', flex: 5, marginBottom: 5 }
 
 export const EmptyCard = styled.View`
   height: 250px;

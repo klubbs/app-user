@@ -7,10 +7,10 @@ import { colors } from '../../../../assets/constants/colors';
 import { IRegisterUser } from '../../../services/@types/@login-services';
 import { LoginService } from '../../../services/login-service';
 import { RegisterScreenProps } from '../../../settings/@types/@app-stack';
-import { isEmpty, nameof } from '../../../utils/extensions/object-extensions';
+import { isEmpty } from '../../../utils/extensions/object-extensions';
 import { NotificationsFlash } from '../../../utils/flash-notifications';
-import { MailCodeModal } from '../../modals/MailCodeModal';
-import { IModalRef } from '../../modals/MailCodeModal/@types';
+import { ModalCodeMail } from '../../modals/modal-code-mail';
+import { IModalCodeMailRef } from '../../modals/modal-code-mail/@types';
 import {
   Confirm,
   containerBackButton,
@@ -25,144 +25,140 @@ import {
   Title,
   Wrapper,
   WrapperKeyboard,
-  SubtitlePassword
+  SubtitlePassword,
 } from './styles';
 import { Spinner } from '../../components/Spinner';
 
-
 const SCROOL_INDEX = { FIRST: 0, LAST: 1 };
-const WIDTH = Dimensions.get('window').width
+const WIDTH = Dimensions.get('window').width;
 
 const Register: React.FC<RegisterScreenProps> = ({ route }) => {
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [password, setPassword] = useState('');
 
-  const [name, setName] = useState("")
-  const [phone, setPhone] = useState("")
-  const [password, setPassword] = useState("")
+  const [errorInput, setErrorInput] = useState({ password: false, name: false, phone: false });
+  const [currentScroll, setCurrentScroll] = useState(0);
+  const [loading, setLoading] = useState(false);
 
-  const [errorInput, setErrorInput] = useState({ password: false, name: false, phone: false })
-  const [currentScroll, setCurrentScroll] = useState(0)
-  const [loading, setLoading] = useState(false)
+  const scroolRef = useRef<ScrollView>(null);
+  const modalCodeRef = useRef<IModalCodeMailRef>(null);
 
-  const scroolRef = useRef<ScrollView>(null)
-  const modalCodeRef = useRef<IModalRef>(null)
-
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   useEffect(() => {
     navigation.addListener('beforeRemove', (e) => {
+      e.preventDefault();
 
-      e.preventDefault()
-
-      Alert.alert('Cancelar cadastro?', 'Ao retornar, você perderá todas as informações preenchidas.', [
-        {
-          text: 'Não sair',
-          style: 'cancel',
-          onPress: () => { }
-        },
-        {
-          text: 'Descartar',
-          style: 'destructive',
-          onPress: () => navigation.dispatch(e.data.action),
-        }
-      ])
-
-    })
-  }, [])
+      Alert.alert(
+        'Cancelar cadastro?',
+        'Ao retornar, você perderá todas as informações preenchidas.',
+        [
+          {
+            text: 'Não sair',
+            style: 'cancel',
+            onPress: () => {},
+          },
+          {
+            text: 'Descartar',
+            style: 'destructive',
+            onPress: () => navigation.dispatch(e.data.action),
+          },
+        ],
+      );
+    });
+  }, []);
 
   const welcomeInformations = useCallback(() => {
     return currentScroll === SCROOL_INDEX.FIRST
-      ? { title: `Opa, ${route.params.mail}`, description: "Conta um pouquinho mais sobre você ?" }
-      : { title: "Para finalizar", description: "Estamos quase acabando !" }
-
-  }, [currentScroll])
-
+      ? { title: `Opa, ${route.params.mail}`, description: 'Conta um pouquinho mais sobre você ?' }
+      : { title: 'Para finalizar', description: 'Estamos quase acabando !' };
+  }, [currentScroll]);
 
   const onAnimatedScroll = (isNext: boolean) => {
-    Keyboard.dismiss()
-
+    Keyboard.dismiss();
 
     if (isNext && currentScroll === SCROOL_INDEX.LAST) {
-      modalCodeRef.current?.openModal()
+      modalCodeRef.current?.openModal();
     }
 
-    setCurrentScroll(isNext ? SCROOL_INDEX.LAST : SCROOL_INDEX.FIRST)
+    setCurrentScroll(isNext ? SCROOL_INDEX.LAST : SCROOL_INDEX.FIRST);
 
-    const distance = isNext
-      ? WIDTH
-      : 0
+    const distance = isNext ? WIDTH : 0;
 
-    scroolRef.current?.scrollTo({ x: distance, y: 0, animated: true })
-  }
+    scroolRef.current?.scrollTo({ x: distance, y: 0, animated: true });
+  };
 
   async function handleRegister() {
-
     if (currentScroll !== SCROOL_INDEX.LAST) {
-      onAnimatedScroll(true)
+      onAnimatedScroll(true);
       return;
     }
 
     try {
-      setLoading(true)
+      setLoading(true);
 
       const fieldsValidation = await LoginService.validateRegister({
         mail: route.params.mail,
         password: password,
         name: name,
-        phone: phone
-      })
+        phone: phone,
+      });
 
       if (!isEmpty(fieldsValidation)) {
-        Haptic.impactAsync(Haptic.ImpactFeedbackStyle.Medium)
+        Haptic.impactAsync(Haptic.ImpactFeedbackStyle.Medium);
 
-        let errorInputTmp = errorInput
+        let errorInputTmp = errorInput;
 
-        if ("password" as keyof IRegisterUser in fieldsValidation) {
-          errorInputTmp.password = true
+        if (('password' as keyof IRegisterUser) in fieldsValidation) {
+          errorInputTmp.password = true;
         }
 
-        if ("phone" as keyof IRegisterUser in fieldsValidation) {
-          errorInputTmp.phone = true
+        if (('phone' as keyof IRegisterUser) in fieldsValidation) {
+          errorInputTmp.phone = true;
         }
 
-        if ("name" as keyof IRegisterUser in fieldsValidation) {
-          errorInputTmp.name = true
+        if (('name' as keyof IRegisterUser) in fieldsValidation) {
+          errorInputTmp.name = true;
         }
 
         if (errorInputTmp.phone && !errorInputTmp.password && !errorInputTmp.name) {
-          NotificationsFlash.customMessage('', 'Telefone já em uso ou incorreto')
+          NotificationsFlash.customMessage('', 'Telefone já em uso ou incorreto');
         } else {
-          NotificationsFlash.incompleteRegisterInputs()
+          NotificationsFlash.incompleteRegisterInputs();
         }
 
-        setErrorInput({ ...errorInput })
+        setErrorInput({ ...errorInput });
 
         return;
       }
 
-      modalCodeRef.current?.openModal()
-
+      modalCodeRef.current?.openModal();
     } catch (error: any) {
-      NotificationsFlash.spillCoffee()
+      NotificationsFlash.spillCoffee();
+    } finally {
+      setLoading(false);
     }
-    finally { setLoading(false) }
-
   }
 
   const RenderScrolls = () => {
-
     return (
       <>
         <ContainerScrool>
           <Name
             value={name}
             onChangeText={setName}
-            onTouchEnd={() => errorInput.name ? setErrorInput({ ...errorInput, name: false }) : null}
+            onTouchEnd={() =>
+              errorInput.name ? setErrorInput({ ...errorInput, name: false }) : null
+            }
             error={errorInput.name}
           />
           <Phone
             value={phone}
             onChangeText={(e) => setPhone(e)}
-            onTouchEnd={() => errorInput.phone ? setErrorInput({ ...errorInput, phone: false }) : null}
+            onTouchEnd={() =>
+              errorInput.phone ? setErrorInput({ ...errorInput, phone: false }) : null
+            }
             error={errorInput.phone}
           />
         </ContainerScrool>
@@ -171,37 +167,38 @@ const Register: React.FC<RegisterScreenProps> = ({ route }) => {
           <Password
             value={password}
             onChangeText={setPassword}
-            onTouchEnd={() => errorInput.password ? setErrorInput({ ...errorInput, password: false }) : null}
+            onTouchEnd={() =>
+              errorInput.password ? setErrorInput({ ...errorInput, password: false }) : null
+            }
             error={errorInput.password}
           />
           <SubtitlePassword>Pelo menos 5 caracteres</SubtitlePassword>
         </ContainerScrool>
       </>
-    )
-  }
+    );
+  };
 
   const RenderButtons: React.FC = () => {
-
     return (
       <ContainerBottom>
-
-        {
-          currentScroll === SCROOL_INDEX.LAST &&
+        {currentScroll === SCROOL_INDEX.LAST && (
           <Feather
-            name={"chevron-left"}
+            name={'chevron-left'}
             size={15}
             style={containerBackButton as any}
-            color={errorInput.name || errorInput.phone ? colors.COLOR_RED : colors.COLOR_SECUNDARY_WHITE}
+            color={
+              errorInput.name || errorInput.phone ? colors.COLOR_RED : colors.COLOR_SECUNDARY_WHITE
+            }
             onPress={() => onAnimatedScroll(false)}
           />
-        }
+        )}
 
         <Confirm onPress={handleRegister}>
-          <Feather name={"chevron-right"} size={15} color={colors.COLOR_WHITE} />
+          <Feather name={'chevron-right'} size={15} color={colors.COLOR_WHITE} />
         </Confirm>
       </ContainerBottom>
-    )
-  }
+    );
+  };
 
   return (
     <Wrapper>
@@ -218,21 +215,21 @@ const Register: React.FC<RegisterScreenProps> = ({ route }) => {
             showsHorizontalScrollIndicator={false}
             bounces={false}
             scrollEnabled={false}
-            ref={scroolRef}>
+            ref={scroolRef}
+          >
             {RenderScrolls()}
           </ScrollView>
         </ContainerMiddle>
         <RenderButtons />
-
       </WrapperKeyboard>
-      <MailCodeModal
+      <ModalCodeMail
         ref={modalCodeRef}
         action={'REGISTER'}
-        registerParams={{ mail: route.params.mail, phone, password, name }} />
+        registerParams={{ mail: route.params.mail, phone, password, name }}
+      />
       <Spinner loading={loading} />
     </Wrapper>
-
   );
-}
+};
 
 export default Register;

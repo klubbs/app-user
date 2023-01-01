@@ -1,5 +1,5 @@
-import * as React from "react"
-import Svg, { SvgProps, G, Path } from "react-native-svg"
+import * as React from 'react';
+import Svg, { SvgProps, G, Path } from 'react-native-svg';
 /* SVGR has dropped some elements not supported by react-native-svg: title */
 
 export function ClockIcon(props: SvgProps) {
@@ -10,5 +10,5 @@ export function ClockIcon(props: SvgProps) {
         <Path d="M7.947 15.598l-1.061-1.696L11 11.325V6h2v6.433l-5.053 3.165z" />
       </G>
     </Svg>
-  )
+  );
 }

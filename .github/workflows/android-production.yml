@@ -11,7 +11,6 @@ jobs:
         node-version: [14.x]
 
     steps:
-
       - name: 🏗 Setup repo
         uses: actions/checkout@v2
 
@@ -50,6 +49,7 @@ jobs:
         env:
           ENVIRONMENT_KLUBBS_API_URL: ${{ secrets.ENVIRONMENT_KLUBBS_API_URL }}
           ENVIRONMENT_KLUBBS_AUTHZN_URL: ${{ secrets.ENVIRONMENT_KLUBBS_AUTHZN_URL }}
+          ENVIRONMENT_PROJECT_EAS_ID: ${{ secrets.ENVIRONMENT_PROJECT_EAS_ID }}
         run: |
           eas build --platform android --profile production --non-interactive --local
           eas submit --platform android --profile production --path "$(find /home/runner/work/app-user/app-user/ -name '*.aab')" --non-interactive

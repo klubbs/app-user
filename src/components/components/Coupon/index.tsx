@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { ICouponProps } from './@types';
 import {
   MotifiedWrapper,
@@ -6,45 +6,48 @@ import {
   CouponCode,
   CountCoupons,
   Container,
-  OffCoupons,
   CouponContainer,
   Influencer,
   InfluencerEmpty,
   ShopSubtitleIcon,
-  CouponDefaultImage
+  CouponDefaultImage,
 } from './styles';
 
-const CODE_COUPONS_SIZE = 12
+const CODE_COUPONS_SIZE = 12;
+
 export const Coupon: React.FC<ICouponProps> = (props) => {
+  const offersCount = props.data.offers?.length;
 
-  const offersQtd = props.data.master_coupons?.length
-  const couponsActive = defineIsActive()
-
-
-  function defineIsActive() {
-
-    if (!props.toggle) {
-      if (offersQtd >= 1) {
-        return true
-      }
-
-      return false
-    } else {
-      if (props.isActiveByToggle)
-        return true
-      else
-        return false
-    }
-
+  function formattedCouponCode() {
+    return `${props.data.coupon_code.substring(0, CODE_COUPONS_SIZE)}${
+      props.data.coupon_code.length > CODE_COUPONS_SIZE ? '...' : ''
+    }`;
   }
 
-  useEffect(() => {
+  function isActiveCoupon() {
+    if (!props.toggle) {
+      if (offersCount >= 1) {
+        return true;
+      }
 
-    if (offersQtd >= 1) {
-      const offValues = props.data.master_coupons.map(item => item.master_coupon_off_percentual);
+      return false;
+    } else {
+      if (props.isActiveByToggle) return true;
+      else return false;
+    }
+  }
+
+  function RenderInfluencerImage() {
+    if (props.data.partner_image) {
+      return <Influencer source={{ uri: props.data.partner_image }} />;
     }
 
-  }, [props.data])
+    return (
+      <InfluencerEmpty>
+        <CouponDefaultImage />
+      </InfluencerEmpty>
+    );
+  }
 
   return (
     <MotifiedWrapper
@@ -56,24 +59,17 @@ export const Coupon: React.FC<ICouponProps> = (props) => {
       onPressOut={props.onPressOut}
       onPressIn={props.onPressIn}
     >
-      <BackgroundCoupon active={couponsActive} />
+      <BackgroundCoupon active={isActiveCoupon()} />
       <Container>
         <CouponContainer>
-          <CountCoupons>{offersQtd}</CountCoupons>
+          <CountCoupons>{offersCount}</CountCoupons>
           <ShopSubtitleIcon />
         </CouponContainer>
       </Container>
-      {
-        props.data.influencer_image
-          ? <Influencer source={{ uri: props.data.influencer_image }} />
-          : <InfluencerEmpty>
-            <CouponDefaultImage />
-          </InfluencerEmpty>
-      }
-      <CouponCode putMarginBottom={props.toggle} active={couponsActive}>
-        {props.data.coupon_code.substring(0, CODE_COUPONS_SIZE)}
-        {props.data.coupon_code.length > CODE_COUPONS_SIZE ? '...' : ''}
+      <RenderInfluencerImage />
+      <CouponCode putMarginBottom={props.toggle} active={isActiveCoupon()}>
+        {formattedCouponCode()}
       </CouponCode>
-    </MotifiedWrapper >
+    </MotifiedWrapper>
   );
-}
+};

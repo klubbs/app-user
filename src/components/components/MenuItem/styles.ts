@@ -1,6 +1,5 @@
 import styled from 'styled-components/native';
 import { colors } from '../../../../assets/constants/colors';
-import { Feather } from '@expo/vector-icons';
 export const MenuItemContainer = styled.TouchableOpacity.attrs(props => ({
   activeOpacity: 0.8
 }))`
@@ -34,19 +33,3 @@ export const MenuItemIcon = styled.View`
   justify-content: center;
   align-items: center;
 `;
-
-export const MenuItemArrow = styled.View`
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  justify-content: center;
-  align-items: center;
-  background-color: ${colors.COLOR_BLACK10};
-`;
-
-
-export const ArrowRight = styled(Feather).attrs(props => ({
-  name: "chevron-right",
-  size: 18,
-  colors: colors.COLOR_SECUNDARY_BLACK
-}))``

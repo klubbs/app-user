@@ -6,10 +6,9 @@ import { IModalProps } from './@types';
 import { Container, ContainerBlur, Header, Wrapper } from './styles';
 
 export const ModalComponent: React.FC<IModalProps> = (props) => {
-
   return (
     <Modal
-      animationType={"slide"}
+      animationType={'slide'}
       transparent={true}
       hardwareAccelerated
       onRequestClose={() => props.onClose()}
@@ -23,27 +22,13 @@ export const ModalComponent: React.FC<IModalProps> = (props) => {
         <Container>
           <Header>
             <TouchableOpacity onPress={() => props.onClose()}>
-              <Feather
-                name={"x"}
-                size={18}
-                color={colors.COLOR_BLACK50}
-                style={{ width: 50 }}
-              />
+              <Feather name={'x'} size={18} color={colors.COLOR_BLACK50} style={{ width: 50 }} />
             </TouchableOpacity>
           </Header>
-          <Wrapper>
-            {props.children}
-          </Wrapper>
+          <Wrapper>{props.children}</Wrapper>
         </Container>
-        {
-          props.visible &&
-          <ContainerBlur
-            from={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-          />
-        }
+        {props.visible && <ContainerBlur from={{ opacity: 0 }} animate={{ opacity: 1 }} />}
       </KeyboardAvoidingView>
-
-    </Modal >
+    </Modal>
   );
-}
+};

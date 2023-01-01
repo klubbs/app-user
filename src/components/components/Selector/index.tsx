@@ -1,47 +1,37 @@
-import React, { useState, useImperativeHandle, ForwardRefRenderFunction, forwardRef, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as Haptic from 'expo-haptics';
 import { SelectionTouch } from './styles';
-import { ISelectorProps, ISelectorRefs } from './@types';
+import { ISelectorProps } from './@types';
 
-export const SelectorForwardRef: ForwardRefRenderFunction<ISelectorRefs, ISelectorProps> = (props, ref) => {
+
+export const Selector: React.FC<ISelectorProps> = (props) => {
 
   const [selected, setSelected] = useState<boolean>(false)
 
-  useImperativeHandle(ref, () => ({
-    disabledSelect: () => setSelected(false),
-  }));
-
   useEffect(() => {
 
-    if (props.toggle !== undefined) {
-
-      if (props.toggle)
-        setSelected(true)
-      else
-        setSelected(false)
-
+    if (props.toggle === true) {
+      Haptic.impactAsync(Haptic.ImpactFeedbackStyle.Light)
     }
 
   }, [props.toggle])
 
   function handlePress() {
-
-    if (props.toggle !== undefined && selected)
-      return
+    if (props.toggle !== undefined) {
+      return;
+    }
 
     Haptic.impactAsync(Haptic.ImpactFeedbackStyle.Light)
+    const newValue = !selected;
 
-    setSelected(!selected);
+    setSelected(newValue);
 
-    props.onPress(!selected);
-
+    if (props.onPress) {
+      props.onPress(newValue);
+    }
   }
 
   return (
-    <SelectionTouch onPress={handlePress} active={selected} style={props.style} />
+    <SelectionTouch onPress={handlePress} active={props.toggle ?? selected} style={props.style} />
   );
 }
-
-const Selector = forwardRef(SelectorForwardRef)
-
-export { Selector }

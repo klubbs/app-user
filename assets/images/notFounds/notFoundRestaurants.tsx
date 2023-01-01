@@ -1,30 +1,12 @@
-import * as React from "react"
-import Svg, {
-  SvgProps,
-  Path,
-  Defs,
-  Pattern,
-  Use,
-  Image,
-} from "react-native-svg"
+import * as React from 'react';
+import Svg, { SvgProps, Path, Defs, Pattern, Use, Image } from 'react-native-svg';
 
 export function NotFoundRestaurants(props: SvgProps) {
   return (
-    <Svg
-      width={757}
-      height={757}
-      viewBox="0 0 757 757"
-      fill="none"
-      {...props}
-    >
+    <Svg width={757} height={757} viewBox="0 0 757 757" fill="none" {...props}>
       <Path fill="url(#prefix__pattern0)" d="M0 0h757v757H0z" />
       <Defs>
-        <Pattern
-          id="prefix__pattern0"
-          patternContentUnits="objectBoundingBox"
-          width={1}
-          height={1}
-        >
+        <Pattern id="prefix__pattern0" patternContentUnits="objectBoundingBox" width={1} height={1}>
           <Use xlinkHref="#prefix__image0" transform="scale(.00195)" />
         </Pattern>
         <Image
@@ -35,5 +17,5 @@ export function NotFoundRestaurants(props: SvgProps) {
         />
       </Defs>
     </Svg>
-  )
+  );
 }

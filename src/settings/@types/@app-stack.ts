@@ -1,32 +1,41 @@
-import { StackScreenProps } from "@react-navigation/stack";
-import { IRestaurants } from "../../components/components_heavy/RestaurantsList/@types";
-import { ICouponsItem } from "../../components/components_heavy/WalletCouponsTab/@types";
+import { StackScreenProps } from '@react-navigation/stack';
+import { IRestaurants } from '../../components/components_heavy/RestaurantsList/@types';
+import { IWalletCouponsReponse } from '../../services/@types/@coupon-services';
 
 export type IAppStackParams = {
   Tabs: undefined;
   LoginWelcome: undefined;
   LoginPassword: { mail: string };
   Register: { mail: string };
-  Restaurant: IRestaurants;
-  CouponQr: ICouponsItem;
+  StoreProfile: IRestaurants;
+  CouponQr: IWalletCouponsReponse & { checkoutId?: string };
   Influencer: undefined;
-  Offers: undefined;
+  OffersForInfluencers: undefined;
   Settings: undefined;
   Help: undefined;
   ForgetPassword: { mail: string };
-  RemoveOfferInfluencer: { couponId: string },
+  InfluencerRemoverOffer: { couponId: string };
+  CreateCheckin: Omit<IWalletCouponsReponse, 'wallet_id'> & {
+    flux: 'KLUBBS_FLUX' | 'NORMAL_FLUX';
+  };
+  OfferPools: { type: 'HIGH' | 'MEDIUM' | 'LOW' };
 };
 
+export type StoreScreenProps = StackScreenProps<IAppStackParams, 'StoreProfile'>;
 
-export type RestaurantScreenProps = StackScreenProps<IAppStackParams, 'Restaurant'>
+export type LoginPasswordScreenProps = StackScreenProps<IAppStackParams, 'LoginPassword'>;
 
-export type LoginPasswordScreenProps = StackScreenProps<IAppStackParams, 'LoginPassword'>
+export type RegisterScreenProps = StackScreenProps<IAppStackParams, 'Register'>;
 
-export type RegisterScreenProps = StackScreenProps<IAppStackParams, 'Register'>
+export type CouponQrScreenProps = StackScreenProps<IAppStackParams, 'CouponQr'>;
 
-export type CouponQrScreenProps = StackScreenProps<IAppStackParams, 'CouponQr'>
+export type ForgetPasswordScreenProps = StackScreenProps<IAppStackParams, 'ForgetPassword'>;
 
-export type ForgetPasswordScreenProps = StackScreenProps<IAppStackParams, 'ForgetPassword'>
+export type CreateCheckinScreenProps = StackScreenProps<IAppStackParams, 'CreateCheckin'>;
 
-export type RemoveOfferInfluencerScreenProps = StackScreenProps<IAppStackParams, 'RemoveOfferInfluencer'>
+export type OfferPoolsScreenProps = StackScreenProps<IAppStackParams, 'OfferPools'>;
 
+export type InfluencerRemoverOfferScreenProps = StackScreenProps<
+  IAppStackParams,
+  'InfluencerRemoverOffer'
+>;
