@@ -34,6 +34,7 @@ import { NotificationsFlash } from '../../../utils/flash-notifications';
 import { CouponService } from '../../../services/coupon-service';
 import ModalFluxOffer from '../../modals/modal-flux-offer';
 import { TOfferSelected } from '../../modals/modal-offer-rules-qrcode';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const StoreProfile: React.FC<StoreScreenProps> = ({ route }) => {
   const navigation = useNavigation();
@@ -114,46 +115,47 @@ const StoreProfile: React.FC<StoreScreenProps> = ({ route }) => {
             </BlocksValue>
           </BlocksWrapper>
         </StoreNameWrapper>
-
-        <FlatList
-          data={route.params.offers}
-          keyExtractor={(item) => item.id}
-          contentContainerStyle={{ width: '100%', marginTop: 20 }}
-          ListHeaderComponent={() => {
-            return (
-              <HeaderContainer>
-                <HeaderTitle>Todas as ofertas</HeaderTitle>
-                <HeaderSubtitle>Válidas para utilizar hoje</HeaderSubtitle>
-              </HeaderContainer>
-            );
-          }}
-          renderItem={({ item }) => {
-            return (
-              <WrapperOffer onPress={() => handleSelectOffer(item)}>
-                <OfferDescription>
-                  <UseThisOffer>Ativar oferta</UseThisOffer>
-                  <TicketMinimum>
-                    {item.min_ticket === 0
-                      ? 'Sem valor mínimo'
-                      : `Pagando mais de ${formatCurrency(item?.min_ticket)}`}
-                  </TicketMinimum>
-                </OfferDescription>
-                <OfferContainer>
-                  <OfferOff>{item?.off}%</OfferOff>
-                </OfferContainer>
-              </WrapperOffer>
-            );
-          }}
-        />
-        <InteractionsWrapper>
-          <RestaurantInteractions
-            data={{
-              lat: route.params.latitude,
-              long: route.params.longitude,
-              restaurantName: route.params.name,
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <FlatList
+            data={route.params.offers}
+            keyExtractor={(item) => item.id}
+            contentContainerStyle={{ width: '100%', marginTop: 20 }}
+            ListHeaderComponent={() => {
+              return (
+                <HeaderContainer>
+                  <HeaderTitle>Todas as ofertas</HeaderTitle>
+                  <HeaderSubtitle>Válidas para utilizar hoje</HeaderSubtitle>
+                </HeaderContainer>
+              );
+            }}
+            renderItem={({ item }) => {
+              return (
+                <WrapperOffer onPress={() => handleSelectOffer(item)}>
+                  <OfferDescription>
+                    <UseThisOffer>Ativar oferta</UseThisOffer>
+                    <TicketMinimum>
+                      {item.min_ticket === 0
+                        ? 'Sem valor mínimo'
+                        : `Pagando mais de ${formatCurrency(item?.min_ticket)}`}
+                    </TicketMinimum>
+                  </OfferDescription>
+                  <OfferContainer>
+                    <OfferOff>{item?.off}%</OfferOff>
+                  </OfferContainer>
+                </WrapperOffer>
+              );
             }}
           />
-        </InteractionsWrapper>
+          <InteractionsWrapper>
+            <RestaurantInteractions
+              data={{
+                lat: route.params.latitude,
+                long: route.params.longitude,
+                restaurantName: route.params.name,
+              }}
+            />
+          </InteractionsWrapper>
+        </ScrollView>
         <ModalFluxOffer
           enable={enableFluxOfferModal}
           onClose={() => setEnableFluxOfferModal(!enableFluxOfferModal)}

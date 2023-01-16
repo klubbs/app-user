@@ -8,13 +8,21 @@ export const Wrapper = styled.SafeAreaView`
   align-items: center;
 `;
 
-export const ContainerLocation = styled.View`
+export const ContainerCommandUserBar = styled.View`
   flex: 0.5;
-  width: 50%;
+  width: 90%;
   justify-content: center;
+  flex-direction: row;
   align-items: center;
   border-bottom-width: 1px;
   border-color: ${`${colors.COLOR_YELLOW}20`};
+`;
+
+export const ContainerSearch = styled.View`
+  flex: 0.9;
+  width: 90%;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const ContainerDiscountPool = styled.View`

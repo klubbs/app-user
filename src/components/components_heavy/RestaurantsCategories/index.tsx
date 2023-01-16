@@ -49,5 +49,3 @@ export const RestaurantsCategories: React.FC = (props) => {
     />
   );
 };
-
-export default RestaurantsCategories;
