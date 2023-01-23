@@ -16,27 +16,17 @@ export const ContainerCommandUserBar = styled.View`
   align-items: center;
   border-bottom-width: 1px;
   border-color: ${`${colors.COLOR_YELLOW}20`};
-`;
-
-export const ContainerSearch = styled.View`
-  flex: 0.9;
-  width: 90%;
-  justify-content: center;
-  align-items: center;
+  padding-horizontal: 0.5%;
+  /* background-color: red; */
 `;
 
 export const ContainerDiscountPool = styled.View`
   flex: 2.5;
   justify-content: center;
-  margin: 1px;
+  padding-horizontal: 0.5%;
+  /* background-color: red; */
 `;
-
-export const ContainerCategories = styled.View`
-  flex: 1;
-`;
-
 export const ContainerBottom = styled.View`
   flex: 5;
-  padding-left: 2%;
-  padding-right: 2%;
+  padding-horizontal: 1.5%;
 `;

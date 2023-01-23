@@ -3,13 +3,12 @@ import { colors } from '../../../../assets/constants/colors';
 
 export const Container = styled.View`
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
 `;
 
 export const CityTitle = styled.Text`
   color: ${colors.COLOR_SECUNDARY_BLACK};
   font-size: 15px;
+  margin-right: 5px;
   font-family: 'Nunito_Bold';
   text-align: flex-start;
 `;
@@ -20,7 +19,7 @@ export const CityTouchable = styled.TouchableOpacity.attrs({
   width: 20px;
   height: 20px;
   border-radius: 2.5px;
-  left: 10px;
+  margin-right: 10px;
   justify-content: center;
   align-items: center;
 `;

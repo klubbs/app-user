@@ -20,6 +20,9 @@ export const HomeContext = createContext(
     location: { city: string; lat: number | null; long: number | null };
     klubbsOffers: TPoolOffer[];
     getKlubbsOffersAsync: () => Promise<void>;
+    setSearchValue: (val: string | null) => void;
+    searchValue: string | null;
+    searchIsEnable: boolean;
   },
 );
 
@@ -34,12 +37,14 @@ const HomeProvider: React.FC = ({ children }: any) => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [restaurants, setRestaurants] = useState<IRestaurants[]>([]);
   const [klubbsOffers, setKlubbsOffers] = useState<TPoolOffer[]>([]);
-
+  const [searchValue, setSearchValue] = useState<null | string>(null);
   const [location, setLocation] = useState<{
     city: string;
     lat: number | null;
     long: number | null;
   }>(START_LOCATION_STATE);
+
+  const searchIsEnable = searchValue != null;
 
   useEffect(() => {
     getLocationAsync();
@@ -153,6 +158,9 @@ const HomeProvider: React.FC = ({ children }: any) => {
         location,
         getKlubbsOffersAsync,
         klubbsOffers,
+        searchValue,
+        setSearchValue,
+        searchIsEnable,
       }}
     >
       {children}

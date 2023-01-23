@@ -1,33 +1,26 @@
-import React from 'react';
-import { HomeProvider } from '../../../contexts/home-context';
+import React, { useContext } from 'react';
 import { RestaurantsList } from '../../components_heavy/RestaurantsList';
-import {
-  ContainerBottom,
-  Wrapper,
-  ContainerCategories,
-  ContainerDiscountPool,
-  ContainerCommandUserBar,
-  ContainerSearch,
-} from './styles';
+import { ContainerBottom, Wrapper, ContainerDiscountPool, ContainerCommandUserBar } from './styles';
 import { DiscountPoolSlider } from '../../components_heavy/DiscountPoolSlider';
-import { LocationSelector } from '../../components/LocationSelector';
-import { SearchBar } from '../../components/search-bar';
-import { ScrollView } from 'react-native-gesture-handler';
 import { CommandUserBar } from '../../components_heavy/command-user-bar';
+import { RestaurantsCategories } from '../../components_heavy/RestaurantsCategories';
+import { HomeContext } from '../../../contexts/home-context';
 
 export const Home: React.FC = () => {
+  const { searchIsEnable } = useContext(HomeContext);
+
   return (
     <Wrapper>
       <ContainerCommandUserBar>
         <CommandUserBar />
       </ContainerCommandUserBar>
-      <ContainerDiscountPool>
-        <DiscountPoolSlider />
-      </ContainerDiscountPool>
-      {/* <ContainerCategories>
-          <MainCategories />
-        </ContainerCategories> */}
+      {!searchIsEnable && (
+        <ContainerDiscountPool>
+          <DiscountPoolSlider />
+        </ContainerDiscountPool>
+      )}
       <ContainerBottom>
+        {!searchIsEnable && <RestaurantsCategories />}
         <RestaurantsList />
       </ContainerBottom>
     </Wrapper>

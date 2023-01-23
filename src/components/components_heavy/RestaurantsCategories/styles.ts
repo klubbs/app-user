@@ -25,8 +25,9 @@ export const WrapplerTouchable = styled.TouchableOpacity<{ selected: boolean }>`
 export const FlatComponent = styled.FlatList.attrs((props) => ({
   horizontal: true,
   showsHorizontalScrollIndicator: false,
-  contentContainerStyle: { paddingVertical: 20 },
-}))``;
+}))`
+  flex: 0.5;
+`;
 
 export const SkeletonStyled = styled(Skeleton).attrs((props) => ({
   width: '100%',

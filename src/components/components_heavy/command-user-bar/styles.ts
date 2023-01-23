@@ -13,8 +13,8 @@ export const SearchPressable = styled(MotiPressable).attrs({
 `;
 
 export const Input = styled.TextInput.attrs({
-  placeholder: 'Busque por restaurante ou prato',
-  placeholderTextColor: colors.COLOR_BLACK20,
+  placeholder: 'Busque por estabelecimento',
+  placeholderTextColor: colors.COLOR_BLACK40,
   keyboardType: 'default',
   returnKeyType: 'done',
   textAlign: 'center',
@@ -31,7 +31,7 @@ export const Input = styled.TextInput.attrs({
 export const ContainerLocation = styled.View`
   flex: 5;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: flex-end;
 `;
 
 export const ContainerSearch = styled.View`

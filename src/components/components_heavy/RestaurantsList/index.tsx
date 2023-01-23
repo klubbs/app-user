@@ -1,6 +1,6 @@
 import * as Location from 'expo-location';
 import React, { useEffect, useState, useContext } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { CardEstablishment } from '../../components/CardEstablishment';
 import { IRestaurants } from './@types';
@@ -18,7 +18,6 @@ import {
   NotFoundSubtitle,
   WrapperDenied,
 } from './styles';
-import { RestaurantsCategories } from '../RestaurantsCategories';
 
 let userLocation: LocationObject | undefined = undefined;
 
@@ -105,21 +104,18 @@ export const RestaurantsList: React.FC = () => {
   }
 
   return (
-    <>
-      <RestaurantsCategories />
-      <FlatList
-        data={categorizedRestaurants}
-        refreshing={loading}
-        onRefresh={loadAllRestaurants}
-        showsVerticalScrollIndicator={false}
-        numColumns={2}
-        columnWrapperStyle={wrapperStyle as any}
-        keyExtractor={(item: IRestaurants, index: number) => `${item.id}`}
-        ListHeaderComponent={() => <Header>Restaurantes</Header>}
-        ListEmptyComponent={() => <NotFound />}
-        stickyHeaderIndices={[0]}
-        renderItem={HowItemRender}
-      />
-    </>
+    <FlatList
+      data={categorizedRestaurants}
+      refreshing={loading}
+      onRefresh={loadAllRestaurants}
+      showsVerticalScrollIndicator={false}
+      numColumns={2}
+      columnWrapperStyle={wrapperStyle as any}
+      keyExtractor={(item: IRestaurants, index: number) => `${item.id}`}
+      ListHeaderComponent={() => <Header>Restaurantes</Header>}
+      ListEmptyComponent={() => <NotFound />}
+      stickyHeaderIndices={[0]}
+      renderItem={HowItemRender}
+    />
   );
 };
