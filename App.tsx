@@ -11,6 +11,7 @@ import { InfluencerProvider } from './src/contexts/influencer-context';
 import FlashComponent from 'flash-notify';
 import { CheckoutProvider } from './src/contexts/checkout-context';
 import { HomeProvider } from './src/contexts/home-context';
+import { Welcome } from './src/components/screens/welcome';
 
 LogBox.ignoreAllLogs(['Expected style', 'Require cycles are allowed']);
 
@@ -37,6 +38,8 @@ export default function App() {
       </View>
     );
   }
+
+  return <Welcome />;
 
   return (
     <AuthProvider>

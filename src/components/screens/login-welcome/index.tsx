@@ -34,7 +34,7 @@ const SUBTITLES = [
   { id: 0, title: 'Muito mais que fidelidade' },
   { id: 1, title: 'Muito mais que cupons' },
   { id: 2, title: 'Muito mais que descontos' },
-  { id: 3, title: 'Muito mais que klubs' },
+  { id: 3, title: 'Muito mais que klubbs' },
 ];
 
 const LoginWelcome: React.FC = () => {
@@ -79,7 +79,7 @@ const LoginWelcome: React.FC = () => {
 
     const interval = setInterval(() => {
       setCurrentIndex((currentIndex) => (currentIndex + 1) % SUBTITLES.length);
-    }, 3000);
+    }, 2000);
     return () => clearInterval(interval);
   }, [currentIndex]);
 
