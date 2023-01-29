@@ -2,12 +2,17 @@ import { useNavigation } from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
 import React from 'react';
 import Gift from '../../../../assets/animations/present.json';
-import { SignInButton, UnregisterBoxText, UnregisterUser, UnregisterUserDesc, Wrapper, WrapperLottie } from './styles';
+import {
+  SignInButton,
+  UnregisterBoxText,
+  UnregisterUser,
+  UnregisterUserDesc,
+  Wrapper,
+  WrapperLottie,
+} from './styles';
 
 export const CouponsEmpty: React.FC = () => {
-
-  const navigation = useNavigation()
-
+  const navigation = useNavigation();
 
   return (
     <Wrapper>
@@ -16,13 +21,9 @@ export const CouponsEmpty: React.FC = () => {
         <UnregisterUserDesc>Entre para ter acesso ao seus cupons!</UnregisterUserDesc>
       </UnregisterBoxText>
       <WrapperLottie>
-        <LottieView
-          source={Gift}
-          loop={true}
-          autoPlay
-        />
+        <LottieView source={Gift} loop={true} autoPlay />
       </WrapperLottie>
-      <SignInButton onPress={() => navigation.navigate("LoginWelcome")} />
+      <SignInButton onPress={() => navigation.navigate('LoginWelcome')} />
     </Wrapper>
   );
-}
+};

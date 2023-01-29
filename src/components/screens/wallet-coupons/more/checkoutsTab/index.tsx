@@ -3,16 +3,16 @@ import { useNavigation } from '@react-navigation/native';
 import {
   IUserCheckoutsReponse,
   IWalletCouponsReponse,
-} from '../../../services/@types/@coupon-services';
-import { CouponService } from '../../../services/coupon-service';
-import { MemoiZedCardCheckout } from '../../components/card-checkout-offer';
+} from '../../../../../services/@types/@coupon-services';
+import { CouponService } from '../../../../../services/coupon-service';
+import { MemoiZedCardCheckout } from '../../../../components/card-checkout-offer';
 import { CheckoutsFlatList, NothingTransactionSubtitle } from './styles';
-import { CheckoutContext } from '../../../contexts/checkout-context';
-import { NotificationsFlash } from '../../../utils/flash-notifications';
+import { CheckoutContext } from '../../../../../contexts/checkout-context';
+import { NotificationsFlash } from '../../../../../utils/flash-notifications';
 import * as Haptic from 'expo-haptics';
-import { formatUserCouponCode } from '../../../utils/formatersUtils';
+import { formatUserCouponCode } from '../../../../../utils/formatersUtils';
 
-export const CouponsCheckout: React.FC = () => {
+export const CheckoutsTab: React.FC = () => {
   const navigation = useNavigation();
 
   const { setCheckoutStatus } = useContext(CheckoutContext);

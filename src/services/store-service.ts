@@ -30,6 +30,18 @@ class StoreService {
 
     return data.message;
   }
+
+  static async searchStore(val: string) {
+    const { data } = await connectionHandler('KLUBBS_API_URL').get<
+      IResponseMessage<IStoresResponse[]>
+    >('stores/search/name', {
+      params: {
+        searchValue: val,
+      },
+    });
+
+    return data.message;
+  }
 }
 
 export { StoreService };

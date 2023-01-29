@@ -170,4 +170,5 @@ export const InteractionsWrapper = styled.View`
   border-top-width: 1px;
   border-top-color: ${colors.COLOR_BLACK10};
   padding-top: 10px;
+  margin-bottom: 20px;
 `;

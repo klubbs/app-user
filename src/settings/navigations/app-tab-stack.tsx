@@ -6,8 +6,8 @@ import Svg, { Path } from 'react-native-svg';
 import { colors } from '../../../assets/constants/colors';
 import { CouponIcon } from '../../../assets/icons/coupon_icon';
 import { ShopIcon } from '../../../assets/icons/shop_icon';
-import { TabCoupons } from '../../components/screens/tab-coupons';
-import { Home } from '../../components/screens/Home';
+import { WalletCoupons } from '../../components/screens/wallet-coupons';
+import { Home } from '../../components/screens/home';
 import { UserProfile } from '../../components/screens/user-profile';
 import { isIphoneX } from '../../utils/dimensions';
 import { ITabsParamList } from '../@types/@app-tab-stack';
@@ -122,7 +122,7 @@ const Tabs: React.FC = () => {
 
       <Tab.Screen
         name="Coupon"
-        component={TabCoupons}
+        component={WalletCoupons}
         options={{
           tabBarIcon: ({ focused }) => (
             <CouponIcon

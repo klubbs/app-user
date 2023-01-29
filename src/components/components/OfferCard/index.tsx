@@ -17,8 +17,8 @@ import {
   MinimumTicketSubtitle,
   MinimumTicket,
 } from './styles';
-import { Selector } from '../../components/Selector';
-import { SelectorDaysWeek } from '../../components/selector-days-week';
+import { Selector } from '../Selector';
+import { SelectorDaysWeek } from '../selector-days-week';
 
 export const CardOffers: React.FC<ICardOffersProps> = (props) => {
   function handleSelector(isSelected: boolean) {

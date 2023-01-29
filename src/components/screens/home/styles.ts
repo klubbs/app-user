@@ -8,27 +8,23 @@ export const Wrapper = styled.SafeAreaView`
   align-items: center;
 `;
 
-export const ContainerLocation = styled.View`
-  flex: 0.5;
-  width: 50%;
+export const ContainerCommandUserBar = styled.View<{ searchIsEnable: boolean }>`
+  flex: ${(props) => (props.searchIsEnable ? 1 : 0.5)};
+  width: 90%;
   justify-content: center;
+  flex-direction: row;
   align-items: center;
   border-bottom-width: 1px;
   border-color: ${`${colors.COLOR_YELLOW}20`};
+  padding-horizontal: 0.5%;
 `;
 
 export const ContainerDiscountPool = styled.View`
   flex: 2.5;
   justify-content: center;
-  margin: 1px;
+  padding-horizontal: 0.5%;
 `;
-
-export const ContainerCategories = styled.View`
-  flex: 1;
-`;
-
 export const ContainerBottom = styled.View`
   flex: 5;
-  padding-left: 2%;
-  padding-right: 2%;
+  padding-horizontal: 1.5%;
 `;
