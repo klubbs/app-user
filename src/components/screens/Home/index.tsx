@@ -11,7 +11,7 @@ export const Home: React.FC = () => {
 
   return (
     <Wrapper>
-      <ContainerCommandUserBar>
+      <ContainerCommandUserBar searchIsEnable={searchIsEnable}>
         <CommandUserBar />
       </ContainerCommandUserBar>
       {!searchIsEnable && (

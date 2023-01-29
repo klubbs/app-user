@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, FlatList } from 'react-native';
+import { FlatList } from 'react-native';
 import { UberLogo } from '../../../../assets/images/others/uber';
 import * as Linking from 'expo-linking';
 
 import { Container, Header, TouchableContainer } from './styles';
 import { IRestaurantInteractions } from './@types';
 
-export const RestaurantInteractions: React.FC<IRestaurantInteractions> = ({ data }) => {
+export const InteractionLocs: React.FC<IRestaurantInteractions> = ({ data }) => {
   const DATA = [{ id: '1', cb: handleUberCall, icon: 'uber' }];
 
   function handleUberCall() {
@@ -45,7 +45,7 @@ export const RestaurantInteractions: React.FC<IRestaurantInteractions> = ({ data
       <Header>Interações</Header>
       <FlatList
         data={DATA}
-        keyExtractor={(item, index: number) => item.id}
+        keyExtractor={(item, _: number) => item.id}
         horizontal
         showsHorizontalScrollIndicator={false}
         renderItem={ItemRender}

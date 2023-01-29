@@ -12,17 +12,18 @@ export const HomeContext = createContext(
   {} as {
     categories: ICategoryResponse[];
     selectedCategory: string;
-    setSelectedCategory: (val: string) => void;
-    getCategoriesDescription(id: string): string | undefined;
     categorizedRestaurants: IRestaurants[];
-    getCategories: () => Promise<void>;
-    getRestaurants: (latitude: number, longitude: number) => Promise<void>;
     location: { city: string; lat: number | null; long: number | null };
     klubbsOffers: TPoolOffer[];
-    getKlubbsOffersAsync: () => Promise<void>;
-    setSearchValue: (val: string | null) => void;
     searchValue: string | null;
     searchIsEnable: boolean;
+    getCategories: () => Promise<void>;
+    getRestaurants: (latitude: number, longitude: number) => Promise<void>;
+    getKlubbsOffersAsync: () => Promise<void>;
+    getCategoriesDescription(id: string): string | undefined;
+    setSearchValue: (val: string | null) => void;
+    setSelectedCategory: (val: string) => void;
+    setRestaurants: (val: IRestaurants[]) => void;
   },
 );
 
@@ -37,14 +38,14 @@ const HomeProvider: React.FC = ({ children }: any) => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [restaurants, setRestaurants] = useState<IRestaurants[]>([]);
   const [klubbsOffers, setKlubbsOffers] = useState<TPoolOffer[]>([]);
-  const [searchValue, setSearchValue] = useState<null | string>(null);
+  const [searchValue, setSearchValue] = useState<string | null>('');
   const [location, setLocation] = useState<{
     city: string;
     lat: number | null;
     long: number | null;
   }>(START_LOCATION_STATE);
 
-  const searchIsEnable = searchValue != null;
+  const searchIsEnable = searchValue != '';
 
   useEffect(() => {
     getLocationAsync();
@@ -161,6 +162,7 @@ const HomeProvider: React.FC = ({ children }: any) => {
         searchValue,
         setSearchValue,
         searchIsEnable,
+        setRestaurants,
       }}
     >
       {children}

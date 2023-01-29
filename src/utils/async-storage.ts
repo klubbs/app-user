@@ -46,6 +46,16 @@ class AsyncStorageUtils {
 
     return results != null ? JSON.parse(results) : null;
   }
+
+  static async getHasFirstInstall(): Promise<boolean> {
+    const result = await AsyncStorage.getItem('@KLUBBS_FIRST_INSTALLS:KEY');
+
+    return Boolean(result);
+  }
+
+  static async setHasFirstInstall() {
+    await AsyncStorage.setItem('@KLUBBS_FIRST_INSTALLS:KEY', JSON.stringify(true));
+  }
 }
 
 export { AsyncStorageUtils };

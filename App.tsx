@@ -39,8 +39,6 @@ export default function App() {
     );
   }
 
-  return <Welcome />;
-
   return (
     <AuthProvider>
       <InfluencerProvider>

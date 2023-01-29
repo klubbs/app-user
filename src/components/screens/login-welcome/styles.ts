@@ -98,7 +98,7 @@ export const ContainerInsideModal = styled.View`
 `;
 
 export const ContainerScrolling = styled.View`
-  width: ${width};
+  width: ${`${width}px`};
   align-items: center;
   margin-right: 200px;
 `;

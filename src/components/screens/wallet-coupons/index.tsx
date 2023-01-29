@@ -1,9 +1,9 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import React, { useContext, useRef } from 'react';
 import { AuthContext } from '../../../contexts/auth-context';
-import { CouponsCheckout } from '../../components_heavy/WalletCouponsCheckoutTab';
-import { CouponsEmpty } from '../../components_heavy/LogoutCoupons';
-import { CouponsWalletTab } from '../../components_heavy/WalletCouponsTab';
+import { CheckoutsTab } from './more/checkoutsTab';
+import { CouponsEmpty } from '../../components/LogoutCoupons';
+import { CouponTab } from './more/couponTab';
 import { SafeArea, tabStyle, HeaderContainer } from './styles';
 import { ButtonCreateCoupon } from '../../components/ButtonCoupon';
 import { ModalAddCoupon } from '../../modals/modal-add-coupon';
@@ -11,7 +11,7 @@ import { IModalAddCouponRef } from '../../modals/modal-add-coupon/@types';
 
 const Tab = createMaterialTopTabNavigator();
 
-export const TabCoupons: React.FC = () => {
+export const WalletCoupons: React.FC = () => {
   const modalRef = useRef<IModalAddCouponRef>(null);
   const { user } = useContext(AuthContext);
 
@@ -24,8 +24,8 @@ export const TabCoupons: React.FC = () => {
       </HeaderContainer>
 
       <Tab.Navigator tabBarOptions={tabStyle}>
-        <Tab.Screen name="Carteira de Cupons" children={() => <CouponsWalletTab />} />
-        <Tab.Screen name="Checkouts" children={() => <CouponsCheckout />} />
+        <Tab.Screen name="Carteira de Cupons" children={() => <CouponTab />} />
+        <Tab.Screen name="Checkouts" children={() => <CheckoutsTab />} />
       </Tab.Navigator>
       <ModalAddCoupon ref={modalRef} isInfluencer={false} />
     </SafeArea>

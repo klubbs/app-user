@@ -1,9 +1,9 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { colors } from '../../../assets/constants/colors';
 import Tabs from './app-tab-stack';
 import WelcomeLoginScreen from '../../components/screens/login-welcome';
-import Register from '../../components/screens/Register';
+import Register from '../../components/screens/create-user';
 import { StoreProfile } from '../../components/screens/store-profile';
 import { IAppStackParams } from '../@types/@app-stack';
 import { CouponQrScreen } from '../../components/screens/coupon-qr';
@@ -16,6 +16,9 @@ import { ForgetPasswordScreen } from '../../components/screens/forget-password';
 import { InfluencerRemoveOffer } from '../../components/screens/influencer-remove-offer';
 import { CreateCheckin } from '../../components/screens/create-checkin';
 import { OfferPools } from '../../components/screens/offer-pools';
+import { AsyncStorageUtils } from '../../utils/async-storage';
+import { Welcome } from '../../components/screens/welcome';
+import { StatusBar } from 'react-native';
 
 const AppStack = createStackNavigator<IAppStackParams>();
 
@@ -29,6 +32,35 @@ const DEFAULT_OPTIONS = {
 const STYLE_OPTIONS = { color: colors.COLOR_SECUNDARY_BLACK, fontFamily: 'Nunito_SemiBold' };
 
 const App: React.FC = () => {
+  const [showWelcome, setShowWelcome] = useState(true);
+  const [waiting, setWaiting] = useState(true);
+
+  useEffect(() => {
+    (async function handleFirstInstall() {
+      const first = await AsyncStorageUtils.getHasFirstInstall();
+
+      setWaiting(false);
+      setShowWelcome(!first);
+    })();
+  }, []);
+
+  if (waiting && showWelcome) {
+    return <></>;
+  }
+
+  if (showWelcome && !waiting) {
+    return (
+      <>
+        <StatusBar
+          backgroundColor={colors.COLOR_SECUNDARY_WHITE}
+          animated={true}
+          barStyle={'light-content'}
+        />
+        <Welcome hideScreen={() => setShowWelcome(false)} />
+      </>
+    );
+  }
+
   return (
     <AppStack.Navigator screenOptions={(_) => DEFAULT_OPTIONS}>
       <AppStack.Screen name="Tabs" component={Tabs} />

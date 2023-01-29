@@ -5,7 +5,7 @@ import { colors } from '../../../../assets/constants/colors';
 import { ClockIcon } from '../../../../assets/icons/clockIcon';
 import { StoreScreenProps } from '../../../settings/@types/@app-stack';
 import { ChevronIcon } from '../../components/ChevronRight';
-import { RestaurantInteractions } from '../../components_heavy/RestaurantInteractions';
+import { InteractionLocs } from '../../components/InteractionLocs';
 import {
   BlocksWrapper,
   HeaderSubtitle,
@@ -147,7 +147,7 @@ const StoreProfile: React.FC<StoreScreenProps> = ({ route }) => {
             }}
           />
           <InteractionsWrapper>
-            <RestaurantInteractions
+            <InteractionLocs
               data={{
                 lat: route.params.latitude,
                 long: route.params.longitude,

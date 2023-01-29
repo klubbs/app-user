@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 import { colors } from '../../../../assets/constants/colors';
 import { MotiPressable } from 'moti/interactions';
+import { Feather } from '@expo/vector-icons';
 
 export const SearchPressable = styled(MotiPressable).attrs({
   containerStyle: { alignSelf: 'flex-start' },
@@ -40,3 +41,42 @@ export const ContainerSearch = styled.View`
   align-items: center;
   flex-direction: row;
 `;
+
+export const Container = styled.View`
+  width: 100%;
+  height: 100%;
+`;
+
+export const ContainerInTop = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const SubtitleSearch = styled.Text`
+  top: 5%;
+  font-size: 12px;
+  font-family: 'Nunito_Light';
+  color: ${colors.COLOR_BLACK40};
+`;
+
+export const SearchValue = styled.Text`
+  font-size: 13px;
+  font-family: 'Nunito_SemiBold';
+  color: ${colors.COLOR_SECUNDARY_BLACK};
+`;
+
+export const ConfirmPressableSearch = styled.TouchableOpacity`
+  top: 10%;
+`;
+
+export const XCircle = styled(Feather).attrs({
+  name: 'x-circle',
+  size: 16,
+  color: colors.COLOR_BLACK40,
+})``;
+
+export const SearchIcon = styled(Feather).attrs({
+  name: 'search',
+  size: 16,
+  color: colors.COLOR_BLACK40,
+})``;

@@ -57,7 +57,7 @@ const Register: React.FC<RegisterScreenProps> = ({ route }) => {
           {
             text: 'Não sair',
             style: 'cancel',
-            onPress: () => {},
+            onPress: () => null,
           },
           {
             text: 'Descartar',
