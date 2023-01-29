@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Modalize } from 'react-native-modalize';
-import { SelectorDaysWeek } from '../../components/Selector-days-week';
+import { SelectorDaysWeek } from '../../components/Selector-days-week-1';
 import { IWalletCouponsResponseOfferData } from '../../../services/@types/@coupon-services';
 import {
   Wrapper,
