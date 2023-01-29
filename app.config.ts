@@ -20,7 +20,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   ios: {
     supportsTablet: false,
     bundleIdentifier: 'app.klubbs.user',
-    buildNumber: '0.0.17',
+    buildNumber: '0.0.18',
     icon: './assets/images/ios-icon.png',
     infoPlist: {
       NSLocationAlwaysAndWhenInUseUsageDescription:
@@ -32,7 +32,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   android: {
     package: 'app.klubbs.user',
     permissions: ['CAMERA', 'ACCESS_FINE_LOCATION', 'ACCESS_COARSE_LOCATION'],
-    versionCode: 14,
+    versionCode: 15,
     adaptiveIcon: {
       foregroundImage: './assets/images/android-icon.png',
       backgroundColor: '#1F1F1F',
