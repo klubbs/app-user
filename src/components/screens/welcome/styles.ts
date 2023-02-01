@@ -12,6 +12,15 @@ export const Title = styled.Text`
   text-shadow: ${`-1px 1px 10px ${colors.COLOR_WHITE_10}`};
 `;
 
+export const Skip = styled.Text`
+  color: ${colors.COLOR_WHITE};
+  font-size: 16;
+  font-family: 'Nunito_Light';
+  text-shadow: ${`-1px 1px 10px ${colors.COLOR_WHITE_10}`};
+  /* align-self: flex-end;
+  right: 10%; */
+`;
+
 export const Description = styled.Text`
   color: ${colors.COLOR_YELLOW};
   font-size: 16px;
@@ -37,7 +46,12 @@ export const ButtonStyled = styled(Button).attrs({
 })``;
 
 export const stylesheetCustom = StyleSheet.create({
-  icon: { right: '10%', alignSelf: 'flex-end' },
+  skip: {
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'flex-end',
+    paddingRight: '5%',
+  },
   flatlist: {
     justifyContent: 'center',
     alignItems: 'center',

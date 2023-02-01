@@ -19,6 +19,7 @@ import { OfferPools } from '../../components/screens/offer-pools';
 import { AsyncStorageUtils } from '../../utils/async-storage';
 import { Welcome } from '../../components/screens/welcome';
 import { StatusBar } from 'react-native';
+import { useWelcomeEnable } from '../../utils/hooks/welcome-hooks';
 
 const AppStack = createStackNavigator<IAppStackParams>();
 
@@ -32,23 +33,13 @@ const DEFAULT_OPTIONS = {
 const STYLE_OPTIONS = { color: colors.COLOR_SECUNDARY_BLACK, fontFamily: 'Nunito_SemiBold' };
 
 const App: React.FC = () => {
-  const [showWelcome, setShowWelcome] = useState(true);
-  const [waiting, setWaiting] = useState(true);
+  const { isWaitingWelcome, showWelcome, setShowWelcome } = useWelcomeEnable();
 
-  useEffect(() => {
-    (async function handleFirstInstall() {
-      const first = await AsyncStorageUtils.getHasFirstInstall();
-
-      setWaiting(false);
-      setShowWelcome(!first);
-    })();
-  }, []);
-
-  if (waiting && showWelcome) {
+  if (isWaitingWelcome) {
     return <></>;
   }
 
-  if (showWelcome && !waiting) {
+  if (showWelcome) {
     return (
       <>
         <StatusBar
