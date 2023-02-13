@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { View, FlatList, PanResponder } from 'react-native';
+import { View, FlatList, PanResponder, TouchableOpacity } from 'react-native';
 import LottieView from 'lottie-react-native';
 import {
   ButtonStyled,
@@ -16,7 +16,6 @@ import * as Linking from 'expo-linking';
 
 import { NotificationsFlash } from '../../../utils/flash-notifications';
 import { AsyncStorageUtils } from '../../../utils/async-storage';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const SOURCE = [
   {

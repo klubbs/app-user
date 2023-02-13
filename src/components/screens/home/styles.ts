@@ -2,6 +2,7 @@ import styled from 'styled-components/native';
 import { colors } from '../../../../assets/constants/colors';
 
 export const Wrapper = styled.SafeAreaView`
+  padding-top: 1%;
   flex: 1;
   background-color: ${colors.COLOR_WHITE};
   justify-content: center;
