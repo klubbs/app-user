@@ -1,4 +1,5 @@
 import React, { useEffect, useContext } from 'react';
+import * as Haptic from 'expo-haptics';
 import { HomeContext } from '../../../contexts/home-context';
 import { ICategoryResponse } from '../../../services/@types/@store-services';
 import {
@@ -8,9 +9,8 @@ import {
   SkeletonStyled,
   WrapperSkeleton,
 } from './styles';
-import * as Haptic from 'expo-haptics';
 
-export const RestaurantsCategories: React.FC = (props) => {
+export const RestaurantsCategories: React.FC = () => {
   const { getCategories, selectedCategory, setSelectedCategory, categories } =
     useContext(HomeContext);
 
@@ -49,5 +49,3 @@ export const RestaurantsCategories: React.FC = (props) => {
     />
   );
 };
-
-export default RestaurantsCategories;

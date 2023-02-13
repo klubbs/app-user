@@ -49,6 +49,7 @@ const TYPE_BY_OFF = {
 
 export const OfferPools: React.FC<OfferPoolsScreenProps> = ({ route }) => {
   const navigation = useNavigation();
+  //TODO: Remover do contexto e colocar somente dentro da tela
   const { klubbsOffers, getKlubbsOffersAsync } = useContext(HomeContext);
 
   const [offer, setOffer] = useState<TOfferSelected & { storeName: string; storeImage: string }>(

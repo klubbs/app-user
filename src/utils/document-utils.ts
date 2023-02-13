@@ -1,6 +1,5 @@
-import { ValidationErrors } from 'fluentvalidation-ts/dist/ValidationErrors';
 import { IError } from '../settings/@types/@responses';
-import { isEmpty, nameof } from './extensions/object-extensions';
+import { nameof } from './extensions/object-extensions';
 
 export const validPhone = (number: string): boolean => {
   const reg = new RegExp(/^\([1-9]{2}\) (?:[2-8]|9[1-9])[0-9]{3}\-[0-9]{4}$/);

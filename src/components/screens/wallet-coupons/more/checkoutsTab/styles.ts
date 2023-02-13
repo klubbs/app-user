@@ -1,6 +1,6 @@
 import { FlatList } from 'react-native';
 import styled from 'styled-components/native';
-import { colors } from '../../../../assets/constants/colors';
+import { colors } from '../../../../../../assets/constants/colors';
 
 export const Wrapper = styled.View`
   width: 100%;
