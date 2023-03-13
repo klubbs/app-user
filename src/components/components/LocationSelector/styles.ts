@@ -10,7 +10,6 @@ export const CityTitle = styled.Text`
   font-size: 15px;
   margin-right: 5px;
   font-family: 'Nunito_Bold';
-  text-align: flex-start;
 `;
 export const CityTouchable = styled.TouchableOpacity.attrs({
   activeOpacity: 0.8,

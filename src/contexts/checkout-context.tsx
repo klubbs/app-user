@@ -1,7 +1,7 @@
 import React, { createContext, useState } from 'react';
 import { NotificationsFlash } from '../utils/flash-notifications';
 import { CheckoutService } from '../services/checkout-service';
-import { Spinner } from '../components/components/Spinner';
+import { Spinner } from '../components/components/spinner';
 
 type CheckinStatusState = {
   id: string;

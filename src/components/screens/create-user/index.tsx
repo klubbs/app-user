@@ -27,7 +27,7 @@ import {
   WrapperKeyboard,
   SubtitlePassword,
 } from './styles';
-import { Spinner } from '../../components/Spinner';
+import { Spinner } from '../../components/spinner';
 
 const SCROOL_INDEX = { FIRST: 0, LAST: 1 };
 const WIDTH = Dimensions.get('window').width;
