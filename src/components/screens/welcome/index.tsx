@@ -1,3 +1,6 @@
+import * as Location from 'expo-location';
+import * as Notifications from 'expo-notifications';
+import * as Linking from 'expo-linking';
 import React, { useEffect, useRef, useState } from 'react';
 import { View, FlatList, PanResponder, TouchableOpacity } from 'react-native';
 import LottieView from 'lottie-react-native';
@@ -10,28 +13,38 @@ import {
   stylesheetCustom,
   Skip,
 } from './styles';
-import * as Location from 'expo-location';
-import * as Notifications from 'expo-notifications';
-import * as Linking from 'expo-linking';
-
+import { Feather } from '@expo/vector-icons';
 import { NotificationsFlash } from '../../../utils/flash-notifications';
 import { AsyncStorageUtils } from '../../../utils/async-storage';
+import { colors } from '../../../../assets/constants/colors';
 
 const SOURCE = [
   {
     id: 0,
-    title: 'Use e ganhe !',
-    desc: `Quanto mais você usar o seu aplicativo Klubbs,${'\n'} mais pontos você ganhará para trocar por descontos exclusivos ${'\n'}e experiências com nossos parceiros.`,
-    source: require('../../../../assets/animations/coin_welcome.json'),
+    title: 'Economize seu rico dinheirinho !',
+    desc: `Resgate seus cupons de descontos nos melhores estabelecimentos da sua cidade.`,
+    source: require('../../../../assets/animations/coupon_welcome.json'),
   },
   {
     id: 1,
+    title: 'Guarde ou use já!',
+    desc: `Você pode resgatar o seu cupom de desconto ${'\n'} para usar na hora, ou guardar ${'\n'} na sua carteira Klubbs para utilizar no futuro.`,
+    source: require('../../../../assets/animations/wallet_coins.json'),
+  },
+  {
+    id: 2,
+    title: 'Simples e prático!',
+    desc: `É só dizer que tem um cupom Klubbs,${'\n'} mostrar o QR-code para o atendente e pronto,${'\n'} seu desconto será aplicado !`,
+    source: require('../../../../assets/animations/qr_code_welcome.json'),
+  },
+  {
+    id: 3,
     title: 'Localização',
     desc: `O Klubbs utiliza a sua localização${'\n'} para indicar os melhores estabelecimentos${'\n'} próximos à você.`,
     source: require('../../../../assets/animations/tracker_location.json'),
   },
   {
-    id: 2,
+    id: 4,
     title: 'Notificações',
     desc: 'Enviaremos notificações para informar novidades, oportunidades e promoções.',
     source: require('../../../../assets/animations/notification_welcome.json'),
@@ -51,7 +64,7 @@ export const Welcome: React.FC<{ hideScreen: () => void }> = ({ hideScreen }) =>
         //move to right
         if (gestureState.dx < -20) {
           setCurrentIndex((curr) => {
-            if (curr < 2) {
+            if (curr < 4) {
               if (curr + 1 === SOURCE.length) return curr;
 
               return (curr + 1) % SOURCE.length;
@@ -149,24 +162,20 @@ export const Welcome: React.FC<{ hideScreen: () => void }> = ({ hideScreen }) =>
         initialScrollIndex={0}
         ref={flatlistRef}
         renderItem={({ item }) => {
-          const showButton = item.id === 2 || item.id === 1;
-          const messageButton = item.id === 1 ? 'Permitir' : 'Vamos lá';
+          const showButton = item.id === 3 || item.id === 4;
+          const messageButton = item.id === 3 ? 'Permitir' : 'Vamos lá';
 
           return (
             <ContainerFlat {...panResponder.panHandlers}>
               <View style={stylesheetCustom.skip}>
-                <TouchableOpacity
-                  onPress={() => {
-                    if (item.id === 2) {
-                      hideScreen();
-                      return;
-                    }
-
-                    nextScreen();
-                  }}
-                >
-                  <Skip>Pular</Skip>
-                </TouchableOpacity>
+                {item.id >= 3 && (
+                  <TouchableOpacity onPress={hideScreen}>
+                    <Skip>Pular tudo</Skip>
+                  </TouchableOpacity>
+                )}
+                {item.id < 3 && (
+                  <Feather name={'chevron-right'} size={16} color={colors.COLOR_WHITE} />
+                )}
               </View>
               <WrapperLottie>
                 <LottieView source={item.source} loop={true} autoPlay />
@@ -177,7 +186,7 @@ export const Welcome: React.FC<{ hideScreen: () => void }> = ({ hideScreen }) =>
                 <ButtonStyled
                   text={messageButton}
                   onPress={() => {
-                    if (item.id === 1) {
+                    if (item.id === 3) {
                       handleEnableLocation();
                     } else {
                       handleEnableNotification();

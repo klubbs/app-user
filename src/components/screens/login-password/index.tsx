@@ -5,7 +5,7 @@ import { AuthContext } from '../../../contexts/auth-context';
 import { LoginServiceExceptions } from '../../../services/login-service';
 import { LoginPasswordScreenProps } from '../../../settings/@types/@app-stack';
 import { NotificationsFlash } from '../../../utils/flash-notifications';
-import { Spinner } from '../../components/Spinner';
+import { Spinner } from '../../components/spinner';
 import {
   ContainerBottom,
   ContainerTop,

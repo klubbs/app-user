@@ -11,7 +11,7 @@ import {
   InfluencerService,
   InfluencerServiceException,
 } from '../../../services/influencer-service';
-import { Spinner } from '../../components/Spinner';
+import { Spinner } from '../../components/spinner';
 import { IError } from '../../../settings/@types/@responses';
 import { NotificationsFlash } from '../../../utils/flash-notifications';
 import { useNavigation } from '@react-navigation/native';

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Selector } from '../Selector';
+import { Selector } from '../selector';
 
 import { Wrapper, Container, Text, WrapperSelector } from './styles';
 
