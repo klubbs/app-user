@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { PixelRatio } from 'react-native';
 import Svg, { SvgProps, Rect, Path } from 'react-native-svg';
 
 ('-85 300 2500 2200');

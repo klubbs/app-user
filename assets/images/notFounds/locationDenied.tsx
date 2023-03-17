@@ -1,14 +1,9 @@
-import * as React from "react"
-import Svg, { SvgProps, Image } from "react-native-svg"
+import * as React from 'react';
+import Svg, { SvgProps, Image } from 'react-native-svg';
 
 export function LocationDeniedImage(props: SvgProps) {
   return (
-    <Svg
-      width={512}
-      height={512}
-      viewBox="0 0 512 512"
-      {...props}
-    >
+    <Svg width={512} height={512} viewBox="0 0 512 512" {...props}>
       <Image
         data-name="Camada 1"
         width={512}
@@ -47,5 +42,5 @@ export function LocationDeniedImage(props: SvgProps) {
         xlinkHref="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIYAAAEbCAYAAAAf9vy4AAAFlUlEQVR4nO3dbW4bNxiFUbrwnrrnbjIFEk+qqJfWSJoZfp3zMwgiA3zykhzb0sePf/4uFT/u/vij9heZz2cIYG8oewlqQJ9fC/fqou9R+7cF07HPry9tW6QzA7mXXkssnfi8+zLuF+bKUNLrCaWR+zDu1RbmqmCE0sijMGpaTRahXOSvg17mo9Ei/Wiw3S3h1YlRcxtHq4OsKXKAo8O4JZKBnRnGrdaRCORJR50xntHiPOIs8qSrJkbS+qGaKfKNFhPjnhtNh3oIYyOQjvQUxkYgHegxjE3LQJbXcxgbt5gGRghjY3u50EhhFNvLdUYLY2N7OdmoYWxsLycZPYxieznHDGFsxHGgmcIotpbjzBZGsbUcY8YwNuJ4w8xhFNfa180exsb0eNIqYRRxPGelMIpby36rhVEa/kjfUHGsGEZxpX1s1TA24qhYPYwijkwYv4jjjjD+I44bwviTOL4I4/+Wj6MIo2r5OIRRt3QcwvjesnEI47El4xDGPsvFIYy+NYtDGPst9UYrwnjOMluKMJ63RBzCeM30cQjjdVPHIQwiYbxn2qkhjPdNGYcwxnVqHMI4xnQPv4RxnKm2FGEca5o4hEEkjONNMTWEcY7h4xAGkTDOM/TUEAaRMM417NQQxvmGjEMYRMK4xnBTQxhEwrjOUFNDGETCuNYwU0MYRMK43hBTQxhEwmij+6khDCJhtNP11BAGkTCIhNFWt9uJMIiE0V6Xv94ojDU93E6EQSSMPnR3CBUGkTCIhNGPrrYTYRAJg0gYfelmOxEGkTCIhNGfLr53IgxKOmcIg0gYRMIgEkafmj/PEAaRMIiE0a+mzzOEQSQMbv0+gAqDSBhEwiASBpEw+tbsyioM7v28mQiDSBhEwiASBpEwiIRBJIz+NXmWIQwiYRAJg0gYJD+EQSQMImEQCYNIGETCIBIGkTCIhEEkDCJhEAmD5EMYRMIgEgaRMPq3+/PYjyQMImEQCYNIGETCIBIGkTCIhEEkDO79/CVqYfStyVPPIgxqhEEkDCJhEAmDW7/f1kkY/Wp2IynCoEYYRMIgEgabP95PVBh9anrwLMKgRhhEwiASBiW9kb0w+tP84FmEQY0wiITRlxbbSPygHGEQCYNIGGurft6aMPrRxTV1IwwiYRAJow/dXFM3wiASBpEw1vTwY8GF0V5X19SNMIiE0VZ3t5GNMIiEQSSMdrrdRoowqBHGOnZPiyKMZrp8dnFLGETCuF7Xh86NMIiEMb+np0URxuW6P3RuhEEkjOsMcejcCINIGETCuMZQ20gRBjXCON9w06IIgxphnGvIaVGEQY0wzjPstCjCoEYY5xh6WhRhUCOM4w0/LYowqBHGsaaYFkUY1AjjONNMiyIMaoRxjKmmRREGNcJ433TTogjjbVNGUYRBjTBeN+20KMKgRhivmXpaFGG8ZPooijCoEcZzlpgWRRjUCGO/ZaZFEcZuS0VRhEGNMB5bbloUYVAjjO8tOS2KML61bBRFGNQII1t6WhRhRMtHUYRBjTD+ZFp8EcZ/RHFDGETC+MW0uCMMUUTCIFo9DNOiYuUwRPGNVcMQxQOrbyVUrBiGabHDamGIYidbCdFKYZgWT1glDFE8aYUwRPECZwyi2cMwLV40cxiieMOsYYjiTTOGIYoDOHwSzRaGaXGQmcIQxYFmCUMUB5shjBZRTM/h8zVTT4syQRi2kJOMHIYoTjRqGKI42YhhOGxewOFzn6WmRRkwDFvIRUYKQxQXGiUMUVzMGSNbOooijGj5KIowqBkljKv+F5sWX0aaGGcvmihujLaVnLV4orgz4hnj6EUURTDq4fOoxRRFxci3kncXVRTfGP26+uriiuKBGZ5jPLvIothhlgdcFvtgMz353BOHgHaa7ZH4dwsviifM+L2SFIAonlFK+Rc766VDY3gt4gAAAABJRU5ErkJggg=="
       />
     </Svg>
-  )
+  );
 }

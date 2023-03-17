@@ -1,13 +1,15 @@
 import React from 'react';
 import { FlatList } from 'react-native';
-import { UberLogo } from '../../../../assets/images/others/uber';
 import * as Linking from 'expo-linking';
 
-import { Container, Header, TouchableContainer } from './styles';
+import { Container, GapSpacing, Header, TouchableContainer, Uber, Instagram } from './styles';
 import { IRestaurantInteractions } from './@types';
 
-export const InteractionLocs: React.FC<IRestaurantInteractions> = ({ data }) => {
-  const DATA = [{ id: '1', cb: handleUberCall, icon: 'uber' }];
+export const InteractionButtons: React.FC<IRestaurantInteractions> = ({ data }) => {
+  const DATA = [
+    { id: '0', cb: handleUberCall, icon: 'uber' },
+    { id: '1', cb: handleInstagramCall, icon: 'instagram' },
+  ];
 
   function handleUberCall() {
     const lat = `${data.lat}`;
@@ -18,13 +20,23 @@ export const InteractionLocs: React.FC<IRestaurantInteractions> = ({ data }) => 
     );
   }
 
+  function handleInstagramCall() {
+    Linking.openURL(`instagram://user?username=${data.instagram}`);
+  }
+
   const ItemRender = ({ item }: { item: any }) => {
     const Icon = (): JSX.Element => {
       switch (item.icon) {
         case 'uber':
           return (
             <TouchableContainer onPress={item.cb}>
-              <UberLogo width={'100%'} height={'100%'} />
+              <Uber />
+            </TouchableContainer>
+          );
+        case 'instagram':
+          return (
+            <TouchableContainer onPress={item.cb}>
+              <Instagram />
             </TouchableContainer>
           );
 
@@ -47,6 +59,7 @@ export const InteractionLocs: React.FC<IRestaurantInteractions> = ({ data }) => 
         data={DATA}
         keyExtractor={(item, _: number) => item.id}
         horizontal
+        ItemSeparatorComponent={() => <GapSpacing />}
         showsHorizontalScrollIndicator={false}
         renderItem={ItemRender}
       />

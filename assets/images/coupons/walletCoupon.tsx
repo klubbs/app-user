@@ -1,21 +1,15 @@
-import * as React from "react"
-import Svg, { SvgProps, Rect, Path } from "react-native-svg"
+import * as React from 'react';
+import Svg, { SvgProps, Rect, Path } from 'react-native-svg';
 
 export const CouponWalletBackground: React.FC<SvgProps & { active: boolean }> = (props) => {
   return (
-    <Svg
-      width={689}
-      height={820}
-      viewBox="0 0 689 820"
-      fill="none"
-      {...props}
-    >
-      <Rect y={703} width={689} height={117} rx={50} fill={props.active ? "#FBE1BE" : "#E7E7E7"} />
+    <Svg width={689} height={820} viewBox="0 0 689 820" fill="none" {...props}>
+      <Rect y={703} width={689} height={117} rx={50} fill={props.active ? '#FBE1BE' : '#E7E7E7'} />
       <Path
         fillRule="evenodd"
         clipRule="evenodd"
         d="M0 50C0 22.386 22.387 0 50 0h589c27.613 0 50 22.386 50 50v523.002l-.5-.002c-33.965 0-61.5 27.534-61.5 61.5s27.535 61.5 61.5 61.5l.5-.002V749c0 27.614-22.387 50-50 50H50c-27.613 0-50-22.386-50-50v-53.002c33.734-.269 61-27.699 61-61.498 0-33.799-27.266-61.229-61-61.498V50z"
-        fill={props.active ? "#FFBB5F" : "#EDEDED"}
+        fill={props.active ? '#FFBB5F' : '#EDEDED'}
       />
       <Path
         d="M108.167 642.5a7.5 7.5 0 000-15v15zm94.333-15a7.5 7.5 0 000 15v-15zm94.333 15a7.5 7.5 0 000-15v15zm94.334-15a7.5 7.5 0 000 15v-15zm94.333 15a7.5 7.5 0 000-15v15zm94.333-15a7.5 7.5 0 000 15v-15zM61 642.5h47.167v-15H61v15zm141.5 0h94.333v-15H202.5v15zm188.667 0H485.5v-15h-94.333v15zm188.666 0H627v-15h-47.167v15zM108.167 650c8.284 0 15-6.716 15-15 0-8.284-6.716-15-15-15v30zm94.333-30c-8.284 0-15 6.716-15 15 0 8.284 6.716 15 15 15v-30zm94.333 30c8.285 0 15-6.716 15-15 0-8.284-6.715-15-15-15v30zm94.334-30c-8.285 0-15 6.716-15 15 0 8.284 6.715 15 15 15v-30zm94.333 30c8.284 0 15-6.716 15-15 0-8.284-6.716-15-15-15v30zm94.333-30c-8.284 0-15 6.716-15 15 0 8.284 6.716 15 15 15v-30zM61 650h47.167v-30H61v30zm141.5 0h94.333v-30H202.5v30zm188.667 0H485.5v-30h-94.333v30zm188.666 0H627v-30h-47.167v30z"
@@ -23,6 +17,5 @@ export const CouponWalletBackground: React.FC<SvgProps & { active: boolean }> = 
         fillOpacity={0.1}
       />
     </Svg>
-  )
-}
-
+  );
+};

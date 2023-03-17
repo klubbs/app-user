@@ -1,19 +1,10 @@
-import * as React from "react"
-import { Dimensions } from 'react-native'
-import Svg, { SvgProps, Rect, G, Path, Defs } from "react-native-svg"
+import * as React from 'react';
+import Svg, { SvgProps, G, Path, Defs } from 'react-native-svg';
 /* SVGR has dropped some elements not supported by react-native-svg: filter */
-
-const WIDTH = Dimensions.get('window').width
 
 function SubtitleSaveCouponImage(props: SvgProps) {
   return (
-    <Svg
-      width={400}
-      height={140}
-      viewBox="0 0 405 140"
-      fill="none"
-      {...props}
-    >
+    <Svg width={400} height={140} viewBox="0 0 405 140" fill="none" {...props}>
       <Path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -42,7 +33,7 @@ function SubtitleSaveCouponImage(props: SvgProps) {
       </G>
       <Defs></Defs>
     </Svg>
-  )
+  );
 }
 
-export { SubtitleSaveCouponImage }
+export { SubtitleSaveCouponImage };

@@ -1,13 +1,8 @@
-import * as React from "react"
-import Svg, { SvgProps, Path } from "react-native-svg"
+import * as React from 'react';
+import Svg, { SvgProps, Path } from 'react-native-svg';
 
 const PoolCoupon30Image = (props: SvgProps) => (
-  <Svg
-    width={364}
-    height={109}
-    fill="none"
-    {...props}
-  >
+  <Svg width={364} height={109} fill="none" {...props}>
     <Path
       fillRule="evenodd"
       clipRule="evenodd"
@@ -29,6 +24,6 @@ const PoolCoupon30Image = (props: SvgProps) => (
       fill="#3C3C3C"
     />
   </Svg>
-)
+);
 
-export { PoolCoupon30Image }
+export { PoolCoupon30Image };
