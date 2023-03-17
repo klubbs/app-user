@@ -1,6 +1,7 @@
 import { Dimensions } from 'react-native';
 import styled from 'styled-components/native';
 import { colors } from '../../../../assets/constants/colors';
+import { ShopIcon } from '../../../../assets/icons/shop_icon';
 
 export const Wrapper = styled.SafeAreaView`
   flex: 1;
@@ -171,4 +172,24 @@ export const InteractionsWrapper = styled.View`
   border-top-color: ${colors.COLOR_BLACK10};
   padding-top: 10px;
   margin-bottom: 20px;
+`;
+
+export const EmptyStore = styled(ShopIcon).attrs((props) => ({
+  width: 20,
+  height: 20,
+  fill: colors.COLOR_BLACK40,
+}))``;
+
+export const EmptyContainer = styled.View`
+  height: 130px;
+  width: 130px;
+  border-radius: 15;
+  z-index: 10px;
+  top: 25%;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  border-width: 2px;
+  border-color: ${colors.COLOR_YELLOW_LOW};
+  background-color: ${colors.COLOR_SECUNDARY_WHITE};
 `;

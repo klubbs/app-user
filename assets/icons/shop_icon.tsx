@@ -1,5 +1,5 @@
-import * as React from "react"
-import Svg, { Path, SvgProps } from "react-native-svg"
+import * as React from 'react';
+import Svg, { Path, SvgProps } from 'react-native-svg';
 
 function ShopIcon(props: SvgProps) {
   return (
@@ -9,7 +9,7 @@ function ShopIcon(props: SvgProps) {
         data-name="01 align center"
       />
     </Svg>
-  )
+  );
 }
 
-export { ShopIcon }
+export { ShopIcon };

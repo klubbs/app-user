@@ -5,7 +5,7 @@ import { colors } from '../../../../assets/constants/colors';
 import { ClockIcon } from '../../../../assets/icons/clockIcon';
 import { StoreScreenProps } from '../../../settings/@types/@app-stack';
 import { ChevronIcon } from '../../components/ChevronRight';
-import { InteractionLocs } from '../../components/InteractionLocs';
+import { InteractionButtons } from '../../components/InteractionsButton';
 import {
   BlocksWrapper,
   HeaderSubtitle,
@@ -28,6 +28,8 @@ import {
   YellowContainer,
   ImageContainer,
   HeaderContainer,
+  EmptyStore,
+  EmptyContainer,
 } from './styles';
 import { formatCurrency, formatHour } from '../../../utils/formatersUtils';
 import { NotificationsFlash } from '../../../utils/flash-notifications';
@@ -96,11 +98,18 @@ const StoreProfile: React.FC<StoreScreenProps> = ({ route }) => {
           </TouchableOpacity>
         </YellowContainer>
         {/* Sem imagem */}
-        <ImageStore
-          source={{
-            uri: `https://klubbs-establishment.s3.amazonaws.com/${route?.params?.image}`,
-          }}
-        />
+        {!route?.params?.image && (
+          <EmptyContainer>
+            <EmptyStore />
+          </EmptyContainer>
+        )}
+        {route?.params?.image && (
+          <ImageStore
+            source={{
+              uri: `https://klubbs-establishment.s3.amazonaws.com/${route?.params?.image}`,
+            }}
+          />
+        )}
       </ImageContainer>
       <Container>
         <StoreNameWrapper>
@@ -147,11 +156,12 @@ const StoreProfile: React.FC<StoreScreenProps> = ({ route }) => {
             }}
           />
           <InteractionsWrapper>
-            <InteractionLocs
+            <InteractionButtons
               data={{
                 lat: route.params.latitude,
                 long: route.params.longitude,
                 restaurantName: route.params.name,
+                instagram: ``, //TODO
               }}
             />
           </InteractionsWrapper>
