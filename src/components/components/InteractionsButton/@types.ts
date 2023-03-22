@@ -3,6 +3,6 @@ export type IRestaurantInteractions = {
     lat: number;
     long: number;
     restaurantName: string;
-    instagram: string;
+    instagram: string | null;
   };
 };

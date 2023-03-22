@@ -10,6 +10,7 @@ export type IStoresResponse = {
   business_category_id: string;
   latitude: number;
   longitude: number;
+  instagram: string;
   offers: {
     id: string;
     off: number;

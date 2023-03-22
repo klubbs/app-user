@@ -3,9 +3,9 @@ import { Dimensions, FlatList, PixelRatio, Platform } from 'react-native';
 import { colors } from '../../../../assets/constants/colors';
 import QRCode from 'react-native-qrcode-svg';
 import Button from '../../components/Button';
-import { isIphoneX } from '../../../utils/dimensions';
+import { isBiggerAndroid, isIphoneX } from '../../../utils/dimensions';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 export const QRCodeCoupon = styled(QRCode).attrs({
   backgroundColor: 'transparent',
@@ -73,7 +73,10 @@ export const FlatListComponent = styled.FlatList.attrs((props) => ({
 
 export const ContainerQr = styled.View<{ distanceInBottom: boolean }>`
   position: absolute;
-  top: ${Platform.select({ ios: isIphoneX() ? '28.5%' : '24%', android: '24%' })};
+  top: ${Platform.select({
+    ios: isIphoneX() ? '28.5%' : '24%',
+    android: isBiggerAndroid() ? '24%' : '21%',
+  })};
 `;
 
 const BaseCheckoutButton = styled(Button).attrs({
@@ -90,7 +93,10 @@ export const CheckinButton = styled(BaseCheckoutButton).attrs({
   styleContainer: {
     backgroundColor: colors.COLOR_BLACK,
     width: '40%',
-    bottom: Platform.select({ ios: isIphoneX() ? '122%' : '110%', android: '110%' }),
+    bottom: Platform.select({
+      ios: isIphoneX() ? '122%' : '110%',
+      android: isBiggerAndroid() ? '110%' : '95%',
+    }),
   },
 })``;
 

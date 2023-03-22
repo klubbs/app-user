@@ -12,7 +12,7 @@ export const Wrapper = styled.View`
 `;
 
 export const Code = styled.Text`
-  font-size: 20;
+  font-size: 20px;
   color: ${colors.COLOR_WHITE};
   font-family: 'Nunito_Bold';
 `;
@@ -43,20 +43,20 @@ export const ItemContainer = styled.View`
 export const Store = styled.Text.attrs(() => ({
   numberOfLines: 1,
 }))`
-  font-size: 12;
+  font-size: 12px;
   color: ${colors.COLOR_SECUNDARY_BLACK};
   font-family: 'Nunito_Regular';
   left: 10px;
 `;
 
 export const ValidAt = styled.Text<{ isValid: boolean }>`
-  font-size: 11;
+  font-size: 11px;
   color: ${(props) => (props.isValid ? colors.COLOR_GREEN : colors.COLOR_RED)};
   font-family: 'Nunito_SemiBold';
 `;
 
 export const EmptyText = styled.Text`
-  font-size: 12;
+  font-size: 12px;
   color: ${colors.COLOR_BLACK50};
   font-family: 'Nunito_Regular';
   top: 10px;

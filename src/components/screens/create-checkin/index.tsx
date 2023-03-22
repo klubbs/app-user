@@ -63,7 +63,7 @@ export const CreateCheckin: React.FC<CreateCheckinScreenProps> = ({ route }) => 
       });
 
       const checkinId = await CheckoutService.createCheckin(
-        Number(userAmount.replaceAll('.', '').replaceAll(',', '')),
+        Number(userAmount.split('.').join('').split(',').join('')),
         selectedOfferId,
         route.params.coupon_id,
         location.coords.latitude,
@@ -101,7 +101,7 @@ export const CreateCheckin: React.FC<CreateCheckinScreenProps> = ({ route }) => 
 
       <ContainerTop>
         <RSMoney>R$</RSMoney>
-        <UserAmount value={userAmount} onChangeText={(e: string) => setUserAmount(e)} />
+        <UserAmount value={userAmount} onChangeText={(e: string) => setUserAmount(e.toString())} />
         <SubtitleMoney>Valor total do pedido (Pode ser arredondado)</SubtitleMoney>
       </ContainerTop>
       <ContainerBottom>

@@ -69,7 +69,7 @@ export const ShopSubtitleIcon = styled(ShopIcon).attrs((props) => ({
 `;
 
 export const ShopSubtitle = styled.Text`
-  font-size: 12;
+  font-size: 12px;
   color: ${colors.COLOR_YELLOW};
   font-family: 'Nunito_Bold';
 `;

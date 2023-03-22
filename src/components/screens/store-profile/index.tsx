@@ -161,7 +161,7 @@ const StoreProfile: React.FC<StoreScreenProps> = ({ route }) => {
                 lat: route.params.latitude,
                 long: route.params.longitude,
                 restaurantName: route.params.name,
-                instagram: ``, //TODO
+                instagram: route.params.instagram,
               }}
             />
           </InteractionsWrapper>

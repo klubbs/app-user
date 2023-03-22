@@ -20,7 +20,7 @@ export function formatCurrency(price: number) {
       style: 'currency',
       currency: 'BRL',
     }),
-    android: `R$ ${price}`,
+    android: `R$ ${price.toFixed(2).replace(`.`, `,`)}`,
   });
 }
 
