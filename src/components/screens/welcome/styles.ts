@@ -40,7 +40,7 @@ export const WrapperLottie = styled.View`
 `;
 
 export const ButtonStyled = styled(Button).attrs({
-  styleContainer: { marginTop: '10%' },
+  styleContainer: { marginTop: '10%', width: '80%', height: 50 },
 })``;
 
 export const stylesheetCustom = StyleSheet.create({
