@@ -11,7 +11,7 @@ import { AuthContext } from '../../../contexts/auth-context';
 import { LoginService } from '../../../services/login-service';
 import { NotificationsFlash } from '../../../utils/flash-notifications';
 import { ModalComponent } from '../../components/Modal';
-import { Spinner } from '../../components/spinner';
+import { Spinner } from '../../components/Spinner';
 import { IModalCodeMailRef, IModalCodeMailProps } from './@types';
 import {
   ButtonConfirm,

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext, useRef } from 'react';
 import { CodeField, Cursor, useClearByFocusCell } from 'react-native-confirmation-code-field';
 import { useNavigation } from '@react-navigation/native';
 import { ForgetPasswordScreenProps } from '../../../settings/@types/@app-stack';
-import { Spinner } from '../../components/spinner';
+import { Spinner } from '../../components/Spinner';
 import { LoginService } from '../../../services/login-service';
 import { IError } from '../../../settings/@types/@responses';
 import { isAPIException } from '../../../utils/document-utils';

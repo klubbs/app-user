@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { MenuItem } from '../../components/MenuItem';
 import { ModalComponent } from '../../components/Modal';
-import { Spinner } from '../../components/spinner';
+import { Spinner } from '../../components/Spinner';
 import { ContainerModal } from './styles';
 
 const ModalFluxOffer: React.FC<{

@@ -4,7 +4,7 @@ import { ModalComponent } from '../../components/Modal';
 import { Input, Container, Wrapper } from './styles';
 import { ButtonStorage } from '../../components/ButtonStorage';
 import { CouponService } from '../../../services/coupon-service';
-import { Spinner } from '../../components/spinner';
+import { Spinner } from '../../components/Spinner';
 import { NotificationsFlash } from '../../../utils/flash-notifications';
 import { IError } from '../../../settings/@types/@responses';
 import {

@@ -5,7 +5,7 @@ import { Dimensions, FlatList, Keyboard, PanResponder, View } from 'react-native
 import { KlubbsLogo } from '../../../../assets/images/klubbsLogo';
 import { LoginService, LoginServiceExceptions } from '../../../services/login-service';
 import { IError } from '../../../settings/@types/@responses';
-import { Spinner } from '../../components/spinner';
+import { Spinner } from '../../components/Spinner';
 import {
   ContainerBottom,
   EnterButton,

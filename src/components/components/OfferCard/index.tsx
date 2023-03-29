@@ -17,7 +17,7 @@ import {
   MinimumTicketSubtitle,
   MinimumTicket,
 } from './styles';
-import { Selector } from '../selector';
+import { Selector } from '../Selector';
 import { SelectorDaysWeek } from '../selector-days-week';
 
 export const CardOffers: React.FC<ICardOffersProps> = (props) => {
