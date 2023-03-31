@@ -32,7 +32,7 @@ export const Title = styled.Text`
 `;
 
 export const Subtitle = styled.Text`
-  color: ${colors.COLOR_WHITE_40};
+  color: ${colors.COLOR_WHITE_80};
   font-size: 14px;
   font-family: 'Nunito_Light';
   text-align: center;
