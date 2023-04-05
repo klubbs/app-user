@@ -51,6 +51,8 @@ export const OffersForInfluencers: React.FC = () => {
   }
 
   function handleOfferSelect(isSelected: boolean, masteCouponId: string, establishmentId: string) {
+    Haptic.impactAsync(Haptic.ImpactFeedbackStyle.Light);
+
     isSelected
       ? setSelectedOffer([
           ...selectedOffers,
@@ -60,30 +62,6 @@ export const OffersForInfluencers: React.FC = () => {
   }
 
   function handleOpenBagTab() {
-    const uniqueEstablishmentsId = [...new Set(selectedOffers.map((a) => a.establishmentId))];
-
-    const errors: any[] = [];
-
-    uniqueEstablishmentsId.forEach((element) => {
-      const matchs = selectedOffers.filter((item) => item.establishmentId === element);
-
-      if (matchs.length > 1) {
-        errors.push(matchs);
-        return;
-      }
-    });
-
-    if (errors.length >= 1) {
-      Haptic.notificationAsync(Haptic.NotificationFeedbackType.Warning);
-
-      NotificationsFlash.customMessage(
-        'Ofertas do mesmo estabelecimento',
-        'Cada cupom seu só pode ser associado a 1 oferta do mesmo estabelecimento',
-      );
-
-      return;
-    }
-
     couponOffersRef.current?.showModal();
   }
 

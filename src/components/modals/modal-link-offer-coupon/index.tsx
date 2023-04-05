@@ -87,7 +87,7 @@ export const ModalLinkOfferCoupon = React.forwardRef<
     setSelectedCoupon(coupon.coupon_id);
   }
 
-  function RenderCoupon({ item, _ }: { item: ICouponInfluencer; index: number }): ReactElement {
+  function RenderCoupon({ item }: { item: ICouponInfluencer; index: number }): ReactElement {
     const isToggleSelected = selectedCoupon === item.coupon_id;
 
     return (

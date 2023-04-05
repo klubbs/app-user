@@ -45,11 +45,7 @@ export default function App() {
         <CheckoutProvider>
           <HomeProvider>
             <NavigationContainer>
-              <StatusBar
-                backgroundColor={colors.COLOR_SECUNDARY_WHITE}
-                animated={true}
-                barStyle={'dark-content'}
-              />
+              <StatusBar animated={true} barStyle={'dark-content'} />
               <AppStack />
             </NavigationContainer>
             <FlashComponent />
