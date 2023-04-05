@@ -92,16 +92,16 @@ jobs:
           name: appbuild
 
       # PUT IF RELEASE BRANCHS
-      - name: Extract Branch Name
-        shell: bash
-        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-        id: extract_branch
+      # - name: Extract Branch Name
+      #   shell: bash
+      #   run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      #   id: extract_branch
 
-      - name: Automatic Merge Main
-        uses: mtanzi/action-automerge@v1
-        # if: github.ref == 'refs/heads/release'
-        with:
-          github_token: ${{ github.token }}
-          source: ${{ steps.extract_branch.outputs.branch }}
-          target: 'main'
-          webhook_url: #if present add the Slack webhook
+      # - name: Automatic Merge Main
+      #   uses: mtanzi/action-automerge@v1
+      #   # if: github.ref == 'refs/heads/release'
+      #   with:
+      #     github_token: ${{ github.token }}
+      #     source: ${{ steps.extract_branch.outputs.branch }}
+      #     target: 'main'
+      #     webhook_url: #if present add the Slack webhook
