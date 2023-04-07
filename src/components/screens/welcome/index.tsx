@@ -13,10 +13,8 @@ import {
   stylesheetCustom,
   Skip,
 } from './styles';
-import { Feather } from '@expo/vector-icons';
 import { NotificationsFlash } from '../../../utils/flash-notifications';
 import { AsyncStorageUtils } from '../../../utils/async-storage';
-import { colors } from '../../../../assets/constants/colors';
 
 const SOURCE = [
   {
@@ -169,12 +167,14 @@ export const Welcome: React.FC<{ hideScreen: () => void }> = ({ hideScreen }) =>
             <ContainerFlat {...panResponder.panHandlers}>
               <View style={stylesheetCustom.skip}>
                 {item.id >= 3 && (
-                  <TouchableOpacity onPress={hideScreen}>
+                  <TouchableOpacity onPress={createWasInstalled}>
                     <Skip>Pular tudo</Skip>
                   </TouchableOpacity>
                 )}
                 {item.id < 3 && (
-                  <Feather name={'chevron-right'} size={16} color={colors.COLOR_WHITE} />
+                  <TouchableOpacity onPress={nextScreen}>
+                    <Skip>Próximo</Skip>
+                  </TouchableOpacity>
                 )}
               </View>
               <WrapperLottie>

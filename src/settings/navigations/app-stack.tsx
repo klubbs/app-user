@@ -1,5 +1,5 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { colors } from '../../../assets/constants/colors';
 import Tabs from './app-tab-stack';
 import WelcomeLoginScreen from '../../components/screens/login-welcome';
@@ -16,7 +16,6 @@ import { ForgetPasswordScreen } from '../../components/screens/forget-password';
 import { InfluencerRemoveOffer } from '../../components/screens/influencer-remove-offer';
 import { CreateCheckin } from '../../components/screens/create-checkin';
 import { OfferPools } from '../../components/screens/offer-pools';
-import { AsyncStorageUtils } from '../../utils/async-storage';
 import { Welcome } from '../../components/screens/welcome';
 import { StatusBar } from 'react-native';
 import { useWelcomeEnable } from '../../utils/hooks/welcome-hooks';

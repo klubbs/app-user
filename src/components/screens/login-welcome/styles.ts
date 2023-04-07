@@ -25,15 +25,9 @@ export const ContainerBottom = styled.View`
   align-items: center;
 `;
 
-export const Title = styled.Text`
-  color: ${colors.COLOR_WHITE};
-  font-size: 20px;
-  font-family: 'Nunito_Bold';
-`;
-
 export const Subtitle = styled.Text`
   color: ${colors.COLOR_WHITE_80};
-  font-size: 14px;
+  font-size: 15px;
   font-family: 'Nunito_Light';
   text-align: center;
 `;
