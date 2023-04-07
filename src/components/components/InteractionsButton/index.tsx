@@ -4,6 +4,7 @@ import * as Linking from 'expo-linking';
 
 import { Container, GapSpacing, Header, TouchableContainer, Uber, Instagram } from './styles';
 import { IRestaurantInteractions } from './@types';
+import { NotificationsFlash } from '../../../utils/flash-notifications';
 
 export const InteractionButtons: React.FC<IRestaurantInteractions> = ({ data }) => {
   const DATA = [
@@ -21,6 +22,14 @@ export const InteractionButtons: React.FC<IRestaurantInteractions> = ({ data }) 
   }
 
   function handleInstagramCall() {
+    if (!data.instagram) {
+      NotificationsFlash.customMessage(
+        'Instagram não informado 🤨',
+        'Ainda não foi informado pelo estabelecimento',
+      );
+      return;
+    }
+
     Linking.openURL(`instagram://user?username=${data.instagram}`);
   }
 

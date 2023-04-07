@@ -5,7 +5,7 @@ export function isIphoneX() {
   return (
     Platform.OS === 'ios' &&
     !Platform.isPad &&
-    !Platform.isTVOS &&
+    !Platform.isTV &&
     (dimen.height === 780 ||
       dimen.width === 780 ||
       dimen.height === 812 ||
@@ -20,5 +20,6 @@ export function isIphoneX() {
 }
 
 export function isBiggerAndroid() {
-  return Platform.OS === 'android' && Dimensions.get('window').width >= 360;
+  console.log(Dimensions.get('window').width);
+  return Platform.OS === 'android' && Dimensions.get('window').width > 360;
 }

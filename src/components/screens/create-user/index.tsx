@@ -27,7 +27,7 @@ import {
   WrapperKeyboard,
   SubtitlePassword,
 } from './styles';
-import { Spinner } from '../../components/spinner';
+import { Spinner } from '../../components/Spinner';
 
 const SCROOL_INDEX = { FIRST: 0, LAST: 1 };
 const WIDTH = Dimensions.get('window').width;
@@ -108,7 +108,7 @@ const Register: React.FC<RegisterScreenProps> = ({ route }) => {
       if (!isEmpty(fieldsValidation)) {
         Haptic.impactAsync(Haptic.ImpactFeedbackStyle.Medium);
 
-        let errorInputTmp = errorInput;
+        const errorInputTmp = errorInput;
 
         if (('password' as keyof IRegisterUser) in fieldsValidation) {
           errorInputTmp.password = true;

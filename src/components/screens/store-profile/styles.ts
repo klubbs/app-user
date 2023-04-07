@@ -1,7 +1,17 @@
-import { Dimensions } from 'react-native';
+import { Dimensions, Platform } from 'react-native';
 import styled from 'styled-components/native';
 import { colors } from '../../../../assets/constants/colors';
 import { ShopIcon } from '../../../../assets/icons/shop_icon';
+import { isBiggerAndroid } from '../../../utils/dimensions';
+
+const IMAGE_HEIGHT = Platform.select({
+  android: isBiggerAndroid() ? 130 : 90,
+  ios: 130,
+});
+const IMAGE_WIDTH = Platform.select({
+  android: isBiggerAndroid() ? 130 : 90,
+  ios: 130,
+});
 
 export const Wrapper = styled.SafeAreaView`
   flex: 1;
@@ -22,15 +32,15 @@ export const YellowContainer = styled.View`
   width: 100%;
   border-radius: 15;
   align-items: flex-start;
-  padding:10px
+  padding: 10px;
   background-color: ${colors.COLOR_YELLOW_LOW};
 `;
 
 export const ImageStore = styled.Image.attrs({
   resizeMode: 'cover',
 })`
-  height: 130px;
-  width: 130px;
+  height: ${IMAGE_HEIGHT};
+  width: ${IMAGE_WIDTH};
   border-radius: 15;
   z-index: 10px;
   top: 25%;
@@ -181,8 +191,8 @@ export const EmptyStore = styled(ShopIcon).attrs((props) => ({
 }))``;
 
 export const EmptyContainer = styled.View`
-  height: 130px;
-  width: 130px;
+  height: ${IMAGE_HEIGHT};
+  width: ${IMAGE_WIDTH};
   border-radius: 15;
   z-index: 10px;
   top: 25%;

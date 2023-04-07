@@ -11,7 +11,7 @@ import {
   InfluencerService,
   InfluencerServiceException,
 } from '../../../services/influencer-service';
-import { Spinner } from '../../components/spinner';
+import { Spinner } from '../../components/Spinner';
 import { IError } from '../../../settings/@types/@responses';
 import { NotificationsFlash } from '../../../utils/flash-notifications';
 import { useNavigation } from '@react-navigation/native';
@@ -87,7 +87,7 @@ export const ModalLinkOfferCoupon = React.forwardRef<
     setSelectedCoupon(coupon.coupon_id);
   }
 
-  function RenderCoupon({ item, _ }: { item: ICouponInfluencer; index: number }): ReactElement {
+  function RenderCoupon({ item }: { item: ICouponInfluencer; index: number }): ReactElement {
     const isToggleSelected = selectedCoupon === item.coupon_id;
 
     return (

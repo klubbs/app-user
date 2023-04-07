@@ -14,7 +14,7 @@ export const Title = styled.Text`
 
 export const Skip = styled.Text`
   color: ${colors.COLOR_WHITE};
-  font-size: 16;
+  font-size: 16px;
   font-family: 'Nunito_Light';
   text-shadow: ${`-1px 1px 10px ${colors.COLOR_WHITE_10}`};
 `;
@@ -40,7 +40,7 @@ export const WrapperLottie = styled.View`
 `;
 
 export const ButtonStyled = styled(Button).attrs({
-  styleContainer: { marginTop: '10%' },
+  styleContainer: { marginTop: '10%', width: '80%', height: 50 },
 })``;
 
 export const stylesheetCustom = StyleSheet.create({

@@ -1,17 +1,16 @@
 import { useNavigation } from '@react-navigation/native';
 import * as Haptic from 'expo-haptics';
 import React, { useEffect, useRef, useState } from 'react';
-import { Dimensions, FlatList, Keyboard, PanResponder, View } from 'react-native';
+import { Dimensions, FlatList, Keyboard, PanResponder } from 'react-native';
 import { KlubbsLogo } from '../../../../assets/images/klubbsLogo';
 import { LoginService, LoginServiceExceptions } from '../../../services/login-service';
 import { IError } from '../../../settings/@types/@responses';
-import { Spinner } from '../../components/spinner';
+import { Spinner } from '../../components/Spinner';
 import {
   ContainerBottom,
   EnterButton,
   ExplainText,
   MailInput,
-  Title,
   Wrapper,
   WrapperImage,
   WrapperKeyboard,
@@ -28,13 +27,14 @@ import { Feather } from '@expo/vector-icons';
 import { colors } from '../../../../assets/constants/colors';
 import { Modalize } from 'react-native-modalize';
 
-const { height, width } = Dimensions.get('window');
+const { height } = Dimensions.get('window');
 
 const SUBTITLES = [
   { id: 0, title: 'Muito mais que fidelidade' },
   { id: 1, title: 'Muito mais que cupons' },
   { id: 2, title: 'Muito mais que descontos' },
-  { id: 3, title: 'Muito mais que klubbs' },
+  { id: 3, title: 'Muito mais que um guia de melhores estabelecimentos' },
+  { id: 4, title: 'O seu app de descontos' },
 ];
 
 const LoginWelcome: React.FC = () => {

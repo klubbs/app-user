@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { IUserCheckoutsReponse } from '../../../services/@types/@coupon-services';
 import { formatCurrency } from '../../../utils/formatersUtils';
 import OFF from '../OFF';
-import { Selector } from '../selector';
+import { Selector } from '../Selector';
 import {
   ContainerLeft,
   Dot,

@@ -1,14 +1,17 @@
 import styled from 'styled-components/native';
 import { colors } from '../../../../assets/constants/colors';
 import { ShopIcon } from '../../../../assets/icons/shop_icon';
+import { Platform } from 'react-native';
+import { isBiggerAndroid } from '../../../utils/dimensions';
 
 export const Wrapper = styled.TouchableOpacity.attrs({
   activeOpacity: 0.85,
 })`
   width: 200px;
-  margin: 10px;
-  height: 140px;
-  align-items: center;
+  height: ${Platform.select({
+    ios: 120,
+    android: isBiggerAndroid() ? 120 : 100,
+  })};
 `;
 
 export const EstablishmentImage = styled.Image`

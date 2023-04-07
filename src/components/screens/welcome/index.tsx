@@ -13,23 +13,21 @@ import {
   stylesheetCustom,
   Skip,
 } from './styles';
-import { Feather } from '@expo/vector-icons';
 import { NotificationsFlash } from '../../../utils/flash-notifications';
 import { AsyncStorageUtils } from '../../../utils/async-storage';
-import { colors } from '../../../../assets/constants/colors';
 
 const SOURCE = [
   {
     id: 0,
     title: 'Economize seu rico dinheirinho !',
-    desc: `Resgate seus cupons de descontos nos melhores estabelecimentos da sua cidade.`,
-    source: require('../../../../assets/animations/coupon_welcome.json'),
+    desc: `Resgate seus cupons de desconto nos melhores estabelecimentos da sua cidade.`,
+    source: require('../../../../assets/animations/wellcome_coupon.json'),
   },
   {
     id: 1,
     title: 'Guarde ou use já!',
     desc: `Você pode resgatar o seu cupom de desconto ${'\n'} para usar na hora, ou guardar ${'\n'} na sua carteira Klubbs para utilizar no futuro.`,
-    source: require('../../../../assets/animations/wallet_coins.json'),
+    source: require('../../../../assets/animations/wellcome_coins.json'),
   },
   {
     id: 2,
@@ -47,7 +45,7 @@ const SOURCE = [
     id: 4,
     title: 'Notificações',
     desc: 'Enviaremos notificações para informar novidades, oportunidades e promoções.',
-    source: require('../../../../assets/animations/notification_welcome.json'),
+    source: require('../../../../assets/animations/pulse_welcome.json'),
   },
 ];
 
@@ -169,16 +167,25 @@ export const Welcome: React.FC<{ hideScreen: () => void }> = ({ hideScreen }) =>
             <ContainerFlat {...panResponder.panHandlers}>
               <View style={stylesheetCustom.skip}>
                 {item.id >= 3 && (
-                  <TouchableOpacity onPress={hideScreen}>
+                  <TouchableOpacity onPress={createWasInstalled}>
                     <Skip>Pular tudo</Skip>
                   </TouchableOpacity>
                 )}
                 {item.id < 3 && (
-                  <Feather name={'chevron-right'} size={16} color={colors.COLOR_WHITE} />
+                  <TouchableOpacity onPress={nextScreen}>
+                    <Skip>Próximo</Skip>
+                  </TouchableOpacity>
                 )}
               </View>
               <WrapperLottie>
-                <LottieView source={item.source} loop={true} autoPlay />
+                {item.id === 0 && (
+                  <LottieView
+                    source={require('../../../../assets/animations/congratulations_coupons.json')}
+                    loop={true}
+                    autoPlay
+                  />
+                )}
+                <LottieView source={item.source} loop={true} autoPlay cacheStrategy="strong" />
               </WrapperLottie>
               <Title>{item.title}</Title>
               <Description>{item.desc}</Description>
