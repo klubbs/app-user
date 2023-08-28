@@ -34,7 +34,7 @@ const SUBTITLES = [
   { id: 1, title: 'Muito mais que cupons' },
   { id: 2, title: 'Muito mais que descontos' },
   { id: 3, title: 'Muito mais que um guia de melhores estabelecimentos' },
-  { id: 4, title: 'O seu app de descontos' },
+  { id: 4, title: 'Sua influência em descontos' },
 ];
 
 const LoginWelcome: React.FC = () => {
