@@ -101,51 +101,20 @@ export const Welcome: React.FC<{ hideScreen: () => void }> = ({ hideScreen }) =>
   async function handleEnableLocation() {
     const { status: existingStatus } = await Location.requestForegroundPermissionsAsync();
 
-    let finalStatus = existingStatus;
-
     if (existingStatus !== 'granted') {
-      const { status } = await Location.requestBackgroundPermissionsAsync();
-      finalStatus = status;
+      await Location.requestBackgroundPermissionsAsync();
     }
 
-    if (finalStatus !== 'granted') {
-      NotificationsFlash.customMessage(
-        'Precisamos que nos habilite',
-        'Iremos te redirecionar as configurações',
-        'NEUTRAL',
-      );
-      setTimeout(() => {
-        Linking.openSettings();
-      }, 3000);
-      return;
-    } else {
-      nextScreen();
-    }
+    nextScreen();
   }
 
   async function handleEnableNotification() {
     const { status: existingStatus } = await Notifications.getPermissionsAsync();
 
-    let finalStatus = existingStatus;
-
     if (existingStatus !== 'granted') {
-      const { status } = await Notifications.requestPermissionsAsync();
-      finalStatus = status;
+      await Notifications.requestPermissionsAsync();
     }
-    if (finalStatus !== 'granted') {
-      NotificationsFlash.customMessage(
-        'Precisamos que nos habilite',
-        'Iremos te redirecionar as configurações',
-        'NEUTRAL',
-      );
-
-      setTimeout(() => {
-        Linking.openSettings();
-      }, 3000);
-      return;
-    } else {
-      await createWasInstalled();
-    }
+    await createWasInstalled();
   }
 
   return (

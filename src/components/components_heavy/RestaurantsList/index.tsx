@@ -1,6 +1,6 @@
 import * as Location from 'expo-location';
 import React, { useEffect, useState, useContext } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, Linking } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { CardEstablishment } from '../../components/CardEstablishment';
 import { IRestaurants } from './@types';
@@ -43,6 +43,17 @@ export const RestaurantsList: React.FC = () => {
 
       if (status !== 'granted') {
         setLocationDenied(true);
+
+        NotificationsFlash.customMessage(
+          'Para uma melhor experiência',
+          'Tente habilitar sua localização, redirecionando',
+          'NEUTRAL',
+        );
+
+        setTimeout(() => {
+          Linking.openSettings();
+        }, 3000);
+
         return;
       }
 
