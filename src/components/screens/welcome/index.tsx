@@ -130,7 +130,7 @@ export const Welcome: React.FC<{ hideScreen: () => void }> = ({ hideScreen }) =>
         ref={flatlistRef}
         renderItem={({ item }) => {
           const showButton = item.id === 3 || item.id === 4;
-          const messageButton = item.id === 3 ? 'Permitir' : 'Vamos lá';
+          const messageButton = item.id === 3 ? 'Continuar' : 'Vamos lá';
 
           return (
             <ContainerFlat {...panResponder.panHandlers}>

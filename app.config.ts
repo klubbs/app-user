@@ -20,7 +20,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   ios: {
     supportsTablet: false,
     bundleIdentifier: 'app.klubbs.user',
-    buildNumber: '0.0.25',
+    buildNumber: '0.0.26',
     icon: './assets/images/ios-icon.png',
     infoPlist: {
       NSLocationAlwaysAndWhenInUseUsageDescription:

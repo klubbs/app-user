@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Linking } from 'react-native';
 import { MenuItem } from '../../components/MenuItem';
 
 import { Wrapper, ContainerScroll } from './styles';
+import { AuthContext } from '../../../contexts/auth-context';
 
 export const UserHelp: React.FC = () => {
+  const { user } = useContext(AuthContext);
+
   return (
     <Wrapper>
       <ContainerScroll>
@@ -51,6 +54,20 @@ export const UserHelp: React.FC = () => {
             )
           }
         />
+        {user && (
+          <MenuItem
+            key={'4'}
+            text="Cancelar conta"
+            description="Podemos te ajudar com isso"
+            icon="triangle"
+            cb={() =>
+              Linking.openURL(
+                `mailto: suportecontas@klubbs.com.br?subject=Sou o usuário( ${user?.mail} ) e gostaria de cancelar
+                minha conta`,
+              )
+            }
+          />
+        )}
       </ContainerScroll>
     </Wrapper>
   );
